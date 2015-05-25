@@ -5,7 +5,7 @@ ConnectionController: function(StrQuery,res){
 	//Connect Configuration 
 	var pg = require("pg");
 	
-	var conString = "pg://postgres:desa4361@localhost:5432/AppDhis";
+	var conString = "pg://postgres:desa4361@localhost:5432/appDhis";
 
 	pg.connect(conString, function(err, client, done) {
 	
@@ -28,6 +28,7 @@ ConnectionController: function(StrQuery,res){
 
 	var executeQuery=function(StrQuery,client){
 		// get the total number of visits today (including the current visit)
+    	 console.log(StrQuery);
     	  exeQuery=client.query(StrQuery, function(err, result) {
 	        // handle an error from the query
     	    if(handleError(err,client)) return;

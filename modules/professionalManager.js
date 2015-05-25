@@ -2,10 +2,22 @@ module.exports = {
 	
 //save professional in Db
 Post: function (newProfessional) { 
-	var sqlString="INSERT INTO hphealthprofessional(prid,prname ) VALUES ("
-    			  	+newProfessional.hpid+","
-					+"'"+newProfessional.hpname+"'"
-    			  	+")";
+
+	var sqlString="INSERT INTO hphealthprofessional( hptipdoc, hpnumdoc, hppriape, hpsegape, hpprinom, hpsegnom, hpsexo, hpdepnac, hpmunnac, hppais, hpfecnac, hpetnia, hptoken) VALUES ("
+			+"'"+newProfessional.hptipdoc+"',"
+            +"'"+newProfessional.hpnumdoc+"',"
+            +"'"+newProfessional.hppriape+"',"
+            +"'"+newProfessional.hpsegape+"',"
+            +"'"+newProfessional.hpprinom+"',"
+            +"'"+newProfessional.hpsegnom+"',"
+            +"'"+newProfessional.hpsexo+"',"
+            +"'"+newProfessional.hpdepnac+"',"
+            +"'"+newProfessional.hpmunnac+"',"
+            +"'"+newProfessional.hppais+"',"
+            +"'"+newProfessional.hpfecnac+"',"
+            +"'"+newProfessional.hpetnia+"',"
+            +"'"+newProfessional.hptoken+"'"
+            +")";
 	return sqlString;
 	
 },
