@@ -1,0 +1,6 @@
+<div  ng-controller="d2DropdownOptionSetController">
+  <input type="text" ng-model="optionsetSelected" typeahead-template-url="directives/optionSet/template.html" placeholder="{{'OPTIONSET_SEARCH' | translate }}" typeahead="os as os.name for os in findOptionbyName($viewValue)" typeahead-min-length="2"  typeahead-loading="loadingrefresh" class="form-control" typeahead-on-select="onSelect($item, $model, $label)">
+    <i ng-show="loadingrefresh" class="glyphicon glyphicon-refresh"></i>
+</div>
+</div>
+
