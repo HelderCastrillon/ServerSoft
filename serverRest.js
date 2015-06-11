@@ -11,7 +11,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var methodOverride= require('method-override');
-
+var path    = require("path");
 
 //controller
 var mainController=require('./ServerController.js');
@@ -37,11 +37,17 @@ app.get('/', function(request, response) {
 
 
 //common modules
+//file public
+app.use(express.static(path.join(__dirname, '/frontend/include/')));
 
+app.get('/include/angular-1.3.7/angular.min.js', function(request, response) {
+	 response.sendFile(path.join(__dirname+'/frontend/include/angular-1.3.7/angular.min.js'));
+});
+///
 //view 
-app.get('/view', function(request, response) {
-	app.use(express["static"](__dirname + '/frontend'));
 
+app.get('/view', function(request, response) {
+	 response.sendFile(path.join(__dirname+'/frontend/index.html'));
 });
 ///
 //get enumlist
