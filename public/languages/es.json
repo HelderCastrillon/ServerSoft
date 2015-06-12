@@ -1,9 +1,29 @@
 {
+	
+	"-----------common----------------":"",
+	"OPTIONLIST_SELECT":"Seleccione una opción",
+	"NEXT":"Continuar",
+	
 	"-----------Professional Health ----------------":"",
 	"PROF_TITLE":"Registro de profesional de Salud",
 	"PROF_TAB_PERSONAL":"Datos Personales",
 	"PROF_TAB_PERSONALADD":"Datos adicionales",
 	"PROF_TAB_STUDY":"Estudios",
-	"PROF_TAB_SERVICE":"Servicio social obligatorio"
+	"PROF_TAB_SERVICE":"Servicio social obligatorio",
+	"PROF_DOC":"Numero de Documento",
+	"PROF_DOC_TYPE":"tipo de documento",
+	"PROF_TAB_PERSONAL_DESC":"Por favor diligencia tus datos personales",
+	"PROF_PRIAPE":"Primer apellido",
+	"PROF_SEGAPE":"Segundo apellido",
+	"PROF_PRINOM":"Primer nombre",
+	"PROF_SEGNOM":"Segundo nombre",
+	"PROF_SEXO":"Sexo",
+	"PROF_FECNAC":"Fecha de nacimiento",
+	"PROF_COLOMBIANO":"Nació en Colombia?",
+	"PROF_PAIS":"Pais",
+	"PROF_DEPARTAMENTO":"Departamento",
+	"PROF_MUNICIPIO":"Municipio",
+	"PROF_ETNIA":"Etnia"
+
 
 }

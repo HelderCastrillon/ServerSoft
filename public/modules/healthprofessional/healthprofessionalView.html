@@ -1,14 +1,125 @@
-<h3>{{'PROF_TITLE'| translate}}</h3>
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-11">
-   <tabset justified="true">
+<h3>{{'PROF_TITLE'| translate}}</h3>
+<br>
+   <tabset>
+	<tab heading="{{'PROF_TAB_PERSONAL'| translate}}">
+  		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">{{'PROF_TAB_INTRO'| translate}}</h3>
+		  </div>
+		  <div class="panel-body">
+		  Estimado profesional de Salud,
+
+		  La Secretaría Departamental de Salud del Cauca ha desarrollado esta plataforma con el fin de 
+		  mejorar el proceso de registro de profesionales de salud del Departamento del Cauca.
+		  le pedimos a usted, hacer buen uso de la plataforma y registrar la información real que se le está solicitando.
+		  reiteamos que el uso de la información que se registra a continuación se utilizará solo para fines de registro,
+		  reporte al ministerio de salud. se custoriará de acuerdo la ley.
+
+		  Usted acepta.
+		  </div>
+		</div>
+	</tab>
+
+
+
     <tab heading="{{'PROF_TAB_PERSONAL'| translate}}">
     
-		    <hs-optionlist namelist='tipdoc'></hs-optionlist>
-		    <label for="numdoc">{{ 'PROF_DOC' | translate }} </label>
-		     <input type="text" class="form-control" ng-model="numdoc" name="numdoc" required=""/>
+	<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{'PROF_TAB_PERSONAL_DESC'| translate}}</h3>
+  </div>
+  <div class="panel-body">
+    		<div class="row">
+				<div class="col-md-6">
+					<label for="numdoc">{{ 'PROF_DOC_TYPE' | translate }} </label>
+		    		<hs-optionlist namelist='tipdoc'></hs-optionlist>
+				</div>
+				<div class="col-md-6">
+				   	<label for="numdoc">{{ 'PROF_DOC' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="numdoc" name="numdoc" required=""/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+				   	<label for="priape">{{ 'PROF_PRIAPE' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="priape" name="priape" required=""/>
+				</div>
+				<div class="col-md-6">
+				   	<label for="segape">{{ 'PROF_SEGAPE' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="segape" name="segape" required=""/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+				   	<label for="prinom">{{ 'PROF_PRINOM' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="prinom" name="prinom" required=""/>
+				</div>
+				<div class="col-md-6">
+				   	<label for="segnom">{{ 'PROF_SEGNOM' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="segnom" name="segnom" required=""/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+				   	<label for="sexo">{{ 'PROF_SEXO' | translate }} </label>
+		    		<hs-optionlist namelist='sexo'></hs-optionlist>
+				</div>
+				<div class="col-md-6">
+				   	<label for="fecnac">{{ 'PROF_FECNAC' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="fecnac" name="fecnac" required=""/>
+				</div>
+			</div>
+    		<div class="row">
+				<div class="col-md-6">
+				   	<label for="colombiano">{{ 'PROF_COLOMBIANO' | translate }} </label>
+		    		<br>
+		    		<div class="btn-group" data-toggle="buttons">
+					  <label class="btn btn-primary active">
+					    <input type="radio" name="options" id="option1" autocomplete="off" checked> Si
+					  </label>
+					  <label class="btn btn-primary">
+					    <input type="radio" name="options" id="option2" autocomplete="off">No
+					  </label>
+					</div>
+				</div>
+				<div class="col-md-6">
+				   	<label for="pais">{{ 'PROF_PAIS' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="pais" name="pais" required=""/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+				   	<label for="depto">{{ 'PROF_DEPARTAMENTO' | translate }} </label>
+		    		<hs-optionlist namelist='depto'></hs-optionlist>
+				</div>
+				<div class="col-md-6">
+				   	<label for="municipio">{{ 'PROF_MUNICIPIO' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="municipio" name="municipio" required=""/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+				   	<label for="etnia">{{ 'PROF_ETNIA' | translate }} </label>
+		    		<hs-optionlist namelist='etnia'></hs-optionlist>
+				</div>				
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+				   
+				</div>
+				<div class="col-md-6">
+				 <button type="button" class="btn  btn-primary">{{'NEXT' | translate}}</button>  
+				</div>				
+			</div>
 
+
+
+	  </div>
+	</div>
+		    
     </tab>
     <tab heading="{{'PROF_TAB_PERSONALADD'| translate}}"></tab>
     <tab heading="{{'PROF_TAB_STUDY'| translate}}"></tab>
