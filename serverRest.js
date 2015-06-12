@@ -38,16 +38,12 @@ app.get('/', function(request, response) {
 
 //common modules
 //file public
-app.use(express.static(path.join(__dirname, '/frontend/include/')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/include/angular-1.3.7/angular.min.js', function(request, response) {
-	 response.sendFile(path.join(__dirname+'/frontend/include/angular-1.3.7/angular.min.js'));
-});
-///
 //view 
 
 app.get('/view', function(request, response) {
-	 response.sendFile(path.join(__dirname+'/frontend/index.html'));
+	 response.sendFile(path.join(__dirname+'/public/index.html'));
 });
 ///
 //get enumlist

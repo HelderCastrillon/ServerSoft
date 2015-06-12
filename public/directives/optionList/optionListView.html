@@ -1,0 +1,12 @@
+<div class="dropdown" ng-controller="hsOptionListController">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+	    {{OptionName?OptionName:'OPTIONLIST_SELECT' | translate}}
+	    <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownCountry">
+		   <li ng-repeat="data in ListData">
+			   <a  ng-click='selectData(data)'>{{data.value}}</a>
+		   </li>
+	   </ul>
+</div>
+

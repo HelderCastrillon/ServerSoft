@@ -1,0 +1,19 @@
+<h3>{{'PROF_TITLE'| translate}}</h3>
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-11">
+   <tabset justified="true">
+    <tab heading="{{'PROF_TAB_PERSONAL'| translate}}">
+    
+		    <hs-optionlist namelist='tipdoc'></hs-optionlist>
+		    <label for="numdoc">{{ 'PROF_DOC' | translate }} </label>
+		     <input type="text" class="form-control" ng-model="numdoc" name="numdoc" required=""/>
+
+    </tab>
+    <tab heading="{{'PROF_TAB_PERSONALADD'| translate}}"></tab>
+    <tab heading="{{'PROF_TAB_STUDY'| translate}}"></tab>
+    <tab heading="{{'PROF_TAB_SERVICE'| translate}}"></tab>
+  
+  </tabset>
+</div>
+<div>

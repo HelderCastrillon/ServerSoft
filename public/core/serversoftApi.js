@@ -11,6 +11,7 @@ var ServersoftApi = angular.module("ServersoftApi", ['ngResource']);
 ServersoftApi.factory("commonvariable", function () {
 	var Vari={
 			url:"http://localhost:5433/api/",
+			OptionSetSelected:[]
 			};
 
    return Vari; 
@@ -26,9 +27,9 @@ ServersoftApi.factory("HealthProfessional",['$resource','commonvariable', functi
 }]);
 
 ServersoftApi.factory("enumList",['$resource','commonvariable', function ($resource,commonvariable) {
-	return $resource( commonvariable.url+"commonList/:nlist", 
-	{pid:'@pid'},
-  { get: { method: "GET"}
+	return $resource(commonvariable.url+"commonList/:nlist", 
+	{nlist:'@nlist'},
+  { get: { method: "GET",isArray: true}
   });
 }]);
 

@@ -2,80 +2,80 @@ module.exports = {
 	getList: function (nlist,response){
 
 		var tipdoc=[
-		{"CC":"Cedula de Ciudadanía"},
-		{"CE":"Cedula de extranjería"},
-		{"TI":"Tarjeta de identidad"},
-		{"PA":"Pasaporte"},
-		{"RC":"Registro civil"}
+		{"key":"CC","value":"Cedula de Ciudadanía"},
+		{"key":"CE","value":"Cedula de extranjería"},
+		{"key":"TI","value":"Tarjeta de identidad"},
+		{"key":"PA","value":"Pasaporte"},
+		{"key":"RC","value":"Registro civil"}
 		];
 
 		var sexo=[
-		{"M":"Masculino"},
-		{"F":"Femenino"}
+		{"key":"M","value":"Masculino"},
+		{"key":"F","value":"Femenino"}
 		];
 
 		var conyugal=[
-		{"SO":"Solter@"},
-		{"CA":"Casad@"},
-		{"DI":"Divorciad@"},
-		{"VI":"Viud@"},
-		{"UM":"Union marital de hecho"}
+		{"key":"SO","value":"Solter@"},
+		{"key":"CA","value":"Casad@"},
+		{"key":"DI","value":"Divorciad@"},
+		{"key":"VI","value":"Viud@"},
+		{"key":"UM","value":"Union marital de hecho"}
 		];
 
 		var etnia=[
-		{"1":"Indigena"},
-		{"2":"ROM (Gitano)"},
-		{"3":"Raizal del archipielago de san andres"},
-		{"4":"Palenquero de san basilio"},
-		{"5":"Negro, Mulato, Afro Colombiano o Afro desendiente"},
-		{"6":"ninguno de los anteriores"}
+		{"key":"1","value":"Indigena"},
+		{"key":"2","value":"ROM (Gitano)"},
+		{"key":"3","value":"Raizal del archipielago de san andres"},
+		{"key":"4","value":"Palenquero de san basilio"},
+		{"key":"5","value":"Negro, Mulato, Afro Colombiano o Afro desendiente"},
+		{"key":"6","value":"ninguno de los anteriores"}
 		];
 
 		var origentitulo=[
-		{"1":"Local"},
-		{"2":"Extranjero"}
+		{"key":"1","value":"Local"},
+		{"key":"2","value":"Extranjero"}
 		];
 
 		var tipoinstitucion=[
-		{"1":"Educación superior"},
-		{"2":"Educación para el trabajo y el desarrollo humano"}
+		{"key":"1","value":"Educación superior"},
+		{"key":"2","value":"Educación para el trabajo y el desarrollo humano"}
 		];
 
 		var tipoprograma=[
-		{"AUX":"Auxiliar"},
-		{"TCP":"Técnico profesional"},
-		{"TEC":"Tecnología"},
-		{"UNV":"Universitaria"},
-		{"ESP":"Especialización"},
-		{"TEC":"Maestría"},
-		{"DOC":"Doctorado"}
+		{"key":"AUX","value":"Auxiliar"},
+		{"key":"TCP","value":"Técnico profesional"},
+		{"key":"TEC","value":"Tecnología"},
+		{"key":"UNV","value":"Universitaria"},
+		{"key":"ESP","value":"Especialización"},
+		{"key":"TEC","value":"Maestría"},
+		{"key":"DOC","value":"Doctorado"}
 		];
 
 		var serviciooblig=[
-		{"1":"Prestó el servicio social obligatorio"},
-		{"2":"exento del servicio social obligatorio"},
-		{"3":"exonerado del servicio social obligatorio"}
+		{"key":"1","value":"Prestó el servicio social obligatorio"},
+		{"key":"2","value":"exento del servicio social obligatorio"},
+		{"key":"3","value":"exonerado del servicio social obligatorio"}
 		];
 
 		var modalidad=[
-		{"0":"Sin modalidad"},
-		{"1":"Programa de salud pública"},
-		{"2":"Programa de salud en población vulnerable"},
-		{"3":"Programa de investigación en salud"},
-		{"4":"Prestación de servicios profesionales de salud en IPS habilitada"},
-		{"5":"Prestación de servicios especializados de salud en IPS habilitada"}
+		{"key":"0","value":"Sin modalidad"},
+		{"key":"1","value":"Programa de salud pública"},
+		{"key":"2","value":"Programa de salud en población vulnerable"},
+		{"key":"3","value":"Programa de investigación en salud"},
+		{"key":"4","value":"Prestación de servicios profesionales de salud en IPS habilitada"},
+		{"key":"5","value":"Prestación de servicios especializados de salud en IPS habilitada"}
 		];
 
 		var programa=[
-		{"1":"Medicina"},
-		{"2":"Odontología"},
-		{"3":"Enfermería"},
-		{"4":"Bacteriología"}
+		{"key":"1","value":"Medicina"},
+		{"key":"2","value":"Odontología"},
+		{"key":"3","value":"Enfermería"},
+		{"key":"4","value":"Bacteriología"}
 		];
 		var list={};
 		switch(nlist){
-			case "tipodoc":
-				list = tipodoc;
+			case "tipdoc":
+				list = tipdoc;
 				break;
 			case "sexo":
 				list = sexo;

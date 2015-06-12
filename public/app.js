@@ -3,11 +3,11 @@ var appServersoft = angular.module("appServersoft", ['ngRoute','ServersoftApi','
 appServersoft.config(function($routeProvider) {
  
 	  $routeProvider.when('/healthprofessional', {
-		  	templateUrl: "modules/healthprofessional/healthprofessionalView.html",
+		  	templateUrl: "/modules/healthprofessional/healthprofessionalView.html",
 		  	controller: "healthprofessionalController"
 		  });
 	  $routeProvider.otherwise({
-	        redirectTo: '/'
+	        redirectTo: '/healthprofessional'
 	  });   
 
 	});
@@ -15,7 +15,7 @@ appServersoft.config(function($routeProvider) {
 appServersoft.config(function ($translateProvider) {
   
 	  $translateProvider.useStaticFilesLoader({
-          prefix: 'languages/',
+          prefix: '/languages/',
           suffix: '.json'
       });
 	  
@@ -23,8 +23,8 @@ appServersoft.config(function ($translateProvider) {
 			    ['es', 'en'],
 			    {
 			        'en*': 'en',
-			        'es*': 'es',
-			        '*': 'en' // must be last!
+			        'es': 'es',
+			         '*': 'es' // must be last!
 			    }
 			);
 	  
