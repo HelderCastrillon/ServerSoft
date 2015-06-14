@@ -4,32 +4,41 @@
 <h3>{{'PROF_TITLE'| translate}}</h3>
 <br>
    <tabset>
-	<tab heading="{{'PROF_TAB_PERSONAL'| translate}}">
+	<tab heading="{{'PROF_TAB_INTRO'| translate}}">
   		<div class="panel panel-default">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">{{'PROF_TAB_INTRO'| translate}}</h3>
+		    <h3 class="panel-title">{{'PROF_TAB_INTRO_DETALLE'| translate}}</h3>
 		  </div>
 		  <div class="panel-body">
 		  Estimado profesional de Salud,
-
+		  <br>
 		  La Secretaría Departamental de Salud del Cauca ha desarrollado esta plataforma con el fin de 
-		  mejorar el proceso de registro de profesionales de salud del Departamento del Cauca.
-		  le pedimos a usted, hacer buen uso de la plataforma y registrar la información real que se le está solicitando.
-		  reiteamos que el uso de la información que se registra a continuación se utilizará solo para fines de registro,
-		  reporte al ministerio de salud. se custoriará de acuerdo la ley.
-
-		  Usted acepta.
+		  mejorar el proceso de registro de profesionales de salud del Departamento del Cauca, siguiendo la ley 3030 de 2014.
+		  le pedimos a usted, hacer buen uso de la plataforma y registrar la información real que se está solicitando.
+		  reiteramos que el uso de la información registrada a continuación se utilizará solo para fines de registro cumplimento a la ley, reporte al ministerio de salud y demas disposiciones en cumplimiento de la Ley 1581 de 2012 y del Decreto 1377 de 2013.
+		  <br>
+		   Al usted continuar con este proceso acepta las condiciones expuestas previamente.
+		  <br>
+		  <nav>
+			  <ul class="pager">
+			    <li class="next">
+			    	<button type="button" class="btn btn-primary" ng-click="next(0)" aria-label="Left Align">
+					  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{'ACCEPT' | translate}}
+					</button>
+			    </li>
+			  </ul>
+		  </nav>
 		  </div>
 		</div>
 	</tab>
 
 
 
-    <tab heading="{{'PROF_TAB_PERSONAL'| translate}}">
+    <tab heading="{{'PROF_TAB_PERSONAL'| translate}}" ng-repeat="tab in tabsPersonal[0]" active="tab.active" disable="tab.disabled">
     
 	<div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">{{'PROF_TAB_PERSONAL_DESC'| translate}}</h3>
+    <h3 class="panel-title">{{'PROF_TAB_PERSONAL_DESC'| translate}} {{tab.name}}</h3>
   </div>
   <div class="panel-body">
     		<div class="row">
@@ -93,7 +102,7 @@
 			<div class="row">
 				<div class="col-md-6">
 				   	<label for="depto">{{ 'PROF_DEPARTAMENTO' | translate }} </label>
-		    		<hs-optionlist namelist='depto'></hs-optionlist>
+		    		<input type="text" class="form-control" ng-model="depto" name="depto" required=""/>
 				</div>
 				<div class="col-md-6">
 				   	<label for="municipio">{{ 'PROF_MUNICIPIO' | translate }} </label>
@@ -106,24 +115,129 @@
 		    		<hs-optionlist namelist='etnia'></hs-optionlist>
 				</div>				
 			</div>
-			<div class="row">
-				<div class="col-md-6">
-				   
-				</div>
-				<div class="col-md-6">
-				 <button type="button" class="btn  btn-primary">{{'NEXT' | translate}}</button>  
-				</div>				
-			</div>
-
+			<br>
+		  <nav>
+			  <ul class="pager">
+			    <li class="next"><a href="/view#/healthprofessional" ng-click="next(1)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
+			  </ul>
+		  </nav>
 
 
 	  </div>
 	</div>
 		    
     </tab>
-    <tab heading="{{'PROF_TAB_PERSONALADD'| translate}}"></tab>
-    <tab heading="{{'PROF_TAB_STUDY'| translate}}"></tab>
-    <tab heading="{{'PROF_TAB_SERVICE'| translate}}"></tab>
+    <tab heading="{{'PROF_TAB_PERSONALADD'| translate}}" ng-repeat="tab in tabsPersonal[1]" active="tab.active" disable="tab.disabled">
+    	
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">{{'PROF_TAB_PERSONALADD_DESC'| translate}} {{tab.name}}</h3>
+		  </div>
+		  <div class="panel-body">
+	    	
+hpid
+hpdEstcon
+hpdpaisred
+hpddepred
+hpdmunred
+hpddirecc
+hpdtelef
+hpdtelmov
+hpdcorreo
+
+	    	<br>
+			  <nav>
+				  <ul class="pager">
+				    <li class="previous"><a href="/view#/healthprofessional" ng-click="next(0)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
+				    <li class="next"><a href="/view#/healthprofessional" ng-click="next(2)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
+				  </ul>
+			  </nav>
+		</div>
+	</div>
+    </tab>
+    <tab heading="{{'PROF_TAB_STUDY'| translate}}" ng-repeat="tab in tabsPersonal[2]" active="tab.active" disable="tab.disabled">
+    		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">{{'PROF_TAB_STUDY_DESC'| translate}} {{tab.name}}</h3>
+		  </div>
+		  <div class="panel-body">
+		  hpid
+hpeorigtit
+hpedepin
+hpemunin
+hpepaisin
+hpetipin
+hpecodin
+hpetippr
+hpenompr
+hpefecgrad
+hpenumconv
+hpefecconv
+hpetitequi
+hpegruptit
+hpeactoadm
+hpefecact
+
+	    	<br>
+		  <nav>
+			  <ul class="pager">
+			    <li class="previous"><a href="/view#/healthprofessional" ng-click="next(1)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
+			    <li class="next"><a href="/view#/healthprofessional" ng-click="next(3)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
+			  </ul>
+		  </nav>
+		</div>
+	</div>  
+    </tab>
+    <tab heading="{{'PROF_TAB_SERVICE'| translate}}" ng-repeat="tab in tabsPersonal[3]" active="tab.active" disable="tab.disabled">
+    		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">{{'PROF_TAB_SERVICE_DESC'| translate}} {{tab.name}}</h3>
+		  </div>
+		  <div class="panel-body">
+	    	<br>
+		  <nav>
+			  <ul class="pager">
+			    <li class="previous"><a href="/view#/healthprofessional" ng-click="next(2)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
+			    <li class="next"><a href="/view#/healthprofessional" ng-click="next(4)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
+			  </ul>
+		  </nav>
+		 </div>
+	</div>
+    </tab>
+    <tab heading="{{'PROF_TAB_RESUME'| translate}}" ng-repeat="tab in tabsPersonal[4]" active="tab.active" disable="tab.disabled">
+    		
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">{{'PROF_TAB_RESUME_DESC'| translate}} {{tab.name}}</h3>
+		  </div>
+		  <div class="panel-body">
+		  hpid
+hpsobliga
+hpstiplug
+hpsdeppr
+hpsmunpr
+hpspaispr
+phsfecini
+hpsfecfin
+hpsmodal
+hpsprog
+
+	    	<br>
+		  <nav>
+			  <ul class="pager">
+			    <li class="previous"><a href="/view#/healthprofessional" ng-click="next(3)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
+			    <li class="next">
+			    	<button type="button" class="btn btn-primary" aria-label="Left Align">
+					  <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> {{'SAVE' | translate}}
+					</button>
+			    </li>
+			  </ul>
+		  </nav>
+		 </div>
+	</div>
+    </tab>
   
   </tabset>
 </div>
