@@ -48,27 +48,27 @@
 				</div>
 				<div class="col-md-6">
 				   	<label for="numdoc">{{ 'PROF_DOC' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="numdoc" name="numdoc" required=""/>
+		    		<input type="text" class="form-control" ng-model="DataPersonal.hpnumdoc" name="numdoc" required=""/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
 				   	<label for="priape">{{ 'PROF_PRIAPE' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="priape" name="priape" required=""/>
+		    		<input type="text" class="form-control" ng-model="DataPersonal.hppriape" name="priape" required=""/>
 				</div>
 				<div class="col-md-6">
 				   	<label for="segape">{{ 'PROF_SEGAPE' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="segape" name="segape" required=""/>
+		    		<input type="text" class="form-control" ng-model="DataPersonal.hpsegape" name="segape" required=""/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
 				   	<label for="prinom">{{ 'PROF_PRINOM' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="prinom" name="prinom" required=""/>
+		    		<input type="text" class="form-control" ng-model="DataPersonal.hpprinom" name="prinom" required=""/>
 				</div>
 				<div class="col-md-6">
 				   	<label for="segnom">{{ 'PROF_SEGNOM' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="segnom" name="segnom" required=""/>
+		    		<input type="text" class="form-control" ng-model="DataPersonal.hpsegnom" name="segnom" required=""/>
 				</div>
 			</div>
 			<div class="row">
@@ -78,7 +78,13 @@
 				</div>
 				<div class="col-md-6">
 				   	<label for="fecnac">{{ 'PROF_FECNAC' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="fecnac" name="fecnac" required=""/>
+		    		<p class="input-group">
+		              <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="DataPersonal.hpfecnac" is-open="opened" ng-required="true" close-text="Close" />
+		              <span class="input-group-btn">
+		                <button type="button" class="btn btn-primary" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+		              </span>
+		            </p>
+
 				</div>
 			</div>
     		<div class="row">
