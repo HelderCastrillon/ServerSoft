@@ -79,7 +79,7 @@
 				<div class="col-md-6">
 				   	<label for="fecnac">{{ 'PROF_FECNAC' | translate }} </label>
 		    		<p class="input-group">
-		              <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="DataPersonal.hpfecnac" is-open="opened" ng-required="true" close-text="Close" />
+		               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="DataPersonal.hpfecnac" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
 		              <span class="input-group-btn">
 		                <button type="button" class="btn btn-primary" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 		              </span>
@@ -141,15 +141,42 @@
 		  </div>
 		  <div class="panel-body">
 	    	
-hpid
-hpdEstcon
-hpdpaisred
-hpddepred
-hpdmunred
-hpddirecc
-hpdtelef
-hpdtelmov
-hpdcorreo
+			<div class="row">
+				<div class="col-md-6">
+				   	<label for="etnia">{{ 'PROF_ESTADOCONYUGAL' | translate }} </label>
+		    		<hs-optionlist namelist='conyugal'></hs-optionlist>
+				</div>
+				<div class="col-md-6">
+				   	<label for="pais">{{ 'PROF_PAISRED' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdpaisred" name="pais" required=""/>
+				</div>
+				<div class="col-md-6">
+				   	<label for="pais">{{ 'PROF_DEPARTAMENTORED' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpddepred" name="Departamento" required=""/>
+				</div>
+				<div class="col-md-6">
+				   	<label for="pais">{{ 'PROF_MUNICIPIORED' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+				</div>
+				<div class="col-md-6">
+				   	<label for="pais">{{ 'PROF_DIRECCIONRED' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpddirecc" name="Dirección" required=""/>
+				</div>
+				<div class="col-md-6">
+				   	<label for="pais">{{ 'PROF_TELEFONORED' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelef" name="Telefono" required=""/>
+				</div>
+				<div class="col-md-6">
+				   	<label for="pais">{{ 'PROF_MOVIL' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelmov" name="TelefonoCel" required=""/>
+				</div>
+				<div class="col-md-6">
+				   	<label for="pais">{{ 'PROF_CORREO' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdcorreo" name="Correo" required=""/>
+				</div>			
+			</div>
+
+
 
 	    	<br>
 			  <nav>
@@ -202,6 +229,16 @@ hpefecact
 		    <h3 class="panel-title">{{'PROF_TAB_SERVICE_DESC'| translate}} {{tab.name}}</h3>
 		  </div>
 		  <div class="panel-body">
+	    	 hpid
+hpsobliga
+hpstiplug
+hpsdeppr
+hpsmunpr
+hpspaispr
+phsfecini
+hpsfecfin
+hpsmodal
+hpsprog
 	    	<br>
 		  <nav>
 			  <ul class="pager">
@@ -219,16 +256,7 @@ hpefecact
 		    <h3 class="panel-title">{{'PROF_TAB_RESUME_DESC'| translate}} {{tab.name}}</h3>
 		  </div>
 		  <div class="panel-body">
-		  hpid
-hpsobliga
-hpstiplug
-hpsdeppr
-hpsmunpr
-hpspaispr
-phsfecini
-hpsfecfin
-hpsmodal
-hpsprog
+		 
 
 	    	<br>
 		  <nav>

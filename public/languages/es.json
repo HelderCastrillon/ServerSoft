@@ -33,7 +33,14 @@
 	"PROF_PAIS":"Pais",
 	"PROF_DEPARTAMENTO":"Departamento",
 	"PROF_MUNICIPIO":"Municipio",
-	"PROF_ETNIA":"Etnia"
-
+	"PROF_ETNIA":"Etnia",
+	"PROF_ESTADOCONYUGAL":"Estado Conyugal",
+	"PROF_PAISRED":"Pais de residencia",
+	"PROF_DEPARTAMENTORED":"Departamento de residencia",
+	"PROF_MUNICIPIORED":"Municipio de residencia",
+	"PROF_DIRECCIONRED":"Dirección de residencia",
+	"PROF_TELEFONORED":"Telefono de residencia",
+	"PROF_MOVIL":"Telefono movil",
+	"PROF_CORREO":"Correo Electrónico"
 
 }

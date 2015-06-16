@@ -1,5 +1,6 @@
 appServersoft.controller('healthprofessionalController', ['$scope','commonvariable', function($scope,commonvariable){
 	
+	//Data Object
 	$scope.DataPersonal={
 		hptipdoc:"",
 		hpnumdoc:"",
@@ -16,11 +17,55 @@ appServersoft.controller('healthprofessionalController', ['$scope','commonvariab
 		hptoken:""
 	};
 
-	  $scope.open = function($event) {
-	    $event.preventDefault();
-	    $event.stopPropagation();
-	    $scope.opened = true;
-	  };
+	$scope.DataPersonalAdd={
+		hpdEstcon:"",
+		hpdpaisred:"",
+		hpddepred:"",
+		hpdmunred:"",
+		hpddirecc:"",
+		hpdtelef:"",
+		hpdtelmov:"",
+		hpdcorreo:""
+	};
+
+	$scope.Study={
+		hpeorigtit:"",
+		hpedepin:"",
+		hpemunin:"",
+		hpepaisin:"",
+		hpetipin:"",
+		hpecodin:"",
+		hpetippr:"",
+		hpenompr:"",
+		hpefecgrad:"",
+		hpenumconv:"",
+		hpefecconv:"",
+		hpetitequi:"",
+		hpegruptit:"",
+		hpeactoadm:"",
+		hpefecact:""
+	};
+	$scope.Studies=[];
+
+   // Date datepicker
+  $scope.today = function() {
+    datetoday = new Date();
+    $scope.currentDate=datetoday.getFullYear()+"-"+(datetoday.getMonth()<=9?"0"+datetoday.getMonth():datetoday.getMonth())+"-"+(datetoday.getDate()<=9?"0"+datetoday.getDate():datetoday.getDate());
+  	$scope.DataPersonal.hpfecnac=$scope.currentDate;
+  };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.DataPersonal.hpfecnac = null;
+  };
+
+   $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.opendDate = true;
+  };
+
+
 
 	$scope.tabsPersonal = [{"0":[{disabled:false}]},
  						{"1":[{disabled:false}]},
@@ -37,13 +82,15 @@ appServersoft.controller('healthprofessionalController', ['$scope','commonvariab
   			$scope.DataPersonal.hpsexo=commonvariable.OptionSetSelected.sexo.key;
   			$scope.DataPersonal.hpetnia=commonvariable.OptionSetSelected.etnia.key;
   			break;
-   		case 2: break;
+   		case 2: 
+   			$scope.DataPersonalAdd.hpdEstcon=commonvariable.OptionSetSelected.conyugal.key;
+   			break;
   		case 3: break;
   		case 4: break;
   	}
 
 
-  	console.log($scope.DataPersonal);
+  	console.log($scope.DataPersonalAdd);
   	
   };
     
