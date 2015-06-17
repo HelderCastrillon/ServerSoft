@@ -18,6 +18,7 @@ var mainController=require('./ServerController.js');
 
 //Modules
 var profManager=require('./modules/professionalManager.js');
+var CommmonQuery=require('./modules/commonQuery.js');
 var List=require('./modules/commonList.js');
 
 //variable for configuration
@@ -75,6 +76,40 @@ app.post('/api/HealthProfessional', function(request, response) {
 
 /////////////////////////////////////////////////////////
 
+/////common  query///////////////////////////////////////
+
+//get country by name
+app.get('/api/common/country/:name', function(request, response) {
+	var PMquery=CommmonQuery.GetCountry(request.params.name);
+	mainController.ConnectionController(PMquery,response);
+});
+
+//get depto by name
+app.get('/api/common/department/:name', function(request, response) {
+	var PMquery=CommmonQuery.GetDepartment(request.params.name);
+	mainController.ConnectionController(PMquery,response);
+});
+
+//get municipality by name
+app.get('/api/common/municipality/:department/:name', function(request, response) {
+	var PMquery=CommmonQuery.GetMunicipality(request.params.name,request.params.department);
+	console.log(PMquery);
+	mainController.ConnectionController(PMquery,response);
+});
+
+//get institution by name and municipality
+app.get('/api/common/institution/:municipality/:name', function(request, response) {
+	var PMquery=CommmonQuery.GetInstitution(request.params.name,request.params.municipality);
+	mainController.ConnectionController(PMquery,response);
+});
+
+//get program by name and institution
+app.get('/api/common/program/:institution/:name', function(request, response) {
+	var PMquery=CommmonQuery.GetProgram(request.params.name,request.params.institution);
+	mainController.ConnectionController(PMquery,response);
+});
+
+///////////////////////////////////////////////////////////
 
 //creation of the Server
 http.createServer(app).listen(app.get('port'), function(){

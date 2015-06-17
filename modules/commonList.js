@@ -57,6 +57,11 @@ module.exports = {
 		{"key":"3","value":"exonerado del servicio social obligatorio"}
 		];
 
+		var tipolugarservicio=[
+		{"key":"1","value":"Local"},
+		{"key":"2","value":"Extranjero"}
+		];
+
 		var modalidad=[
 		{"key":"0","value":"Sin modalidad"},
 		{"key":"1","value":"Programa de salud pública"},
@@ -103,6 +108,9 @@ module.exports = {
 				break;
 			case "programa":
 				list = programa;
+				break;
+			case "tipolugarservicio":
+				list =tipolugarservicio;
 				break;
 		}
 

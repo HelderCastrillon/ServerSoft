@@ -141,15 +141,39 @@
 		  </div>
 		  <div class="panel-body">
 	    	
+			
 			<div class="row">
+					<div class="col-md-6">
+					   	<label for="etnia">{{ 'PROF_ESTADOCONYUGAL' | translate }} </label>
+			    		<hs-optionlist namelist='conyugal'></hs-optionlist>
+					</div>
+
+					<div class="col-md-6">
+					   	<label for="colombiano">{{ 'PROF_lIVEIN' | translate }} </label>
+			    		<br>
+			    		<div class="btn-group" data-toggle="buttons">
+						  <label class="btn btn-primary active">
+						    <input type="radio" name="options" id="option1" autocomplete="off" checked> Si
+						  </label>
+						  <label class="btn btn-primary">
+						    <input type="radio" name="options" id="option2" autocomplete="off">No
+						  </label>
+						</div>
+					</div>
+			</div>
+			<div class="row">
+
 				<div class="col-md-6">
-				   	<label for="etnia">{{ 'PROF_ESTADOCONYUGAL' | translate }} </label>
-		    		<hs-optionlist namelist='conyugal'></hs-optionlist>
+				   	<label for="paisred">{{ 'PROF_PAIS' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="pais" name="pais" required=""/>
 				</div>
+			
 				<div class="col-md-6">
 				   	<label for="pais">{{ 'PROF_PAISRED' | translate }} </label>
 		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdpaisred" name="pais" required=""/>
 				</div>
+			</div>
+			<div class="row">
 				<div class="col-md-6">
 				   	<label for="pais">{{ 'PROF_DEPARTAMENTORED' | translate }} </label>
 		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpddepred" name="Departamento" required=""/>
@@ -158,20 +182,24 @@
 				   	<label for="pais">{{ 'PROF_MUNICIPIORED' | translate }} </label>
 		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
 				</div>
+			</div>
+			<div class="row">
 				<div class="col-md-6">
-				   	<label for="pais">{{ 'PROF_DIRECCIONRED' | translate }} </label>
+				   	<label for="Direccion">{{ 'PROF_DIRECCIONRED' | translate }} </label>
 		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpddirecc" name="Dirección" required=""/>
 				</div>
 				<div class="col-md-6">
-				   	<label for="pais">{{ 'PROF_TELEFONORED' | translate }} </label>
+				   	<label for="Telefono">{{ 'PROF_TELEFONORED' | translate }} </label>
 		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelef" name="Telefono" required=""/>
 				</div>
+			</div>
+			<div class="row">
 				<div class="col-md-6">
-				   	<label for="pais">{{ 'PROF_MOVIL' | translate }} </label>
+				   	<label for="Movil">{{ 'PROF_MOVIL' | translate }} </label>
 		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelmov" name="TelefonoCel" required=""/>
 				</div>
 				<div class="col-md-6">
-				   	<label for="pais">{{ 'PROF_CORREO' | translate }} </label>
+				   	<label for="Correo">{{ 'PROF_CORREO' | translate }} </label>
 		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdcorreo" name="Correo" required=""/>
 				</div>			
 			</div>
@@ -195,23 +223,85 @@
 		    <h3 class="panel-title">{{'PROF_TAB_STUDY_DESC'| translate}} {{tab.name}}</h3>
 		  </div>
 		  <div class="panel-body">
-		  hpid
-hpeorigtit
-hpedepin
-hpemunin
-hpepaisin
-hpetipin
-hpecodin
-hpetippr
-hpenompr
-hpefecgrad
-hpenumconv
-hpefecconv
-hpetitequi
-hpegruptit
-hpeactoadm
-hpefecact
+		  		<div class="row">
+		  			 <div class="col-md-6">
+					   	<label for="origentitulo">{{ 'PROF_EST_ORIGEN' | translate }} </label>
+			    		<hs-optionlist namelist='origentitulo'></hs-optionlist>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+					   	<label for="paisin">{{ 'PROF_PAISIN' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdpaisred" name="pais" required=""/>
+					</div>
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_DEPARTAMENTOIN' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpddepred" name="Departamento" required=""/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_MUNICIPIOIN' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+					</div>
+					<div class="col-md-6">
+					   	<label for="tipoinstitucion">{{ 'PROF_EST_TYPEIN' | translate }} </label>
+			    		<hs-optionlist namelist='tipoinstitucion'></hs-optionlist>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_EST_INSTITUTION' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+					</div>
+					 <div class="col-md-6">
+					   	<label for="tipoprograma">{{ 'PROF_EST_TYPE' | translate }} </label>
+			    		<hs-optionlist namelist='tipoprograma'></hs-optionlist>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_EST_PROGRAM' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+					</div>
+					<div class="col-md-6">
+					   	<label for="fecnac">{{ 'PROF_FEC_CONV' | translate }} </label>
+			    		<p class="input-group">
+			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="DataPersonal.hpfecnac" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
+			              <span class="input-group-btn">
+			                <button type="button" class="btn btn-primary" ng-click="openconv($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			              </span>
+			            </p>
 
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_EST_PROGRAM' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+					</div>
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_EST_PROGRAM' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_EST_PROGRAM' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+					</div>
+					<div class="col-md-6">
+					   	<label for="fecnac">{{ 'PROF_FEC_ACTO' | translate }} </label>
+			    		<p class="input-group">
+			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="DataPersonal.hpfecnac" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
+			              <span class="input-group-btn">
+			                <button type="button" class="btn btn-primary" ng-click="openconv($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			              </span>
+			            </p>
+
+					</div>
+				</div>
+			
 	    	<br>
 		  <nav>
 			  <ul class="pager">
@@ -229,16 +319,64 @@ hpefecact
 		    <h3 class="panel-title">{{'PROF_TAB_SERVICE_DESC'| translate}} {{tab.name}}</h3>
 		  </div>
 		  <div class="panel-body">
-	    	 hpid
-hpsobliga
-hpstiplug
-hpsdeppr
-hpsmunpr
-hpspaispr
-phsfecini
-hpsfecfin
-hpsmodal
-hpsprog
+				<div class="row">
+		  			 <div class="col-md-6">
+					   	<label for="serviciooblig">{{ 'PROF_SERVICIO' | translate }} </label>
+			    		<hs-optionlist namelist='serviciooblig'></hs-optionlist>
+					</div>
+					<div class="col-md-6">
+					   	<label for="tipolugarservicio">{{ 'PROF_SER_TYPE' | translate }} </label>
+			    		<hs-optionlist namelist='tipolugarservicio'></hs-optionlist>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+					   	<label for="paisin">{{ 'PROF_PAISIN' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdpaisred" name="pais" required=""/>
+					</div>
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_DEPARTAMENTOIN' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpddepred" name="Departamento" required=""/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_MUNICIPIOIN' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+					</div>					
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+					   	<label for="fecnac">{{ 'PROF_SER_FECINI' | translate }} </label>
+			    		<p class="input-group">
+			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="obligService.phsfecini" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
+			              <span class="input-group-btn">
+			                <button type="button" class="btn btn-primary" ng-click="openconv($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			              </span>
+			            </p>
+
+					</div>
+					<div class="col-md-6">
+					   	<label for="fecnac">{{ 'PROF_SER_FECFIN' | translate }} </label>
+			    		<p class="input-group">
+			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="obligService.phsfecini" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
+			              <span class="input-group-btn">
+			                <button type="button" class="btn btn-primary" ng-click="openconv($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			              </span>
+			            </p>
+
+					</div>
+				</div>
+				<div class="row">
+		  			 <div class="col-md-6">
+					   	<label for="modalidad">{{ 'PROF_SERVICIO' | translate }} </label>
+			    		<hs-optionlist namelist='modalidad'></hs-optionlist>
+					</div>
+					<div class="col-md-6">
+					   	<label for="programa">{{ 'PROF_SER_TYPE' | translate }} </label>
+			    		<hs-optionlist namelist='programa'></hs-optionlist>
+					</div>
+				</div>
 	    	<br>
 		  <nav>
 			  <ul class="pager">

@@ -47,6 +47,18 @@ appServersoft.controller('healthprofessionalController', ['$scope','commonvariab
 	};
 	$scope.Studies=[];
 
+	$scope.obligService={
+		hpsobliga:"",
+		hpstiplug:"",
+		hpsdeppr:"",
+		hpsmunpr:"",
+		hpspaispr:"",
+		phsfecini:"",
+		hpsfecfin:"",
+		hpsmodal:"",
+		hpsprog:""
+	}
+	
    // Date datepicker
   $scope.today = function() {
     datetoday = new Date();
