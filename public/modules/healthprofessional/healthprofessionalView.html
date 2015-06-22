@@ -92,17 +92,13 @@
 				   	<label for="colombiano">{{ 'PROF_COLOMBIANO' | translate }} </label>
 		    		<br>
 		    		<div class="btn-group" data-toggle="buttons">
-					  <label class="btn btn-primary active">
-					    <input type="radio" name="options" id="option1" autocomplete="off" checked> Si
-					  </label>
-					  <label class="btn btn-primary">
-					    <input type="radio" name="options" id="option2" autocomplete="off">No
-					  </label>
+						<button type="button" ng-click="nacionalidad(true)" class="btn btn-primary active"> Si</button>
+				    	<button type="button" ng-click="nacionalidad(false)" class="btn btn-primary active">No </button>
 					</div>
 				</div>
 				<div class="col-md-6">
 				   	<label for="pais">{{ 'PROF_PAIS' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="pais" name="pais" required=""/>
+		    		<div ng-init="colombiano"> <d2-dropdownoptionset tittleoption='pais'></d2-dropdownoptionset></div>
 				</div>
 			</div>
 			<div class="row">
@@ -277,28 +273,18 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-					   	<label for="pais">{{ 'PROF_EST_PROGRAM' | translate }} </label>
+					   	<label for="pais">{{ 'PROF_NUM_CONV' | translate }} </label>
 			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
 					</div>
 					<div class="col-md-6">
-					   	<label for="pais">{{ 'PROF_EST_PROGRAM' | translate }} </label>
+					   	<label for="pais">{{ 'PROF_TIT_GRUP' | translate }} </label>
 			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-					   	<label for="pais">{{ 'PROF_EST_PROGRAM' | translate }} </label>
+					   	<label for="pais">{{ 'PROF_TIT_EQUI' | translate }} </label>
 			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
-					</div>
-					<div class="col-md-6">
-					   	<label for="fecnac">{{ 'PROF_FEC_ACTO' | translate }} </label>
-			    		<p class="input-group">
-			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="DataPersonal.hpfecnac" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
-			              <span class="input-group-btn">
-			                <button type="button" class="btn btn-primary" ng-click="openconv($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-			              </span>
-			            </p>
-
 					</div>
 				</div>
 			
@@ -331,17 +317,17 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-					   	<label for="paisin">{{ 'PROF_PAISIN' | translate }} </label>
+					   	<label for="paisin">{{ 'PROF_PAISSER' | translate }} </label>
 			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdpaisred" name="pais" required=""/>
 					</div>
 					<div class="col-md-6">
-					   	<label for="pais">{{ 'PROF_DEPARTAMENTOIN' | translate }} </label>
+					   	<label for="pais">{{ 'PROF_DEPARTAMENTOSER' | translate }} </label>
 			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpddepred" name="Departamento" required=""/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-					   	<label for="pais">{{ 'PROF_MUNICIPIOIN' | translate }} </label>
+					   	<label for="pais">{{ 'PROF_MUNICIPIOSER' | translate }} </label>
 			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
 					</div>					
 				</div>
@@ -369,7 +355,7 @@
 				</div>
 				<div class="row">
 		  			 <div class="col-md-6">
-					   	<label for="modalidad">{{ 'PROF_SERVICIO' | translate }} </label>
+					   	<label for="modalidad">{{ 'PROF_SERV_MOD' | translate }} </label>
 			    		<hs-optionlist namelist='modalidad'></hs-optionlist>
 					</div>
 					<div class="col-md-6">

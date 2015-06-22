@@ -59,6 +59,11 @@ appServersoft.controller('healthprofessionalController', ['$scope','commonvariab
 		hpsprog:""
 	}
 	
+	$scope.colombiano=true;
+	$scope.nacionalidad=function(est){
+		$scope.colombiano=est;
+		console.log(est);
+	}
    // Date datepicker
   $scope.today = function() {
     datetoday = new Date();

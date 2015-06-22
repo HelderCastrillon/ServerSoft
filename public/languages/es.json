@@ -6,6 +6,7 @@
 	"PREV":"Anterior",
 	"SAVE":"Guardar",
 	"ACCEPT":"Aceptar",
+	"OPTIONSET_SEARCH":"Escribe aqui para buscar",
 	
 	"-----------Professional Health ----------------":"",
 	"PROF_TITLE":"Registro de profesional de Salud",
@@ -41,6 +42,30 @@
 	"PROF_DIRECCIONRED":"Dirección de residencia",
 	"PROF_TELEFONORED":"Telefono de residencia",
 	"PROF_MOVIL":"Telefono movil",
-	"PROF_CORREO":"Correo Electrónico"
+	"PROF_CORREO":"Correo Electrónico",
+	"PROF_EST_ORIGEN":"Origen de sus estudios",
+	"PROF_PAISIN":"Pais donde estudio",
+	"PROF_DEPARTAMENTOIN":"Departamento donde estudio",
+	"PROF_MUNICIPIOIN":"Municipio donde estudio",
+	"PROF_EST_TYPEIN": "Tipo de estudios realizados",
+	"PROF_EST_INSTITUTION":"Institución",
+	"PROF_EST_TYPE":"Nivel de estudios realizado",
+	"PROF_EST_PROGRAM":"Programa educativo",
+	"PROF_NUM_CONV":"Numero de la convocatoria",
+	"PROF_FEC_CONV":"Fecha de la convocatoria",
+	"PROF_TIT_EQUI":"Titulo equivalente",
+	"PROF_TIT_GRUP":"Grupo Equivalente",
+	"PROF_NUM_ACTO":"Acto administrativo numero",
+	"PROF_FEC_CONV":"Fecha del acto administrativo",
+	"PROF_SERVICIO":"Respecto a su servicio social obligatorio(SSO)",
+	"PROF_SER_TYPE":"El servicio lo presto en Colombia(Local) o fuera del pais(extranjero)",
+	"PROF_PAISSER":"Pais donde prestó",
+	"PROF_DEPARTAMENTOSER":"Departamento donde lo prestó",
+	"PROF_MUNICIPIOSER":"Municipio donde lo prestó",
+	"PROF_SER_FECFIN":"Fecha finalización",
+	"PROF_SER_FECINI":"Fecha inició",
+	"PROF_SERV_MOD":"Modalidad",
+	"PROF_SER_TYPE":"Tipo del programa"
+
 
 }

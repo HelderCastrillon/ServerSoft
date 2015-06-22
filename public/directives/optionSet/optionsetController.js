@@ -3,18 +3,18 @@ appServersoft.directive('d2Dropdownoptionset', function(){
 		restrict: 'E',
 		templateUrl: '/directives/optionSet/optionsetView.html',
 		scope: {
-		      nameList:'@'
+		     tittleoption:'@'
 		    }
 	}
 	}); 
-appServersoft.controller("hsDropdownOptionSetController", ['$scope','Optionset',"commonvariable", function ($scope,Optionset,commonvariable) {
+appServersoft.controller("hsDropdownOptionSetController", ['$scope','CountryList',"commonvariable", function ($scope,CountryList,commonvariable) {
 	$scope.findOptionbyName = function(nameOs) {
-			return Optionset.get({uid:$scope.nameList})
+			return CountryList.get({name:nameOs})
 			.$promise.then(function(response){
-				return  response.options;
+				return  response;
 			 })};
 	$scope.onSelect = function ($item, $model, $label) {
-			commonvariable.Optionset[$scope.nameList] = $item;
+			commonvariable.OptionSetSelected[$scope.tittleoption]=$item;
 		   };
 
 }]);

@@ -33,3 +33,11 @@ ServersoftApi.factory("enumList",['$resource','commonvariable', function ($resou
   });
 }]);
 
+ServersoftApi.factory("CountryList",['$resource','commonvariable', function ($resource,commonvariable) {
+	return $resource(commonvariable.url+"common/country/:name", 
+	{name:'@name'},
+  { get: { method: "GET",isArray: true}
+  });
+}]);
+
+

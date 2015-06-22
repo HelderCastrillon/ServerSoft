@@ -79,6 +79,12 @@ app.post('/api/HealthProfessional', function(request, response) {
 /////common  query///////////////////////////////////////
 
 //get country by name
+app.get('/api/common/country', function(request, response) {
+	var PMquery=CommmonQuery.GetCountry(undefined);
+	mainController.ConnectionController(PMquery,response);
+});
+
+//get country by name
 app.get('/api/common/country/:name', function(request, response) {
 	var PMquery=CommmonQuery.GetCountry(request.params.name);
 	mainController.ConnectionController(PMquery,response);
@@ -89,10 +95,21 @@ app.get('/api/common/department/:name', function(request, response) {
 	var PMquery=CommmonQuery.GetDepartment(request.params.name);
 	mainController.ConnectionController(PMquery,response);
 });
+//get depto by name
+app.get('/api/common/department', function(request, response) {
+	var PMquery=CommmonQuery.GetDepartment(undefined);
+	mainController.ConnectionController(PMquery,response);
+});
 
 //get municipality by name
 app.get('/api/common/municipality/:department/:name', function(request, response) {
 	var PMquery=CommmonQuery.GetMunicipality(request.params.name,request.params.department);
+	console.log(PMquery);
+	mainController.ConnectionController(PMquery,response);
+});
+//get municipality by name
+app.get('/api/common/municipality/:department', function(request, response) {
+	var PMquery=CommmonQuery.GetMunicipality(undefined,request.params.department);
 	console.log(PMquery);
 	mainController.ConnectionController(PMquery,response);
 });
@@ -103,9 +120,21 @@ app.get('/api/common/institution/:municipality/:name', function(request, respons
 	mainController.ConnectionController(PMquery,response);
 });
 
+//get institution by  municipality
+app.get('/api/common/institution/:municipality', function(request, response) {
+	var PMquery=CommmonQuery.GetInstitution(undefined,request.params.municipality);
+	mainController.ConnectionController(PMquery,response);
+});
+
 //get program by name and institution
 app.get('/api/common/program/:institution/:name', function(request, response) {
 	var PMquery=CommmonQuery.GetProgram(request.params.name,request.params.institution);
+	mainController.ConnectionController(PMquery,response);
+});
+
+//get program by  institution
+app.get('/api/common/program/:institution', function(request, response) {
+	var PMquery=CommmonQuery.GetProgram(undefined,request.params.institution);
 	mainController.ConnectionController(PMquery,response);
 });
 
