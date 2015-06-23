@@ -29,7 +29,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','commonvariab
 	};
 
 	$scope.Study={
-		hpeorigtit:"",
+		hpeorigtit:1,
 		hpedepin:"",
 		hpemunin:"",
 		hpepaisin:"",
@@ -48,8 +48,8 @@ appServersoft.controller('healthprofessionalController', ['$scope','commonvariab
 	$scope.Studies=[];
 
 	$scope.obligService={
-		hpsobliga:"",
-		hpstiplug:"",
+		hpsobliga:1,
+		hpstiplug:1,
 		hpsdeppr:"",
 		hpsmunpr:"",
 		hpspaispr:"",
@@ -58,12 +58,56 @@ appServersoft.controller('healthprofessionalController', ['$scope','commonvariab
 		hpsmodal:"",
 		hpsprog:""
 	}
-	
-	$scope.colombiano=true;
-	$scope.nacionalidad=function(est){
-		$scope.colombiano=est;
-		console.log(est);
+	$scope.colombiano=[];
+	$scope.colombiano['nacionalidad']=0;
+	$scope.colombiano['residencia']=0;
+	$scope.nacionalidad=function(est,name,pdmc){
+		var pdm = pdmc.split(',');
+		console.log(pdm)
+		$scope.colombiano[name]=est;
+		if(est==0){
+			commonvariable.OptionSetSelected[pdm[0]]='170';
+
+		}else{			
+			commonvariable.OptionSetSelected[pdm[1]]='00';
+			commonvariable.OptionSetSelected[pdm[2]]='000';
+		}
+		
 	}
+
+	$scope.estudios=function(tip){
+		$scope.Study.hpeorigtit=tip;
+		if(tip==1){
+
+		}
+		else{
+
+		}
+
+	}
+
+	$scope.prestosso=function(tip){
+		$scope.obligService.hpsobliga=tip;
+		if(tip==1){
+
+		}
+		else{
+			
+		}
+
+	}
+
+	$scope.lugarsso=function(tip){
+		$scope.obligService.hpstiplug=tip;
+		if(tip==1){
+
+		}
+		else{
+			
+		}
+
+	}
+	
    // Date datepicker
   $scope.today = function() {
     datetoday = new Date();

@@ -65,7 +65,8 @@
 	"PROF_SER_FECFIN":"Fecha finalización",
 	"PROF_SER_FECINI":"Fecha inició",
 	"PROF_SERV_MOD":"Modalidad",
-	"PROF_SER_TYPE":"Tipo del programa"
+	"PROF_SER_TYPE":"Tipo del programa",
+	"PROF_lIVEIN":"Viven en Colombia"
 
 
 }

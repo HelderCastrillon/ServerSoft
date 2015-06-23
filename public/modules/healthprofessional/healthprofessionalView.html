@@ -38,7 +38,7 @@
     
 	<div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">{{'PROF_TAB_PERSONAL_DESC'| translate}} {{tab.name}}</h3>
+    <h3 class="panel-title">{{'PROF_TAB_PERSONAL_DESC'| translate}} {{tab.disabled}}</h3>
   </div>
   <div class="panel-body">
     		<div class="row">
@@ -92,23 +92,23 @@
 				   	<label for="colombiano">{{ 'PROF_COLOMBIANO' | translate }} </label>
 		    		<br>
 		    		<div class="btn-group" data-toggle="buttons">
-						<button type="button" ng-click="nacionalidad(true)" class="btn btn-primary active"> Si</button>
-				    	<button type="button" ng-click="nacionalidad(false)" class="btn btn-primary active">No </button>
+						<button type="button" ng-click="nacionalidad(0,'nacionalidad','pais,departamento,municipio')" class="btn {{colombiano.nacionalidad==0?' btn-primary':' btn-default'}}">Si</button>
+				    	<button type="button" ng-click="nacionalidad(1,'nacionalidad','pais,departamento,municipio')" class="btn {{colombiano.nacionalidad==0?' btn-default':' btn-primary'}}">No</button>
 					</div>
 				</div>
-				<div class="col-md-6">
-				   	<label for="pais">{{ 'PROF_PAIS' | translate }} </label>
-		    		<div ng-init="colombiano"> <d2-dropdownoptionset tittleoption='pais'></d2-dropdownoptionset></div>
+				<div class="col-md-6"  ng-show="colombiano.nacionalidad==1?true:false">
+				   	<label for="pais">{{'PROF_PAIS' | translate }} </label>
+		    		 <d2-dropdownoptionset tittleoption='pais' resource='country'></d2-dropdownoptionset>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" ng-show="colombiano.nacionalidad==0?true:false">
 				<div class="col-md-6">
 				   	<label for="depto">{{ 'PROF_DEPARTAMENTO' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="depto" name="depto" required=""/>
+		    		 <d2-dropdownoptionset tittleoption='departamento' resource='department'></d2-dropdownoptionset>
 				</div>
 				<div class="col-md-6">
 				   	<label for="municipio">{{ 'PROF_MUNICIPIO' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="municipio" name="municipio" required=""/>
+		    		 <d2-dropdownoptionset tittleoption='municipio' resource='municipality'></d2-dropdownoptionset>
 				</div>
 			</div>
 			<div class="row">
@@ -147,36 +147,28 @@
 					<div class="col-md-6">
 					   	<label for="colombiano">{{ 'PROF_lIVEIN' | translate }} </label>
 			    		<br>
+
 			    		<div class="btn-group" data-toggle="buttons">
-						  <label class="btn btn-primary active">
-						    <input type="radio" name="options" id="option1" autocomplete="off" checked> Si
-						  </label>
-						  <label class="btn btn-primary">
-						    <input type="radio" name="options" id="option2" autocomplete="off">No
-						  </label>
+							<button type="button" ng-click="nacionalidad(0,'residencia','paisred,departamentored,municipiored')" class="btn {{colombiano.residencia==0?' btn-primary':' btn-default'}}">Si</button>
+					    	<button type="button" ng-click="nacionalidad(1,'residencia','paisred,departamentored,municipiored')" class="btn {{colombiano.residencia==0?' btn-default':' btn-primary'}}">No</button>
 						</div>
 					</div>
 			</div>
 			<div class="row">
-
-				<div class="col-md-6">
-				   	<label for="paisred">{{ 'PROF_PAIS' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="pais" name="pais" required=""/>
-				</div>
-			
-				<div class="col-md-6">
-				   	<label for="pais">{{ 'PROF_PAISRED' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdpaisred" name="pais" required=""/>
+	
+				<div class="col-md-6"  ng-show="colombiano.residencia==1?true:false">
+				   	<label for="pais">{{'PROF_PAISRED' | translate }} </label>
+		    		 <d2-dropdownoptionset tittleoption='paisred' resource='country'></d2-dropdownoptionset>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" ng-show="colombiano.residencia==0?true:false">
 				<div class="col-md-6">
-				   	<label for="pais">{{ 'PROF_DEPARTAMENTORED' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpddepred" name="Departamento" required=""/>
+				   	<label for="depto">{{ 'PROF_DEPARTAMENTORED' | translate }} </label>
+		    		 <d2-dropdownoptionset tittleoption='departamentored' resource='department'></d2-dropdownoptionset>
 				</div>
 				<div class="col-md-6">
-				   	<label for="pais">{{ 'PROF_MUNICIPIORED' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+				   	<label for="municipio">{{ 'PROF_MUNICIPIORED' | translate }} </label>
+		    		 <d2-dropdownoptionset tittleoption='municipiored' resource='municipality'></d2-dropdownoptionset>
 				</div>
 			</div>
 			<div class="row">
@@ -222,69 +214,77 @@
 		  		<div class="row">
 		  			 <div class="col-md-6">
 					   	<label for="origentitulo">{{ 'PROF_EST_ORIGEN' | translate }} </label>
-			    		<hs-optionlist namelist='origentitulo'></hs-optionlist>
-					</div>
+			    		<br>
+
+			    		<div class="btn-group" data-toggle="buttons">
+							<button type="button" ng-click="estudios(1)" class="btn {{Study.hpeorigtit==1?' btn-primary':' btn-default'}}">en Colombia</button>
+					    	<button type="button" ng-click="estudios(2)" class="btn {{Study.hpeorigtit==1?' btn-default':' btn-primary'}}">en el exterior</button>
+						</div>
+					</div>		  			 
 				</div>
-				<div class="row">
+				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
 					<div class="col-md-6">
 					   	<label for="paisin">{{ 'PROF_PAISIN' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdpaisred" name="pais" required=""/>
-					</div>
-					<div class="col-md-6">
-					   	<label for="pais">{{ 'PROF_DEPARTAMENTOIN' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpddepred" name="Departamento" required=""/>
+			    		 <d2-dropdownoptionset tittleoption='paisin' resource='country'></d2-dropdownoptionset>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_DEPARTAMENTOIN' | translate }} </label>
+			    		<d2-dropdownoptionset tittleoption='departamentoin' resource='department'></d2-dropdownoptionset>
+					</div>
 					<div class="col-md-6">
 					   	<label for="pais">{{ 'PROF_MUNICIPIOIN' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+			    		<d2-dropdownoptionset tittleoption='municipioin' resource='municipality'></d2-dropdownoptionset>
 					</div>
+				</div>
+				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
+					
 					<div class="col-md-6">
 					   	<label for="tipoinstitucion">{{ 'PROF_EST_TYPEIN' | translate }} </label>
 			    		<hs-optionlist namelist='tipoinstitucion'></hs-optionlist>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
 					<div class="col-md-6">
 					   	<label for="pais">{{ 'PROF_EST_INSTITUTION' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+			    		<d2-dropdownoptionset tittleoption='institution' resource='institution'></d2-dropdownoptionset>
 					</div>
 					 <div class="col-md-6">
 					   	<label for="tipoprograma">{{ 'PROF_EST_TYPE' | translate }} </label>
 			    		<hs-optionlist namelist='tipoprograma'></hs-optionlist>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
 					<div class="col-md-6">
 					   	<label for="pais">{{ 'PROF_EST_PROGRAM' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+			    		<d2-dropdownoptionset tittleoption='institution' resource='institution'></d2-dropdownoptionset>
 					</div>
+				</div>
+				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_NUM_CONV' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="Study.hpenumconv" name="Municipio" required=""/>
+					</div>
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_TIT_GRUP' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="Study.hpegruptit" name="Municipio" required=""/>
+					</div>
+				</div>
+				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
 					<div class="col-md-6">
 					   	<label for="fecnac">{{ 'PROF_FEC_CONV' | translate }} </label>
 			    		<p class="input-group">
-			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="DataPersonal.hpfecnac" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
+			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="Study.hpefecconv" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
 			              <span class="input-group-btn">
 			                <button type="button" class="btn btn-primary" ng-click="openconv($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 			              </span>
 			            </p>
 
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-					   	<label for="pais">{{ 'PROF_NUM_CONV' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
-					</div>
-					<div class="col-md-6">
-					   	<label for="pais">{{ 'PROF_TIT_GRUP' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
-					</div>
-				</div>
-				<div class="row">
 					<div class="col-md-6">
 					   	<label for="pais">{{ 'PROF_TIT_EQUI' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+			    		<input type="text" class="form-control" ng-model="Study.hpetitequi" name="Municipio" required=""/>
 					</div>
 				</div>
 			
@@ -308,30 +308,37 @@
 				<div class="row">
 		  			 <div class="col-md-6">
 					   	<label for="serviciooblig">{{ 'PROF_SERVICIO' | translate }} </label>
-			    		<hs-optionlist namelist='serviciooblig'></hs-optionlist>
+			    		<div class="btn-group" data-toggle="buttons">
+							<button type="button" ng-click="prestosso(1)" class="btn {{obligService.hpsobliga==1?' btn-primary':' btn-default'}}">Lo prestó</button>
+					    	<button type="button" ng-click="prestosso(2)" class="btn {{obligService.hpsobliga==2?' btn-primary':' btn-default'}}">Fue exento</button>
+					    	<button type="button" ng-click="prestosso(3)" class="btn {{obligService.hpsobliga==3?' btn-primary':' btn-default'}}">Fue exonerado</button>
+						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6" ng-show="obligService.hpsobliga==1?true:false">
 					   	<label for="tipolugarservicio">{{ 'PROF_SER_TYPE' | translate }} </label>
-			    		<hs-optionlist namelist='tipolugarservicio'></hs-optionlist>
+			    		<div class="btn-group" data-toggle="buttons">
+							<button type="button" ng-click="lugarsso(1)" class="btn {{obligService.hpstiplug==1?' btn-primary':' btn-default'}}">en Colombia</button>
+					    	<button type="button" ng-click="lugarsso(2)" class="btn {{obligService.hpstiplug==1?' btn-default':' btn-primary'}}">en el exterior</button>
+						</div>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" ng-show="obligService.hpsobliga==1?true:false" ng-hide="obligService.hpstiplug==1?true:false">
 					<div class="col-md-6">
 					   	<label for="paisin">{{ 'PROF_PAISSER' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdpaisred" name="pais" required=""/>
-					</div>
-					<div class="col-md-6">
-					   	<label for="pais">{{ 'PROF_DEPARTAMENTOSER' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpddepred" name="Departamento" required=""/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-					   	<label for="pais">{{ 'PROF_MUNICIPIOSER' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdmunred" name="Municipio" required=""/>
+			    		<d2-dropdownoptionset tittleoption='paisin' resource='country'></d2-dropdownoptionset>
 					</div>					
 				</div>
-				<div class="row">
+				<div class="row" ng-show="obligService.hpsobliga==1?true:false" ng-hide="obligService.hpstiplug==2?true:false">
+					<div class="col-md-6" >
+					   	<label for="pais">{{ 'PROF_DEPARTAMENTOSER' | translate }} </label>
+			    		<d2-dropdownoptionset tittleoption='departamentoin' resource='department'></d2-dropdownoptionset>
+					</div>
+					<div class="col-md-6">
+					   	<label for="pais">{{ 'PROF_MUNICIPIOSER' | translate }} </label>
+			    		<d2-dropdownoptionset tittleoption='municipioin' resource='municipality'></d2-dropdownoptionset>
+					</div>					
+				</div>
+				<div class="row" ng-show="obligService.hpsobliga==1?true:false">
 					<div class="col-md-6">
 					   	<label for="fecnac">{{ 'PROF_SER_FECINI' | translate }} </label>
 			    		<p class="input-group">
@@ -342,7 +349,7 @@
 			            </p>
 
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6" ng-show="obligService.hpsobliga==1?true:false">
 					   	<label for="fecnac">{{ 'PROF_SER_FECFIN' | translate }} </label>
 			    		<p class="input-group">
 			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="obligService.phsfecini" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
@@ -353,7 +360,7 @@
 
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" ng-show="obligService.hpsobliga==1?true:false">
 		  			 <div class="col-md-6">
 					   	<label for="modalidad">{{ 'PROF_SERV_MOD' | translate }} </label>
 			    		<hs-optionlist namelist='modalidad'></hs-optionlist>
