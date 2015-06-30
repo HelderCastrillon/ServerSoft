@@ -127,32 +127,36 @@ appServersoft.controller('healthprofessionalController', ['$scope','commonvariab
   };
 
 
-
-	$scope.tabsPersonal = [{"0":[{disabled:false}]},
- 						{"1":[{disabled:false}]},
- 						{"2":[{disabled:false}]},
- 						{"3":[{disabled:false}]},
- 						{"4":[{disabled:false}]}
- ];
+  	$scope.tabsPersonal0 = [{active:true,disabled:false}];
+	$scope.tabsPersonal1 = [{active:false,disabled:true}];
+	$scope.tabsPersonal2 = [{active:false,disabled:true}];
+	$scope.tabsPersonal3 = [{active:false,disabled:true}];
+	$scope.tabsPersonal4 = [{active:false,disabled:true}];
+	$scope.tabsPersonal5 = [{active:false,disabled:true}];
 
   $scope.next=function(NumTab){
-  	$scope.tabsPersonal[NumTab][NumTab].active = true;
+  	$scope.tabsPersonal4[0].disabled=false
   	switch(NumTab){
   		case 1:
+  			$scope.tabsPersonal1.active = true;
+
   			$scope.DataPersonal.hptipdoc=commonvariable.OptionSetSelected.tipdoc.key;
   			$scope.DataPersonal.hpsexo=commonvariable.OptionSetSelected.sexo.key;
   			$scope.DataPersonal.hpetnia=commonvariable.OptionSetSelected.etnia.key;
   			break;
    		case 2: 
+   			$scope.tabsPersonal2.active = true;
    			$scope.DataPersonalAdd.hpdEstcon=commonvariable.OptionSetSelected.conyugal.key;
    			break;
-  		case 3: break;
-  		case 4: break;
+  		case 3:
+  			$scope.tabsPersonal3.active = true;
+  			break;
+  		case 4:
+  			$scope.tabsPersonal4.active = true;
+  		 	break;
   	}
 
-
-  	console.log($scope.DataPersonalAdd);
-  	
+ 	
   };
     
 }]);
