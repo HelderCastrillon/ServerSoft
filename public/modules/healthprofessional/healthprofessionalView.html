@@ -4,7 +4,7 @@
 <h3>{{'PROF_TITLE'| translate}}</h3>
 <br>
    <tabset>
-	<tab heading="{{'PROF_TAB_INTRO'| translate}}" ng-repeat="tab0 in tabsPersonal0" active="tab0.active" disable="tab0.disabled">
+	<tab heading="{{tabsPersonal0.tittle}}" active="tabsPersonal0.active" disable="tabsPersonal0.disabled" select='next(0)'>
   		<div class="panel panel-default">
 		  <div class="panel-heading">
 		    <h3 class="panel-title">{{'PROF_TAB_INTRO_DETALLE'| translate}}</h3>
@@ -17,24 +17,24 @@
 		  le pedimos a usted, hacer buen uso de la plataforma y registrar la información real que se está solicitando.
 		  reiteramos que el uso de la información registrada a continuación se utilizará solo para fines de registro cumplimento a la ley, reporte al ministerio de salud y demas disposiciones en cumplimiento de la Ley 1581 de 2012 y del Decreto 1377 de 2013.
 		  <br>
-		   Al usted continuar con este proceso acepta las condiciones expuestas previamente.
+		   antes de continuar con este proceso debes aceptar las condiciones expuestas previamente.
+
 		  <br>
-		  <nav>
+				
+			<nav>
 			  <ul class="pager">
-			    <li class="next">
-			    	<button type="button" class="btn btn-primary" ng-click="next(0)" aria-label="Left Align">
-					  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{'ACCEPT' | translate}}
-					</button>
-			    </li>
+			    <li class="next"><input type="checkbox" ng-mode="agreeinformation" ng-click="agreeinformation=!agreeinformation"><a href="/view#/healthprofessional" ng-click="next(1)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
 			  </ul>
 		  </nav>
+
+		   
 		  </div>
 		</div>
 	</tab>
 
 
 
-    <tab heading="{{'PROF_TAB_PERSONAL'| translate}}" ng-repeat="tab1 in tabsPersonal1" active="tab1.active" disable="tab1.disabled">
+    <tab heading="{{tabsPersonal1.tittle}}"  active="tabsPersonal1.active" disable="tabsPersonal1.disabled">
     
 	<div class="panel panel-default">
   <div class="panel-heading">
@@ -129,7 +129,7 @@
 	</div>
 		    
     </tab>
-    <tab heading="{{'PROF_TAB_PERSONALADD'| translate}}" ng-repeat="tab2 in tabsPersonal2" active="tab2.active" disable="tab2.disabled">
+    <tab heading="{{tabsPersonal2.tittle}}"  active="tabsPersonal2.active" disable="tabsPersonal2.disabled">
     	
 		<div class="panel panel-default">
 		  <div class="panel-heading">
@@ -204,7 +204,7 @@
 		</div>
 	</div>
     </tab>
-    <tab heading="{{'PROF_TAB_STUDY'| translate}}" ng-repeat="tab3 in tabsPersonal3" active="tab3.active" disable="tab3.disabled">
+    <tab heading="{{tabsPersonal3.tittle}}" active="tabsPersonal3.active" disable="tabsPersonal3.disabled">
     		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
@@ -298,7 +298,7 @@
 		</div>
 	</div>  
     </tab>
-    <tab heading="{{'PROF_TAB_SERVICE'| translate}}" ng-repeat="tab4 in tabsPersonal4" active="tab4.active" disable="tab4.disabled">
+    <tab heading="{{tabsPersonal4.tittle}}" active="tabsPersonal4.active" disable="tabsPersonal4.disabled">
     		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
@@ -380,7 +380,7 @@
 		 </div>
 	</div>
     </tab>
-    <tab heading="{{'PROF_TAB_RESUME'| translate}}" ng-repeat="tab5 in tabsPersonal5" active="tab5.active" disable="tab5.disabled">
+    <tab heading="{{tabsPersonal5.tittle}}" active="tabsPersonal5.active" disable="tabsPersonal5.disabled">
     		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
@@ -407,3 +407,5 @@
   </tabset>
 </div>
 <div>
+
+ 

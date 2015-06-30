@@ -1,5 +1,7 @@
-appServersoft.controller('healthprofessionalController', ['$scope','commonvariable', function($scope,commonvariable){
+appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable', function($scope,$filter,commonvariable){
 	
+	var $translate = $filter('translate');
+
 	//Data Object
 	$scope.DataPersonal={
 		hptipdoc:"",
@@ -126,20 +128,20 @@ appServersoft.controller('healthprofessionalController', ['$scope','commonvariab
     $scope.opendDate = true;
   };
 
-
-  	$scope.tabsPersonal0 = [{active:true,disabled:false}];
-	$scope.tabsPersonal1 = [{active:false,disabled:true}];
-	$scope.tabsPersonal2 = [{active:false,disabled:true}];
-	$scope.tabsPersonal3 = [{active:false,disabled:true}];
-	$scope.tabsPersonal4 = [{active:false,disabled:true}];
-	$scope.tabsPersonal5 = [{active:false,disabled:true}];
+  	$scope.tabsPersonal0 = {tittle:$translate('PROF_TAB_INTRO'),active:true,disabled:false};
+	$scope.tabsPersonal1 = {tittle:$translate('PROF_TAB_PERSONAL'),active:false,disabled:true};
+	$scope.tabsPersonal2 = {tittle:$translate('PROF_TAB_PERSONALADD'),active:false,disabled:true};
+	$scope.tabsPersonal3 = {tittle:$translate('PROF_TAB_STUDY'),active:false,disabled:true};
+	$scope.tabsPersonal4 = {tittle:$translate('PROF_TAB_SERVICE'),active:false,disabled:true};
+	$scope.tabsPersonal5 = {tittle:$translate('PROF_TAB_RESUME'),active:false,disabled:true};
 
   $scope.next=function(NumTab){
-  	$scope.tabsPersonal4[0].disabled=false
   	switch(NumTab){
+  		case 0:
+  			$scope.tabsPersonal1.active = true;
+  			break;
   		case 1:
   			$scope.tabsPersonal1.active = true;
-
   			$scope.DataPersonal.hptipdoc=commonvariable.OptionSetSelected.tipdoc.key;
   			$scope.DataPersonal.hpsexo=commonvariable.OptionSetSelected.sexo.key;
   			$scope.DataPersonal.hpetnia=commonvariable.OptionSetSelected.etnia.key;
