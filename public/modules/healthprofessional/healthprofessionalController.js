@@ -128,6 +128,9 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
     $scope.opendDate = true;
   };
 
+  $scope.agreeinformation=function(){
+  	$scope.conditionacepted=!$scope.conditionacepted;
+  }
   	$scope.tabsPersonal0 = {tittle:$translate('PROF_TAB_INTRO'),active:true,disabled:false};
 	$scope.tabsPersonal1 = {tittle:$translate('PROF_TAB_PERSONAL'),active:false,disabled:true};
 	$scope.tabsPersonal2 = {tittle:$translate('PROF_TAB_PERSONALADD'),active:false,disabled:true};
@@ -136,6 +139,14 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 	$scope.tabsPersonal5 = {tittle:$translate('PROF_TAB_RESUME'),active:false,disabled:true};
 
   $scope.next=function(NumTab){
+  	
+  	var resp=$scope.validation(NumTab);
+
+  	if(resp==0)
+  		return 0; //s sale
+  	else
+  		return 1
+
   	switch(NumTab){
   		case 0:
   			$scope.tabsPersonal1.active = true;
@@ -160,5 +171,47 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 
  	
   };
+
+ $scope.alerts = [];
+
+  $scope.addAlert = function(menssage) {
+    $scope.alerts.push({msg: menssage});
+  };
+
+$scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
+
+ $scope.validation=function(NumTab){
+ 	var msg;
+  	switch(NumTab){
+  		case 0:
+  			break;
+  		case 1:
+  			if($scope.conditionacepted==undefined||$scope.conditionacepted==0)
+  				msg="Si desea continuar debe aceptar los terminos";		
+  			break;
+   		case 2: 
+
+   			break;
+  		case 3:
+
+  			break;
+  		case 4:
+
+  		 	break;
+  	}
+  	if(msg){
+  		addAlert(msg);
+  		return 0;
+  	}
+  	else
+  		return 1	
+
+
+
+ 	
+  };
+
     
 }]);

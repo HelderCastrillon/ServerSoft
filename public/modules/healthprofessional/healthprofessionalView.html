@@ -2,9 +2,16 @@
 <div class="col-md-1"></div>
 <div class="col-md-11">
 <h3>{{'PROF_TITLE'| translate}}</h3>
+	<div class="row">
+		<div class="col-md-1"></div>
+			<div class="col-md-11">
+				<alert ng-repeat="alert in alerts" type="warning" close="closeAlert($index)">{{alert.msg}}</alert>
+			</div>
+		</div>
+	</div>
 <br>
    <tabset>
-	<tab heading="{{tabsPersonal0.tittle}}" active="tabsPersonal0.active" disable="tabsPersonal0.disabled" select='next(0)'>
+	<tab heading="{{tabsPersonal0.tittle}}" active="tabsPersonal0.active" disable="tabsPersonal0.disabled">
   		<div class="panel panel-default">
 		  <div class="panel-heading">
 		    <h3 class="panel-title">{{'PROF_TAB_INTRO_DETALLE'| translate}}</h3>
@@ -17,13 +24,16 @@
 		  le pedimos a usted, hacer buen uso de la plataforma y registrar la información real que se está solicitando.
 		  reiteramos que el uso de la información registrada a continuación se utilizará solo para fines de registro cumplimento a la ley, reporte al ministerio de salud y demas disposiciones en cumplimiento de la Ley 1581 de 2012 y del Decreto 1377 de 2013.
 		  <br>
-		   antes de continuar con este proceso debes aceptar las condiciones expuestas previamente.
-
 		  <br>
-				
+		  <div class="alert alert-info" role="alert">
+			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			   <input type="checkbox" ng-click="agreeinformation()">
+			  Usted acepta las condiciones expuestas previamente.
+			</div>
+					   
 			<nav>
-			  <ul class="pager">
-			    <li class="next"><input type="checkbox" ng-mode="agreeinformation" ng-click="agreeinformation=!agreeinformation"><a href="/view#/healthprofessional" ng-click="next(1)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
+			  <ul class="pager" ng-show='conditionacepted'>
+			    <li class="next"><a href="/view#/healthprofessional" ng-click="next(0)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
 			  </ul>
 		  </nav>
 
@@ -34,7 +44,7 @@
 
 
 
-    <tab heading="{{tabsPersonal1.tittle}}"  active="tabsPersonal1.active" disable="tabsPersonal1.disabled">
+    <tab heading="{{tabsPersonal1.tittle}}"  active="tabsPersonal1.active" disable="tabsPersonal1.disabled" select='next(1)'>
     
 	<div class="panel panel-default">
   <div class="panel-heading">
