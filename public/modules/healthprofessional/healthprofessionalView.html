@@ -2,16 +2,13 @@
 <div class="col-md-1"></div>
 <div class="col-md-11">
 <h3>{{'PROF_TITLE'| translate}}</h3>
-	<div class="row">
-		<div class="col-md-1"></div>
-			<div class="col-md-11">
-				<alert ng-repeat="alert in alerts" type="warning" close="closeAlert($index)">{{alert.msg}}</alert>
-			</div>
-		</div>
-	</div>
+
 <br>
    <tabset>
-	<tab heading="{{tabsPersonal0.tittle}}" active="tabsPersonal0.active" disable="tabsPersonal0.disabled">
+   	<tab active="tabsPersonal0.active" disable="tabsPersonal0.disabled">
+  		<tab-heading>
+  				{{tabsPersonal0.tittle}}
+  		</tab-heading>
   		<div class="panel panel-default">
 		  <div class="panel-heading">
 		    <h3 class="panel-title">{{'PROF_TAB_INTRO_DETALLE'| translate}}</h3>
@@ -27,7 +24,7 @@
 		  <br>
 		  <div class="alert alert-info" role="alert">
 			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-			   <input type="checkbox" ng-click="agreeinformation()">
+			   <input type="checkbox" ng-click="agreeinformation()" {{nextagree==1?'disabled':''}}>
 			  Usted acepta las condiciones expuestas previamente.
 			</div>
 					   
@@ -44,8 +41,10 @@
 
 
 
-    <tab heading="{{tabsPersonal1.tittle}}"  active="tabsPersonal1.active" disable="tabsPersonal1.disabled" select='next(1)'>
-    
+    <tab  active="tabsPersonal1.active" disable="tabsPersonal1.disabled" select='validation(1)'>
+    <tab-heading>
+    	{{tabsPersonal1.tittle}}
+    </tab-heading>
 	<div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">{{'PROF_TAB_PERSONAL_DESC'| translate}} </h3>
@@ -53,22 +52,22 @@
   <div class="panel-body">
     		<div class="row">
 				<div class="col-md-6">
-					<label for="numdoc">{{ 'PROF_DOC_TYPE' | translate }} </label>
+					<label for="hptipdoc" class="{{ValidationField.hptipdoc.active?'label label-danger':''}}">{{ 'PROF_DOC_TYPE' | translate }} </label>
 		    		<hs-optionlist namelist='tipdoc'></hs-optionlist>
 				</div>
-				<div class="col-md-6">
-				   	<label for="numdoc">{{ 'PROF_DOC' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonal.hpnumdoc" name="numdoc" required=""/>
+				<div class="col-md-6 form-group {{ValidationField.hpnumdoc.active?'has-error':''}}">
+				   	<label class="control-label"  for="numdoc">{{ 'PROF_DOC' | translate }} </label>
+		    		<input type="text" class="form-control" ng-model="DataPersonal.hpnumdoc" id="numdoc" required=""/>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-6 form-group {{ValidationField.hppriape.active?'has-error':''}}" >
 				   	<label for="priape">{{ 'PROF_PRIAPE' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonal.hppriape" name="priape" required=""/>
+		    		<input type="text" class="form-control" ng-model="DataPersonal.hppriape" id="priape" required=""/>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 form-group {{ValidationField.hpsegape.active?'has-error':''}}">
 				   	<label for="segape">{{ 'PROF_SEGAPE' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonal.hpsegape" name="segape" required=""/>
+		    		<input type="text" class="form-control" ng-model="DataPersonal.hpsegape" id="segape" required=""/>
 				</div>
 			</div>
 			<div class="row">
@@ -139,7 +138,7 @@
 	</div>
 		    
     </tab>
-    <tab heading="{{tabsPersonal2.tittle}}"  active="tabsPersonal2.active" disable="tabsPersonal2.disabled">
+    <tab heading="{{tabsPersonal2.tittle}}"  active="tabsPersonal2.active" disable="tabsPersonal2.disabled" select='validation(2)'>
     	
 		<div class="panel panel-default">
 		  <div class="panel-heading">
@@ -214,7 +213,7 @@
 		</div>
 	</div>
     </tab>
-    <tab heading="{{tabsPersonal3.tittle}}" active="tabsPersonal3.active" disable="tabsPersonal3.disabled">
+    <tab heading="{{tabsPersonal3.tittle}}" active="tabsPersonal3.active" disable="tabsPersonal3.disabled" select='validation(2)'>
     		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
@@ -413,7 +412,26 @@
 		 </div>
 	</div>
     </tab>
-  
+  <tab active="tabsPersonalE.active" disable="tabsPersonalE.disabled"  class="bg-warning">
+  		<tab-heading >
+        <i class="glyphicon glyphicon-bell"></i>
+      </tab-heading>
+  		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">{{'PROF_TAB_ERROR'| translate}}</h3>
+		  </div>
+		  <div class="panel-body">
+		  				   
+			<alert ng-repeat="alert in alerts" type="warning" close="closeAlert($index)">{{alert.msg}}</alert>
+		   
+		  </div>
+		</div>
+		 <nav>
+			  <ul class="pager">
+			    <li class="previous"><a href="/view#/healthprofessional" ng-click="returnTab(tabReturn)"><span aria-hidden="true">&larr;</span> {{'PREV_ERROR' | translate}}</a></li>
+			  </ul>
+		  </nav>
+	</tab>
   </tabset>
 </div>
 <div>
