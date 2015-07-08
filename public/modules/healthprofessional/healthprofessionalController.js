@@ -1,4 +1,4 @@
-appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable', function($scope,$filter,commonvariable){
+appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable','$modal', function($scope,$filter,commonvariable,$modal){
 	
 	var $translate = $filter('translate');
 
@@ -133,14 +133,18 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 	$scope.nacionalidad(0,'nacionalidad','pais,departamento,municipio');
 	$scope.nacionalidad(0,'residencia','paisred,departamentored,municipiored');
 
-	$scope.estudios=function(tip){
+	$scope.estudios=function(tip,pdmc){
+		var pdm = pdmc.split(',');
 		$scope.Study.hpeorigtit=tip;
 		if(tip==1){
-
+			commonvariable.OptionSetSelected[pdm[0]]={code:'170'};
 		}
 		else{
-
+			commonvariable.OptionSetSelected[pdm[1]]={code:'00'};
+			commonvariable.OptionSetSelected[pdm[2]]={code:'000'};
 		}
+
+	$scope.estudios(1,'paisin,departamentoin,municipioin');
 
 	}
 
@@ -166,11 +170,13 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 
 	}
 	
-   // Date datepicker
+   /////////// Date datepicker///////////////////////////////////
   $scope.today = function() {
     datetoday = new Date();
     $scope.currentDate=datetoday.getFullYear()+"-"+(datetoday.getMonth()<=9?"0"+datetoday.getMonth():datetoday.getMonth())+"-"+(datetoday.getDate()<=9?"0"+datetoday.getDate():datetoday.getDate());
   	$scope.DataPersonal.hpfecnac=$scope.currentDate;
+  	$scope.Study.hpefecconv=$scope.currentDate;
+  	$scope.Study.hpefecgrad=$scope.currentDate;
   };
   $scope.today();
 
@@ -183,6 +189,21 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
     $event.stopPropagation();
     $scope.opendDate = true;
   };
+
+   $scope.openconv = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.opendDateConv = true;
+  };
+
+   $scope.openGrad = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.opendDateGrad = true;
+  };
+
+/////////////////////////////////////////////////////////
+
 
   $scope.agreeinformation=function(){
   	$scope.conditionacepted=!$scope.conditionacepted;
@@ -219,6 +240,14 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 			$scope.DataPersonalAdd.hpdmunred=(commonvariable.OptionSetSelected.municipiored!=undefined)?commonvariable.OptionSetSelected.municipiored.code:"";
 			break;
   		case 3:
+  			$scope.Study.hpedepin=(commonvariable.OptionSetSelected.departamentoin!=undefined)?commonvariable.OptionSetSelected.departamentoin.code:"";
+			$scope.Study.hpemunin=(commonvariable.OptionSetSelected.municipioin!=undefined)?commonvariable.OptionSetSelected.municipioin.code:"";
+			$scope.Study.hpepaisin=(commonvariable.OptionSetSelected.paisin!=undefined)?commonvariable.OptionSetSelected.paisin.code:"";
+			$scope.Study.hpetipin=(commonvariable.OptionSetSelected.tipoinstitucion!=undefined)?commonvariable.OptionSetSelected.tipoinstitucion.key:"";
+			$scope.Study.hpecodin=(commonvariable.OptionSetSelected.institution!=undefined)?commonvariable.OptionSetSelected.institution.code:"";
+			$scope.Study.hpetippr=(commonvariable.OptionSetSelected.tipoprograma!=undefined)?commonvariable.OptionSetSelected.tipoprograma.key:"";
+			$scope.Study.hpenompr=(commonvariable.OptionSetSelected.program!=undefined)?commonvariable.OptionSetSelected.program.code:"";
+  			
   			$scope.tabsPersonal4.active = true;
   			break;
   		case 4:
@@ -321,7 +350,8 @@ $scope.validationtype=function(type,value, msg){
  			});
    			$scope.tabReturn=1;	
    			break;
-  		case 3:angular.forEach($scope.DataPersonalAdd,function(value,key){
+  		case 3:
+  			angular.forEach($scope.DataPersonalAdd,function(value,key){
  				if($scope.ValidationField[key].mandatory==true||($scope.ValidationField[key].mandatory==false && value!="")){
 	 				var revaltype=$scope.validationtype($scope.ValidationField[key].tipval,value,$scope.ValidationField[key].msg);
 	 				$scope.ValidationField[key].active=revaltype;
@@ -330,7 +360,22 @@ $scope.validationtype=function(type,value, msg){
    			$scope.tabReturn=2;	
   			break;
   		case 4:
-
+			angular.forEach($scope.Study,function(value,key){
+ 				if($scope.ValidationField[key].mandatory==true||($scope.ValidationField[key].mandatory==false && value!="")){
+	 				var revaltype=$scope.validationtype($scope.ValidationField[key].tipval,value,$scope.ValidationField[key].msg);
+	 				$scope.ValidationField[key].active=revaltype;
+	 			}		 
+ 			});
+   			$scope.tabReturn=3;	
+  		 	break;
+  		 case 5:
+			angular.forEach($scope.obligService,function(value,key){
+ 				if($scope.ValidationField[key].mandatory==true||($scope.ValidationField[key].mandatory==false && value!="")){
+	 				var revaltype=$scope.validationtype($scope.ValidationField[key].tipval,value,$scope.ValidationField[key].msg);
+	 				$scope.ValidationField[key].active=revaltype;
+	 			}		 
+ 			});
+   			$scope.tabReturn=4;	
   		 	break;
   	}
   	if($scope.alerts.length)  	
@@ -338,5 +383,56 @@ $scope.validationtype=function(type,value, msg){
 	
   };
 
+
+ ///modal
+ 
+$scope.items = ['item1', 'item2', 'item3'];
+
+  $scope.animationsEnabled = true;
+
+  $scope.openmodal = function (size) {
+
+    var modalInstance = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'ModalAlertValidation.html',
+      controller: 'ModalInstanceAlert',
+      size: size,
+      resolve: {
+        items: function () {
+          return $scope.items;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $scope.toggleAnimation = function () {
+    $scope.animationsEnabled = !$scope.animationsEnabled;
+  };
+
+ /// 
+
     
 }]);
+
+
+appServersoft.controller('ModalInstanceAlert', function ($scope, $modalInstance, items) {
+
+  $scope.items = items;
+  $scope.selected = {
+    item: $scope.items[0]
+  };
+
+  $scope.ok = function () {
+    $modalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});

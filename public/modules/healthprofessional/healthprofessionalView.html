@@ -23,7 +23,7 @@
 		  <br>
 		  <br>
 		  <div class="alert alert-info" role="alert">
-			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
 			   <input type="checkbox" ng-click="agreeinformation()" {{nextagree==1?'disabled':''}}>
 			  Usted acepta las condiciones expuestas previamente.
 			</div>
@@ -222,78 +222,88 @@
 		  <div class="panel-body">
 		  		<div class="row">
 		  			 <div class="col-md-6">
-					   	<label class="control-label"  for="origentitulo">{{ 'PROF_EST_ORIGEN' | translate }} </label>
+					   	<label class="control-label"  for="origentitulo" class="{{ValidationField.hpeorigtit.active?'label label-danger':''}}">{{ 'PROF_EST_ORIGEN' | translate }} </label>
 			    		<br>
 
 			    		<div class="btn-group" data-toggle="buttons">
-							<button type="button" ng-click="estudios(1)" class="btn {{Study.hpeorigtit==1?' btn-primary':' btn-default'}}">en Colombia</button>
-					    	<button type="button" ng-click="estudios(2)" class="btn {{Study.hpeorigtit==1?' btn-default':' btn-primary'}}">en el exterior</button>
+							<button type="button" ng-click="estudios(1,'paisin,departamentoin,municipioin')" class="btn {{Study.hpeorigtit==1?' btn-primary':' btn-default'}}">en Colombia</button>
+					    	<button type="button" ng-click="estudios(2,'paisin,departamentoin,municipioin')" class="btn {{Study.hpeorigtit==1?' btn-default':' btn-primary'}}">en el exterior</button>
 						</div>
+					</div>
+					<div class="col-md-6">
+					   	<label class="control-label"  for="fecgrad" class="{{ValidationField.hpefecgrad.active?'label label-danger':''}}">{{ 'PROF_FEC_GRADO' | translate }} </label>
+			    		<p class="input-group">
+			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="Study.hpefecgrad" is-open="opendDateGrad" max-date="currentDate" ng-required="true" close-text="Close" id="fecgrad" />
+			              <span class="input-group-btn">
+			                <button type="button" class="btn btn-primary" ng-click="openGrad($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			              </span>
+			            </p>
+
 					</div>		  			 
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
 					<div class="col-md-6">
-					   	<label class="control-label"  for="paisin">{{ 'PROF_PAISIN' | translate }} </label>
+					   	<label class="control-label"  for="paisin" class="{{ValidationField.hpepaisin.active?'label label-danger':''}}">{{ 'PROF_PAISIN' | translate }} </label>
 			    		 <d2-dropdownoptionset tittleoption='paisin' resource='country'></d2-dropdownoptionset>
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
 					<div class="col-md-6">
-					   	<label class="control-label"  for="pais">{{ 'PROF_DEPARTAMENTOIN' | translate }} </label>
+					   	<label class="control-label"  for="deptoin" class="{{ValidationField.hpedepin.active?'label label-danger':''}}">{{ 'PROF_DEPARTAMENTOIN' | translate }} </label>
 			    		<d2-dropdownoptionset tittleoption='departamentoin' resource='department'></d2-dropdownoptionset>
 					</div>
 					<div class="col-md-6">
-					   	<label class="control-label"  for="pais">{{ 'PROF_MUNICIPIOIN' | translate }} </label>
+					   	<label class="control-label"  for="munin" class="{{ValidationField.hpemunin.active?'label label-danger':''}}">{{ 'PROF_MUNICIPIOIN' | translate }} </label>
 			    		<d2-dropdownoptionset tittleoption='municipioin' resource='municipality'></d2-dropdownoptionset>
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
 					
 					<div class="col-md-6">
-					   	<label class="control-label"  for="tipoinstitucion">{{ 'PROF_EST_TYPEIN' | translate }} </label>
+					   	<label class="control-label"  for="tipoinstitucion" class="{{ValidationField.hpetipin.active?'label label-danger':''}}">{{ 'PROF_EST_TYPEIN' | translate }} </label>
 			    		<hs-optionlist namelist='tipoinstitucion'></hs-optionlist>
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
 					<div class="col-md-6">
-					   	<label class="control-label"  for="pais">{{ 'PROF_EST_INSTITUTION' | translate }} </label>
+					   	<label class="control-label"  for="institution" class="{{ValidationField.hpecodin.active?'label label-danger':''}}">{{ 'PROF_EST_INSTITUTION' | translate }} </label>
 			    		<d2-dropdownoptionset tittleoption='institution' resource='institution'></d2-dropdownoptionset>
 					</div>
 					 <div class="col-md-6">
-					   	<label class="control-label"  for="tipoprograma">{{ 'PROF_EST_TYPE' | translate }} </label>
+					   	<label class="control-label"  for="tipoprograma" class="{{ValidationField.hpetippr.active?'label label-danger':''}}">{{ 'PROF_EST_TYPE' | translate }} </label>
 			    		<hs-optionlist namelist='tipoprograma'></hs-optionlist>
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
 					<div class="col-md-6">
-					   	<label class="control-label"  for="pais">{{ 'PROF_EST_PROGRAM' | translate }} </label>
-			    		<d2-dropdownoptionset tittleoption='institution' resource='institution'></d2-dropdownoptionset>
+					   	<label class="control-label"  for="program" class="{{ValidationField.hpenompr.active?'label label-danger':''}}">{{ 'PROF_EST_PROGRAM' | translate }} </label>
+			    		<d2-dropdownoptionset tittleoption='program' resource='institution' parent="institution"></d2-dropdownoptionset>
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
-					<div class="col-md-6">
-					   	<label class="control-label"  for="pais">{{ 'PROF_NUM_CONV' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="Study.hpenumconv" id="Municipio" required=""/>
+					<div class="col-md-6 {{ValidationField.hpenumconv.active?'has-error':''}}" >
+					   	<label class="control-label"  for="numconv">{{ 'PROF_NUM_CONV' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="Study.hpenumconv" id="numconv" required=""/>
 					</div>
-					<div class="col-md-6">
-					   	<label class="control-label"  for="pais">{{ 'PROF_TIT_GRUP' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="Study.hpegruptit" id="Municipio" required=""/>
+					<div class="col-md-6 {{ValidationField.hpegruptit.active?'has-error':''}}">
+					   	<label class="control-label"  for="titGrup">{{ 'PROF_TIT_GRUP' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="Study.hpegruptit" id="titGrup" required=""/>
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
 					<div class="col-md-6">
 					   	<label class="control-label"  for="fecnac">{{ 'PROF_FEC_CONV' | translate }} </label>
 			    		<p class="input-group">
-			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="Study.hpefecconv" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
+			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="Study.hpefecconv" is-open="opendDateConv" max-date="currentDate" ng-required="true" close-text="Close" />
 			              <span class="input-group-btn">
 			                <button type="button" class="btn btn-primary" ng-click="openconv($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 			              </span>
 			            </p>
 
 					</div>
-					<div class="col-md-6">
-					   	<label class="control-label"  for="pais">{{ 'PROF_TIT_EQUI' | translate }} </label>
-			    		<input type="text" class="form-control" ng-model="Study.hpetitequi" id="Municipio" required=""/>
+					<div class="col-md-6 {{ValidationField.hpetitequi.active?'has-error':''}}">
+					   	<label class="control-label"  for="titEqui">{{ 'PROF_TIT_EQUI' | translate }} </label>
+			    		<input type="text" class="form-control" ng-model="Study.hpetitequi" id="titEqui" required=""/>
 					</div>
 				</div>
 			
@@ -307,7 +317,7 @@
 		</div>
 	</div>  
     </tab>
-    <tab heading="{{tabsPersonal4.tittle}}" active="tabsPersonal4.active" disable="tabsPersonal4.disabled">
+    <tab heading="{{tabsPersonal4.tittle}}" active="tabsPersonal4.active" disable="tabsPersonal4.disabled" select='validation(4)'>
     		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
@@ -389,7 +399,7 @@
 		 </div>
 	</div>
     </tab>
-    <tab heading="{{tabsPersonal5.tittle}}" active="tabsPersonal5.active" disable="tabsPersonal5.disabled">
+    <tab heading="{{tabsPersonal5.tittle}}" active="tabsPersonal5.active" disable="tabsPersonal5.disabled" select='validation(5)'>
     		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
@@ -412,9 +422,9 @@
 		 </div>
 	</div>
     </tab>
-  <tab active="tabsPersonalE.active" disable="tabsPersonalE.disabled"  class="bg-warning">
+  <tab active="tabsPersonalE.active" disable="tabsPersonalE.disabled"  class="alert-info">
   		<tab-heading >
-        <i class="glyphicon glyphicon-bell"></i>
+        <i class="glyphicon glyphicon-warning-sign"></i>
       </tab-heading>
   		<div class="panel panel-default">
 		  <div class="panel-heading">
@@ -422,8 +432,12 @@
 		  </div>
 		  <div class="panel-body">
 		  				   
-			<alert ng-repeat="alert in alerts" type="warning" close="closeAlert($index)">{{alert.msg}}</alert>
-		   
+			<alert ng-repeat="alert in alerts" type="danger" close="closeAlert($index)">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  			<span class="sr-only">Error:</span>
+  			{{alert.msg}}
+  			</alert>
+
 		  </div>
 		</div>
 		 <nav>
@@ -435,5 +449,29 @@
   </tabset>
 </div>
 <div>
+
+
+    <script type="text/ng-template" id="ModalAlertValidation.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Im a modal!</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a ng-click="selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <button class="btn btn-default" ng-click="openmodal()">Open me!</button>
+    <button class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>
+    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+
 
  
