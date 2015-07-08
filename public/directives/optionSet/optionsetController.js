@@ -4,13 +4,18 @@ appServersoft.directive('d2Dropdownoptionset', function(){
 		templateUrl: '/directives/optionSet/optionsetView.html',
 		scope: {
 		     tittleoption:'@',
-		     resource:'@'
+		     resource:'@',
+		     parent:'@'
 		    }
 	}
 	}); 
 appServersoft.controller("hsDropdownOptionSetController", ['$scope','CountryList',"commonvariable", function ($scope,CountryList,commonvariable) {
 	$scope.findOptionbyName = function(nameOs) {
-			return CountryList.get({name:nameOs,resource:$scope.resource})
+			if($scope.parent)
+				$scope.level=commonvariable.OptionSetSelected[$scope.parent].code;
+			else
+				$scope.level=undefined;
+			return CountryList.get({name:nameOs,resource:$scope.resource,level:$scope.level})
 			.$promise.then(function(response){
 				return  response;
 			 })};

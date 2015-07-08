@@ -129,7 +129,10 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		}
 		
 	}
+
 	$scope.nacionalidad(0,'nacionalidad','pais,departamento,municipio');
+	$scope.nacionalidad(0,'residencia','paisred,departamentored,municipiored');
+
 	$scope.estudios=function(tip){
 		$scope.Study.hpeorigtit=tip;
 		if(tip==1){
@@ -210,8 +213,11 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
   			break;
    		case 2: 
    			$scope.tabsPersonal3.active = true;
-   			$scope.DataPersonalAdd.hpdEstcon=commonvariable.OptionSetSelected.conyugal.key;
-   			break;
+   			$scope.DataPersonalAdd.hpdEstcon=(commonvariable.OptionSetSelected.conyugal!=undefined)?commonvariable.OptionSetSelected.conyugal.key:"";
+   			$scope.DataPersonalAdd.hpdpaisred=(commonvariable.OptionSetSelected.paisred!=undefined)?commonvariable.OptionSetSelected.paisred.code:"";
+			$scope.DataPersonalAdd.hpddepred=(commonvariable.OptionSetSelected.departamentored!=undefined)?commonvariable.OptionSetSelected.departamentored.code:"";
+			$scope.DataPersonalAdd.hpdmunred=(commonvariable.OptionSetSelected.municipiored!=undefined)?commonvariable.OptionSetSelected.municipiored.code:"";
+			break;
   		case 3:
   			$scope.tabsPersonal4.active = true;
   			break;
@@ -219,7 +225,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
   			$scope.tabsPersonal5.active = true;
   		 	break;
   	}
-  	console.log($scope.DataPersonal);
+  	console.log($scope.DataPersonalAdd);
 
  	
   };
@@ -315,8 +321,13 @@ $scope.validationtype=function(type,value, msg){
  			});
    			$scope.tabReturn=1;	
    			break;
-  		case 3:
-
+  		case 3:angular.forEach($scope.DataPersonalAdd,function(value,key){
+ 				if($scope.ValidationField[key].mandatory==true||($scope.ValidationField[key].mandatory==false && value!="")){
+	 				var revaltype=$scope.validationtype($scope.ValidationField[key].tipval,value,$scope.ValidationField[key].msg);
+	 				$scope.ValidationField[key].active=revaltype;
+	 			}		 
+ 			});
+   			$scope.tabReturn=2;	
   			break;
   		case 4:
 

@@ -117,7 +117,7 @@
 				</div>
 				<div class="col-md-6">
 				   	<label for="municipio" class="{{ValidationField.hpmunnac.active?'label label-danger':''}}">{{ 'PROF_MUNICIPIO' | translate }} </label>
-		    		 <d2-dropdownoptionset tittleoption='municipio' resource='municipality'></d2-dropdownoptionset>
+		    		 <d2-dropdownoptionset tittleoption='municipio' resource='municipality' parent='departamento'></d2-dropdownoptionset>
 				</div>
 			</div>
 			<div class="row">
@@ -149,7 +149,7 @@
 			
 			<div class="row">
 					<div class="col-md-6">
-					   	<label class="control-label"  for="etnia">{{ 'PROF_ESTADOCONYUGAL' | translate }} </label>
+					   	<label class="control-label"  for="etnia" class="{{ValidationField.hpdEstcon.active?'label label-danger':''}}">{{ 'PROF_ESTADOCONYUGAL' | translate }} </label>
 			    		<hs-optionlist namelist='conyugal'></hs-optionlist>
 					</div>
 
@@ -166,36 +166,36 @@
 			<div class="row">
 	
 				<div class="col-md-6"  ng-show="colombiano.residencia==1?true:false">
-				   	<label class="control-label"  for="pais">{{'PROF_PAISRED' | translate }} </label>
+				   	<label class="control-label"  for="pais" class="{{ValidationField.hpdpaisred.active?'label label-danger':''}}">{{'PROF_PAISRED' | translate }} </label>
 		    		 <d2-dropdownoptionset tittleoption='paisred' resource='country'></d2-dropdownoptionset>
 				</div>
 			</div>
 			<div class="row" ng-show="colombiano.residencia==0?true:false">
 				<div class="col-md-6">
-				   	<label class="control-label"  for="depto">{{ 'PROF_DEPARTAMENTORED' | translate }} </label>
+				   	<label class="control-label"  for="depto" class="{{ValidationField.hpddepred.active?'label label-danger':''}}">{{ 'PROF_DEPARTAMENTORED' | translate }} </label>
 		    		 <d2-dropdownoptionset tittleoption='departamentored' resource='department'></d2-dropdownoptionset>
 				</div>
 				<div class="col-md-6">
-				   	<label class="control-label"  for="municipio">{{ 'PROF_MUNICIPIORED' | translate }} </label>
-		    		 <d2-dropdownoptionset tittleoption='municipiored' resource='municipality'></d2-dropdownoptionset>
+				   	<label class="control-label"  for="municipio" class="{{ValidationField.hpdmunred.active?'label label-danger':''}}">{{ 'PROF_MUNICIPIORED' | translate }} </label>
+		    		 <d2-dropdownoptionset tittleoption='municipiored' resource='municipality' parent="departamentored"></d2-dropdownoptionset>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-6 {{ValidationField.hpddirecc.active?'has-error':''}}">
 				   	<label class="control-label"  for="Direccion">{{ 'PROF_DIRECCIONRED' | translate }} </label>
 		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpddirecc" id="Dirección" required=""/>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 {{ValidationField.hpdtelef.active?'has-error':''}}">
 				   	<label class="control-label"  for="Telefono">{{ 'PROF_TELEFONORED' | translate }} </label>
 		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelef" id="Telefono" required="" placeholder="Escriba el numero de telefono Ejm: 8233332"/>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-6 {{ValidationField.hpdtelmov.active?'has-error':''}}">
 				   	<label class="control-label"  for="Movil">{{ 'PROF_MOVIL' | translate }} </label>
 		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelmov" id="TelefonoCel" required="" placeholder="Escriba el numero de telefono Ejm: 3112233445"/>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 {{ValidationField.hpdcorreo.active?'has-error':''}}">
 				   	<label class="control-label"  for="Correo">{{ 'PROF_CORREO' | translate }} </label>
 		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdcorreo" id="Correo" required="" placeholder="Escriba un correo como tuemail@serviciomail.com"/>
 				</div>			
@@ -213,7 +213,7 @@
 		</div>
 	</div>
     </tab>
-    <tab heading="{{tabsPersonal3.tittle}}" active="tabsPersonal3.active" disable="tabsPersonal3.disabled" select='validation(2)'>
+    <tab heading="{{tabsPersonal3.tittle}}" active="tabsPersonal3.active" disable="tabsPersonal3.disabled" select='validation(3)'>
     		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
