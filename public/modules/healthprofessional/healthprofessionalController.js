@@ -43,9 +43,8 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		hpenumconv:"",
 		hpefecconv:"",
 		hpetitequi:"",
-		hpegruptit:"",
-		hpeactoadm:"",
-		hpefecact:""
+		hpegruptit:""
+
 	};
 	$scope.Studies=[];
 
@@ -122,8 +121,11 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		$scope.colombiano[name]=est;
 		if(est==0){
 			commonvariable.OptionSetSelected[pdm[0]]={numericcod:'170'};
+			commonvariable.OptionSetSelected[pdm[1]]={code:''};
+			commonvariable.OptionSetSelected[pdm[2]]={code:''};
 
 		}else{			
+			commonvariable.OptionSetSelected[pdm[0]]={numericcod:''};
 			commonvariable.OptionSetSelected[pdm[1]]={code:'00'};
 			commonvariable.OptionSetSelected[pdm[2]]={code:'000'};
 		}
@@ -138,34 +140,74 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		$scope.Study.hpeorigtit=tip;
 		if(tip==1){
 			commonvariable.OptionSetSelected[pdm[0]]={numericcod:'170'};
+			$scope.Study.hpenumconv='999999';
+			$scope.Study.hpefecconv='1900-01-01';
+			$scope.Study.hpetitequi='999999';
+			$scope.Study.hpegruptit='999999';
+
+			commonvariable.OptionSetSelected[pdm[1]]={code:''};
+			commonvariable.OptionSetSelected[pdm[2]]={code:''};
+			$scope.Study.hpecodin='';
+			$scope.Study.hpenompr='';
 		}
 		else{
 			commonvariable.OptionSetSelected[pdm[1]]={code:'00'};
 			commonvariable.OptionSetSelected[pdm[2]]={code:'000'};
-		}
+			$scope.Study.hpecodin='0000';
+			$scope.Study.hpenompr='0000';
 
-	$scope.estudios(1,'paisin,departamentoin,municipioin');
+			ommonvariable.OptionSetSelected[pdm[0]]={numericcod:''};
+			$scope.Study.hpenumconv='';
+			$scope.Study.hpefecconv='';
+			$scope.Study.hpetitequi='';
+			$scope.Study.hpegruptit='';
+		}
 
 	}
+	$scope.estudios(1,'paisin,departamentoin,municipioin');
 
-	$scope.prestosso=function(tip){
+	$scope.prestosso=function(tip,pdmc){
+		var pdm = pdmc.split(',');
 		$scope.obligService.hpsobliga=tip;
-		if(tip==1){
-
+		if(tip=1){
+			$scope.obligService.hpstiplug='';
+			commonvariable.OptionSetSelected[pdm[0]]={numericcod:''};
+			commonvariable.OptionSetSelected[pdm[1]]={code:''};
+			commonvariable.OptionSetSelected[pdm[2]]={code:''};
+			$scope.obligService.phsfecini='',
+			$scope.obligService.hpsfecfin='',
+			$scope.obligService.hpsmodal='',
+			$scope.obligService.hpsprog=''	
 		}
 		else{
-			
+			$scope.obligService.hpstiplug=1;
+			commonvariable.OptionSetSelected[pdm[0]]={numericcod:'000'};
+			commonvariable.OptionSetSelected[pdm[1]]={code:'00'};
+			commonvariable.OptionSetSelected[pdm[2]]={code:'000'};
+			$scope.obligService.phsfecini='1900-01-01',
+			$scope.obligService.hpsfecfin='1900-01-01',
+			$scope.obligService.hpsmodal='0',
+			$scope.obligService.hpsprog='0'	
 		}
 
 	}
 
 	$scope.lugarsso=function(tip){
 		$scope.obligService.hpstiplug=tip;
-		if(tip==1){
-
+		if(tip=1){
+			commonvariable.OptionSetSelected[pdm[0]]={numericcod:'170'};
+			commonvariable.OptionSetSelected[pdm[1]]={code:''};
+			commonvariable.OptionSetSelected[pdm[2]]={code:''};
+			commonvariable.OptionSetSelected[pdm[3]]={key:'0'};
+			commonvariable.OptionSetSelected[pdm[4]]={key:'0'};
 		}
 		else{
-			
+			commonvariable.OptionSetSelected[pdm[0]]={numericcod:''};
+			commonvariable.OptionSetSelected[pdm[1]]={code:'00'};
+			commonvariable.OptionSetSelected[pdm[2]]={code:'000'};
+			$scope.obligService.phsfecini='1900-01-01',
+			$scope.obligService.hpsfecfin='1900-01-01'
+
 		}
 
 	}
@@ -231,6 +273,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
   			$scope.DataPersonal.hpdepnac=(commonvariable.OptionSetSelected.departamento!=undefined)?commonvariable.OptionSetSelected.departamento.code:"";
 			$scope.DataPersonal.hpmunnac=(commonvariable.OptionSetSelected.municipio!=undefined)?commonvariable.OptionSetSelected.municipio.code:"";
 			$scope.DataPersonal.hppais=(commonvariable.OptionSetSelected.pais!=undefined)?commonvariable.OptionSetSelected.pais.numericcod:"";
+  			console.log($scope.DataPersonal);
   			break;
    		case 2: 
    			$scope.tabsPersonal3.active = true;
@@ -238,8 +281,10 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
    			$scope.DataPersonalAdd.hpdpaisred=(commonvariable.OptionSetSelected.paisred!=undefined)?commonvariable.OptionSetSelected.paisred.numericcod:"";
 			$scope.DataPersonalAdd.hpddepred=(commonvariable.OptionSetSelected.departamentored!=undefined)?commonvariable.OptionSetSelected.departamentored.code:"";
 			$scope.DataPersonalAdd.hpdmunred=(commonvariable.OptionSetSelected.municipiored!=undefined)?commonvariable.OptionSetSelected.municipiored.code:"";
+			console.log($scope.DataPersonalAdd);
 			break;
   		case 3:
+  			$scope.tabsPersonal4.active = true;
   			$scope.Study.hpedepin=(commonvariable.OptionSetSelected.departamentoin!=undefined)?commonvariable.OptionSetSelected.departamentoin.code:"";
 			$scope.Study.hpemunin=(commonvariable.OptionSetSelected.municipioin!=undefined)?commonvariable.OptionSetSelected.municipioin.code:"";
 			$scope.Study.hpepaisin=(commonvariable.OptionSetSelected.paisin!=undefined)?commonvariable.OptionSetSelected.paisin.numericcod:"";
@@ -247,14 +292,13 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 			$scope.Study.hpecodin=(commonvariable.OptionSetSelected.institution!=undefined)?commonvariable.OptionSetSelected.institution.code:"";
 			$scope.Study.hpetippr=(commonvariable.OptionSetSelected.tipoprograma!=undefined)?commonvariable.OptionSetSelected.tipoprograma.key:"";
 			$scope.Study.hpenompr=(commonvariable.OptionSetSelected.program!=undefined)?commonvariable.OptionSetSelected.program.code:"";
-  			
-  			$scope.tabsPersonal4.active = true;
+  			console.log($scope.Study);
   			break;
   		case 4:
   			$scope.tabsPersonal5.active = true;
   		 	break;
   	}
-  	console.log($scope.DataPersonalAdd);
+  	
 
  	
   };

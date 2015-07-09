@@ -257,29 +257,28 @@
 			    		<d2-dropdownoptionset tittleoption='municipioin' resource='municipality' parent='departamentoin'></d2-dropdownoptionset>
 					</div>
 				</div>
-				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
+				<div class="row">
 					
 					<div class="col-md-6">
 					   	<label  for="tipoinstitucion" class="{{ValidationField.hpetipin.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_TYPEIN' | translate }} </label>
 			    		<hs-optionlist namelist='tipoinstitucion'></hs-optionlist>
 					</div>
-				</div>
-				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
-					<div class="col-md-6">
+					<div class="col-md-6" ng-show="Study.hpeorigtit==1?true:false">
 					   	<label class="control-label"  for="institution" class="{{ValidationField.hpecodin.active?'label label-danger':''}}">{{ 'PROF_EST_INSTITUTION' | translate }} </label>
 			    		<d2-dropdownoptionset tittleoption='institution' resource='institution' parent='municipioin'></d2-dropdownoptionset>
 					</div>
+				</div>
+				<div class="row" >
+					
 					 <div class="col-md-6">
 					   	<label   for="tipoprograma" class="{{ValidationField.hpetippr.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_TYPE' | translate }} </label>
 			    		<hs-optionlist namelist='tipoprograma'></hs-optionlist>
 					</div>
-				</div>
-				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
-					<div class="col-md-6">
+					<div class="col-md-6" ng-show="Study.hpeorigtit==1?true:false">
 					   	<label  for="program" class="{{ValidationField.hpenompr.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_PROGRAM' | translate }} </label>
 			    		<d2-dropdownoptionset tittleoption='program' resource='program' parent="institution"></d2-dropdownoptionset>
 					</div>
-				</div>
+				</div>	
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
 					<div class="col-md-6 {{ValidationField.hpenumconv.active?'has-error':''}}" >
 					   	<label class="control-label"  for="numconv">{{ 'PROF_NUM_CONV' | translate }} </label>
