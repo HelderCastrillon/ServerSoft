@@ -82,11 +82,11 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-				   	<label for="sexo" class="{{ValidationField.hpsexo.active?'label label-danger':''}}">{{ 'PROF_SEXO' | translate }} </label>
+				   	<label for="sexo" class="{{ValidationField.hpsexo.active?'label label-danger':'control-label'}}">{{ 'PROF_SEXO' | translate }} </label>
 		    		<hs-optionlist namelist='sexo'></hs-optionlist>
 				</div>
-				<div class="col-md-6 {{ValidationField.hpfecnac.active?'has-error':''}}">
-				   	<label class="control-label"  for="fecnac">{{ 'PROF_FECNAC' | translate }} </label>
+				<div class="col-md-6">
+				   	<label for="fecnac" class="{{ValidationField.hpfecnac.active?'label label-danger':'control-label'}}">{{ 'PROF_FECNAC' | translate }} </label>
 		    		<p class="input-group">
 		               <input type="text" class="form-control" id="fecnac" datepicker-popup="yyyy-MM-dd" ng-model="DataPersonal.hpfecnac" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
 		              <span class="input-group-btn">
@@ -149,7 +149,7 @@
 			
 			<div class="row">
 					<div class="col-md-6">
-					   	<label class="control-label"  for="etnia" class="{{ValidationField.hpdEstcon.active?'label label-danger':''}}">{{ 'PROF_ESTADOCONYUGAL' | translate }} </label>
+					   	<label for="etnia" class="{{ValidationField.hpdEstcon.active?'label label-danger':'control-label'}}">{{ 'PROF_ESTADOCONYUGAL' | translate }} </label>
 			    		<hs-optionlist namelist='conyugal'></hs-optionlist>
 					</div>
 
@@ -172,11 +172,11 @@
 			</div>
 			<div class="row" ng-show="colombiano.residencia==0?true:false">
 				<div class="col-md-6">
-				   	<label class="control-label"  for="depto" class="{{ValidationField.hpddepred.active?'label label-danger':''}}">{{ 'PROF_DEPARTAMENTORED' | translate }} </label>
+				   	<label for="depto" class="{{ValidationField.hpddepred.active?'label label-danger':'control-label'}}">{{ 'PROF_DEPARTAMENTORED' | translate }} </label>
 		    		 <d2-dropdownoptionset tittleoption='departamentored' resource='department'></d2-dropdownoptionset>
 				</div>
 				<div class="col-md-6">
-				   	<label class="control-label"  for="municipio" class="{{ValidationField.hpdmunred.active?'label label-danger':''}}">{{ 'PROF_MUNICIPIORED' | translate }} </label>
+				   	<label for="municipio" class="{{ValidationField.hpdmunred.active?'label label-danger':'control-label'}}">{{ 'PROF_MUNICIPIORED' | translate }} </label>
 		    		 <d2-dropdownoptionset tittleoption='municipiored' resource='municipality' parent="departamentored"></d2-dropdownoptionset>
 				</div>
 			</div>
@@ -222,7 +222,7 @@
 		  <div class="panel-body">
 		  		<div class="row">
 		  			 <div class="col-md-6">
-					   	<label class="control-label"  for="origentitulo" class="{{ValidationField.hpeorigtit.active?'label label-danger':''}}">{{ 'PROF_EST_ORIGEN' | translate }} </label>
+					   	<label   for="origentitulo" class="{{ValidationField.hpeorigtit.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_ORIGEN' | translate }} </label>
 			    		<br>
 
 			    		<div class="btn-group" data-toggle="buttons">
@@ -231,7 +231,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-					   	<label class="control-label"  for="fecgrad" class="{{ValidationField.hpefecgrad.active?'label label-danger':''}}">{{ 'PROF_FEC_GRADO' | translate }} </label>
+					   	<label   for="fecgrad" class="{{ValidationField.hpefecgrad.active?'label label-danger':'control-label'}}">{{ 'PROF_FEC_GRADO' | translate }} </label>
 			    		<p class="input-group">
 			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="Study.hpefecgrad" is-open="opendDateGrad" max-date="currentDate" ng-required="true" close-text="Close" id="fecgrad" />
 			              <span class="input-group-btn">
@@ -243,41 +243,41 @@
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
 					<div class="col-md-6">
-					   	<label class="control-label"  for="paisin" class="{{ValidationField.hpepaisin.active?'label label-danger':''}}">{{ 'PROF_PAISIN' | translate }} </label>
+					   	<label  for="paisin" class="{{ValidationField.hpepaisin.active?'label label-danger':'control-label'}}">{{ 'PROF_PAISIN' | translate }} </label>
 			    		 <d2-dropdownoptionset tittleoption='paisin' resource='country'></d2-dropdownoptionset>
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
 					<div class="col-md-6">
-					   	<label class="control-label"  for="deptoin" class="{{ValidationField.hpedepin.active?'label label-danger':''}}">{{ 'PROF_DEPARTAMENTOIN' | translate }} </label>
+					   	<label  for="deptoin" class="{{ValidationField.hpedepin.active?'label label-danger':'control-label'}}">{{ 'PROF_DEPARTAMENTOIN' | translate }} </label>
 			    		<d2-dropdownoptionset tittleoption='departamentoin' resource='department'></d2-dropdownoptionset>
 					</div>
 					<div class="col-md-6">
-					   	<label class="control-label"  for="munin" class="{{ValidationField.hpemunin.active?'label label-danger':''}}">{{ 'PROF_MUNICIPIOIN' | translate }} </label>
-			    		<d2-dropdownoptionset tittleoption='municipioin' resource='municipality'></d2-dropdownoptionset>
+					   	<label for="munin" class="{{ValidationField.hpemunin.active?'label label-danger':'control-label'}}">{{ 'PROF_MUNICIPIOIN' | translate }} </label>
+			    		<d2-dropdownoptionset tittleoption='municipioin' resource='municipality' parent='departamentoin'></d2-dropdownoptionset>
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
 					
 					<div class="col-md-6">
-					   	<label class="control-label"  for="tipoinstitucion" class="{{ValidationField.hpetipin.active?'label label-danger':''}}">{{ 'PROF_EST_TYPEIN' | translate }} </label>
+					   	<label  for="tipoinstitucion" class="{{ValidationField.hpetipin.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_TYPEIN' | translate }} </label>
 			    		<hs-optionlist namelist='tipoinstitucion'></hs-optionlist>
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
 					<div class="col-md-6">
 					   	<label class="control-label"  for="institution" class="{{ValidationField.hpecodin.active?'label label-danger':''}}">{{ 'PROF_EST_INSTITUTION' | translate }} </label>
-			    		<d2-dropdownoptionset tittleoption='institution' resource='institution'></d2-dropdownoptionset>
+			    		<d2-dropdownoptionset tittleoption='institution' resource='institution' parent='municipioin'></d2-dropdownoptionset>
 					</div>
 					 <div class="col-md-6">
-					   	<label class="control-label"  for="tipoprograma" class="{{ValidationField.hpetippr.active?'label label-danger':''}}">{{ 'PROF_EST_TYPE' | translate }} </label>
+					   	<label   for="tipoprograma" class="{{ValidationField.hpetippr.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_TYPE' | translate }} </label>
 			    		<hs-optionlist namelist='tipoprograma'></hs-optionlist>
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
 					<div class="col-md-6">
-					   	<label class="control-label"  for="program" class="{{ValidationField.hpenompr.active?'label label-danger':''}}">{{ 'PROF_EST_PROGRAM' | translate }} </label>
-			    		<d2-dropdownoptionset tittleoption='program' resource='institution' parent="institution"></d2-dropdownoptionset>
+					   	<label  for="program" class="{{ValidationField.hpenompr.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_PROGRAM' | translate }} </label>
+			    		<d2-dropdownoptionset tittleoption='program' resource='program' parent="institution"></d2-dropdownoptionset>
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
@@ -292,7 +292,7 @@
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
 					<div class="col-md-6">
-					   	<label class="control-label"  for="fecnac">{{ 'PROF_FEC_CONV' | translate }} </label>
+					   	<label class="{{ValidationField.hpefecconv.active?'label label-danger':'control-label'}}"  for="fecnac">{{ 'PROF_FEC_CONV' | translate }} </label>
 			    		<p class="input-group">
 			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="Study.hpefecconv" is-open="opendDateConv" max-date="currentDate" ng-required="true" close-text="Close" />
 			              <span class="input-group-btn">
@@ -422,30 +422,6 @@
 		 </div>
 	</div>
     </tab>
-  <tab active="tabsPersonalE.active" disable="tabsPersonalE.disabled"  class="alert-info">
-  		<tab-heading >
-        <i class="glyphicon glyphicon-warning-sign"></i>
-      </tab-heading>
-  		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <h3 class="panel-title">{{'PROF_TAB_ERROR'| translate}}</h3>
-		  </div>
-		  <div class="panel-body">
-		  				   
-			<alert ng-repeat="alert in alerts" type="danger" close="closeAlert($index)">
-			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  			<span class="sr-only">Error:</span>
-  			{{alert.msg}}
-  			</alert>
-
-		  </div>
-		</div>
-		 <nav>
-			  <ul class="pager">
-			    <li class="previous"><a href="/view#/healthprofessional" ng-click="returnTab(tabReturn)"><span aria-hidden="true">&larr;</span> {{'PREV_ERROR' | translate}}</a></li>
-			  </ul>
-		  </nav>
-	</tab>
   </tabset>
 </div>
 <div>
@@ -453,25 +429,21 @@
 
     <script type="text/ng-template" id="ModalAlertValidation.html">
         <div class="modal-header">
-            <h3 class="modal-title">Im a modal!</h3>
+            <h3 class="modal-title">{{'PROF_TAB_ERROR'| translate}}</h3>
         </div>
         <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in items">
-                    <a ng-click="selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
+            <alert ng-repeat="alert in alerts" type="danger" close="closeAlert($index)">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  			<span class="sr-only">Error:</span>
+  			{{alert.msg}}
+  			</alert>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" ng-click="ok()">{{'PROF_TAB_ERROR_RETURN'| translate}}</button>
         </div>
     </script>
 
-    <button class="btn btn-default" ng-click="openmodal()">Open me!</button>
-    <button class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>
-    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+
 
 
  

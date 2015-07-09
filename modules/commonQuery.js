@@ -27,15 +27,15 @@ GetMunicipality: function (name, department) {
 //get Institution of education
 GetInstitution: function (name, municipality) {
       if(name)
-            return ("SELECT code, name, state, principal, type, sector, municipio  FROM hpinstitutions where name ilike '%"+name+"%' and municipio ilike '%"+municipality+"%' limit 10");
+            return ("SELECT hpinstitutions.code, hpinstitutions.name, state, principal, type, sector, municipio  FROM hpinstitutions inner join municipality on municipality.name=municipio  where hpinstitutions.name ilike '%"+name+"%' and municipality.code = '"+municipality+"' limit 10");
       else
-            return "SELECT code, name, state, principal, type, sector, municipio  FROM hpinstitutions where municipio ilike '%"+municipality+"%'";
+            return "SELECT hpinstitutions.code, hpinstitutions.name, state, principal, type, sector, municipio  FROM hpinstitutions inner join municipality on municipality.name=municipio  where municipality.code ='"+municipality+"'";
       },
 
 //get program by institution
 GetProgram: function (name,institution) {
       if(name)
-            return ("SELECT institutioncode, code, area, nbc, name, level, levelac  FROM hpprograms where name  ilike '%"+name+"%' and institutioncode = "+institution+" limit 10");
+            return ("SELECT institutioncode, code, area, nbc, name, level, levelac  FROM hpprograms where name  ilike '%"+name+"%' and institutioncode = '"+institution+"' limit 10");
       else
             return "SELECT institutioncode, code, area, nbc, name, level, levelac  FROM hpprograms where institutioncode = "+institution+" limit 10";
       }

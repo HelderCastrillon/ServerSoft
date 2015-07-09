@@ -66,7 +66,11 @@
 	"PROF_SER_FECINI":"Fecha inició",
 	"PROF_SERV_MOD":"Modalidad",
 	"PROF_SER_TYPE":"Tipo del programa",
-	"PROF_lIVEIN":"Viven en Colombia"
+	"PROF_lIVEIN":"Viven en Colombia",
+	"PROF_TAB_ERROR":"Se han presentado errores en el Formulario",
+	"PROF_TAB_ERROR_RETURN":"Regresar",
+	"PROF_FEC_GRADO":"Fecha de grado"
+
 
 
 }

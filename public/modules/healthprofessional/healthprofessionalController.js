@@ -85,7 +85,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		hpdtelef:{label:"Telefono Fijo",msg:"Escriba si telefono fijo de contacto",tipval:"N",active:false,mandatory:false},
 		hpdtelmov:{label:"Telefono celular",msg:"Escriba un telefono celular de contacto valido",tipval:"N",active:false,mandatory:false},
 		hpdcorreo:{label:"Correo Electronico",msg:"escriba un correo electronico valido",tipval:"M",active:false,mandatory:true},
-		hpeorigtit:{label:"Origen del titulo",msg:"Seleccione su titulo de origen",tipval:"M",active:false,mandatory:true},
+		hpeorigtit:{label:"Origen del titulo",msg:"Seleccione su titulo de origen",tipval:"S",active:false,mandatory:true},
 		hpedepin:{label:"Departamento donde estudió",msg:"Seleccione el departamento donde se encuentra el instituto donde estudió",tipval:"S",active:false,mandatory:true},
 		hpemunin:{label:"Municipio donde Estudió",msg:"Seleccione el municipio donde se encuentra el instituto donde estudió",tipval:"S",active:false,mandatory:true},
 		hpepaisin:{label:"Pais donde estudió",msg:"Seleccione el Pais donde se encuentra el instituto donde estudió, si estudió en Colombia seleccione que el origen es Colombia",tipval:"S",active:false,mandatory:true},
@@ -121,7 +121,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		var pdm = pdmc.split(',');
 		$scope.colombiano[name]=est;
 		if(est==0){
-			commonvariable.OptionSetSelected[pdm[0]]={code:'170'};
+			commonvariable.OptionSetSelected[pdm[0]]={numericcod:'170'};
 
 		}else{			
 			commonvariable.OptionSetSelected[pdm[1]]={code:'00'};
@@ -137,7 +137,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		var pdm = pdmc.split(',');
 		$scope.Study.hpeorigtit=tip;
 		if(tip==1){
-			commonvariable.OptionSetSelected[pdm[0]]={code:'170'};
+			commonvariable.OptionSetSelected[pdm[0]]={numericcod:'170'};
 		}
 		else{
 			commonvariable.OptionSetSelected[pdm[1]]={code:'00'};
@@ -230,19 +230,19 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
   			$scope.DataPersonal.hpetnia=(commonvariable.OptionSetSelected.etnia!=undefined)?commonvariable.OptionSetSelected.etnia.key:"";
   			$scope.DataPersonal.hpdepnac=(commonvariable.OptionSetSelected.departamento!=undefined)?commonvariable.OptionSetSelected.departamento.code:"";
 			$scope.DataPersonal.hpmunnac=(commonvariable.OptionSetSelected.municipio!=undefined)?commonvariable.OptionSetSelected.municipio.code:"";
-			$scope.DataPersonal.hppais=(commonvariable.OptionSetSelected.pais!=undefined)?commonvariable.OptionSetSelected.pais.code:"";
+			$scope.DataPersonal.hppais=(commonvariable.OptionSetSelected.pais!=undefined)?commonvariable.OptionSetSelected.pais.numericcod:"";
   			break;
    		case 2: 
    			$scope.tabsPersonal3.active = true;
    			$scope.DataPersonalAdd.hpdEstcon=(commonvariable.OptionSetSelected.conyugal!=undefined)?commonvariable.OptionSetSelected.conyugal.key:"";
-   			$scope.DataPersonalAdd.hpdpaisred=(commonvariable.OptionSetSelected.paisred!=undefined)?commonvariable.OptionSetSelected.paisred.code:"";
+   			$scope.DataPersonalAdd.hpdpaisred=(commonvariable.OptionSetSelected.paisred!=undefined)?commonvariable.OptionSetSelected.paisred.numericcod:"";
 			$scope.DataPersonalAdd.hpddepred=(commonvariable.OptionSetSelected.departamentored!=undefined)?commonvariable.OptionSetSelected.departamentored.code:"";
 			$scope.DataPersonalAdd.hpdmunred=(commonvariable.OptionSetSelected.municipiored!=undefined)?commonvariable.OptionSetSelected.municipiored.code:"";
 			break;
   		case 3:
   			$scope.Study.hpedepin=(commonvariable.OptionSetSelected.departamentoin!=undefined)?commonvariable.OptionSetSelected.departamentoin.code:"";
 			$scope.Study.hpemunin=(commonvariable.OptionSetSelected.municipioin!=undefined)?commonvariable.OptionSetSelected.municipioin.code:"";
-			$scope.Study.hpepaisin=(commonvariable.OptionSetSelected.paisin!=undefined)?commonvariable.OptionSetSelected.paisin.code:"";
+			$scope.Study.hpepaisin=(commonvariable.OptionSetSelected.paisin!=undefined)?commonvariable.OptionSetSelected.paisin.numericcod:"";
 			$scope.Study.hpetipin=(commonvariable.OptionSetSelected.tipoinstitucion!=undefined)?commonvariable.OptionSetSelected.tipoinstitucion.key:"";
 			$scope.Study.hpecodin=(commonvariable.OptionSetSelected.institution!=undefined)?commonvariable.OptionSetSelected.institution.code:"";
 			$scope.Study.hpetippr=(commonvariable.OptionSetSelected.tipoprograma!=undefined)?commonvariable.OptionSetSelected.tipoprograma.key:"";
@@ -305,19 +305,38 @@ $scope.validationtype=function(type,value, msg){
 			}
 		break;
 		case 'N'://numeros
-			if(!/^([0-9])*$/.test(value) || (value=="")){
+			if(!/^([0-9])*$/.test(value) || (value=="")|| (value==undefined)){
 				$scope.addAlert(msg);
 			}
 		break;
 		case 'D'://fecha
-			var patron = /^\d{1,2}\-\d{1,2}\-\d{2,4}$/;
-			if(patron.test(value) || (value=="")){
+			
+			if(value!=undefined && value!=""){
+							 	
+				 try{
+					 var fechaArr = value.split('-');
+					 var aho = fechaArr[0];
+					 var mes = fechaArr[1];
+					 var dia = fechaArr[2];
+					 
+					 var plantilla = new Date(aho, mes - 1, dia);//mes empieza de cero Enero = 0
+				}
+				catch(err){
+					var plantilla=value;
+					 var aho = plantilla.getFullYear();
+					 var mes = plantilla.getMonth()+1;
+					 var dia = plantilla.getDate();
+				}
+				 if(!plantilla || plantilla.getFullYear() != aho || plantilla.getMonth() != (mes -1) || plantilla.getDate() != dia)
+				 	$scope.addAlert(msg);				 
+				}
+			else
 				$scope.addAlert(msg);
-			}
+
 		break;
 		case 'M'://correo
 			var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-			if(value.search(patron)!=0){
+			if(value.search(patron)!=0|| (value=="")|| (value==undefined)){
 				$scope.addAlert(msg);
 			}
 		break;
@@ -338,8 +357,8 @@ $scope.validationtype=function(type,value, msg){
   		case 1:
   			if($scope.conditionacepted==undefined||$scope.conditionacepted==0){
   				$scope.addAlert("Si desea continuar debe aceptar los terminos");  				
-  				$scope.tabReturn=0;	
   			}
+  			$scope.tabReturn=0;
   			break;
    		case 2:
  			angular.forEach($scope.DataPersonal,function(value,key){
@@ -348,7 +367,7 @@ $scope.validationtype=function(type,value, msg){
 	 				$scope.ValidationField[key].active=revaltype;
 	 			}		 
  			});
-   			$scope.tabReturn=1;	
+ 			$scope.tabReturn=1;
    			break;
   		case 3:
   			angular.forEach($scope.DataPersonalAdd,function(value,key){
@@ -357,7 +376,7 @@ $scope.validationtype=function(type,value, msg){
 	 				$scope.ValidationField[key].active=revaltype;
 	 			}		 
  			});
-   			$scope.tabReturn=2;	
+ 			$scope.tabReturn=2;
   			break;
   		case 4:
 			angular.forEach($scope.Study,function(value,key){
@@ -366,7 +385,7 @@ $scope.validationtype=function(type,value, msg){
 	 				$scope.ValidationField[key].active=revaltype;
 	 			}		 
  			});
-   			$scope.tabReturn=3;	
+ 			$scope.tabReturn=3;
   		 	break;
   		 case 5:
 			angular.forEach($scope.obligService,function(value,key){
@@ -375,19 +394,17 @@ $scope.validationtype=function(type,value, msg){
 	 				$scope.ValidationField[key].active=revaltype;
 	 			}		 
  			});
-   			$scope.tabReturn=4;	
+ 			$scope.tabReturn=4;
   		 	break;
   	}
   	if($scope.alerts.length)  	
-  		$scope.tabsPersonalE.active = true;
+  		$scope.openmodal();
 	
   };
 
 
  ///modal
  
-$scope.items = ['item1', 'item2', 'item3'];
-
   $scope.animationsEnabled = true;
 
   $scope.openmodal = function (size) {
@@ -396,24 +413,22 @@ $scope.items = ['item1', 'item2', 'item3'];
       animation: $scope.animationsEnabled,
       templateUrl: 'ModalAlertValidation.html',
       controller: 'ModalInstanceAlert',
+      backdrop:false,
       size: size,
       resolve: {
-        items: function () {
-          return $scope.items;
+        alerts: function () {
+          return $scope.alerts;
         }
       }
     });
 
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
+    modalInstance.result.then(function () {
+     	$scope.returnTab($scope.tabReturn);
     }, function () {
-      console.log('Modal dismissed at: ' + new Date());
+      
     });
   };
 
-  $scope.toggleAnimation = function () {
-    $scope.animationsEnabled = !$scope.animationsEnabled;
-  };
 
  /// 
 
@@ -421,18 +436,10 @@ $scope.items = ['item1', 'item2', 'item3'];
 }]);
 
 
-appServersoft.controller('ModalInstanceAlert', function ($scope, $modalInstance, items) {
+appServersoft.controller('ModalInstanceAlert', function ($scope, $modalInstance, alerts) {
 
-  $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
-
-  $scope.ok = function () {
-    $modalInstance.close($scope.selected.item);
-  };
-
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+  $scope.alerts = alerts;
+   $scope.ok = function () {
+    $modalInstance.close();
   };
 });
