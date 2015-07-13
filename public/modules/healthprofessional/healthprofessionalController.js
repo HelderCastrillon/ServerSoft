@@ -63,35 +63,35 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 
 //Data Object
 	$scope.ValidationField={
-		hptipdoc:{label:"Tipo documento",msg:"Seleccione un tipo de documento",tipval:"S",active:false,mandatory:true},
+		hptipdoc:{label:"Tipo documento",msg:"Seleccione un tipo de documento",tipval:"S",active:false,mandatory:true,list:{source:"tipdoc",field:"value"}},
 		hpnumdoc:{label:"Numero de documento",msg:"Escriba un numero documento valido",tipval:"N",active:false,mandatory:true},
 		hppriape:{label:"Primer apellido",msg:"Escriba su primer apellido",tipval:"W",active:false,mandatory:true},
 		hpsegape:{label:"Segundo apellido",msg:"Escriba su segundo apellido",tipval:"W",active:false,mandatory:false},
 		hpprinom:{label:"Primer nombre",msg:"Escriba su primer nombre",tipval:"W",active:false,mandatory:true},
 		hpsegnom:{label:"Segundo nombre",msg:"Escriba su segundo nombre",tipval:"W",active:false,mandatory:false},
-		hpsexo:{label:"Sexo",msg:"seleccione su sexo",tipval:"S",active:false,mandatory:true},
-		hpdepnac:{label:"Departamento donde nació",msg:"Seleccione su departamento de nacimiento",tipval:"S",active:false,mandatory:true},
-		hpmunnac:{label:"Municipio donde nació",msg:"Seleccione su municipio de nacimiento",tipval:"S",active:false,mandatory:true},
-		hppais:{label:"Pais donde nació",msg:"Seleccione su pais de nacimiento si no es colombiano, de lo contrario seleccione que es colombiano",tipval:"S",active:false,mandatory:true},
+		hpsexo:{label:"Sexo",msg:"seleccione su sexo",tipval:"S",active:false,mandatory:true,list:{source:"sexo",field:"value"}},
+		hpdepnac:{label:"Departamento donde nació",msg:"Seleccione su departamento de nacimiento",tipval:"S",active:false,mandatory:true,list:{source:"departamento",field:"name"}},
+		hpmunnac:{label:"Municipio donde nació",msg:"Seleccione su municipio de nacimiento",tipval:"S",active:false,mandatory:true,list:{source:"municipio",field:"name"}},
+		hppais:{label:"Pais donde nació",msg:"Seleccione su pais de nacimiento si no es colombiano, de lo contrario seleccione que es colombiano",tipval:"S",active:false,mandatory:true,list:{source:"pais",field:"name"}},
 		hpfecnac:{label:"Fecha de nacimiento",msg:"Escriba o seleccione la fecha de nacimiento",tipval:"D",active:false,mandatory:true},
-		hpetnia:{label:"Grupo Etnico",msg:"Debe seleccionar su etnia, o en su defecto la opción que dice 'ninguna de las anteriores'",tipval:"S",active:false,mandatory:true},
+		hpetnia:{label:"Grupo Etnico",msg:"Debe seleccionar su etnia, o en su defecto la opción que dice 'ninguna de las anteriores'",tipval:"S",active:false,mandatory:true,list:{source:"etnia",field:"value"}},
 		hptoken:{label:"token",msg:"Token aun no asignado",tipval:"W",active:false,mandatory:true},
-		hpdEstcon:{label:"Estado Conyugal",msg:"Seleccione su estado conyugal",tipval:"S",active:false,mandatory:true},
-		hpdpaisred:{label:"Pais de recidencia",msg:"Seleccione su pais de residencia si no es Colombia, de lo contrario seleccione que vive en Colombia",tipval:"S",active:false,mandatory:true},
-		hpddepred:{label:"Departamento de Residencia",msg:"Seleccione su departamento de residencia",tipval:"S",active:false,mandatory:true},
-		hpdmunred:{label:"Municipio de residencia",msg:"Seleccione su municipio de residencia",tipval:"S",active:false,mandatory:true},
+		hpdEstcon:{label:"Estado Conyugal",msg:"Seleccione su estado conyugal",tipval:"S",active:false,mandatory:true,list:{source:"conyugal",field:"value"}},
+		hpdpaisred:{label:"Pais de recidencia",msg:"Seleccione su pais de residencia si no es Colombia, de lo contrario seleccione que vive en Colombia",tipval:"S",active:false,mandatory:true,list:{source:"paisred",field:"name"}},
+		hpddepred:{label:"Departamento de Residencia",msg:"Seleccione su departamento de residencia",tipval:"S",active:false,mandatory:true,list:{source:"departamentored",field:"name"}},
+		hpdmunred:{label:"Municipio de residencia",msg:"Seleccione su municipio de residencia",tipval:"S",active:false,mandatory:true,list:{source:"municipiored",field:"name"}},
 		hpddirecc:{label:"Dirección de residencia",msg:"Escriba la dirección donde usted vive",tipval:"W",active:false,mandatory:true},
 		hpdtelef:{label:"Telefono Fijo",msg:"Escriba si telefono fijo de contacto",tipval:"N",active:false,mandatory:false},
 		hpdtelmov:{label:"Telefono celular",msg:"Escriba un telefono celular de contacto valido",tipval:"N",active:false,mandatory:false},
 		hpdcorreo:{label:"Correo Electronico",msg:"escriba un correo electronico valido",tipval:"M",active:false,mandatory:true},
-		hpeorigtit:{label:"Origen del titulo",msg:"Seleccione su titulo de origen",tipval:"S",active:false,mandatory:true},
-		hpedepin:{label:"Departamento donde estudió",msg:"Seleccione el departamento donde se encuentra el instituto donde estudió",tipval:"S",active:false,mandatory:true},
-		hpemunin:{label:"Municipio donde Estudió",msg:"Seleccione el municipio donde se encuentra el instituto donde estudió",tipval:"S",active:false,mandatory:true},
-		hpepaisin:{label:"Pais donde estudió",msg:"Seleccione el Pais donde se encuentra el instituto donde estudió, si estudió en Colombia seleccione que el origen es Colombia",tipval:"S",active:false,mandatory:true},
-		hpetipin:{label:"Tipo de institución",msg:"Seleccione el tipo de institución donde estudió",tipval:"S",active:false,mandatory:true},
-		hpecodin:{label:"Institución donde estudió",msg:"Seleccione la institución donde estudió",tipval:"S",active:false,mandatory:true},
-		hpetippr:{label:"Tipo de programa que estudió",msg:"Seleccione el tipo de programa",tipval:"S",active:false,mandatory:true},
-		hpenompr:{label:"Programa que estudió",msg:"Seleccione el programa que estudió",tipval:"S",active:false,mandatory:true},
+		hpeorigtit:{label:"Origen del titulo",msg:"Seleccione su titulo de origen",tipval:"S",active:false,mandatory:true,list:{source:"paisin",field:"name"}},
+		hpedepin:{label:"Departamento donde estudió",msg:"Seleccione el departamento donde se encuentra el instituto donde estudió",tipval:"S",active:false,mandatory:true,list:{source:"departamentoin",field:"name"}},
+		hpemunin:{label:"Municipio donde Estudió",msg:"Seleccione el municipio donde se encuentra el instituto donde estudió",tipval:"S",active:false,mandatory:true,list:{source:"municipioin",field:"name"}},
+		hpepaisin:{label:"Pais donde estudió",msg:"Seleccione el Pais donde se encuentra el instituto donde estudió, si estudió en Colombia seleccione que el origen es Colombia",tipval:"S",active:false,mandatory:true,list:{source:"paisin",field:"name"}},
+		hpetipin:{label:"Tipo de institución",msg:"Seleccione el tipo de institución donde estudió",tipval:"S",active:false,mandatory:true,list:{source:"tipoinstitucion",field:"value"}},
+		hpecodin:{label:"Institución donde estudió",msg:"Seleccione la institución donde estudió",tipval:"S",active:false,mandatory:true,list:{source:"institution",field:"name"}},
+		hpetippr:{label:"Tipo de programa que estudió",msg:"Seleccione el tipo de programa",tipval:"S",active:false,mandatory:true,list:{source:"tipoprograma",field:"value"}},
+		hpenompr:{label:"Programa que estudió",msg:"Seleccione el programa que estudió",tipval:"S",active:false,mandatory:true,list:{source:"program",field:"name"}},
 		hpefecgrad:{label:"Fecha de grado",msg:"Seleccione o escriba la fecha de grado",tipval:"D",active:false,mandatory:true},
 		hpenumconv:{label:"Numero de convocatoria",msg:"escriba el numero de la convocatoria con la cual hizo la homologación de sus estudios",tipval:"N",active:false,mandatory:true},
 		hpefecconv:{label:"Fecha de la convocatoria",msg:"Seleccione o escriba la fecha de la convocatoria",tipval:"D",active:false,mandatory:true},
@@ -99,15 +99,15 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		hpegruptit:{label:"Grupo al que pertenece el titulo",msg:"Escriba el grupo al que pertenece el titulo",tipval:"W",active:false,mandatory:true},
 		hpeactoadm:{label:"Acto administrativo",msg:"Escriba el acto administrativo",tipval:"W",active:false,mandatory:true},
 		hpefecact:{label:"Fecha de grado",msg:"Seleccione o escriba la fecha de grado",tipval:"D",active:false,mandatory:true},
-		hpsobliga:{label:"Realizó su Servicio Social Obligtorio",msg:"Seleccione si realizó su Servicio Social Obligtorio",tipval:"S",active:false,mandatory:true},
-		hpstiplug:{label:"Lugar",msg:"Seleccione el tipo de lugar donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true},
-		hpsdeppr:{label:"Departamento",msg:"Seleccione el departamento donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true},
-		hpsmunpr:{label:"Municipio",msg:"Seleccione el municipio de lugar donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true},
-		hpspaispr:{label:"Pais",msg:"Seleccione el pais donde realizó su Servicio Social Obligatorio, si es en Colombia debe selecciona 'en Colombia'",tipval:"S",active:false,mandatory:true},
+		hpsobliga:{label:"Realizó su Servicio Social Obligtorio",msg:"Seleccione si realizó su Servicio Social Obligtorio",tipval:"S",active:false,mandatory:true,list:{source:"sso",field:"name"}},
+		hpstiplug:{label:"Lugar",msg:"Seleccione el tipo de lugar donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"ssolugar",field:"name"}},
+		hpsdeppr:{label:"Departamento",msg:"Seleccione el departamento donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"departamentoss",field:"name"}},
+		hpsmunpr:{label:"Municipio",msg:"Seleccione el municipio de lugar donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"municipioss",field:"name"}},
+		hpspaispr:{label:"Pais",msg:"Seleccione el pais donde realizó su Servicio Social Obligatorio, si es en Colombia debe selecciona 'en Colombia'",tipval:"S",active:false,mandatory:true,list:{source:"paisss",field:"name"}},
 		phsfecini:{label:"Fecha inicio",msg:"Seleccione o escriba la fecha en que inició su Servicio Social Obligatorio",tipval:"D",active:false,mandatory:true},
 		hpsfecfin:{label:"Fecha fin",msg:"Seleccione o escriba la fecha en que finalizó su Servicio Social Obligatorio",tipval:"D",active:false,mandatory:true},
-		hpsmodal:{label:"Modalidad",msg:"Seleccione la modalidad n que realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true},
-		hpsprog:{label:"Programa",msg:"Seleccione o escriba un programa con el cual realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true}
+		hpsmodal:{label:"Modalidad",msg:"Seleccione la modalidad n que realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"modalidad",field:"value"}},
+		hpsprog:{label:"Programa",msg:"Seleccione o escriba un programa con el cual realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"program",field:"value"}}
 	};
 
 
@@ -120,7 +120,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		var pdm = pdmc.split(',');
 		$scope.colombiano[name]=est;
 		if(est==0){
-			commonvariable.OptionSetSelected[pdm[0]]={numericcode:'170'};
+			commonvariable.OptionSetSelected[pdm[0]]={numericcode:'170', name:'COLOMBIA'};
 			commonvariable.OptionSetSelected[pdm[1]]={code:''};
 			commonvariable.OptionSetSelected[pdm[2]]={code:''};
 
@@ -139,7 +139,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		var pdm = pdmc.split(',');
 		$scope.Study.hpeorigtit=tip;
 		if(tip==1){
-			commonvariable.OptionSetSelected[pdm[0]]={numericcode:'170'};
+			commonvariable.OptionSetSelected[pdm[0]]={numericcode:'170', name:'COLOMBIA'};
 			$scope.Study.hpenumconv='999999';
 			$scope.Study.hpefecconv='1900-01-01';
 			$scope.Study.hpetitequi='999999';
@@ -176,7 +176,10 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 	$scope.prestosso=function(tip,pdmc){
 		var pdm = pdmc.split(',');
 		$scope.obligService.hpsobliga=tip;
+
 		if(tip=1){
+			commonvariable.OptionSetSelected['sso']={key:tip,value:"SI"};
+
 			$scope.obligService.hpstiplug='';
 			commonvariable.OptionSetSelected[pdm[0]]={numericcode:''};
 			commonvariable.OptionSetSelected[pdm[1]]={code:''};
@@ -187,6 +190,8 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 			$scope.obligService.hpsprog=''	
 		}
 		else{
+			commonvariable.OptionSetSelected['sso']={key:tip,value:"NO"};
+
 			$scope.obligService.hpstiplug=1;
 			commonvariable.OptionSetSelected[pdm[0]]={numericcode:'000'};
 			commonvariable.OptionSetSelected[pdm[1]]={code:'00'};
@@ -205,13 +210,15 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		var pdm = pdmc.split(',');
 		$scope.obligService.hpstiplug=tip;
 		if(tip==1){
-			commonvariable.OptionSetSelected[pdm[0]]={numericcode:'170'};
+			commonvariable.OptionSetSelected['ssolugar']={key:tip,value:"COLOMBIA"};
+			commonvariable.OptionSetSelected[pdm[0]]={numericcode:'170', name:'COLOMBIA'};
 			commonvariable.OptionSetSelected[pdm[1]]={code:''};
 			commonvariable.OptionSetSelected[pdm[2]]={code:''};
 			commonvariable.OptionSetSelected[pdm[3]]={key:'0'};
 			commonvariable.OptionSetSelected[pdm[4]]={key:'0'};
 		}
 		else{
+			commonvariable.OptionSetSelected['ssolugar']={key:tip,value:"EL EXTERIOR"};
 			commonvariable.OptionSetSelected[pdm[0]]={numericcode:''};
 			commonvariable.OptionSetSelected[pdm[1]]={code:'00'};
 			commonvariable.OptionSetSelected[pdm[2]]={code:'000'};
@@ -221,7 +228,8 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		}
 
 	}
-	
+	$scope.lugarsso(1,'paisss,departamentoss,municipioss,modalidad,programa');
+
    /////////// Date datepicker///////////////////////////////////
   $scope.today = function() {
     datetoday = new Date();
@@ -474,19 +482,27 @@ $scope.validationtype=function(type,value, msg){
  	$scope.obligServiceR=[];
  	///data personal
  	angular.forEach($scope.DataPersonal,function(value,key){
- 			$scope.DataPersonalR.push({label:$scope.ValidationField[key].label,value:value});		 
- 			});
+			if($scope.ValidationField[key].tipval=='S')
+ 				value=commonvariable.OptionSetSelected[$scope.ValidationField[key].list.source][$scope.ValidationField[key].list.field];
+ 			$scope.DataPersonalR.push({label:$scope.ValidationField[key].label,value:value});	 			
+   			});
  	///data personal add
  	angular.forEach($scope.DataPersonalAdd,function(value,key){
+ 			if($scope.ValidationField[key].tipval=='S')
+ 				value=commonvariable.OptionSetSelected[$scope.ValidationField[key].list.source][$scope.ValidationField[key].list.field];
  			$scope.DataPersonalAddR.push({label:$scope.ValidationField[key].label,value:value});	
  						 
  			});
  	//study
  	angular.forEach($scope.Study,function(value,key){
+ 			if($scope.ValidationField[key].tipval=='S')
+ 				value=commonvariable.OptionSetSelected[$scope.ValidationField[key].list.source][$scope.ValidationField[key].list.field];
  			$scope.StudyR.push({label:$scope.ValidationField[key].label,value:value});				 
  			});
  	//Obligatory Service social
  	angular.forEach($scope.obligService,function(value,key){
+ 			if($scope.ValidationField[key].tipval=='S')
+ 				value=commonvariable.OptionSetSelected[$scope.ValidationField[key].list.source][$scope.ValidationField[key].list.field];
  			$scope.obligServiceR.push({label:$scope.ValidationField[key].label,value:value});				 
  			});
 
