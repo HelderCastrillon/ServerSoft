@@ -99,15 +99,15 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		hpegruptit:{label:"Grupo al que pertenece el titulo",msg:"Escriba el grupo al que pertenece el titulo",tipval:"W",active:false,mandatory:true},
 		hpeactoadm:{label:"Acto administrativo",msg:"Escriba el acto administrativo",tipval:"W",active:false,mandatory:true},
 		hpefecact:{label:"Fecha de grado",msg:"Seleccione o escriba la fecha de grado",tipval:"D",active:false,mandatory:true},
-		hpsobliga:{label:"Realizó su Servicio Social Obligtorio",msg:"Seleccione si realizó su Servicio Social Obligtorio",tipval:"S",active:false,mandatory:true,list:{source:"sso",field:"name"}},
-		hpstiplug:{label:"Lugar",msg:"Seleccione el tipo de lugar donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"ssolugar",field:"name"}},
+		hpsobliga:{label:"Realizó su Servicio Social Obligtorio",msg:"Seleccione si realizó su Servicio Social Obligtorio",tipval:"S",active:false,mandatory:true,list:{source:"sso",field:"value"}},
+		hpstiplug:{label:"Lugar",msg:"Seleccione el tipo de lugar donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"ssolugar",field:"value"}},
 		hpsdeppr:{label:"Departamento",msg:"Seleccione el departamento donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"departamentoss",field:"name"}},
 		hpsmunpr:{label:"Municipio",msg:"Seleccione el municipio de lugar donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"municipioss",field:"name"}},
 		hpspaispr:{label:"Pais",msg:"Seleccione el pais donde realizó su Servicio Social Obligatorio, si es en Colombia debe selecciona 'en Colombia'",tipval:"S",active:false,mandatory:true,list:{source:"paisss",field:"name"}},
 		phsfecini:{label:"Fecha inicio",msg:"Seleccione o escriba la fecha en que inició su Servicio Social Obligatorio",tipval:"D",active:false,mandatory:true},
 		hpsfecfin:{label:"Fecha fin",msg:"Seleccione o escriba la fecha en que finalizó su Servicio Social Obligatorio",tipval:"D",active:false,mandatory:true},
 		hpsmodal:{label:"Modalidad",msg:"Seleccione la modalidad n que realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"modalidad",field:"value"}},
-		hpsprog:{label:"Programa",msg:"Seleccione o escriba un programa con el cual realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"program",field:"value"}}
+		hpsprog:{label:"Programa",msg:"Seleccione o escriba un programa con el cual realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"programa",field:"value"}}
 	};
 
 
@@ -205,6 +205,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		}
 
 	}
+	$scope.prestosso(1,'paisss,departamentoss,municipioss,modalidad,programa');
 
 	$scope.lugarsso=function(tip,pdmc){
 		var pdm = pdmc.split(',');

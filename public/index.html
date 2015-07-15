@@ -38,9 +38,41 @@
 
 </head>
 <body >
- <div class="row">
-	<div class="col-md-11"><div ng-view></div></div>
-</div>
+	<div class="row">
+	<br>
+	</div>
+ 	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">	
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+				 	
+				 	<div class="row">
+						<div class="col-md-2">
+							<img id="logo1" alt="" src="http://www.cauca.gov.co/sites/all/pqrdf/uploads/images/dac1a-escudocauca-jpg.png" height="110">
+						</div>
+						<div class="col-md-8">
+							<h3>{{'PROF_TITLE'| translate}}</h3>
+						</div>
+						<div class="col-md-2">
+							<img id="logo2" alt="" src="http://www.cauca.gov.co/sites/all/pqrdf/images/Escudo-colombia.png" height="110">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12" style="background-color: #333;">xx</div>
+					</div>
 
+		  </div>
+		  <div class="panel-body">
+				<div class="row">	
+					<div class="col-md-12"><div ng-view></div></div>
+				</div>
+			</div>
+		<div class="panel-footer">Panel footer</div>
+		</div>
+
+	</div>
+	<div class="col-md-1"></div>
+</div>
 </body>
 </html>
