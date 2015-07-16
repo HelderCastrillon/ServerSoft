@@ -18,6 +18,7 @@ var mainController=require('./ServerController.js');
 
 //Modules
 var profManager=require('./modules/professionalManager.js');
+var profManagerDetail=require('./modules/professionalDetailManager.js');
 var CommmonQuery=require('./modules/commonQuery.js');
 var List=require('./modules/commonList.js');
 
@@ -58,7 +59,12 @@ app.get('/api/commonList/:nlist', function(request, response) {
 
 //get professioanl by id
 app.get('/api/HealthProfessional/:pid', function(request, response) {
-	var PMquery=profManager.Get(request.params.pid);
+	var PMquery=profManager.Get(request.params.pid,'id');
+	mainController.ConnectionController(PMquery,response);
+});
+//find professional by name
+app.get('/api/HealthProfessional/find/:pid', function(request, response) {
+	var PMquery=profManager.Get(request.params.pid,'name');
 	mainController.ConnectionController(PMquery,response);
 });
 
@@ -71,6 +77,33 @@ app.get('/api/HealthProfessional', function(request, response) {
 //Save professional
 app.post('/api/HealthProfessional', function(request, response) {
 	var PMquery=profManager.Post(request.body);		
+	mainController.ConnectionController(PMquery,response);
+});
+
+/////////////////////////////////////////////////////////
+
+////	Module Health professional Detail	///
+
+//get professioanl by id
+app.get('/api/HealthProfessionalDetail/:pid', function(request, response) {
+	var PMquery=profManagerDetail.Get(request.params.pid,'id');
+	mainController.ConnectionController(PMquery,response);
+});
+//find professional by name
+app.get('/api/HealthProfessionalDetail/find/:pid', function(request, response) {
+	var PMquery=profManagerDetail.Get(request.params.pid,'name');
+	mainController.ConnectionController(PMquery,response);
+});
+
+//get all professional
+app.get('/api/HealthProfessionalDetail', function(request, response) {
+	var PMquery=profManagerDetail.Get();		
+	mainController.ConnectionController(PMquery,response);
+});
+
+//Save professional
+app.post('/api/HealthProfessionalDetail', function(request, response) {
+	var PMquery=profManagerDetail.Post(request.body);		
 	mainController.ConnectionController(PMquery,response);
 });
 

@@ -11,26 +11,51 @@
 <h5>A continuación usted puede iniciar el registro de su información o consultar el estado de su registro</h5>
 
 <div class="row">
-<div class="col-sm-3">
-</div>
   <div class="col-sm-3">
     <div class="thumbnail">
       <img src="img/register.png" alt="Registro de profesional">
       <div class="caption">
         <h4>Registro</h4>
-        <p>Tenga en cuenta tener a la mano la información personal, de sus estudios, del lugar de residencia y de su Servicio Social Obligatorio</p>
-        <p><a href="#" class="btn btn-primary" role="button">Registrar</a> </p>
+        <p>Tenga en cuenta tener a la mano su información personal, también de sus estudios, del lugar de residencia y de su Servicio Social Obligatorio</p>
+        <p><a href="#/healthprofessional" class="btn btn-primary" role="button">Registrar</a> </p>
       </div>
     </div>
   </div>
-  <div class="col-sm-3">
-    <div class="thumbnail">
-      <img src="img/token.png" alt="Consultar registro">
-      <div class="caption">
-        <h4>Consulta</h4>
-        <p>Si usted ya se ha registrado tiene que contar con un codigo de rgistro, escriba aquí el codigo con su documento de identificación para consultar el estado</p>
-        <p><a href="#" class="btn btn-primary" role="button">Consultar</a></p>
-      </div>
+  <div class="col-sm-9">
+  <div class="thumbnail">
+  	<div class="row">
+	  <div class="col-sm-5">
+	    <div >
+	      <img src="img/token.png" alt="Consultar registro">
+	      <div class="caption">
+	        <h4>Consulta</h4>
+	        <p>Si usted ya se ha registrado debe contar con el codigo de registro de 5 digitos (Verifique en su correo electronico un mensaje recibido por <strong>sistemas@saludcauca.gov.co)</strong>, escriba aquí el codigo con su documento de identificación para consultar el estado</p>	        
+	      </div>
+	    </div>
+	  </div>
+	  <div class="col-sm-7">
+    <div class="well well-lg">
+    <div>
+        <h4 class="text-center">Formulario de Consulta</h4>
+     <br>
+      <form>
+		  <div class="form-group">
+		    <label for="document">Documento de identificación</label>
+		    <input type="text" class="form-control" id="document" placeholder="Solo numeros ejemplo: 1062891765 ">
+		  </div>
+		  <div class="form-group">
+		    <label for="code">Codigo de registro(5 Digitos)</label>
+		    <input type="text" class="form-control" id="code" placeholder="ejemplo: X4w5t4">
+		  </div>
+		  <br>
+		  		<button ng-click="" class="btn btn-primary" role="button">Consultar</button>
+      	</form>
+      	
+     </div>
     </div>
   </div>
+	</div>	 
+	</div>
+</div>
+
 </div>

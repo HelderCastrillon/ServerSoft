@@ -23,12 +23,18 @@ Post: function (newProfessional) {
 },
 
 //get register professional in Db
-Get: function (pid) {
-	if(pid>=0)
-		return ("SELECT * FROM hphealthprofessional where hpid="+pid);
-	else
-		return "SELECT * FROM hphealthprofessional";
-	},
+Get: function (pid,option) {
+      switch(option){
+	case 'id':
+	     return ("SELECT * FROM hphealthprofessional where hpid="+pid);
+           break;
+	case 'name':
+		return ("SELECT * FROM hphealthprofessional where hpnumdoc||hppriape||hpsegape||hpprinom||hpsegnom ilike '%"+pid+"%';");
+            break
+      default:
+            return ("SELECT * FROM hphealthprofessional");
+	}
+},
 
 //update professional in Db
 Put: function (idProfessional,CurrentProfessional) {

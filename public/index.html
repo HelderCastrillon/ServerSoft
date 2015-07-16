@@ -54,7 +54,7 @@
 							<img id="logoSDSC" alt=" Logo Secretaría Departamental de Salud del Cauca" src="img/logoGov.png" height="110">
 						</div>
 						<div class="col-md-8">
-							<h2 class="text-center">{{'PROF_TITLE'| translate}}</h2>
+						<br>
 							<nav class="navbar navbar-default">
 							  <div class="container-fluid">
 							    <!-- Brand and toggle get grouped for better mobile display -->
@@ -65,13 +65,15 @@
 							        <span class="icon-bar"></span>
 							        <span class="icon-bar"></span>
 							      </button>
-							      <a class="navbar-brand" href="#">SDSC</a>
+							      
+							      <span class="navbar-brand"><strong style="font-size:25px;">{{'PROF_TITLE'| translate}}</strong></span>
 							    </div>
 
 							    <!-- Collect the nav links, forms, and other content for toggling -->
 							    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							        <ul class="nav navbar-nav navbar-right">
-							        <li class="{{opactive=='index'||opactive==undefined?'active':''}}"><a ng-click="opactive='index'" href="#/index">inicio</a></li>	
+							        <li class="{{opactive=='index'||opactive==undefined?'active':''}}"><a ng-click="opactive='index'" href="#/index">inicio</a></li>
+							        <li class="{{opactive=='register'?'active':''}}"><a ng-click="opactive='register'" href="#/healthprofessional">Registro</a></li>		
 							        <li class="{{opactive=='help'?'active':''}}"><a ng-click="opactive='help'" href="#/help">Ayuda</a></li>						        
 							      </ul>
 							    </div><!-- /.navbar-collapse -->
