@@ -1,19 +1,27 @@
 var appServersoft = angular.module("appServersoft", ['ngRoute','ServersoftApi','pascalprecht.translate','ui.bootstrap']);
 
-appServersoft.config(function($routeProvider) {
+appServersoft.config(function($routeProvider,$translateProvider) {
  
 	  $routeProvider.when('/healthprofessional', {
 		  	templateUrl: "/modules/healthprofessional/healthprofessionalView.html",
 		  	controller: "healthprofessionalController"
 		  });
-	  $routeProvider.otherwise({
-	        redirectTo: '/healthprofessional'
-	  });   
+	  $routeProvider.when('/index', {
+		  	templateUrl: "/modules/index/indexView.html",
+		  	controller: "indexController"
+		  });
 
-	});
+	  $routeProvider.when('/help', {
+		  	templateUrl: "/modules/help/helpView.html",
+		  	controller: "helpController"
+		  });	 
+	$routeProvider.otherwise({
+	        redirectTo: '/index'
+	  });
 
-appServersoft.config(function ($translateProvider) {
-  
+
+
+
 	  $translateProvider.useStaticFilesLoader({
           prefix: '/languages/',
           suffix: '.json'
@@ -30,6 +38,7 @@ appServersoft.config(function ($translateProvider) {
 	  
 	  $translateProvider.fallbackLanguage(['en']);
 	  $translateProvider.determinePreferredLanguage();
-	  //$translateProvider.use('es');
-	  
-});
+	  //$translateProvider.use('es');    
+
+	});
+
