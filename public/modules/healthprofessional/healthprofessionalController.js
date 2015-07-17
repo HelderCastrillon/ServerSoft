@@ -1,4 +1,4 @@
-appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable','$modal', function($scope,$filter,commonvariable,$modal){
+appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable','$modal','HealthProfessional','HealthProfessionalDetail','HealthProfessionalStudy','HealthProfessionalService', function($scope,$filter,commonvariable,$modal,HealthProfessional,HealthProfessionalDetail,HealthProfessionalStudy,HealthProfessionalService){
 	
 	var $translate = $filter('translate');
 
@@ -537,8 +537,34 @@ $scope.validationtype=function(type,value, msg){
   };
 
 
- /// 
+ ///  save Data i server
+ $scope.sendforms=function(){
 
+
+ 	//data professional
+ 	
+ 	HealthProfessional.post($scope.DataPersonal)
+			.$promise.then(function(response){
+				return  response;
+			 });
+	//data professional detail
+ 	HealthProfessionalDetail.post($scope.DataPersonalAdd)
+			.$promise.then(function(response){
+				return  response;
+			 });
+	//data professional study
+ 	HealthProfessionalStudy.post($scope.Study)
+			.$promise.then(function(response){
+				return  response;
+			 });
+	//data professional service		
+ 	HealthProfessionalService.post($scope.obligService)
+			.$promise.then(function(response){
+				return  response;
+			 });
+
+ 	
+ };
     
 }]);
 

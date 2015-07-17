@@ -26,6 +26,34 @@ ServersoftApi.factory("HealthProfessional",['$resource','commonvariable', functi
   });
 }]);
 
+ServersoftApi.factory("HealthProfessionalDetail",['$resource','commonvariable', function ($resource,commonvariable) {
+	return $resource( commonvariable.url+"HealthProfessionalDetail/:pid", 
+	{pid:'@pid'},
+  { get: { method: "GET"},
+	post: { method: "POST"},
+	remove: {method:'DELETE'}
+  });
+}]);
+
+ServersoftApi.factory("HealthProfessionalStudy",['$resource','commonvariable', function ($resource,commonvariable) {
+	return $resource( commonvariable.url+"ProfessionalStudy/:pid", 
+	{pid:'@pid'},
+  { get: { method: "GET"},
+	post: { method: "POST"},
+	remove: {method:'DELETE'}
+  });
+}]);
+
+ServersoftApi.factory("HealthProfessionalService",['$resource','commonvariable', function ($resource,commonvariable) {
+	return $resource( commonvariable.url+"ProfessionalSSO/:pid", 
+	{pid:'@pid'},
+  { get: { method: "GET"},
+	post: { method: "POST"},
+	remove: {method:'DELETE'}
+  });
+}]);
+
+
 ServersoftApi.factory("enumList",['$resource','commonvariable', function ($resource,commonvariable) {
 	return $resource(commonvariable.url+"commonList/:nlist", 
 	{nlist:'@nlist'},

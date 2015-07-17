@@ -19,6 +19,8 @@ var mainController=require('./ServerController.js');
 //Modules
 var profManager=require('./modules/professionalManager.js');
 var profManagerDetail=require('./modules/professionalDetailManager.js');
+var ServiceManager=require('./modules/ServiceManager.js');
+var StudyManager=require('./modules/StudyManager.js');
 var CommmonQuery=require('./modules/commonQuery.js');
 var List=require('./modules/commonList.js');
 
@@ -104,6 +106,63 @@ app.get('/api/HealthProfessionalDetail', function(request, response) {
 //Save professional
 app.post('/api/HealthProfessionalDetail', function(request, response) {
 	var PMquery=profManagerDetail.Post(request.body);		
+	mainController.ConnectionController(PMquery,response);
+});
+
+/////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////
+
+////	Module Study of the professional	///
+
+//get professioanl by id
+app.get('/api/ProfessionalStudy/:pid', function(request, response) {
+	var PMquery=StudyManager.Get(request.params.pid,'id');
+	mainController.ConnectionController(PMquery,response);
+});
+//find professional by name
+app.get('/api/ProfessionalStudy/find/:pid', function(request, response) {
+	var PMquery=StudyManager.Get(request.params.pid,'name');
+	mainController.ConnectionController(PMquery,response);
+});
+
+//get all professional
+app.get('/api/ProfessionalStudy', function(request, response) {
+	var PMquery=StudyManager.Get();		
+	mainController.ConnectionController(PMquery,response);
+});
+
+//Save professional
+app.post('/api/ProfessionalStudy', function(request, response) {
+	var PMquery=StudyManager.Post(request.body);		
+	mainController.ConnectionController(PMquery,response);
+});
+
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+
+////	Module Service of the professional	///
+
+//get professioanl by id
+app.get('/api/ProfessionalSSO/:pid', function(request, response) {
+	var PMquery=ServiceManager.Get(request.params.pid,'id');
+	mainController.ConnectionController(PMquery,response);
+});
+//find professional by name
+app.get('/api/ProfessionalSSO/find/:pid', function(request, response) {
+	var PMquery=ServiceManager.Get(request.params.pid,'name');
+	mainController.ConnectionController(PMquery,response);
+});
+
+//get all professional
+app.get('/api/ProfessionalSSO', function(request, response) {
+	var PMquery=ServiceManager.Get();		
+	mainController.ConnectionController(PMquery,response);
+});
+
+//Save professional
+app.post('/api/ProfessionalSSO', function(request, response) {
+	var PMquery=ServiceManager.Post(request.body);		
 	mainController.ConnectionController(PMquery,response);
 });
 
