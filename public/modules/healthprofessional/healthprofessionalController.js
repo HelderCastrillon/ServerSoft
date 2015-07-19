@@ -1,64 +1,69 @@
-appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable','$modal','HealthProfessional','HealthProfessionalDetail','HealthProfessionalStudy','HealthProfessionalService','HealthProfessionalId', function($scope,$filter,commonvariable,$modal,HealthProfessional,HealthProfessionalDetail,HealthProfessionalStudy,HealthProfessionalService,HealthProfessionalId){
+appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable','$modal','HealthProfessional','HealthProfessionalDetail','HealthProfessionalStudy','HealthProfessionalService','HealthProfessionalId','md5', 'sendmailservice', function($scope,$filter,commonvariable,$modal,HealthProfessional,HealthProfessionalDetail,HealthProfessionalStudy,HealthProfessionalService,HealthProfessionalId,md5,sendmailservice){
 	
 	var $translate = $filter('translate');
 
-	//Data Object
-	$scope.DataPersonal={
-		hptipdoc:"",
-		hpnumdoc:"",
-		hppriape:"",
-		hpsegape:"",
-		hpprinom:"",
-		hpsegnom:"",
-		hpsexo:"",
-		hpdepnac:"",
-		hpmunnac:"",
-		hppais:"",
-		hpfecnac:"",
-		hpetnia:"",
-		hptoken:"1"
+	$scope.initData=function(){
+		//Data Object
+		$scope.DataPersonal={
+			hptipdoc:"",
+			hpnumdoc:"",
+			hppriape:"",
+			hpsegape:"",
+			hpprinom:"",
+			hpsegnom:"",
+			hpsexo:"",
+			hpdepnac:"",
+			hpmunnac:"",
+			hppais:"",
+			hpfecnac:"",
+			hpetnia:"",
+			hptoken:"1"
+		};
+
+		$scope.DataPersonalAdd={
+			hpdestcon:"",
+			hpdpaisred:"",
+			hpddepred:"",
+			hpdmunred:"",
+			hpddirecc:"",
+			hpdtelef:"",
+			hpdtelmov:"",
+			hpdcorreo:""
+		};
+
+		$scope.Study={
+			hpeorigtit:1,
+			hpedepin:"",
+			hpemunin:"",
+			hpepaisin:"",
+			hpetipin:"",
+			hpecodin:"",
+			hpetippr:"",
+			hpecodpr:"",
+			hpefecgrad:"",
+			hpenumconv:"",
+			hpefecconv:"",
+			hpetitequi:"",
+			hpegruptit:""
+
+		};
+		$scope.Studies=[];
+
+		$scope.obligService={
+			hpsobliga:1,
+			hpstiplug:1,
+			hpsdeppr:"",
+			hpsmunpr:"",
+			hpspaispr:"",
+			phsfecini:"",
+			hpsfecfin:"",
+			hpsmodal:"",
+			hpsprog:""
+		}
+
+
 	};
-
-	$scope.DataPersonalAdd={
-		hpdestcon:"",
-		hpdpaisred:"",
-		hpddepred:"",
-		hpdmunred:"",
-		hpddirecc:"",
-		hpdtelef:"",
-		hpdtelmov:"",
-		hpdcorreo:""
-	};
-
-	$scope.Study={
-		hpeorigtit:1,
-		hpedepin:"",
-		hpemunin:"",
-		hpepaisin:"",
-		hpetipin:"",
-		hpecodin:"",
-		hpetippr:"",
-		hpecodpr:"",
-		hpefecgrad:"",
-		hpenumconv:"",
-		hpefecconv:"",
-		hpetitequi:"",
-		hpegruptit:""
-
-	};
-	$scope.Studies=[];
-
-	$scope.obligService={
-		hpsobliga:1,
-		hpstiplug:1,
-		hpsdeppr:"",
-		hpsmunpr:"",
-		hpspaispr:"",
-		phsfecini:"",
-		hpsfecfin:"",
-		hpsmodal:"",
-		hpsprog:""
-	}
+$scope.initData();
 ///////////////////////////////////////////////////////////////////
 
 //Data Object
@@ -540,7 +545,10 @@ $scope.validationtype=function(type,value, msg){
  ///  save Data i server
  $scope.sendforms=function(){
 
-
+ 	//generating md5 for token
+ 	$scope.DataPersonal.hptoken=md5.createHash($scope.DataPersonal.hpnumdoc || '');
+ 	$scope.DataPersonal.hptoken=$scope.DataPersonal.hptoken.substring(0, 5);
+ 	$scope.tokenForUser=$scope.DataPersonal.hptoken;
  	//data professional
  	
  	HealthProfessional.post($scope.DataPersonal)
@@ -551,28 +559,68 @@ $scope.validationtype=function(type,value, msg){
 					$scope.DataPersonalAdd["hpid"]=responseId[0].hpid;
 					$scope.Study["hpid"]=responseId[0].hpid;
 					$scope.obligService["hpid"]=responseId[0].hpid;
+					if(responseId.status=="SUCCESS"){
 					//data professional detail
 				 	HealthProfessionalDetail.post($scope.DataPersonalAdd)
 							.$promise.then(function(responseAdd){
-								return  responseAdd;
+								if(responseAdd.status=="SUCCESS"){
+										//data professional study
+						 			HealthProfessionalStudy.post($scope.Study)
+									.$promise.then(function(responseSt){
+										if(responseSt.status=="SUCCESS"){	
+											//data professional service		
+										 	HealthProfessionalService.post($scope.obligService)
+													.$promise.then(function(responseSSO){
+														return  responseSSO;
+													 });
+										}	
+
+									 });
+								}
 							 });
-					//data professional study
-				 	HealthProfessionalStudy.post($scope.Study)
-							.$promise.then(function(responseSt){
-								return  responseSt;
-							 });
-					//data professional service		
-				 	HealthProfessionalService.post($scope.obligService)
-							.$promise.then(function(responseSSO){
-								return  responseSSO;
-							 });
+					}
+					
+
 
 				});
 			
 			
-			return  responseHP;
+			
 
  	 });
+
+
+
+ };
+
+ $scope.tokenPresentation=function(){
+ 	$scope.showtoken=true;
+ 	///send token by email
+	var messageForUser='<h3> Estimado Profesional de Salud : ' + dvalue.name+"</h3>";
+	messageForUser+="<br> <h4> El presente correo es informativo y se le envía para notificarle que el proceso de registro se ha realizado exitosamente";
+	messageForUser+="recuerde que usted debe entregar los documentos originales en la oficina de Registro de diplomas ubicada en la Secretaria de salud. </h4>";
+	messageForUser+="<br> Cuando el proceso se encuentre completo serán notificado, también podrá verificar su estado a traves del portal XXX con el codigo de registro  "; 
+	messageForUser+="<h3>Codigo de Registro</h3>"; 
+	messageForUser+="<h2>"+$scope.tokenForUser+"</h2>"; 
+	messageForUser+="<br> Si tiene alguna inquietud puede comunicarse con la oficina de registro de diplomas";
+	messageForUser+="<br> gracias"; 
+
+	///
+
+	sendmailservice.post({},
+		{to:$scope.DataPersonalAdd.hpdcorreo,
+		toname:"Profesional - "+dvalue.name,
+		fromname:'Sistema de Registro de profesional de Salud - Notificacion automatica',
+		subject:'Correo informativo - Notificación de registro de Profesional en Salud',
+		message:messageForUser
+		});
+
+
+ 	//init data 
+ 	$scope.initData();
+ 	commonvariable.OptionSetSelected=[];
+ 	//
+
  };
     
 }]);

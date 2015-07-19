@@ -22,6 +22,7 @@ Dhis2Api.factory("commonvariable", function () {
 			urlbase:"http://localhost:8080/dhis/",
 			urldownload:"http://localhost:8080/externalfiledhis/",
 			urlupload:"../../../upload/uploadFile",
+			urlemail:"../../../upload/sendmail.php",
 			folder:"Contratos",
 			OrganisationUnit:"z37AIsY28kM",
 			TypeEntity:"WkBTuQkUtRM",

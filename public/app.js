@@ -1,4 +1,4 @@
-var appServersoft = angular.module("appServersoft", ['ngRoute','ServersoftApi','pascalprecht.translate','ui.bootstrap']);
+var appServersoft = angular.module("appServersoft", ['ngRoute','ServersoftApi','pascalprecht.translate','ui.bootstrap','angular-md5']);
 
 appServersoft.config(function($routeProvider,$translateProvider) {
  

@@ -11,6 +11,7 @@ var ServersoftApi = angular.module("ServersoftApi", ['ngResource']);
 ServersoftApi.factory("commonvariable", function () {
 	var Vari={
 			url:"http://localhost:5433/api/",
+			urlemail:"http://190.146.87.62/upload/sendmail.php",
 			OptionSetSelected:[]
 			};
 
@@ -78,4 +79,15 @@ ServersoftApi.factory("CountryList",['$resource','commonvariable', function ($re
   });
 }]);
 
+ServersoftApi.factory("sendmailservice",['$resource','commonvariable', function ($resource,commonvariable) {
+	return $resource( commonvariable.urlemail, 
+	{to:'@to',
+	toname:'@toname',
+	fromname:'@fromname',
+	subject:'@subject',
+	message:'@message'
+	},
+  { post: { method: "POST"}
+  });
+}]);
 

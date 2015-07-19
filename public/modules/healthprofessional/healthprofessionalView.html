@@ -401,7 +401,7 @@
 		    <h3 class="panel-title">{{'PROF_TAB_RESUME_DESC'| translate}} {{tab.name}}</h3>
 		  </div>
 		  <div class="panel-body">
-		 	 
+		 	  <div ng-show="!showtoken">
 		 	 <label "control-label"  for="programa">{{tabsPersonal1.tittle}} </label>
 		 	 <table class="table table-hover">
               <tr>
@@ -467,6 +467,23 @@
 			  </ul>
 		  </nav>
 		 </div>
+		 <div ng-show="showtoken">
+		 	<div class="row">
+			  <div class="col-sm-3">
+			    <div class="thumbnail">
+			      <img src="img/token.png" alt="Registro de profesional">
+			      <div class="caption">
+			        <h4>Codigo de Regitro</h4>
+			        <p>Gracias por usar este servicio, tenga en cuenta que debe llevar los documentos originales a la ofina de registro de diplomas ubicada en la Secretaría Departamental de Salud</p>
+			        <h2 class="text-center">{{tokenForUser}}</h2>
+			        <p><a href="#/index" class="btn btn-primary" role="button">Regresar</a> </p>
+			      </div>
+			    </div>
+			  </div>
+			 </div>
+
+		 </div>
+	 </div>
 	</div>
     </tab>
   </tabset>
