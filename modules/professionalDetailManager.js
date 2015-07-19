@@ -4,7 +4,7 @@ module.exports = {
 Post: function (newProfessionalDetail) { 
 
       var sqlString="INSERT INTO hpdetailprofessional( hpid, hpdestcon, hpdpaisred, hpddepred, hpdmunred, hpddirecc, hpdtelef, hpdtelmov, hpdcorreo) VALUES ("
-                  +"'"+newProfessionalDetail.hpid+"',"
+            +"'"+newProfessionalDetail.hpid+"',"
             +"'"+newProfessionalDetail.hpdestcon+"',"
             +"'"+newProfessionalDetail.hpdpaisred+"',"
             +"'"+newProfessionalDetail.hpddepred+"',"

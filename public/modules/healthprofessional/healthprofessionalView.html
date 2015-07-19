@@ -145,7 +145,7 @@
 			
 			<div class="row">
 					<div class="col-md-6">
-					   	<label for="etnia" class="{{ValidationField.hpdEstcon.active?'label label-danger':'control-label'}}">{{ 'PROF_ESTADOCONYUGAL' | translate }} </label>
+					   	<label for="etnia" class="{{ValidationField.hpdestcon.active?'label label-danger':'control-label'}}">{{ 'PROF_ESTADOCONYUGAL' | translate }} </label>
 			    		<hs-optionlist namelist='conyugal'></hs-optionlist>
 					</div>
 
@@ -271,7 +271,7 @@
 			    		<hs-optionlist namelist='tipoprograma'></hs-optionlist>
 					</div>
 					<div class="col-md-6" ng-show="Study.hpeorigtit==1?true:false">
-					   	<label  for="program" class="{{ValidationField.hpenompr.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_PROGRAM' | translate }} </label>
+					   	<label  for="program" class="{{ValidationField.hpecodpr.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_PROGRAM' | translate }} </label>
 			    		<d2-dropdownoptionset tittleoption='program' resource='program' parent="institution"></d2-dropdownoptionset>
 					</div>
 				</div>	
@@ -459,7 +459,7 @@
 		  <nav>
 			  <ul class="pager">
 			    <li class="previous"><a href="/view#/healthprofessional" ng-click="next(3)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
-			    <li class="next">
+			    <li class="next text-right">
 			    	<button type="button" class="btn btn-primary" ng-click="sendforms()" aria-label="Left Align">
 					  <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> {{'SAVE' | translate}}
 					</button>

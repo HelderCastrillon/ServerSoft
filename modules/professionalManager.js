@@ -36,6 +36,11 @@ Get: function (pid,option) {
 	}
 },
 
+//get lastID
+GetId: function (numdoc){
+   return ("SELECT max(hpid) as hpid  FROM hphealthprofessional where hpnumdoc='"+numdoc+"'"); 
+},
+
 //update professional in Db
 Put: function (idProfessional,CurrentProfessional) {
 	console.log(idProfessional);

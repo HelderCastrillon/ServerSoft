@@ -2,25 +2,22 @@ module.exports = {
       
 //save professional in Db
 Post: function (newStudyProfessional) { 
-
-      var sqlString="INSERT INTO hpstudyprofessional(hpid, hpeorigtit, hpedepin, hpemunin, hpemunin, hpetipin, hpecodin, hpetippr, hpecodpr, hpefecgrad, hpenumconv, hpefecconv, hpetitequi, hpegruptit, hpeactoadm, hpefecact) VALUES ("
-                  +"'"+newStudyProfessiona.hpid+"',"
-            +"'"+newStudyProfessiona.hpeorigtit+"',"
-            +"'"+newStudyProfessiona.hpedepin+"',"
-            +"'"+newStudyProfessiona.hpemunin+"',"
-            +"'"+newStudyProfessiona.hpdmunred+"',"
-            +"'"+newStudyProfessiona.hpemunin+"',"
-            +"'"+newStudyProfessiona.hpetipin+"',"
-            +"'"+newStudyProfessiona.hpecodin+"',"
-            +"'"+newStudyProfessiona.hpetippr+"',"
-            +"'"+newStudyProfessiona.hpecodpr+"',"
-            +"'"+newStudyProfessiona.hpefecgrad+"',"
-            +"'"+newStudyProfessiona.hpenumconv+"',"
-            +"'"+newStudyProfessiona.hpefecconv+"',"
-            +"'"+newStudyProfessiona.hpetitequi+"',"
-            +"'"+newStudyProfessiona.hpegruptit+"',"
-            +"'"+newStudyProfessiona.hpeactoadm+"',"
-            +"'"+newStudyProfessiona.hpefecact+"'"
+      console.log(newStudyProfessional)
+      var sqlString="INSERT INTO hpstudyprofessional(hpid, hpeorigtit, hpedepin, hpemunin, hpepaisin, hpetipin, hpecodin, hpetippr, hpecodpr, hpefecgrad, hpenumconv, hpefecconv, hpetitequi, hpegruptit) VALUES ("
+                  +"'"+newStudyProfessional.hpid+"',"
+            +"'"+newStudyProfessional.hpeorigtit+"',"
+            +"'"+newStudyProfessional.hpedepin+"',"
+            +"'"+newStudyProfessional.hpemunin+"',"
+            +"'"+newStudyProfessional.hpepaisin+"',"
+            +"'"+newStudyProfessional.hpetipin+"',"
+            +"'"+newStudyProfessional.hpecodin+"',"
+            +"'"+newStudyProfessional.hpetippr+"',"
+            +"'"+newStudyProfessional.hpecodpr+"',"
+            +"'"+newStudyProfessional.hpefecgrad+"',"
+            +"'"+newStudyProfessional.hpenumconv+"',"
+            +"'"+newStudyProfessional.hpefecconv+"',"
+            +"'"+newStudyProfessional.hpetitequi+"',"
+            +"'"+newStudyProfessional.hpegruptit+"'"
             +")";
       return sqlString;
       

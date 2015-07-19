@@ -2,6 +2,10 @@ module.exports = {
 
 ConnectionController: function(StrQuery,res){
 
+	
+	//print
+	console.log(StrQuery);
+	
 	//Connect Configuration 
 	var pg = require("pg");
 	
@@ -28,7 +32,6 @@ ConnectionController: function(StrQuery,res){
 
 	var executeQuery=function(StrQuery,client){
 		// get the total number of visits today (including the current visit)
-    	 console.log(client);
     	  exeQuery=client.query(StrQuery, function(err, result) {
 	        // handle an error from the query
     	    if(handleError(err,client)) return;

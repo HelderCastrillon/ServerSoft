@@ -1,4 +1,4 @@
-appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable','$modal','HealthProfessional','HealthProfessionalDetail','HealthProfessionalStudy','HealthProfessionalService', function($scope,$filter,commonvariable,$modal,HealthProfessional,HealthProfessionalDetail,HealthProfessionalStudy,HealthProfessionalService){
+appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable','$modal','HealthProfessional','HealthProfessionalDetail','HealthProfessionalStudy','HealthProfessionalService','HealthProfessionalId', function($scope,$filter,commonvariable,$modal,HealthProfessional,HealthProfessionalDetail,HealthProfessionalStudy,HealthProfessionalService,HealthProfessionalId){
 	
 	var $translate = $filter('translate');
 
@@ -20,7 +20,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 	};
 
 	$scope.DataPersonalAdd={
-		hpdEstcon:"",
+		hpdestcon:"",
 		hpdpaisred:"",
 		hpddepred:"",
 		hpdmunred:"",
@@ -38,7 +38,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		hpetipin:"",
 		hpecodin:"",
 		hpetippr:"",
-		hpenompr:"",
+		hpecodpr:"",
 		hpefecgrad:"",
 		hpenumconv:"",
 		hpefecconv:"",
@@ -76,7 +76,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		hpfecnac:{label:"Fecha de nacimiento",msg:"Escriba o seleccione la fecha de nacimiento",tipval:"D",active:false,mandatory:true},
 		hpetnia:{label:"Grupo Etnico",msg:"Debe seleccionar su etnia, o en su defecto la opción que dice 'ninguna de las anteriores'",tipval:"S",active:false,mandatory:true,list:{source:"etnia",field:"value"}},
 		hptoken:{label:"token",msg:"Token aun no asignado",tipval:"W",active:false,mandatory:true},
-		hpdEstcon:{label:"Estado Conyugal",msg:"Seleccione su estado conyugal",tipval:"S",active:false,mandatory:true,list:{source:"conyugal",field:"value"}},
+		hpdestcon:{label:"Estado Conyugal",msg:"Seleccione su estado conyugal",tipval:"S",active:false,mandatory:true,list:{source:"conyugal",field:"value"}},
 		hpdpaisred:{label:"Pais de recidencia",msg:"Seleccione su pais de residencia si no es Colombia, de lo contrario seleccione que vive en Colombia",tipval:"S",active:false,mandatory:true,list:{source:"paisred",field:"name"}},
 		hpddepred:{label:"Departamento de Residencia",msg:"Seleccione su departamento de residencia",tipval:"S",active:false,mandatory:true,list:{source:"departamentored",field:"name"}},
 		hpdmunred:{label:"Municipio de residencia",msg:"Seleccione su municipio de residencia",tipval:"S",active:false,mandatory:true,list:{source:"municipiored",field:"name"}},
@@ -91,7 +91,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 		hpetipin:{label:"Tipo de institución",msg:"Seleccione el tipo de institución donde estudió",tipval:"S",active:false,mandatory:true,list:{source:"tipoinstitucion",field:"value"}},
 		hpecodin:{label:"Institución donde estudió",msg:"Seleccione la institución donde estudió",tipval:"S",active:false,mandatory:true,list:{source:"institution",field:"name"}},
 		hpetippr:{label:"Tipo de programa que estudió",msg:"Seleccione el tipo de programa",tipval:"S",active:false,mandatory:true,list:{source:"tipoprograma",field:"value"}},
-		hpenompr:{label:"Programa que estudió",msg:"Seleccione el programa que estudió",tipval:"S",active:false,mandatory:true,list:{source:"program",field:"name"}},
+		hpecodpr:{label:"Programa que estudió",msg:"Seleccione el programa que estudió",tipval:"S",active:false,mandatory:true,list:{source:"program",field:"name"}},
 		hpefecgrad:{label:"Fecha de grado",msg:"Seleccione o escriba la fecha de grado",tipval:"D",active:false,mandatory:true},
 		hpenumconv:{label:"Numero de convocatoria",msg:"escriba el numero de la convocatoria con la cual hizo la homologación de sus estudios",tipval:"N",active:false,mandatory:true},
 		hpefecconv:{label:"Fecha de la convocatoria",msg:"Seleccione o escriba la fecha de la convocatoria",tipval:"D",active:false,mandatory:true},
@@ -152,13 +152,13 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 			commonvariable.OptionSetSelected[pdm[4]]={key:''};
 
 			$scope.Study.hpecodin='';
-			$scope.Study.hpenompr='';
+			$scope.Study.hpecodpr='';
 		}
 		else{
 			commonvariable.OptionSetSelected[pdm[1]]={code:'00'};
 			commonvariable.OptionSetSelected[pdm[2]]={code:'000'};
 			$scope.Study.hpecodin='0000';
-			$scope.Study.hpenompr='0000';
+			$scope.Study.hpecodpr='0000';
 			
 			commonvariable.OptionSetSelected[pdm[3]]={code:'0000'};
 			commonvariable.OptionSetSelected[pdm[4]]={code:'0000'};
@@ -296,7 +296,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
   			break;
    		case 2: 
    			$scope.tabsPersonal3.active = true;
-   			$scope.DataPersonalAdd.hpdEstcon=(commonvariable.OptionSetSelected.conyugal!=undefined)?commonvariable.OptionSetSelected.conyugal.key:"";
+   			$scope.DataPersonalAdd.hpdestcon=(commonvariable.OptionSetSelected.conyugal!=undefined)?commonvariable.OptionSetSelected.conyugal.key:"";
    			$scope.DataPersonalAdd.hpdpaisred=(commonvariable.OptionSetSelected.paisred!=undefined)?commonvariable.OptionSetSelected.paisred.numericcode:"";
 			$scope.DataPersonalAdd.hpddepred=(commonvariable.OptionSetSelected.departamentored!=undefined)?commonvariable.OptionSetSelected.departamentored.code:"";
 			$scope.DataPersonalAdd.hpdmunred=(commonvariable.OptionSetSelected.municipiored!=undefined)?commonvariable.OptionSetSelected.municipiored.code:"";
@@ -310,7 +310,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 			$scope.Study.hpetipin=(commonvariable.OptionSetSelected.tipoinstitucion!=undefined)?commonvariable.OptionSetSelected.tipoinstitucion.key:"";
 			$scope.Study.hpecodin=(commonvariable.OptionSetSelected.institution!=undefined)?commonvariable.OptionSetSelected.institution.code:"";
 			$scope.Study.hpetippr=(commonvariable.OptionSetSelected.tipoprograma!=undefined)?commonvariable.OptionSetSelected.tipoprograma.key:"";
-			$scope.Study.hpenompr=(commonvariable.OptionSetSelected.program!=undefined)?commonvariable.OptionSetSelected.program.code:"";
+			$scope.Study.hpecodpr=(commonvariable.OptionSetSelected.program!=undefined)?commonvariable.OptionSetSelected.program.code:"";
   			console.log($scope.Study);
   			break;
   		case 4:
@@ -544,26 +544,35 @@ $scope.validationtype=function(type,value, msg){
  	//data professional
  	
  	HealthProfessional.post($scope.DataPersonal)
-			.$promise.then(function(response){
-				return  response;
-			 });
-	//data professional detail
- 	HealthProfessionalDetail.post($scope.DataPersonalAdd)
-			.$promise.then(function(response){
-				return  response;
-			 });
-	//data professional study
- 	HealthProfessionalStudy.post($scope.Study)
-			.$promise.then(function(response){
-				return  response;
-			 });
-	//data professional service		
- 	HealthProfessionalService.post($scope.obligService)
-			.$promise.then(function(response){
-				return  response;
-			 });
+			.$promise.then(function(responseHP){
+				HealthProfessionalId.get({numdoc:$scope.DataPersonal.hpnumdoc})
+				.$promise.then(function(responseId){
 
- 	
+					$scope.DataPersonalAdd["hpid"]=responseId[0].hpid;
+					$scope.Study["hpid"]=responseId[0].hpid;
+					$scope.obligService["hpid"]=responseId[0].hpid;
+					//data professional detail
+				 	HealthProfessionalDetail.post($scope.DataPersonalAdd)
+							.$promise.then(function(responseAdd){
+								return  responseAdd;
+							 });
+					//data professional study
+				 	HealthProfessionalStudy.post($scope.Study)
+							.$promise.then(function(responseSt){
+								return  responseSt;
+							 });
+					//data professional service		
+				 	HealthProfessionalService.post($scope.obligService)
+							.$promise.then(function(responseSSO){
+								return  responseSSO;
+							 });
+
+				});
+			
+			
+			return  responseHP;
+
+ 	 });
  };
     
 }]);
