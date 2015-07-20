@@ -559,7 +559,7 @@ $scope.validationtype=function(type,value, msg){
 					$scope.DataPersonalAdd["hpid"]=responseId[0].hpid;
 					$scope.Study["hpid"]=responseId[0].hpid;
 					$scope.obligService["hpid"]=responseId[0].hpid;
-					if(responseId.status=="SUCCESS"){
+					if(responseId[0].hpid){
 					//data professional detail
 				 	HealthProfessionalDetail.post($scope.DataPersonalAdd)
 							.$promise.then(function(responseAdd){
@@ -571,7 +571,9 @@ $scope.validationtype=function(type,value, msg){
 											//data professional service		
 										 	HealthProfessionalService.post($scope.obligService)
 													.$promise.then(function(responseSSO){
-														return  responseSSO;
+														if(responseSSO.status=="SUCCESS"){
+															$scope.tokenPresentation();
+														}
 													 });
 										}	
 
@@ -596,7 +598,8 @@ $scope.validationtype=function(type,value, msg){
  $scope.tokenPresentation=function(){
  	$scope.showtoken=true;
  	///send token by email
-	var messageForUser='<h3> Estimado Profesional de Salud : ' + dvalue.name+"</h3>";
+ 	$scope.professionalFullName=$scope.DataPersonal.hppriape+" "+$scope.DataPersonal.hpsegape+" "+$scope.DataPersonal.hpprinom+" "+$scope.DataPersonal.hpsegnom;
+	var messageForUser='<h3> Estimado Profesional de Salud : ' +$scope.professionalFullName+"</h3>";
 	messageForUser+="<br> <h4> El presente correo es informativo y se le envía para notificarle que el proceso de registro se ha realizado exitosamente";
 	messageForUser+="recuerde que usted debe entregar los documentos originales en la oficina de Registro de diplomas ubicada en la Secretaria de salud. </h4>";
 	messageForUser+="<br> Cuando el proceso se encuentre completo serán notificado, también podrá verificar su estado a traves del portal XXX con el codigo de registro  "; 
@@ -609,7 +612,7 @@ $scope.validationtype=function(type,value, msg){
 
 	sendmailservice.post({},
 		{to:$scope.DataPersonalAdd.hpdcorreo,
-		toname:"Profesional - "+dvalue.name,
+		toname:"Profesional - "+$scope.professionalFullName,
 		fromname:'Sistema de Registro de profesional de Salud - Notificacion automatica',
 		subject:'Correo informativo - Notificación de registro de Profesional en Salud',
 		message:messageForUser
