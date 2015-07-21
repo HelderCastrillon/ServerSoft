@@ -21,7 +21,7 @@ ServersoftApi.factory("commonvariable", function () {
 ServersoftApi.factory("HealthProfessional",['$resource','commonvariable', function ($resource,commonvariable) {
 	return $resource( commonvariable.url+"HealthProfessional/:pid", 
 	{pid:'@pid'},
-  { get: { method: "GET"},
+  { get: { method: "GET",isArray: true},
 	post: { method: "POST"},
 	remove: {method:'DELETE'}
   });

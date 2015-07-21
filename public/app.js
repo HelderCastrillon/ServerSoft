@@ -14,6 +14,10 @@ appServersoft.config(function($routeProvider,$translateProvider) {
 	  $routeProvider.when('/help', {
 		  	templateUrl: "/modules/help/helpView.html",
 		  	controller: "helpController"
+		  });
+	  $routeProvider.when('/adminaccess', {
+		  	templateUrl: "/modules/administrator/administratorView.html",
+		  	controller: "administratorController"
 		  });	 
 	$routeProvider.otherwise({
 	        redirectTo: '/index'
