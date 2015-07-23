@@ -10,7 +10,7 @@ var ServersoftApi = angular.module("ServersoftApi", ['ngResource']);
 //Create all common variables of the apps 
 ServersoftApi.factory("commonvariable", function () {
 	var Vari={
-			url:"http://localhost:5433/api/",
+			url:"http://192.168.1.42:5433/api/",
 			urlemail:"http://190.146.87.62/upload/sendmail.php",
 			OptionSetSelected:[]
 			};
@@ -24,6 +24,13 @@ ServersoftApi.factory("HealthProfessional",['$resource','commonvariable', functi
   { get: { method: "GET",isArray: true},
 	post: { method: "POST"},
 	remove: {method:'DELETE'}
+  });
+}]);
+
+ServersoftApi.factory("FindHealthProfessional",['$resource','commonvariable', function ($resource,commonvariable) {
+	return $resource( commonvariable.url+"HealthProfessional/find/:value", 
+	{value:'@value'},
+  { get: { method: "GET",isArray: true}
   });
 }]);
 

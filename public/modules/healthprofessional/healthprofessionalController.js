@@ -1,4 +1,4 @@
-appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable','$modal','HealthProfessional','HealthProfessionalDetail','HealthProfessionalStudy','HealthProfessionalService','HealthProfessionalId','md5', 'sendmailservice', function($scope,$filter,commonvariable,$modal,HealthProfessional,HealthProfessionalDetail,HealthProfessionalStudy,HealthProfessionalService,HealthProfessionalId,md5,sendmailservice){
+appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable','$modal','HealthProfessional','FindHealthProfessional','HealthProfessionalDetail','HealthProfessionalStudy','HealthProfessionalService','HealthProfessionalId','md5', 'sendmailservice', function($scope,$filter,commonvariable,$modal,HealthProfessional,FindHealthProfessional,HealthProfessionalDetail,HealthProfessionalStudy,HealthProfessionalService,HealthProfessionalId,md5,sendmailservice){
 	
 	var $translate = $filter('translate');
 
@@ -513,6 +513,23 @@ $scope.validationtype=function(type,value, msg){
  			});
 
  };
+
+///find professional if there exist 94489321
+
+$scope.findProfessional=function(){
+
+	FindHealthProfessional.get({value:$scope.DataPersonal.hpnumdoc})
+	.$promise.then(function(dataProfessional){
+
+			$scope.DataPersonal.hppriape=dataProfessional[0].hppriape;
+			$scope.DataPersonal.hpsegape=dataProfessional[0].hpsegape;
+			$scope.DataPersonal.hpprinom=dataProfessional[0].hpprinom;
+			$scope.DataPersonal.hpsegnom=dataProfessional[0].hpsegnom;
+			$scope.DataPersonal.hpfecnac=dataProfessional[0].hpfecnac;
+
+	});
+
+}
 
 ///////////
  ///modal

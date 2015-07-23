@@ -53,7 +53,7 @@
 				</div>
 				<div class="col-md-6 form-group {{ValidationField.hpnumdoc.active?'has-error':''}}">
 				   	<label class="control-label"  for="numdoc">{{ 'PROF_DOC' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonal.hpnumdoc" id="numdoc" required=""/>
+		    		<input type="text" class="form-control" ng-model="DataPersonal.hpnumdoc" ng-blur="findProfessional()" id="numdoc" required=""/>
 				</div>
 			</div>
 			<div class="row">
