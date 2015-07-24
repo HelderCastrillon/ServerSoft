@@ -45,7 +45,7 @@ ServersoftApi.factory("HealthProfessionalId",['$resource','commonvariable', func
 ServersoftApi.factory("HealthProfessionalDetail",['$resource','commonvariable', function ($resource,commonvariable) {
 	return $resource( commonvariable.url+"HealthProfessionalDetail/:pid", 
 	{pid:'@pid'},
-  { get: { method: "GET"},
+  { get: { method: "GET",isArray: true},
 	post: { method: "POST"},
 	remove: {method:'DELETE'}
   });
@@ -54,7 +54,7 @@ ServersoftApi.factory("HealthProfessionalDetail",['$resource','commonvariable', 
 ServersoftApi.factory("HealthProfessionalStudy",['$resource','commonvariable', function ($resource,commonvariable) {
 	return $resource( commonvariable.url+"ProfessionalStudy/:pid", 
 	{pid:'@pid'},
-  { get: { method: "GET"},
+  { get: { method: "GET",isArray: true},
 	post: { method: "POST"},
 	remove: {method:'DELETE'}
   });
@@ -63,7 +63,7 @@ ServersoftApi.factory("HealthProfessionalStudy",['$resource','commonvariable', f
 ServersoftApi.factory("HealthProfessionalService",['$resource','commonvariable', function ($resource,commonvariable) {
 	return $resource( commonvariable.url+"ProfessionalSSO/:pid", 
 	{pid:'@pid'},
-  { get: { method: "GET"},
+  { get: { method: "GET",isArray: true},
 	post: { method: "POST"},
 	remove: {method:'DELETE'}
   });

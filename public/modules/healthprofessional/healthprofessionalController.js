@@ -63,6 +63,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 
 
 	};
+
 $scope.initData();
 ///////////////////////////////////////////////////////////////////
 
@@ -290,14 +291,17 @@ $scope.initData();
   			$scope.tabsPersonal1.active = true;
   			break;
   		case 1:
-  			$scope.tabsPersonal2.active = true;
-  			$scope.DataPersonal.hptipdoc=(commonvariable.OptionSetSelected.tipdoc!=undefined)?commonvariable.OptionSetSelected.tipdoc.key:"";
-  			$scope.DataPersonal.hpsexo=(commonvariable.OptionSetSelected.sexo!=undefined)?commonvariable.OptionSetSelected.sexo.key:"";
-  			$scope.DataPersonal.hpetnia=(commonvariable.OptionSetSelected.etnia!=undefined)?commonvariable.OptionSetSelected.etnia.key:"";
-  			$scope.DataPersonal.hpdepnac=(commonvariable.OptionSetSelected.departamento!=undefined)?commonvariable.OptionSetSelected.departamento.code:"";
-			$scope.DataPersonal.hpmunnac=(commonvariable.OptionSetSelected.municipio!=undefined)?commonvariable.OptionSetSelected.municipio.code:"";
-			$scope.DataPersonal.hppais=(commonvariable.OptionSetSelected.pais!=undefined)?commonvariable.OptionSetSelected.pais.numericcode:"";
-  			console.log($scope.DataPersonal);
+  			$scope.findProfessional();
+  			if($scope.ifsubreg==false||$scope.ifsubreg==undefined){
+	  			$scope.tabsPersonal2.active = true;
+	  			$scope.DataPersonal.hptipdoc=(commonvariable.OptionSetSelected.tipdoc!=undefined)?commonvariable.OptionSetSelected.tipdoc.key:"";
+	  			$scope.DataPersonal.hpsexo=(commonvariable.OptionSetSelected.sexo!=undefined)?commonvariable.OptionSetSelected.sexo.key:"";
+	  			$scope.DataPersonal.hpetnia=(commonvariable.OptionSetSelected.etnia!=undefined)?commonvariable.OptionSetSelected.etnia.key:"";
+	  			$scope.DataPersonal.hpdepnac=(commonvariable.OptionSetSelected.departamento!=undefined)?commonvariable.OptionSetSelected.departamento.code:"";
+				$scope.DataPersonal.hpmunnac=(commonvariable.OptionSetSelected.municipio!=undefined)?commonvariable.OptionSetSelected.municipio.code:"";
+				$scope.DataPersonal.hppais=(commonvariable.OptionSetSelected.pais!=undefined)?commonvariable.OptionSetSelected.pais.numericcode:"";
+	  			console.log($scope.DataPersonal);
+	  		}
   			break;
    		case 2: 
    			$scope.tabsPersonal3.active = true;
@@ -520,14 +524,28 @@ $scope.findProfessional=function(){
 
 	FindHealthProfessional.get({value:$scope.DataPersonal.hpnumdoc})
 	.$promise.then(function(dataProfessional){
+			if(dataProfessional.length>0){
+				HealthProfessionalStudy.get({pid:dataProfessional[0].hpid})
+				.$promise.then(function(dataStudy){
+					if(dataStudy[0].hpeactoadm){
+						$scope.DataPersonal.hppriape=dataProfessional[0].hppriape;
+						$scope.DataPersonal.hpsegape=dataProfessional[0].hpsegape;
+						$scope.DataPersonal.hpprinom=dataProfessional[0].hpprinom;
+						$scope.DataPersonal.hpsegnom=dataProfessional[0].hpsegnom;
+						$scope.DataPersonal.hpfecnac=dataProfessional[0].hpfecnac;
+					}
+					else{
+						 	$scope.addAlert("Estimado "+dataProfessional[0].hppriape+" "+dataProfessional[0].hpsegape+" "+dataProfessional[0].hpprinom+" "+dataProfessional[0].hpsegnom+" Usted ya cuenta con un registro pediente, por favor dirigase a la pagina de inicio si desea verificar su registro, utilizando el codigo: "+dataProfessional[0].hptoken+" Gracias.");
+  							$scope.openmodal();
+  							$scope.ifsubreg=true;
+						}
+				});
+			}
 
-			$scope.DataPersonal.hppriape=dataProfessional[0].hppriape;
-			$scope.DataPersonal.hpsegape=dataProfessional[0].hpsegape;
-			$scope.DataPersonal.hpprinom=dataProfessional[0].hpprinom;
-			$scope.DataPersonal.hpsegnom=dataProfessional[0].hpsegnom;
-			$scope.DataPersonal.hpfecnac=dataProfessional[0].hpfecnac;
+
 
 	});
+
 
 }
 
@@ -547,7 +565,11 @@ $scope.findProfessional=function(){
       resolve: {
         alerts: function () {
           return $scope.alerts;
+        },
+        ifsubreg: function(){
+        	return $scope.ifsubreg;	
         }
+
       }
     });
 
@@ -646,8 +668,8 @@ $scope.findProfessional=function(){
 }]);
 
 
-appServersoft.controller('ModalInstanceAlert', function ($scope, $modalInstance, alerts) {
-
+appServersoft.controller('ModalInstanceAlert', function ($scope, $modalInstance, alerts,ifsubreg) {
+	$scope.ifsubreg=ifsubreg;
   $scope.alerts = alerts;
    $scope.ok = function () {
     $modalInstance.close();
