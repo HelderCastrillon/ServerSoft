@@ -81,16 +81,10 @@
 				   	<label for="sexo" class="{{ValidationField.hpsexo.active?'label label-danger':'control-label'}}">{{ 'PROF_SEXO' | translate }} </label>
 		    		<hs-optionlist namelist='sexo'></hs-optionlist>
 				</div>
-				<div class="col-md-6">
-				   	<label for="fecnac" class="{{ValidationField.hpfecnac.active?'label label-danger':'control-label'}}">{{ 'PROF_FECNAC' | translate }} </label>
-		    		<p class="input-group">
-		               <input type="text" class="form-control" id="fecnac" datepicker-popup="yyyy-MM-dd" ng-model="DataPersonal.hpfecnac" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
-		              <span class="input-group-btn">
-		                <button type="button" class="btn btn-primary" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-		              </span>
-		            </p>
-
-				</div>
+				<div class="col-md-6 {{ValidationField.hpfecnac.active?'has-error':''}}">
+				   	<label for="fecnac" class="">{{ 'PROF_FECNAC' | translate }} (AAAA-MM-DD) </label>
+		    		<input type="text" class="form-control" id="fecnac" ng-model="DataPersonal.hpfecnac" onkeyup="mascara(this,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD ' />
+		         </div>
 			</div>
     		<div class="row">
 				<div class="col-md-6">
@@ -226,15 +220,10 @@
 					    	<button type="button" ng-click="estudios(2,'paisin,departamentoin,municipioin,institution,program')" class="btn {{Study.hpeorigtit==1?' btn-default':' btn-primary'}}">en el exterior</button>
 						</div>
 					</div>
-					<div class="col-md-6">
-					   	<label   for="fecgrad" class="{{ValidationField.hpefecgrad.active?'label label-danger':'control-label'}}">{{ 'PROF_FEC_GRADO' | translate }} </label>
-			    		<p class="input-group">
-			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="Study.hpefecgrad" is-open="opendDateGrad" max-date="currentDate" ng-required="true" close-text="Close" id="fecgrad" />
-			              <span class="input-group-btn">
-			                <button type="button" class="btn btn-primary" ng-click="openGrad($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-			              </span>
-			            </p>
-
+					<div class="col-md-6 {{ValidationField.hpefecgrad.active?'has-error':''}}">
+					   	<label   for="fecgrad">{{ 'PROF_FEC_GRADO' | translate }} (AAAA-MM-DD) </label>
+			    		<input type="text" class="form-control" ng-model="Study.hpefecgrad"  id="fecgrad" onkeyup="mascara(this,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD ' />
+			             
 					</div>		  			 
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
@@ -353,24 +342,14 @@
 					</div>					
 				</div>
 				<div class="row" ng-show="obligService.hpsobliga==1?true:false">
-					<div class="col-md-6">
-					   	<label class="{{ValidationField.phsfecini.active?'label label-danger':'control-label'}}"  for="fecini">{{ 'PROF_SER_FECINI' | translate }} </label>
-			    		<p class="input-group">
-			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="obligService.phsfecini" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
-			              <span class="input-group-btn">
-			                <button type="button" class="btn btn-primary" ng-click="openconv($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-			              </span>
-			            </p>
+					<div class="col-md-6 {{ValidationField.phsfecini.active?'has-error':''}}">
+					   	<label class=""  for="fecini">{{ 'PROF_SER_FECINI' | translate }} (AAAA-MM-DD) </label>
+			    		 <input type="text" class="form-control" ng-model="obligService.phsfecini" onkeyup="mascara(this,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD ' />			              
 
 					</div>
 					<div class="col-md-6" ng-show="obligService.hpsobliga==1?true:false">
-					   	<label class="{{ValidationField.hpsfecfin.active?'label label-danger':'control-label'}}"  for="fecfin">{{ 'PROF_SER_FECFIN' | translate }} </label>
-			    		<p class="input-group">
-			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="obligService.hpsfecfin" is-open="opendDate" max-date="currentDate" ng-required="true" close-text="Close" />
-			              <span class="input-group-btn">
-			                <button type="button" class="btn btn-primary" ng-click="openconv($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-			              </span>
-			            </p>
+					   	<label class="{{ValidationField.hpsfecfin.active?'label label-danger':'control-label'}}"  for="fecfin">{{ 'PROF_SER_FECFIN' | translate }} (AAAA-MM-DD)</label>
+			    		<input type="text" class="form-control" ng-model="obligService.hpsfecfin" onkeyup="mascara(this,'-',[4,2,2],true)" placeholder='Escribe fecha  con formato AAAA-MM-DD ' />          
 
 					</div>
 				</div>

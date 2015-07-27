@@ -241,9 +241,9 @@ $scope.initData();
   $scope.today = function() {
     datetoday = new Date();
     $scope.currentDate=datetoday.getFullYear()+"-"+(datetoday.getMonth()<=9?"0"+datetoday.getMonth():datetoday.getMonth())+"-"+(datetoday.getDate()<=9?"0"+datetoday.getDate():datetoday.getDate());
-  	$scope.DataPersonal.hpfecnac=$scope.currentDate;
-  	$scope.Study.hpefecconv=$scope.currentDate;
-  	$scope.Study.hpefecgrad=$scope.currentDate;
+  	//$scope.DataPersonal.hpfecnac=$scope.currentDate;
+  	//$scope.Study.hpefecconv=$scope.currentDate;
+  	//$scope.Study.hpefecgrad=$scope.currentDate;
   };
   $scope.today();
 
@@ -370,6 +370,21 @@ $scope.closeAlert = function(index) {
   	}
 
   };
+
+  $scope.dateformat=function(value){
+
+  	if(value)
+  		var nvalue=value.split('-');
+  	else
+  		nvalue="";
+  	
+  	var initval='    -  -  ';
+
+  	if(nvalue[1]=="")
+
+  	retVal=nvalue+initval.substring(nvalue.length,10-nvalue.length);
+
+  }
 
 $scope.validationtype=function(type,value, msg){
 	var alertini=$scope.alerts.length;
