@@ -55,7 +55,7 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 			hpsdeppr:"",
 			hpsmunpr:"",
 			hpspaispr:"",
-			phsfecini:"",
+			hpsfecini:"",
 			hpsfecfin:"",
 			hpsmodal:"",
 			hpsprog:""
@@ -79,7 +79,7 @@ $scope.initData();
 		hpdepnac:{label:"Departamento donde nació",msg:"Seleccione su departamento de nacimiento",tipval:"S",active:false,mandatory:true,list:{source:"departamento",field:"name"}},
 		hpmunnac:{label:"Municipio donde nació",msg:"Seleccione su municipio de nacimiento",tipval:"S",active:false,mandatory:true,list:{source:"municipio",field:"name"}},
 		hppais:{label:"Pais donde nació",msg:"Seleccione su pais de nacimiento si no es colombiano, de lo contrario seleccione que es colombiano",tipval:"S",active:false,mandatory:true,list:{source:"pais",field:"name"}},
-		hpfecnac:{label:"Fecha de nacimiento",msg:"Escriba o seleccione la fecha de nacimiento",tipval:"D",active:false,mandatory:true},
+		hpfecnac:{label:"Fecha de nacimiento",msg:"Escriba una fecha de nacimiento valida",tipval:"DL",active:false,mandatory:true},
 		hpetnia:{label:"Grupo Etnico",msg:"Debe seleccionar su etnia, o en su defecto la opción que dice 'ninguna de las anteriores'",tipval:"S",active:false,mandatory:true,list:{source:"etnia",field:"value"}},
 		hptoken:{label:"token",msg:"Token aun no asignado",tipval:"W",active:false,mandatory:true},
 		hpdestcon:{label:"Estado Conyugal",msg:"Seleccione su estado conyugal",tipval:"S",active:false,mandatory:true,list:{source:"conyugal",field:"value"}},
@@ -110,8 +110,8 @@ $scope.initData();
 		hpsdeppr:{label:"Departamento",msg:"Seleccione el departamento donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"departamentoss",field:"name"}},
 		hpsmunpr:{label:"Municipio",msg:"Seleccione el municipio de lugar donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"municipioss",field:"name"}},
 		hpspaispr:{label:"Pais",msg:"Seleccione el pais donde realizó su Servicio Social Obligatorio, si es en Colombia debe selecciona 'en Colombia'",tipval:"S",active:false,mandatory:true,list:{source:"paisss",field:"name"}},
-		phsfecini:{label:"Fecha inicio",msg:"Seleccione o escriba la fecha en que inició su Servicio Social Obligatorio",tipval:"D",active:false,mandatory:true},
-		hpsfecfin:{label:"Fecha fin",msg:"Seleccione o escriba la fecha en que finalizó su Servicio Social Obligatorio",tipval:"D",active:false,mandatory:true},
+		hpsfecini:{label:"Fecha inicio",msg:"escriba la fecha en que inició su Servicio Social Obligatorio",tipval:"D",active:false,mandatory:true},
+		hpsfecfin:{label:"Fecha fin",msg:"Escriba la fecha en que finalizó su Servicio Social Obligatorio, recuerda que debe ser mayor a la inicial",tipval:"DA",active:false,mandatory:true},
 		hpsmodal:{label:"Modalidad",msg:"Seleccione la modalidad n que realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"modalidad",field:"value"}},
 		hpsprog:{label:"Programa",msg:"Seleccione o escriba un programa con el cual realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"programa",field:"value"}}
 	};
@@ -190,7 +190,7 @@ $scope.initData();
 			commonvariable.OptionSetSelected[pdm[0]]={numericcode:''};
 			commonvariable.OptionSetSelected[pdm[1]]={code:''};
 			commonvariable.OptionSetSelected[pdm[2]]={code:''};
-			$scope.obligService.phsfecini='',
+			$scope.obligService.hpsfecini='',
 			$scope.obligService.hpsfecfin='',
 			$scope.obligService.hpsmodal='',
 			$scope.obligService.hpsprog=''	
@@ -204,7 +204,7 @@ $scope.initData();
 			commonvariable.OptionSetSelected[pdm[2]]={code:'000'};
 			commonvariable.OptionSetSelected[pdm[3]]={key:'0'};
 			commonvariable.OptionSetSelected[pdm[4]]={key:'0'};
-			$scope.obligService.phsfecini='1900-01-01',
+			$scope.obligService.hpsfecini='1900-01-01',
 			$scope.obligService.hpsfecfin='1900-01-01',
 			$scope.obligService.hpsmodal='0',
 			$scope.obligService.hpsprog='0'	
@@ -229,7 +229,7 @@ $scope.initData();
 			commonvariable.OptionSetSelected[pdm[0]]={numericcode:''};
 			commonvariable.OptionSetSelected[pdm[1]]={code:'00'};
 			commonvariable.OptionSetSelected[pdm[2]]={code:'000'};
-			$scope.obligService.phsfecini='1900-01-01',
+			$scope.obligService.hpsfecini='1900-01-01',
 			$scope.obligService.hpsfecfin='1900-01-01'
 
 		}
@@ -371,20 +371,41 @@ $scope.closeAlert = function(index) {
 
   };
 
-  $scope.dateformat=function(value){
 
-  	if(value)
-  		var nvalue=value.split('-');
-  	else
-  		nvalue="";
-  	
-  	var initval='    -  -  ';
-
-  	if(nvalue[1]=="")
-
-  	retVal=nvalue+initval.substring(nvalue.length,10-nvalue.length);
-
-  }
+ $scope.maskDate=function (value,sep,pat,nums){
+	val = value;
+	largo = val.length
+	val = val.split(sep)
+	val2 = ''
+	for(r=0;r<val.length;r++){
+		val2 += val[r]	
+	}
+	if(nums){
+		for(z=0;z<val2.length;z++){
+			if(isNaN(val2.charAt(z))){
+				letra = new RegExp(val2.charAt(z),"g")
+				val2 = val2.replace(letra,"")
+			}
+		}
+	}
+	val = ''
+	val3 = new Array()
+	for(s=0; s<pat.length; s++){
+		val3[s] = val2.substring(0,pat[s])
+		val2 = val2.substr(pat[s])
+	}
+	for(q=0;q<val3.length; q++){
+		if(q ==0){
+			val = val3[q]
+		}
+		else{
+			if(val3[q] != ""){
+				val += sep + val3[q]
+				}
+		}
+	}
+	return val;
+}
 
 $scope.validationtype=function(type,value, msg){
 	var alertini=$scope.alerts.length;
@@ -403,6 +424,22 @@ $scope.validationtype=function(type,value, msg){
 			if(!/^([0-9])*$/.test(value) || (value=="")|| (value==undefined)){
 				$scope.addAlert(msg);
 			}
+		break;
+		case 'DL'://numeros
+			var fechaArr = value.split('-');
+		 	var ano = fechaArr[0];
+			var datetoday = new Date();
+    		var currentYear=datetoday.getFullYear()
+ 			if(ano>currentYear-12)
+				$scope.addAlert(msg);	
+		break;
+		case 'DA'://numeros
+			var fechaArr1 = $scope.obligService.hpsfecini.split('-');
+		 	var Fecini = new Date(fechaArr1[0], fechaArr1[1] + 1, fechaArr1[2]);//
+		 	var fechaArr2 = $scope.obligService.hpsfecfin.split('-');
+		 	var Fecfin = new Date(fechaArr2[0], fechaArr2[1] + 1, fechaArr2[2]);//
+			if(Fecini>=Fecfin)
+				$scope.addAlert(msg);
 		break;
 		case 'D'://fecha
 			

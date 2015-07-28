@@ -83,7 +83,7 @@
 				</div>
 				<div class="col-md-6 {{ValidationField.hpfecnac.active?'has-error':''}}">
 				   	<label for="fecnac" class="">{{ 'PROF_FECNAC' | translate }} (AAAA-MM-DD) </label>
-		    		<input type="text" class="form-control" id="fecnac" ng-model="DataPersonal.hpfecnac" onkeyup="mascara(this,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD ' />
+		    		<input type="text" class="form-control" id="fecnac" ng-model="DataPersonal.hpfecnac" ng-change="DataPersonal.hpfecnac=maskDate(DataPersonal.hpfecnac,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD '  />
 		         </div>
 			</div>
     		<div class="row">
@@ -222,7 +222,7 @@
 					</div>
 					<div class="col-md-6 {{ValidationField.hpefecgrad.active?'has-error':''}}">
 					   	<label   for="fecgrad">{{ 'PROF_FEC_GRADO' | translate }} (AAAA-MM-DD) </label>
-			    		<input type="text" class="form-control" ng-model="Study.hpefecgrad"  id="fecgrad" onkeyup="mascara(this,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD ' />
+			    		<input type="text" class="form-control" ng-model="Study.hpefecgrad"  id="fecgrad" ng-change="Study.hpefecgrad=maskDate(Study.hpefecgrad,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD ' />
 			             
 					</div>		  			 
 				</div>
@@ -275,14 +275,10 @@
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
-					<div class="col-md-6">
-					   	<label class="{{ValidationField.hpefecconv.active?'label label-danger':'control-label'}}"  for="fecnac">{{ 'PROF_FEC_CONV' | translate }} </label>
-			    		<p class="input-group">
-			               <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="Study.hpefecconv" is-open="opendDateConv" max-date="currentDate" ng-required="true" close-text="Close" />
-			              <span class="input-group-btn">
-			                <button type="button" class="btn btn-primary" ng-click="openconv($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-			              </span>
-			            </p>
+					<div class="col-md-6 {{ValidationField.hpefecconv.active?'has-error':''}}">
+					   	<label   for="fecnac">{{ 'PROF_FEC_CONV' | translate }} </label>
+			    		<input type="text" class="form-control"  ng-model="Study.hpefecconv" ng-change="Study.hpefecgrad=maskDate(Study.hpefecgrad,'-',[4,2,2],true)" />
+			    
 
 					</div>
 					<div class="col-md-6 {{ValidationField.hpetitequi.active?'has-error':''}}">
@@ -342,14 +338,14 @@
 					</div>					
 				</div>
 				<div class="row" ng-show="obligService.hpsobliga==1?true:false">
-					<div class="col-md-6 {{ValidationField.phsfecini.active?'has-error':''}}">
+					<div class="col-md-6 {{ValidationField.hpsfecini.active?'has-error':''}}">
 					   	<label class=""  for="fecini">{{ 'PROF_SER_FECINI' | translate }} (AAAA-MM-DD) </label>
-			    		 <input type="text" class="form-control" ng-model="obligService.phsfecini" onkeyup="mascara(this,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD ' />			              
+			    		 <input type="text" class="form-control" ng-model="obligService.hpsfecini" ng-change="Study.hpefecgrad=maskDate(Study.hpefecgrad,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD ' />			              
 
 					</div>
-					<div class="col-md-6" ng-show="obligService.hpsobliga==1?true:false">
-					   	<label class="{{ValidationField.hpsfecfin.active?'label label-danger':'control-label'}}"  for="fecfin">{{ 'PROF_SER_FECFIN' | translate }} (AAAA-MM-DD)</label>
-			    		<input type="text" class="form-control" ng-model="obligService.hpsfecfin" onkeyup="mascara(this,'-',[4,2,2],true)" placeholder='Escribe fecha  con formato AAAA-MM-DD ' />          
+					<div class="col-md-6 {{ValidationField.hpsfecfin.active?'has-error':''}}" ng-show="obligService.hpsobliga==1?true:false">
+					   	<label  for="fecfin">{{ 'PROF_SER_FECFIN' | translate }} (AAAA-MM-DD)</label>
+			    		<input type="text" class="form-control" ng-model="obligService.hpsfecfin" ng-change="Study.hpefecgrad=maskDate(Study.hpefecgrad,'-',[4,2,2],true)" placeholder='Escribe fecha  con formato AAAA-MM-DD '  />          
 
 					</div>
 				</div>
