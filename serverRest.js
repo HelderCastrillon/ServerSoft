@@ -82,6 +82,12 @@ app.get('/api/HealthProfessionalId/:numdoc', function(request, response) {
 	mainController.ConnectionController(PMquery,response);
 });
 
+//get id professional saved
+app.get('/api/HealthProfessional/token/:numdoc/:ntoken', function(request, response) {
+	var PMquery=profManager.GetByToken(request.params.numdoc,request.params.ntoken);
+	mainController.ConnectionController(PMquery,response);
+});
+
 //Save professional
 app.post('/api/HealthProfessional', function(request, response) {
 	var PMquery=profManager.Post(request.body);		

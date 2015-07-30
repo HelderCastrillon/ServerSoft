@@ -374,8 +374,21 @@ $scope.closeAlert = function(index) {
 
  $scope.maskDate=function (value,sep,pat,nums){
 	val = value;
-	largo = val.length
+	largo = val.length;
+	var preval=val;
 	val = val.split(sep)
+
+	if(val.length==2){
+		var value=val[1].substring(0,2);
+		if(value*1>12)
+			return preval.substring(0,preval.length-1);
+	}
+	if(val.length==3){
+		var value=val[2].substring(0,2);
+		if(value*1>31)
+			return preval.substring(0,preval.length-1);
+	}
+	
 	val2 = ''
 	for(r=0;r<val.length;r++){
 		val2 += val[r]	
@@ -394,6 +407,7 @@ $scope.closeAlert = function(index) {
 		val3[s] = val2.substring(0,pat[s])
 		val2 = val2.substr(pat[s])
 	}
+
 	for(q=0;q<val3.length; q++){
 		if(q ==0){
 			val = val3[q]
@@ -404,6 +418,7 @@ $scope.closeAlert = function(index) {
 				}
 		}
 	}
+
 	return val;
 }
 
@@ -637,7 +652,9 @@ $scope.findProfessional=function(){
  $scope.sendforms=function(){
 
  	//generating md5 for token
- 	$scope.DataPersonal.hptoken=md5.createHash($scope.DataPersonal.hpnumdoc || '');
+ 	datetoday = new Date();
+   	//
+ 	$scope.DataPersonal.hptoken=md5.createHash($scope.DataPersonal.hpnumdoc + datetoday.getTime() || '');
  	$scope.DataPersonal.hptoken=$scope.DataPersonal.hptoken.substring(0, 5);
  	$scope.tokenForUser=$scope.DataPersonal.hptoken;
  	//data professional

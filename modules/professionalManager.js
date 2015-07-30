@@ -40,6 +40,11 @@ Get: function (pid,option) {
 GetId: function (numdoc){
    return ("SELECT max(hpid) as hpid  FROM hphealthprofessional where hpnumdoc='"+numdoc+"'"); 
 },
+//get by token
+GetByToken: function (numdoc, ntoken){
+   return ("select * from hphealthprofessional inner join hpstudyprofessional on hpstudyprofessional.hpid=hphealthprofessional.hpid where  hphealthprofessional.hpnumdoc='"+numdoc+"' and hptoken='"+ntoken+"' limit 1"); 
+},
+
 
 //update professional in Db
 Put: function (idProfessional,CurrentProfessional) {
