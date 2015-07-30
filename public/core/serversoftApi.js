@@ -21,7 +21,7 @@ ServersoftApi.factory("commonvariable", function () {
 ServersoftApi.factory("HealthProfessional",['$resource','commonvariable', function ($resource,commonvariable) {
 	return $resource( commonvariable.url+"HealthProfessional/:pid", 
 	{pid:'@pid'},
-  { get: { method: "GET",isArray: true},
+  	{get: { method: "GET",isArray: true},
 	post: { method: "POST"},
 	remove: {method:'DELETE'}
   });
@@ -85,6 +85,17 @@ ServersoftApi.factory("CountryList",['$resource','commonvariable', function ($re
   { get: { method: "GET",isArray: true}
   });
 }]);
+
+ServersoftApi.factory("Token",['$resource','commonvariable', function ($resource,commonvariable) {
+	return $resource(commonvariable.url+"HealthProfessional/token/:numdoc/:ntoken", 
+	{numdoc:'@numdoc',
+	ntoken:'@ntoken'},
+  { get: { method: "GET",isArray: true}
+  });
+}]);
+
+
+
 
 ServersoftApi.factory("sendmailservice",['$resource','commonvariable', function ($resource,commonvariable) {
 	return $resource( commonvariable.urlemail, 

@@ -26,23 +26,32 @@
 	  </div>
 	  <div class="col-sm-7">
     <div class="well well-lg">
-    <div>
+    <div ng-hide="consulted">
         <h4 class="text-center">Formulario de Consulta</h4>
      <br>
       <form>
 		  <div class="form-group">
 		    <label for="document">Documento de identificación</label>
-		    <input type="text" class="form-control" id="document" placeholder="Solo numeros ejemplo: 1062891765 ">
+		    <input type="text" class="form-control" id="document" ng-model="numdoc" placeholder="Solo numeros ejemplo: 1062891765 ">
 		  </div>
 		  <div class="form-group">
 		    <label for="code">Codigo de registro(5 Digitos)</label>
-		    <input type="text" class="form-control" id="code" placeholder="ejemplo: X4W5t">
+		    <input type="text" class="form-control" id="code" ng-model="numtoken" placeholder="ejemplo: X4W5t">
 		  </div>
 		  <br>
-		  		<button ng-click="" class="btn btn-primary" role="button">Consultar</button>
+		  		<button ng-click="getToken()" class="btn btn-primary" role="button">Consultar</button>
       	</form>
       	
      </div>
+      <div ng-show="consulted" class="text-center">
+          <div class="alert alert-{{joinStatus}}" role="alert">
+            <h3>{{fullName}}</h3>
+            <h4>{{join}}</h4>
+            <br>
+            <br>
+            <button ng-click="return()" class="btn btn-{{joinStatus}}">Regresar</button>
+          </div>
+      </div>
     </div>
   </div>
 	</div>	 
