@@ -29,7 +29,7 @@ Get: function (pid,option) {
 	     return ("SELECT * FROM hphealthprofessional where hpid="+pid);
            break;
 	case 'name':
-		return ("SELECT * FROM hphealthprofessional where hpnumdoc||hppriape||hpsegape||hpprinom||hpsegnom ilike '%"+pid+"%';");
+		return ("SELECT * FROM hphealthprofessional where hpnumdoc||hppriape||hpsegape||hpprinom||hpsegnom ilike '%"+pid+"%' order by hpid desc limit 1;");
             break
       default:
             return ("SELECT * FROM hphealthprofessional");

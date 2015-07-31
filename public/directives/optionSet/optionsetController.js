@@ -21,6 +21,7 @@ appServersoft.controller("hsDropdownOptionSetController", ['$scope','CountryList
 			 })};
 	$scope.onSelect = function ($item, $model, $label) {
 			commonvariable.OptionSetSelected[$scope.tittleoption]=$item;
+			 $label= $label+"xxx";
 		   };
 
 }]);
