@@ -27,7 +27,7 @@ GetMunicipality: function (name, department) {
 //get Institution of education
 GetInstitution: function (name, municipality) {
       if(name)
-            return ("SELECT hpinstitutions.code, trim(hpinstitutions.name), state, principal, type, sector, municipio  FROM hpinstitutions inner join municipality on municipality.name=municipio  where hpinstitutions.name ilike '%"+name+"%' and municipality.code = '"+municipality+"' limit 10");
+            return ("SELECT hpinstitutions.code, trim(hpinstitutions.name) as name, state, principal, type, sector, municipio  FROM hpinstitutions inner join municipality on municipality.name=municipio  where hpinstitutions.name ilike '%"+name+"%' and municipality.code = '"+municipality+"' limit 10");
       else
             return "SELECT hpinstitutions.code, trim(hpinstitutions.name) as name, state, principal, type, sector, municipio  FROM hpinstitutions inner join municipality on municipality.name=municipio  where municipality.code ='"+municipality+"'";
       },

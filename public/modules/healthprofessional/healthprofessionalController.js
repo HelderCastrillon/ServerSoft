@@ -187,13 +187,16 @@ $scope.initData();
 			commonvariable.OptionSetSelected['sso']={key:tip,value:"SI"};
 
 			$scope.obligService.hpstiplug='';
-			commonvariable.OptionSetSelected[pdm[0]]={numericcode:''};
+			commonvariable.OptionSetSelected['ssolugar']={key:tip,value:"COLOMBIA"};
+			commonvariable.OptionSetSelected[pdm[0]]={numericcode:'170', name:'COLOMBIA'};
 			commonvariable.OptionSetSelected[pdm[1]]={code:''};
 			commonvariable.OptionSetSelected[pdm[2]]={code:''};
-			$scope.obligService.hpsfecini='',
-			$scope.obligService.hpsfecfin='',
-			$scope.obligService.hpsmodal='',
-			$scope.obligService.hpsprog=''	
+			commonvariable.OptionSetSelected[pdm[3]]={key:'0'};
+			commonvariable.OptionSetSelected[pdm[4]]={key:'0'};
+			$scope.obligService.hpsfecini='';
+			$scope.obligService.hpsfecfin='';
+			$scope.obligService.hpsmodal='';
+			$scope.obligService.hpsprog='';	
 		}
 		else{
 			commonvariable.OptionSetSelected['sso']={key:tip,value:"NO"};
@@ -204,10 +207,10 @@ $scope.initData();
 			commonvariable.OptionSetSelected[pdm[2]]={code:'000'};
 			commonvariable.OptionSetSelected[pdm[3]]={key:'0'};
 			commonvariable.OptionSetSelected[pdm[4]]={key:'0'};
-			$scope.obligService.hpsfecini='1900-01-01',
-			$scope.obligService.hpsfecfin='1900-01-01',
-			$scope.obligService.hpsmodal='0',
-			$scope.obligService.hpsprog='0'	
+			$scope.obligService.hpsfecini='1900-01-01';
+			$scope.obligService.hpsfecfin='1900-01-01';
+			$scope.obligService.hpsmodal='0';
+			$scope.obligService.hpsprog='0';
 		}
 
 	}
@@ -602,7 +605,7 @@ $scope.findProfessional=function(){
 						$scope.DataPersonal.hpfecnac=dataProfessional[0].hpfecnac;
 					}
 					else{
-						 	$scope.addAlert("Estimado "+dataProfessional[0].hppriape+" "+dataProfessional[0].hpsegape+" "+dataProfessional[0].hpprinom+" "+dataProfessional[0].hpsegnom+" Usted ya cuenta con un registro pediente, por favor dirigase a la pagina de inicio si desea verificar su registro, utilizando el codigo: "+dataProfessional[0].hptoken+" Gracias.");
+						 	$scope.addAlert("Estimado "+dataProfessional[0].hppriape+" "+dataProfessional[0].hpsegape+" "+dataProfessional[0].hpprinom+" "+dataProfessional[0].hpsegnom+" Usted ya cuenta con un registro pediente, por favor dirigase a la pagina de inicio si desea verificar su registro, utilizando el codigo previamente enviado a su correo. Gracias.");
   							$scope.openmodal();
   							$scope.ifsubreg=true;
 						}
@@ -707,7 +710,7 @@ $scope.findProfessional=function(){
  	$scope.showtoken=true;
  	///send token by email
  	$scope.professionalFullName=$scope.DataPersonal.hppriape+" "+$scope.DataPersonal.hpsegape+" "+$scope.DataPersonal.hpprinom+" "+$scope.DataPersonal.hpsegnom;
-	var messageForUser='<h3> Estimado Profesional de Salud : ' +$scope.professionalFullName+"</h3>";
+	var messageForUser='<h3> Estimado : ' +$scope.professionalFullName+"</h3>";
 	messageForUser+="<br> <h4> El presente correo es informativo y se le envía para notificarle que el proceso de registro se ha realizado exitosamente";
 	messageForUser+="recuerde que usted debe entregar los documentos originales en la oficina de Registro de diplomas ubicada en la Secretaria de salud. </h4>";
 	messageForUser+="<br> Cuando el proceso se encuentre completo serán notificado, también podrá verificar su estado a traves del portal XXX con el codigo de registro  "; 
@@ -722,7 +725,7 @@ $scope.findProfessional=function(){
 		{to:$scope.DataPersonalAdd.hpdcorreo,
 		toname:"Profesional - "+$scope.professionalFullName,
 		fromname:'Sistema de Registro de profesional de Salud - Notificacion automatica',
-		subject:'Correo informativo - Notificación de registro de Profesional en Salud',
+		subject:'Correo informativo - REGISTRO UNICO DEL TALENTO HUMANO EN SALUD DEPARTAMENTO DEL CAUCA',
 		message:messageForUser
 		});
 

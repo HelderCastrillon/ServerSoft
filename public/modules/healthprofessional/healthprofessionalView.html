@@ -58,21 +58,21 @@
 			<div class="row">
 				<div class="col-md-6 form-group {{ValidationField.hppriape.active?'has-error':''}}" >
 				   	<label class="control-label"  for="priape">{{ 'PROF_PRIAPE' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonal.hppriape" id="priape" required=""/>
+		    		<input type="text" class="form-control" ng-change="DataPersonal.hppriape=DataPersonal.hppriape.toUpperCase();" ng-model="DataPersonal.hppriape" id="priape" required=""/>
 				</div>
 				<div class="col-md-6 form-group {{ValidationField.hpsegape.active?'has-error':''}}">
 				   	<label class="control-label"  for="segape">{{ 'PROF_SEGAPE' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonal.hpsegape" id="segape" required=""/>
+		    		<input type="text" class="form-control" ng-change="DataPersonal.hpsegape=DataPersonal.hpsegape.toUpperCase();" ng-model="DataPersonal.hpsegape" id="segape" required=""/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6 {{ValidationField.hpprinom.active?'has-error':''}}">
 				   	<label class="control-label"  for="prinom" >{{ 'PROF_PRINOM' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonal.hpprinom" id="prinom" required=""/>
+		    		<input type="text" class="form-control"  ng-change="DataPersonal.hpprinom=DataPersonal.hpprinom.toUpperCase();" ng-model="DataPersonal.hpprinom" id="prinom" required=""/>
 				</div>
 				<div class="col-md-6 {{ValidationField.hpsegnom.active?'has-error':''}}">
 				   	<label class="control-label"  for="segnom">{{ 'PROF_SEGNOM' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonal.hpsegnom" id="segnom" required=""/>
+		    		<input type="text" class="form-control"  ng-change="DataPersonal.hpsegnom=DataPersonal.hpsegnom.toUpperCase();" ng-model="DataPersonal.hpsegnom" id="segnom" required=""/>
 				</div>
 			</div>
 			<div class="row">
@@ -172,7 +172,7 @@
 			<div class="row">
 				<div class="col-md-6 {{ValidationField.hpddirecc.active?'has-error':''}}">
 				   	<label class="control-label"  for="Direccion">{{ 'PROF_DIRECCIONRED' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpddirecc" id="Dirección" required=""/>
+		    		<input type="text" class="form-control" ng-change="DataPersonalAdd.hpddirecc=DataPersonalAdd.hpddirecc.toUpperCase();" ng-model="DataPersonalAdd.hpddirecc" id="Dirección" required=""/>
 				</div>
 				<div class="col-md-6 {{ValidationField.hpdtelef.active?'has-error':''}}">
 				   	<label class="control-label"  for="Telefono">{{ 'PROF_TELEFONORED' | translate }} </label>
@@ -339,12 +339,12 @@
 				<div class="row" ng-show="obligService.hpsobliga==1?true:false">
 					<div class="col-md-6 {{ValidationField.hpsfecini.active?'has-error':''}}">
 					   	<label class=""  for="fecini">{{ 'PROF_SER_FECINI' | translate }} (AAAA-MM-DD) </label>
-			    		 <input type="text" class="form-control" ng-model="obligService.hpsfecini" ng-change="Study.hpefecgrad=maskDate(Study.hpefecgrad,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD ' />			              
+			    		 <input type="text" class="form-control" ng-model="obligService.hpsfecini" ng-change="obligService.hpsfecini=maskDate(obligService.hpsfecini,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD ' />			              
 
 					</div>
 					<div class="col-md-6 {{ValidationField.hpsfecfin.active?'has-error':''}}" ng-show="obligService.hpsobliga==1?true:false">
 					   	<label  for="fecfin">{{ 'PROF_SER_FECFIN' | translate }} (AAAA-MM-DD)</label>
-			    		<input type="text" class="form-control" ng-model="obligService.hpsfecfin" ng-change="Study.hpefecgrad=maskDate(Study.hpefecgrad,'-',[4,2,2],true)" placeholder='Escribe fecha  con formato AAAA-MM-DD '  />          
+			    		<input type="text" class="form-control" ng-model="obligService.hpsfecfin" ng-change="obligService.hpsfecfin=maskDate(obligService.hpsfecfin,'-',[4,2,2],true)" placeholder='Escribe fecha  con formato AAAA-MM-DD '  />          
 
 					</div>
 				</div>
@@ -376,7 +376,7 @@
 		  </div>
 		  <div class="panel-body">
 		 	  <div ng-show="!showtoken">
-		 	 <label "control-label"  for="programa">{{tabsPersonal1.tittle}} </label>
+		 	 <h3 class="text-center">{{tabsPersonal1.tittle}} </h3>
 		 	 <table class="table table-hover">
               <tr>
                 <th>Atributo</th>
@@ -389,7 +389,7 @@
               </tr>
           </table>
           <br>
-          <label "control-label"  for="programa">{{tabsPersonal2.tittle}} </label>
+           <h3 class="text-center">{{tabsPersonal2.tittle}} </h3>
 		 	 <table class="table table-hover">
               <tr>
                 <th>Atributo</th>
@@ -402,7 +402,7 @@
               </tr>
           </table>
           <br>
-           <label "control-label"  for="programa">{{tabsPersonal3.tittle}} </label>
+            <h3 class="text-center">{{tabsPersonal3.tittle}} </h3>
 		 	 <table class="table table-hover">
               <tr>
                 <th>Atributo</th>
@@ -415,7 +415,7 @@
               </tr>
           </table>
           <br>
- 		<label "control-label"  for="programa">{{tabsPersonal4.tittle}} </label>
+ 		  <h3 class="text-center">{{tabsPersonal4.tittle}} </h3>
 		 	 <table class="table table-hover">
               <tr>
                 <th>Atributo</th>
