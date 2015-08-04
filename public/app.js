@@ -6,6 +6,10 @@ appServersoft.config(function($routeProvider,$translateProvider) {
 		  	templateUrl: "/modules/healthprofessional/healthprofessionalView.html",
 		  	controller: "healthprofessionalController"
 		  });
+	  $routeProvider.when('/healthprofessional/:id', {
+		  	templateUrl: "/modules/healthprofessional/healthprofessionalView.html",
+		  	controller: "healthprofessionalController"
+		  });
 	  $routeProvider.when('/index', {
 		  	templateUrl: "/modules/index/indexView.html",
 		  	controller: "indexController"

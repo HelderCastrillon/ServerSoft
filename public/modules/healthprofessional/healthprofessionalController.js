@@ -1,5 +1,6 @@
-appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable','$modal','HealthProfessional','FindHealthProfessional','HealthProfessionalDetail','HealthProfessionalStudy','HealthProfessionalService','HealthProfessionalId','md5', 'sendmailservice', function($scope,$filter,commonvariable,$modal,HealthProfessional,FindHealthProfessional,HealthProfessionalDetail,HealthProfessionalStudy,HealthProfessionalService,HealthProfessionalId,md5,sendmailservice){
+appServersoft.controller('healthprofessionalController', ['$scope','$filter','commonvariable','$modal','HealthProfessional','FindHealthProfessional','HealthProfessionalDetail','HealthProfessionalStudy','HealthProfessionalService','HealthProfessionalId','md5', 'sendmailservice','$routeParams', function($scope,$filter,commonvariable,$modal,HealthProfessional,FindHealthProfessional,HealthProfessionalDetail,HealthProfessionalStudy,HealthProfessionalService,HealthProfessionalId,md5,sendmailservice,$routeParams){
 	
+
 	var $translate = $filter('translate');
 
 	$scope.initData=function(){
@@ -66,6 +67,44 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 
 $scope.initData();
 ///////////////////////////////////////////////////////////////////
+
+//verify if there exist register by id
+
+
+
+
+$scope.loadData=function(id){
+
+ 	HealthProfessional.get({pid:id})
+			.$promise.then(function(responseHP){
+				$scope.DataPersonal=responseHP[0];
+			});
+ 	HealthProfessionalDetail.get({pid:id})
+			.$promise.then(function(responseAdd){
+				$scope.DataPersonalAdd=responseAdd[0];
+			});
+
+	HealthProfessionalStudy.get({pid:id})
+			.$promise.then(function(responseSt){
+				$scope.Study=responseSt[0];
+			});
+											
+ 	HealthProfessionalService.get({pid:id})
+			.$promise.then(function(responseSSO){
+				$scope.obligService=responseSSO[0];
+			 });
+										
+							 
+	
+}
+
+if($routeParams.id){
+	$scope.idforLoad=$routeParams.id;
+	$scope.loadData($routeParams.id);
+	//load data for edit
+}
+
+/////////////////////////////////
 
 //Data Object
 	$scope.ValidationField={

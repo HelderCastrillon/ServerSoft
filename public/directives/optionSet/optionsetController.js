@@ -5,11 +5,16 @@ appServersoft.directive('d2Dropdownoptionset', function(){
 		scope: {
 		     tittleoption:'@',
 		     resource:'@',
-		     parent:'@'
+		     parent:'@',
+		     preload:'@'
 		    }
 	}
 	}); 
 appServersoft.controller("hsDropdownOptionSetController", ['$scope','CountryList',"commonvariable", function ($scope,CountryList,commonvariable) {
+	
+	if($scope.preload){
+		$scope.optionsetSelected='Funciona';
+	}
 	$scope.findOptionbyName = function(nameOs) {
 			if($scope.parent)
 				$scope.level=commonvariable.OptionSetSelected[$scope.parent].code;
@@ -21,7 +26,6 @@ appServersoft.controller("hsDropdownOptionSetController", ['$scope','CountryList
 			 })};
 	$scope.onSelect = function ($item, $model, $label) {
 			commonvariable.OptionSetSelected[$scope.tittleoption]=$item;
-			 $label= $label+"xxx";
 		   };
 
 }]);

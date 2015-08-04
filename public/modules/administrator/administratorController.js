@@ -4,4 +4,8 @@ HealthProfessional.get()
 					$scope.ListProfessional=response;
 				});
 
+
+	$scope.openAditionalInfo=function(id){
+		console.log(id);
+	}
 }]);

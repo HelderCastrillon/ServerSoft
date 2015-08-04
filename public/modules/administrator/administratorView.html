@@ -2,16 +2,12 @@
 <tr>
   <th>Documento</th>
   <th>Nombre</th>
-  <th>carrera</th>
   <th>Ver detalles</th>
-  <th>Registrar Acta</th>
-
 </tr>
 <tr ng-repeat="hp in ListProfessional">
   <td>{{hp.hpnumdoc}}</td>
   <td>{{hp.hppriape+' '+hp.hpprinom+' '+hp.hpsegape+' '+hp.hpsegnom}}</td>
-  <td>{{}}</td>
-  <td><a  target="_blank" href="{{ct.rCompleta}}">{{ct.rContrato}}</a></td>
-  <td><button class="btn btn-default" type="submit" ng-click="openAditionalInfo(ct.event)">Ver detalle</button></td>
+  <td><a class="btn btn-default" type="submit" href="/view#/healthprofessional/{{hp.hpid}}">Ver o modificar Datos</a></td>
 </tr>
 </table>
+

@@ -25,7 +25,7 @@
 					   
 			<nav>
 			  <ul class="pager" ng-show='conditionacepted'>
-			    <li class="next"><a href="/view#/healthprofessional" ng-click="next(0)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
+			    <li class="next"><a ng-click="next(0)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
 			  </ul>
 		  </nav>
 
@@ -48,7 +48,7 @@
     		<div class="row">
 				<div class="col-md-6">
 					<label  for="hptipdoc" class="{{ValidationField.hptipdoc.active?'label label-danger':''}}">{{ 'PROF_DOC_TYPE' | translate }} </label>
-		    		<hs-optionlist namelist='tipdoc'></hs-optionlist>
+		    		<hs-optionlist namelist='tipdoc' preload='CC'></hs-optionlist>
 				</div>
 				<div class="col-md-6 form-group {{ValidationField.hpnumdoc.active?'has-error':''}}">
 				   	<label class="control-label"  for="numdoc">{{ 'PROF_DOC' | translate }} </label>
@@ -118,7 +118,7 @@
 			<br>
 		  <nav>
 			  <ul class="pager">
-			    <li class="next"><a href="/view#/healthprofessional" ng-click="next(1)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
+			    <li class="next"><a ng-click="next(1)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
 			  </ul>
 		  </nav>
 
@@ -195,8 +195,8 @@
 	    	<br>
 			  <nav>
 				  <ul class="pager">
-				    <li class="previous"><a href="/view#/healthprofessional" ng-click="next(0)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
-				    <li class="next"><a href="/view#/healthprofessional" ng-click="next(2)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
+				    <li class="previous"><a ng-click="next(0)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
+				    <li class="next"><a ng-click="next(2)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
 				  </ul>
 			  </nav>
 		</div>
@@ -234,7 +234,7 @@
 				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
 					<div class="col-md-6">
 					   	<label  for="deptoin" class="{{ValidationField.hpedepin.active?'label label-danger':'control-label'}}">{{ 'PROF_DEPARTAMENTOIN' | translate }} </label>
-			    		<d2-dropdownoptionset tittleoption='departamentoin' resource='department'></d2-dropdownoptionset>
+			    		<d2-dropdownoptionset tittleoption='departamentoin' resource='department' preload='1'></d2-dropdownoptionset>
 					</div>
 					<div class="col-md-6">
 					   	<label for="munin" class="{{ValidationField.hpemunin.active?'label label-danger':'control-label'}}">{{ 'PROF_MUNICIPIOIN' | translate }} </label>
@@ -289,8 +289,8 @@
 	    	<br>
 		  <nav>
 			  <ul class="pager">
-			    <li class="previous"><a href="/view#/healthprofessional" ng-click="next(1)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
-			    <li class="next"><a href="/view#/healthprofessional" ng-click="next(3)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
+			    <li class="previous"><a ng-click="next(1)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
+			    <li class="next"><a ng-click="next(3)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
 			  </ul>
 		  </nav>
 		</div>
@@ -361,8 +361,8 @@
 	    	<br>
 		  <nav>
 			  <ul class="pager">
-			    <li class="previous"><a href="/view#/healthprofessional" ng-click="next(2)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
-			    <li class="next"><a href="/view#/healthprofessional" ng-click="next(4)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
+			    <li class="previous"><a ng-click="next(2)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
+			    <li class="next"><a ng-click="next(4)">{{'NEXT' | translate}} <span aria-hidden="true">&rarr;</span></a></li>
 			  </ul>
 		  </nav>
 		 </div>
@@ -432,7 +432,7 @@
 	    	<br>
 		  <nav>
 			  <ul class="pager">
-			    <li class="previous"><a href="/view#/healthprofessional" ng-click="next(3)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
+			    <li class="previous"><a ng-click="next(3)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
 			    <li class="next text-right">
 			    	<button type="button" class="btn btn-primary" ng-click="sendforms()" aria-label="Left Align">
 					  <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> {{'SAVE' | translate}}

@@ -194,11 +194,24 @@ app.get('/api/common/country/:name', function(request, response) {
 	mainController.ConnectionController(PMquery,response);
 });
 
+//get country by id
+app.get('/api/common/countrybyid/:id', function(request, response) {
+	var PMquery=CommmonQuery.GetCountryByID(request.params.id);
+	mainController.ConnectionController(PMquery,response);
+});
+
 //get depto by name
 app.get('/api/common/department/:name', function(request, response) {
 	var PMquery=CommmonQuery.GetDepartment(request.params.name);
 	mainController.ConnectionController(PMquery,response);
 });
+
+//get depto by id
+app.get('/api/common/departmentbyid/:id', function(request, response) {
+	var PMquery=CommmonQuery.GetDepartmentByID(request.params.id);
+	mainController.ConnectionController(PMquery,response);
+});
+
 //get depto by name
 app.get('/api/common/department', function(request, response) {
 	var PMquery=CommmonQuery.GetDepartment(undefined);
@@ -218,6 +231,14 @@ app.get('/api/common/municipality/:department', function(request, response) {
 	mainController.ConnectionController(PMquery,response);
 });
 
+//get municipality by id
+app.get('/api/common/municipalitybyid/:id', function(request, response) {
+	var PMquery=CommmonQuery.GetMunicipalityByID(request.params.id);
+	console.log(PMquery);
+	mainController.ConnectionController(PMquery,response);
+});
+
+
 //get institution by name and municipality
 app.get('/api/common/institution/:municipality/:name', function(request, response) {
 	var PMquery=CommmonQuery.GetInstitution(request.params.name,request.params.municipality);
@@ -227,6 +248,12 @@ app.get('/api/common/institution/:municipality/:name', function(request, respons
 //get institution by  municipality
 app.get('/api/common/institution/:municipality', function(request, response) {
 	var PMquery=CommmonQuery.GetInstitution(undefined,request.params.municipality);
+	mainController.ConnectionController(PMquery,response);
+});
+
+//get institution by  id
+app.get('/api/common/institutionbyid/:id', function(request, response) {
+	var PMquery=CommmonQuery.GetInstitutionByID(request.params.id);
 	mainController.ConnectionController(PMquery,response);
 });
 
@@ -241,6 +268,13 @@ app.get('/api/common/program/:institution', function(request, response) {
 	var PMquery=CommmonQuery.GetProgram(undefined,request.params.institution);
 	mainController.ConnectionController(PMquery,response);
 });
+
+//get program by  id
+app.get('/api/common/programbyid/:id', function(request, response) {
+	var PMquery=CommmonQuery.GetProgramByID(request.params.id);
+	mainController.ConnectionController(PMquery,response);
+});
+
 
 ///////////////////////////////////////////////////////////
 
