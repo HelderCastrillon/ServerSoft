@@ -48,7 +48,7 @@
     		<div class="row">
 				<div class="col-md-6">
 					<label  for="hptipdoc" class="{{ValidationField.hptipdoc.active?'label label-danger':''}}">{{ 'PROF_DOC_TYPE' | translate }} </label>
-		    		<hs-optionlist namelist='tipdoc' preload='CC'></hs-optionlist>
+		    		<hs-optionlist namelist='tipdoc' preload='{{DataPersonal.hptipdoc}}'></hs-optionlist>
 				</div>
 				<div class="col-md-6 form-group {{ValidationField.hpnumdoc.active?'has-error':''}}">
 				   	<label class="control-label"  for="numdoc">{{ 'PROF_DOC' | translate }} </label>
@@ -78,7 +78,7 @@
 			<div class="row">
 				<div class="col-md-6">
 				   	<label for="sexo" class="{{ValidationField.hpsexo.active?'label label-danger':'control-label'}}">{{ 'PROF_SEXO' | translate }} </label>
-		    		<hs-optionlist namelist='sexo'></hs-optionlist>
+		    		<hs-optionlist namelist='sexo' preload='{{DataPersonal.hpsexo}}'></hs-optionlist>
 				</div>
 				<div class="col-md-6 {{ValidationField.hpfecnac.active?'has-error':''}}">
 				   	<label for="fecnac" class="">{{ 'PROF_FECNAC' | translate }} (AAAA-MM-DD) </label>
@@ -96,23 +96,23 @@
 				</div>
 				<div class="col-md-6"  ng-show="colombiano.nacionalidad==1?true:false" >
 				   	<label for="pais" class="{{ValidationField.hppais.active?'label label-danger':''}}">{{'PROF_PAIS' | translate }} </label>
-		    		 <d2-dropdownoptionset tittleoption='pais' resource='country'></d2-dropdownoptionset>
+		    		 <d2-dropdownoptionset tittleoption='pais' resource='country' preload='{{DataPersonal.hppais}}'></d2-dropdownoptionset>
 				</div>
 			</div>
 			<div class="row" ng-show="colombiano.nacionalidad==0?true:false">
 				<div class="col-md-6">
 				   	<label  for="depto" class="{{ValidationField.hpdepnac.active?'label label-danger':''}}">{{ 'PROF_DEPARTAMENTO' | translate }} </label>
-		    		 <d2-dropdownoptionset tittleoption='departamento' resource='department'></d2-dropdownoptionset>
+		    		 <d2-dropdownoptionset tittleoption='departamento' resource='department' preload='{{DataPersonal.hpdepnac}}'></d2-dropdownoptionset>
 				</div>
 				<div class="col-md-6">
 				   	<label for="municipio" class="{{ValidationField.hpmunnac.active?'label label-danger':''}}">{{ 'PROF_MUNICIPIO' | translate }} </label>
-		    		 <d2-dropdownoptionset tittleoption='municipio' resource='municipality' parent='departamento'></d2-dropdownoptionset>
+		    		 <d2-dropdownoptionset tittleoption='municipio' resource='municipality' parent='departamento' preload='{{DataPersonal.hpmunnac}}'></d2-dropdownoptionset>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
 				   	<label for="etnia" class="{{ValidationField.hpetnia.active?'label label-danger':''}}">{{ 'PROF_ETNIA' | translate }} </label>
-		    		<hs-optionlist namelist='etnia'></hs-optionlist>
+		    		<hs-optionlist namelist='etnia' preload='{{DataPersonal.hpetnia}}'></hs-optionlist>
 				</div>				
 			</div>
 			<br>
@@ -156,17 +156,17 @@
 	
 				<div class="col-md-6"  ng-show="colombiano.residencia==1?true:false">
 				   	<label class="control-label"  for="pais" class="{{ValidationField.hpdpaisred.active?'label label-danger':''}}">{{'PROF_PAISRED' | translate }} </label>
-		    		 <d2-dropdownoptionset tittleoption='paisred' resource='country'></d2-dropdownoptionset>
+		    		 <d2-dropdownoptionset tittleoption='paisred' resource='country' preload='{{DataPersonalAdd.hpdpaisred}}'></d2-dropdownoptionset>
 				</div>
 			</div>
 			<div class="row" ng-show="colombiano.residencia==0?true:false">
 				<div class="col-md-6">
 				   	<label for="depto" class="{{ValidationField.hpddepred.active?'label label-danger':'control-label'}}">{{ 'PROF_DEPARTAMENTORED' | translate }} </label>
-		    		 <d2-dropdownoptionset tittleoption='departamentored' resource='department'></d2-dropdownoptionset>
+		    		 <d2-dropdownoptionset tittleoption='departamentored' resource='department' preload='{{DataPersonalAdd.hpddepred}}'></d2-dropdownoptionset>
 				</div>
 				<div class="col-md-6">
 				   	<label for="municipio" class="{{ValidationField.hpdmunred.active?'label label-danger':'control-label'}}">{{ 'PROF_MUNICIPIORED' | translate }} </label>
-		    		 <d2-dropdownoptionset tittleoption='municipiored' resource='municipality' parent="departamentored"></d2-dropdownoptionset>
+		    		 <d2-dropdownoptionset tittleoption='municipiored' resource='municipality' preload='{{DataPersonalAdd.hpdmunred}}' parent="departamentored"></d2-dropdownoptionset>
 				</div>
 			</div>
 			<div class="row">
@@ -228,7 +228,7 @@
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
 					<div class="col-md-6">
 					   	<label  for="paisin" class="{{ValidationField.hpepaisin.active?'label label-danger':'control-label'}}">{{ 'PROF_PAISIN' | translate }} </label>
-			    		 <d2-dropdownoptionset tittleoption='paisin' resource='country'></d2-dropdownoptionset>
+			    		 <d2-dropdownoptionset tittleoption='paisin' resource='country' preload='{{Study.hpepaisin}}'></d2-dropdownoptionset>
 					</div>
 				</div>
 				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
@@ -238,29 +238,29 @@
 					</div>
 					<div class="col-md-6">
 					   	<label for="munin" class="{{ValidationField.hpemunin.active?'label label-danger':'control-label'}}">{{ 'PROF_MUNICIPIOIN' | translate }} </label>
-			    		<d2-dropdownoptionset tittleoption='municipioin' resource='municipality' parent='departamentoin'></d2-dropdownoptionset>
+			    		<d2-dropdownoptionset tittleoption='municipioin' resource='municipality' parent='departamentoin' preload='{{Study.hpemunin}}'></d2-dropdownoptionset>
 					</div>
 				</div>
 				<div class="row">
 					
 					<div class="col-md-6">
 					   	<label  for="tipoinstitucion" class="{{ValidationField.hpetipin.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_TYPEIN' | translate }} </label>
-			    		<hs-optionlist namelist='tipoinstitucion'></hs-optionlist>
+			    		<hs-optionlist namelist='tipoinstitucion' preload='{{Study.hpetipin}}'></hs-optionlist>
 					</div>
 					<div class="col-md-6" ng-show="Study.hpeorigtit==1?true:false">
 					   	<label for="institution" class="{{ValidationField.hpecodin.active?'label label-danger':''}}">{{ 'PROF_EST_INSTITUTION' | translate }} </label>
-			    		<d2-dropdownoptionset tittleoption='institution' resource='institution' parent='municipioin'></d2-dropdownoptionset>
+			    		<d2-dropdownoptionset tittleoption='institution' resource='institution' parent='municipioin' preload='{{Study.hpecodin}}'></d2-dropdownoptionset>
 					</div>
 				</div>
 				<div class="row" >
 					
 					 <div class="col-md-6">
 					   	<label   for="tipoprograma" class="{{ValidationField.hpetippr.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_TYPE' | translate }} </label>
-			    		<hs-optionlist namelist='tipoprograma'></hs-optionlist>
+			    		<hs-optionlist namelist='tipoprograma' preload='{{Study.hpetippr}}'></hs-optionlist>
 					</div>
 					<div class="col-md-6" ng-show="Study.hpeorigtit==1?true:false">
 					   	<label  for="program" class="{{ValidationField.hpecodpr.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_PROGRAM' | translate }} </label>
-			    		<d2-dropdownoptionset tittleoption='program' resource='program' parent="institution"></d2-dropdownoptionset>
+			    		<d2-dropdownoptionset tittleoption='program' resource='program' parent="institution" preload='{{Study.hpecodpr}}'></d2-dropdownoptionset>
 					</div>
 				</div>	
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
@@ -323,17 +323,17 @@
 				<div class="row" ng-show="obligService.hpsobliga==1?true:false" ng-hide="obligService.hpstiplug==1?true:false">
 					<div class="col-md-6">
 					   	<label  class="{{ValidationField.hpspaispr.active?'label label-danger':'control-label'}}" for="paisss">{{ 'PROF_PAISSER' | translate }} </label>
-			    		<d2-dropdownoptionset tittleoption='paisss' resource='country'></d2-dropdownoptionset>
+			    		<d2-dropdownoptionset tittleoption='paisss' resource='country' preload='{{obligService.hpspaispr}}'></d2-dropdownoptionset>
 					</div>					
 				</div>
 				<div class="row" ng-show="obligService.hpsobliga==1?true:false" ng-hide="obligService.hpstiplug==2?true:false">
 					<div class="col-md-6" >
 					   	<label class="{{ValidationField.hpsdeppr.active?'label label-danger':'control-label'}}"  for="departamentoss">{{ 'PROF_DEPARTAMENTOSER' | translate }} </label>
-			    		<d2-dropdownoptionset tittleoption='departamentoss' resource='department'></d2-dropdownoptionset>
+			    		<d2-dropdownoptionset tittleoption='departamentoss' resource='department' preload='{{obligService.hpsdeppr}}'></d2-dropdownoptionset>
 					</div>
 					<div class="col-md-6">
 					   	<label class="{{ValidationField.hpsmunpr.active?'label label-danger':'control-label'}}"   for="municipioss">{{ 'PROF_MUNICIPIOSER' | translate }} </label>
-			    		<d2-dropdownoptionset tittleoption='municipioss' resource='municipality' parent='departamentoss'></d2-dropdownoptionset>
+			    		<d2-dropdownoptionset tittleoption='municipioss' resource='municipality' parent='departamentoss' preload='{{obligService.hpsmunpr}}'></d2-dropdownoptionset>
 					</div>					
 				</div>
 				<div class="row" ng-show="obligService.hpsobliga==1?true:false">
@@ -351,11 +351,11 @@
 				<div class="row" ng-show="obligService.hpsobliga==1?true:false">
 		  			 <div class="col-md-6">
 					   	<label class="{{ValidationField.hpsmodal.active?'label label-danger':'control-label'}}"   for="modalidad">{{ 'PROF_SERV_MOD' | translate }} </label>
-			    		<hs-optionlist namelist='modalidad'></hs-optionlist>
+			    		<hs-optionlist namelist='modalidad' preload='{{obligService.hpsmodal}}'></hs-optionlist>
 					</div>
 					<div class="col-md-6">
 					   	<label class="{{ValidationField.hpsprog.active?'label label-danger':'control-label'}}"  for="programa">{{ 'PROF_SER_TYPE' | translate }} </label>
-			    		<hs-optionlist namelist='programa'></hs-optionlist>
+			    		<hs-optionlist namelist='programa' preload='{{obligService.hpsprog}}'></hs-optionlist>
 					</div>
 				</div>
 	    	<br>

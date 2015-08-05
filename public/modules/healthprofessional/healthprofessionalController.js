@@ -3,6 +3,8 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 
 	var $translate = $filter('translate');
 
+	$scope.RegisterMode='Register';
+
 	$scope.initData=function(){
 		//Data Object
 		$scope.DataPersonal={
@@ -99,6 +101,7 @@ $scope.loadData=function(id){
 }
 
 if($routeParams.id){
+	$scope.RegisterMode='Edit';
 	$scope.idforLoad=$routeParams.id;
 	$scope.loadData($routeParams.id);
 	//load data for edit
@@ -108,6 +111,10 @@ if($routeParams.id){
 
 //Data Object
 	$scope.ValidationField={
+		hpid:{label:"id",msg:"Falta Id",tipval:"N",active:false,mandatory:true},
+		hpdid:{label:"id detalles",msg:"Falta Id de detalles",tipval:"N",active:false,mandatory:true},
+		hpesid:{label:"id estudios",msg:"Falta Id de estudios",tipval:"N",active:false,mandatory:true},
+		hpsid:{label:"id estudios",msg:"Falta Id de Servicio social",tipval:"N",active:false,mandatory:true},
 		hptipdoc:{label:"Tipo documento",msg:"Seleccione un tipo de documento",tipval:"S",active:false,mandatory:true,list:{source:"tipdoc",field:"value"}},
 		hpnumdoc:{label:"Numero de documento",msg:"Escriba un numero documento valido",tipval:"N",active:false,mandatory:true},
 		hppriape:{label:"Primer apellido",msg:"Escriba su primer apellido",tipval:"W",active:false,mandatory:true},
@@ -630,6 +637,8 @@ $scope.validationtype=function(type,value, msg){
 ///find professional if there exist 94489321
 
 $scope.findProfessional=function(){
+	if($scope.RegisterMode=='Edit')
+		return 1;
 
 	FindHealthProfessional.get({value:$scope.DataPersonal.hpnumdoc})
 	.$promise.then(function(dataProfessional){
