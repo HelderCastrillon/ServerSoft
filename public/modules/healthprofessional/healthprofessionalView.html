@@ -139,7 +139,7 @@
 			<div class="row">
 					<div class="col-md-6">
 					   	<label for="etnia" class="{{ValidationField.hpdestcon.active?'label label-danger':'control-label'}}">{{ 'PROF_ESTADOCONYUGAL' | translate }} </label>
-			    		<hs-optionlist namelist='conyugal'></hs-optionlist>
+			    		<hs-optionlist namelist='conyugal' preload='{{DataPersonalAdd.hpdestcon}}'></hs-optionlist>
 					</div>
 
 					<div class="col-md-6">
@@ -234,7 +234,7 @@
 				<div class="row" ng-show="Study.hpeorigtit==1?true:false">
 					<div class="col-md-6">
 					   	<label  for="deptoin" class="{{ValidationField.hpedepin.active?'label label-danger':'control-label'}}">{{ 'PROF_DEPARTAMENTOIN' | translate }} </label>
-			    		<d2-dropdownoptionset tittleoption='departamentoin' resource='department' preload='1'></d2-dropdownoptionset>
+			    		<d2-dropdownoptionset tittleoption='departamentoin' resource='department' preload='{{Study.hpedepin}}'></d2-dropdownoptionset>
 					</div>
 					<div class="col-md-6">
 					   	<label for="munin" class="{{ValidationField.hpemunin.active?'label label-danger':'control-label'}}">{{ 'PROF_MUNICIPIOIN' | translate }} </label>

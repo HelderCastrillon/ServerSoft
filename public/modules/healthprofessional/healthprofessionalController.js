@@ -29,8 +29,8 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 			hpddepred:"",
 			hpdmunred:"",
 			hpddirecc:"",
-			hpdtelef:"",
-			hpdtelmov:"",
+			hpdtelef:"0",
+			hpdtelmov:"0",
 			hpdcorreo:""
 		};
 
@@ -44,8 +44,8 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 			hpetippr:"",
 			hpecodpr:"",
 			hpefecgrad:"",
-			hpenumconv:"",
-			hpefecconv:"",
+			hpenumconv:"9999",
+			hpefecconv:"1900-01-01",
 			hpetitequi:"",
 			hpegruptit:""
 
@@ -149,8 +149,8 @@ if($routeParams.id){
 		hpefecconv:{label:"Fecha de la convocatoria",msg:"Seleccione o escriba la fecha de la convocatoria",tipval:"D",active:false,mandatory:true},
 		hpetitequi:{label:"Titulo equivalente",msg:"Escriba el titulo equivalente",tipval:"W",active:false,mandatory:true},
 		hpegruptit:{label:"Grupo al que pertenece el titulo",msg:"Escriba el grupo al que pertenece el titulo",tipval:"W",active:false,mandatory:true},
-		hpeactoadm:{label:"Acto administrativo",msg:"Escriba el acto administrativo",tipval:"W",active:false,mandatory:true},
-		hpefecact:{label:"Fecha de grado",msg:"Seleccione o escriba la fecha de grado",tipval:"D",active:false,mandatory:true},
+		hpeactoadm:{label:"Acto administrativo",msg:"Escriba el acto administrativo",tipval:"W",active:false,mandatory:false},
+		hpefecact:{label:"Fecha de Acto",msg:"Seleccione o escriba la fecha del acto administrativo",tipval:"D",active:false,mandatory:false},
 		hpsobliga:{label:"Realizó su Servicio Social Obligtorio",msg:"Seleccione si realizó su Servicio Social Obligtorio",tipval:"S",active:false,mandatory:true,list:{source:"sso",field:"value"}},
 		hpstiplug:{label:"Lugar",msg:"Seleccione el tipo de lugar donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"ssolugar",field:"value"}},
 		hpsdeppr:{label:"Departamento",msg:"Seleccione el departamento donde realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"departamentoss",field:"name"}},
@@ -507,8 +507,8 @@ $scope.validationtype=function(type,value, msg){
 		break;
 		case 'D'://fecha
 			
-			if(value!=undefined && value!=""){
-							 	
+			if(value!=undefined && value!=null && value!=""){
+					value=value.substring(0,10);		 	
 				 try{
 					 var fechaArr = value.split('-');
 					 var aho = fechaArr[0];
