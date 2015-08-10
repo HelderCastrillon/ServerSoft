@@ -320,13 +320,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="row" ng-show="obligService.hpsobliga==1?true:false" ng-hide="obligService.hpstiplug==1?true:false">
+				<div class="row" ng-show="(obligService.hpsobliga==1 && obligService.hpstiplug==2)?true:false">
 					<div class="col-md-6">
 					   	<label  class="{{ValidationField.hpspaispr.active?'label label-danger':'control-label'}}" for="paisss">{{ 'PROF_PAISSER' | translate }} </label>
 			    		<d2-dropdownoptionset tittleoption='paisss' resource='country' preload='{{obligService.hpspaispr}}'></d2-dropdownoptionset>
 					</div>					
 				</div>
-				<div class="row" ng-show="obligService.hpsobliga==1?true:false" ng-hide="obligService.hpstiplug==2?true:false">
+				<div class="row" ng-show="(obligService.hpsobliga==1 && obligService.hpstiplug==1)?true:false">
 					<div class="col-md-6" >
 					   	<label class="{{ValidationField.hpsdeppr.active?'label label-danger':'control-label'}}"  for="departamentoss">{{ 'PROF_DEPARTAMENTOSER' | translate }} </label>
 			    		<d2-dropdownoptionset tittleoption='departamentoss' resource='department' preload='{{obligService.hpsdeppr}}'></d2-dropdownoptionset>

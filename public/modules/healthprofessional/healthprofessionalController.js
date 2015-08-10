@@ -228,11 +228,9 @@ if($routeParams.id){
 	$scope.prestosso=function(tip,pdmc){
 		var pdm = pdmc.split(',');
 		$scope.obligService.hpsobliga=tip;
-
-		if(tip=1){
+		$scope.obligService.hpstiplug=1;
+		if(tip==1){
 			commonvariable.OptionSetSelected['sso']={key:tip,value:"SI"};
-
-			$scope.obligService.hpstiplug='';
 			commonvariable.OptionSetSelected['ssolugar']={key:tip,value:"COLOMBIA"};
 			commonvariable.OptionSetSelected[pdm[0]]={numericcode:'170', name:'COLOMBIA'};
 			commonvariable.OptionSetSelected[pdm[1]]={code:''};
@@ -246,8 +244,6 @@ if($routeParams.id){
 		}
 		else{
 			commonvariable.OptionSetSelected['sso']={key:tip,value:"NO"};
-
-			$scope.obligService.hpstiplug=1;
 			commonvariable.OptionSetSelected[pdm[0]]={numericcode:'000'};
 			commonvariable.OptionSetSelected[pdm[1]]={code:'00'};
 			commonvariable.OptionSetSelected[pdm[2]]={code:'000'};
