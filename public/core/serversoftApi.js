@@ -23,6 +23,7 @@ ServersoftApi.factory("HealthProfessional",['$resource','commonvariable', functi
 	{pid:'@pid'},
   	{get: { method: "GET",isArray: true},
 	post: { method: "POST"},
+	put: { method: "PUT"},
 	remove: {method:'DELETE'}
   });
 }]);
@@ -47,6 +48,7 @@ ServersoftApi.factory("HealthProfessionalDetail",['$resource','commonvariable', 
 	{pid:'@pid'},
   { get: { method: "GET",isArray: true},
 	post: { method: "POST"},
+	put: { method: "PUT"},
 	remove: {method:'DELETE'}
   });
 }]);
@@ -56,6 +58,7 @@ ServersoftApi.factory("HealthProfessionalStudy",['$resource','commonvariable', f
 	{pid:'@pid'},
   { get: { method: "GET",isArray: true},
 	post: { method: "POST"},
+	put: { method: "PUT"},
 	remove: {method:'DELETE'}
   });
 }]);
@@ -65,6 +68,7 @@ ServersoftApi.factory("HealthProfessionalService",['$resource','commonvariable',
 	{pid:'@pid'},
   { get: { method: "GET",isArray: true},
 	post: { method: "POST"},
+	put: { method: "PUT"},
 	remove: {method:'DELETE'}
   });
 }]);

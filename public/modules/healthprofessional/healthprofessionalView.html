@@ -1,7 +1,7 @@
 <div class="row">
 <div class="col-md-12">
    <tabset>
-   	<tab active="tabsPersonal0.active" disable="tabsPersonal0.disabled">
+   	<tab active="tabsPersonal0.active" disable="tabsPersonal0.disabled" ng-show="RegisterMode!='Edit'">
   		<tab-heading>
   				{{tabsPersonal0.tittle}}
   		</tab-heading>
@@ -306,6 +306,7 @@
 				<div class="row">
 		  			 <div class="col-md-6">
 					   	<label  class="{{ValidationField.hpsobliga.active?'label label-danger':'control-label'}}"  for="serviciooblig">{{ 'PROF_SERVICIO' | translate }} </label>
+					   	<br>
 			    		<div class="btn-group" data-toggle="buttons">
 							<button type="button" ng-click="prestosso(1,'paisss,departamentoss,municipioss,modalidad,programa')" class="btn {{obligService.hpsobliga==1?' btn-primary':' btn-default'}}">Lo prestó</button>
 					    	<button type="button" ng-click="prestosso(2,'paisss,departamentoss,municipioss,modalidad,programa')" class="btn {{obligService.hpsobliga==2?' btn-primary':' btn-default'}}">Fue exento</button>
@@ -314,6 +315,7 @@
 					</div>
 					<div class="col-md-6" ng-show="obligService.hpsobliga==1?true:false">
 					   	<label class="{{ValidationField.hpstiplug.active?'label label-danger':'control-label'}}" for="tipolugarservicio">{{ 'PROF_SER_TYPE' | translate }} </label>
+					   	<br>
 			    		<div class="btn-group" data-toggle="buttons">
 							<button type="button" ng-click="lugarsso(1,'paisss,departamentoss,municipioss,modalidad,programa')" class="btn {{obligService.hpstiplug==1?' btn-primary':' btn-default'}}">en Colombia</button>
 					    	<button type="button" ng-click="lugarsso(2,'paisss,departamentoss,municipioss,modalidad,programa')" class="btn {{obligService.hpstiplug==1?' btn-default':' btn-primary'}}">en el exterior</button>
@@ -433,9 +435,14 @@
 		  <nav>
 			  <ul class="pager">
 			    <li class="previous"><a ng-click="next(3)"><span aria-hidden="true">&larr;</span> {{'PREV' | translate}}</a></li>
-			    <li class="next text-right">
+			    <li class="next text-right" ng-show="RegisterMode=='Register'?'true':false">
 			    	<button type="button" class="btn btn-primary" ng-click="sendforms()" aria-label="Left Align">
 					  <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> {{'SAVE' | translate}}
+					</button>
+			    </li>
+			    <li class="next text-right" ng-show="RegisterMode=='Edit'?'true':false">
+			    	<button type="button" class="btn btn-primary" ng-click="updateforms()" aria-label="Left Align">
+					  <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> {{'UPDATE' | translate}}
 					</button>
 			    </li>
 			  </ul>

@@ -47,7 +47,9 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 			hpenumconv:"9999",
 			hpefecconv:"1900-01-01",
 			hpetitequi:"",
-			hpegruptit:""
+			hpegruptit:"",
+			hpeactoadm:"",
+			hpefecact:"1900-01-01"
 
 		};
 		$scope.Studies=[];
@@ -70,42 +72,6 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 $scope.initData();
 ///////////////////////////////////////////////////////////////////
 
-//verify if there exist register by id
-
-
-
-
-$scope.loadData=function(id){
-
- 	HealthProfessional.get({pid:id})
-			.$promise.then(function(responseHP){
-				$scope.DataPersonal=responseHP[0];
-			});
- 	HealthProfessionalDetail.get({pid:id})
-			.$promise.then(function(responseAdd){
-				$scope.DataPersonalAdd=responseAdd[0];
-			});
-
-	HealthProfessionalStudy.get({pid:id})
-			.$promise.then(function(responseSt){
-				$scope.Study=responseSt[0];
-			});
-											
- 	HealthProfessionalService.get({pid:id})
-			.$promise.then(function(responseSSO){
-				$scope.obligService=responseSSO[0];
-			 });
-										
-							 
-	
-}
-
-if($routeParams.id){
-	$scope.RegisterMode='Edit';
-	$scope.idforLoad=$routeParams.id;
-	$scope.loadData($routeParams.id);
-	//load data for edit
-}
 
 /////////////////////////////////
 
@@ -162,9 +128,65 @@ if($routeParams.id){
 		hpsprog:{label:"Programa",msg:"Seleccione o escriba un programa con el cual realizó su Servicio Social Obligatorio",tipval:"S",active:false,mandatory:true,list:{source:"programa",field:"value"}}
 	};
 
+  
+///////////////////////////////////// Create the tab structure
+
+  	$scope.tabsPersonalE = {tittle:$translate('PROF_TAB_ERROR'),active:false,disabled:true};
+  	$scope.tabsPersonal0 = {tittle:$translate('PROF_TAB_INTRO'),active:true,disabled:false};
+	$scope.tabsPersonal1 = {tittle:$translate('PROF_TAB_PERSONAL'),active:false,disabled:true};
+	$scope.tabsPersonal2 = {tittle:$translate('PROF_TAB_PERSONALADD'),active:false,disabled:true};
+	$scope.tabsPersonal3 = {tittle:$translate('PROF_TAB_STUDY'),active:false,disabled:true};
+	$scope.tabsPersonal4 = {tittle:$translate('PROF_TAB_SERVICE'),active:false,disabled:true};
+	$scope.tabsPersonal5 = {tittle:$translate('PROF_TAB_RESUME'),active:false,disabled:true};
 
 ///////////////////////////////////////////////////////////////////
 
+$scope.agreeinformation=function(){
+  	$scope.conditionacepted=!$scope.conditionacepted;
+  }
+
+//verify if there exist register by id
+
+
+
+
+$scope.loadData=function(id){
+
+ 	HealthProfessional.get({pid:id})
+			.$promise.then(function(responseHP){
+				$scope.DataPersonal=responseHP[0];
+			});
+ 	HealthProfessionalDetail.get({pid:id})
+			.$promise.then(function(responseAdd){
+				$scope.DataPersonalAdd=responseAdd[0];
+			});
+
+	HealthProfessionalStudy.get({pid:id})
+			.$promise.then(function(responseSt){
+				$scope.Study=responseSt[0];
+			});
+											
+ 	HealthProfessionalService.get({pid:id})
+			.$promise.then(function(responseSSO){
+				$scope.obligService=responseSSO[0];
+			 });
+										
+							 
+	
+}
+
+if($routeParams.id){
+	$scope.RegisterMode='Edit';
+	$scope.idforLoad=$routeParams.id;
+	//load data for edit
+	$scope.loadData($routeParams.id);
+	
+	$scope.nextagree=1;
+  	$scope.tabsPersonal1.active = true;
+  	$scope.agreeinformation();
+}
+
+///////////////////////////////////////////
 	$scope.colombiano=[];
 	$scope.colombiano['nacionalidad']=0;
 	$scope.colombiano['residencia']=0;
@@ -317,16 +339,7 @@ if($routeParams.id){
 /////////////////////////////////////////////////////////
 
 
-  $scope.agreeinformation=function(){
-  	$scope.conditionacepted=!$scope.conditionacepted;
-  }
-  	$scope.tabsPersonalE = {tittle:$translate('PROF_TAB_ERROR'),active:false,disabled:true};
-  	$scope.tabsPersonal0 = {tittle:$translate('PROF_TAB_INTRO'),active:true,disabled:false};
-	$scope.tabsPersonal1 = {tittle:$translate('PROF_TAB_PERSONAL'),active:false,disabled:true};
-	$scope.tabsPersonal2 = {tittle:$translate('PROF_TAB_PERSONALADD'),active:false,disabled:true};
-	$scope.tabsPersonal3 = {tittle:$translate('PROF_TAB_STUDY'),active:false,disabled:true};
-	$scope.tabsPersonal4 = {tittle:$translate('PROF_TAB_SERVICE'),active:false,disabled:true};
-	$scope.tabsPersonal5 = {tittle:$translate('PROF_TAB_RESUME'),active:false,disabled:true};
+  
 
   $scope.next=function(NumTab){
   	
@@ -701,9 +714,11 @@ $scope.findProfessional=function(){
  	//generating md5 for token
  	datetoday = new Date();
    	//
+ 	
  	$scope.DataPersonal.hptoken=md5.createHash($scope.DataPersonal.hpnumdoc + datetoday.getTime() || '');
  	$scope.DataPersonal.hptoken=$scope.DataPersonal.hptoken.substring(0, 5);
  	$scope.tokenForUser=$scope.DataPersonal.hptoken;
+ 
  	//data professional
  	
  	HealthProfessional.post($scope.DataPersonal)
@@ -749,6 +764,55 @@ $scope.findProfessional=function(){
 
 
  };
+
+
+  ///  save Data i server
+ $scope.updateforms=function(){
+
+ 	//generating md5 for token
+ 	datetoday = new Date();
+   	//
+ 	$scope.tokenForUser=$scope.DataPersonal.hptoken;
+
+ 	//data professional
+  	HealthProfessional.put($scope.DataPersonal)
+			.$promise.then(function(responseHP){
+				if(responseHP.status=="SUCCESS"){
+			
+					//data professional detail
+				 	HealthProfessionalDetail.put($scope.DataPersonalAdd)
+							.$promise.then(function(responseAdd){
+								if(responseAdd.status=="SUCCESS"){
+							
+												
+								//data professional study
+								HealthProfessionalStudy.put($scope.Study)
+										.$promise.then(function(responseSt){
+											if(responseSt.status=="SUCCESS"){	
+										
+
+											//data professional service		
+											HealthProfessionalService.put($scope.obligService)
+												.$promise.then(function(responseSSO){
+													if(responseSSO.status=="SUCCESS"){
+
+														$scope.showtoken=true;
+														//init data 
+													 	$scope.initData();
+													 	commonvariable.OptionSetSelected=[];
+													}
+												});									
+										
+											}	
+										});					
+
+				 				}
+							});
+					}	
+			});
+ };
+
+
 
  $scope.tokenPresentation=function(){
  	$scope.showtoken=true;

@@ -6,7 +6,7 @@ appServersoft.controller('indexController', ['$scope','$filter','Token', functio
 					.$promise.then(function(responseToken){
 						$scope.TokenReturn=responseToken[0];
 						try{
-							if($scope.TokenReturn.hpeactoadm==null){
+							if($scope.TokenReturn.hpeactoadm==null||$scope.TokenReturn.hpeactoadm==""||$scope.TokenReturn.hpeactoadm==undefined){
 								$scope.consulted=true;
 								$scope.fullName="Estimado: "+$scope.TokenReturn.hppriape+' '+$scope.TokenReturn.hpsegape+' '+$scope.TokenReturn.hpprinom+' '+$scope.TokenReturn.hpsegnom;
 								$scope.join="Su registro aun no cuenta con el Acto Administrativo que autoriza el ejercicio de su profesión ";

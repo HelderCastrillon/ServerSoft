@@ -94,6 +94,12 @@ app.post('/api/HealthProfessional', function(request, response) {
 	mainController.ConnectionController(PMquery,response);
 });
 
+//Update professional
+app.put('/api/HealthProfessional', function(request, response) {
+	var PMquery=profManager.Put(request.body);	
+	//mainController.ConnectionController(PMquery,response);
+});
+
 /////////////////////////////////////////////////////////
 
 ////	Module Health professional Detail	///
@@ -115,10 +121,16 @@ app.get('/api/HealthProfessionalDetail', function(request, response) {
 	mainController.ConnectionController(PMquery,response);
 });
 
-//Save professional
+//Save professional Detail
 app.post('/api/HealthProfessionalDetail', function(request, response) {
 	var PMquery=profManagerDetail.Post(request.body);		
 	mainController.ConnectionController(PMquery,response);
+});
+
+//Update professional detail
+app.put('/api/HealthProfessionalDetail', function(request, response) {
+	var PMquery=profManagerDetail.Put(request.body);		
+	//mainController.ConnectionController(PMquery,response);
 });
 
 /////////////////////////////////////////////////////////
@@ -150,6 +162,13 @@ app.post('/api/ProfessionalStudy', function(request, response) {
 	mainController.ConnectionController(PMquery,response);
 });
 
+//Update professional Study
+app.put('/api/ProfessionalStudy', function(request, response) {
+	var PMquery=StudyManager.Put(request.body);		
+	//mainController.ConnectionController(PMquery,response);
+});
+
+
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 
@@ -176,6 +195,12 @@ app.get('/api/ProfessionalSSO', function(request, response) {
 app.post('/api/ProfessionalSSO', function(request, response) {
 	var PMquery=ServiceManager.Post(request.body);		
 	mainController.ConnectionController(PMquery,response);
+});
+
+//Save professional Service
+app.put('/api/ProfessionalSSO', function(request, response) {
+	var PMquery=ServiceManager.Put(request.body);		
+	//mainController.ConnectionController(PMquery,response);
 });
 
 /////////////////////////////////////////////////////////

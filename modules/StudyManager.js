@@ -3,7 +3,7 @@ module.exports = {
 //save professional in Db
 Post: function (newStudyProfessional) { 
       console.log(newStudyProfessional)
-      var sqlString="INSERT INTO hpstudyprofessional(hpid, hpeorigtit, hpedepin, hpemunin, hpepaisin, hpetipin, hpecodin, hpetippr, hpecodpr, hpefecgrad, hpenumconv, hpefecconv, hpetitequi, hpegruptit) VALUES ("
+      var sqlString="INSERT INTO hpstudyprofessional(hpid, hpeorigtit, hpedepin, hpemunin, hpepaisin, hpetipin, hpecodin, hpetippr, hpecodpr, hpefecgrad, hpenumconv, hpefecconv, hpetitequi, hpegruptit,hpeactoadm, hpefecact) VALUES ("
                   +"'"+newStudyProfessional.hpid+"',"
             +"'"+newStudyProfessional.hpeorigtit+"',"
             +"'"+newStudyProfessional.hpedepin+"',"
@@ -17,7 +17,9 @@ Post: function (newStudyProfessional) {
             +"'"+newStudyProfessional.hpenumconv+"',"
             +"'"+newStudyProfessional.hpefecconv+"',"
             +"'"+newStudyProfessional.hpetitequi+"',"
-            +"'"+newStudyProfessional.hpegruptit+"'"
+            +"'"+newStudyProfessional.hpegruptit+"',"
+            +"'"+newStudyProfessional.hpeactoadm+"',"
+            +"'"+newStudyProfessional.hpefecact+"'"
             +")";
       return sqlString;
       

@@ -17,6 +17,8 @@ ServersoftApi.controller("hsOptionListController", ['$scope','$http', 'enumList'
 			 });
 
 		$scope.selectData = function(opSelected){
+			if($scope.preload!=opSelected.key)
+					$scope.preload=opSelected.key;
 			commonvariable.OptionSetSelected[$scope.namelist]=opSelected;
 			$scope.OptionName=opSelected.value;
 		}
