@@ -25,6 +25,32 @@ Post: function (newStudyProfessional) {
       
 },
 
+
+//save professional in Db
+Put: function (hpesid,newStudyProfessional) { 
+      console.log(newStudyProfessional)
+      var sqlString="UPDATE hpstudyprofessional SET "
+            +"hpeorigtit= '"+newStudyProfessional.hpeorigtit+"',"
+            +"hpedepin= '"+newStudyProfessional.hpedepin+"',"
+            +"hpemunin= '"+newStudyProfessional.hpemunin+"',"
+            +"hpepaisin= '"+newStudyProfessional.hpepaisin+"',"
+            +"hpetipin= '"+newStudyProfessional.hpetipin+"',"
+            +"hpecodin= '"+newStudyProfessional.hpecodin+"',"
+            +"hpetippr= '"+newStudyProfessional.hpetippr+"',"
+            +"hpecodpr= '"+newStudyProfessional.hpecodpr+"',"
+            +"hpefecgrad= '"+newStudyProfessional.hpefecgrad+"',"
+            +"hpenumconv= '"+newStudyProfessional.hpenumconv+"',"
+            +"hpefecconv= '"+newStudyProfessional.hpefecconv+"',"
+            +"hpetitequi= '"+newStudyProfessional.hpetitequi+"',"
+            +"hpegruptit= '"+newStudyProfessional.hpegruptit+"',"
+            +"hpeactoadm= '"+newStudyProfessional.hpeactoadm+"',"
+            +"hpefecact= '"+newStudyProfessional.hpefecact+"'"
+            +" WHERE hpesid="+hpesid;
+      return sqlString;
+      
+},
+
+
 //get register professional in Db
 Get: function (pid) {
       if(pid)
@@ -32,12 +58,6 @@ Get: function (pid) {
       else
           return ("SELECT * FROM hpstudyprofessional");
       },
-
-//update professional in Db
-Put: function (idProfessional,CurrentProfessional) {
-      console.log(idProfessional);
-      console.log(CurrentProfessional);
-},
 
 //del professional in Db
 Del: function (idProfessional) {

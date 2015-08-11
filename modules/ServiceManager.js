@@ -19,6 +19,23 @@ Post: function (newServiceProfessional) {
       
 },
 
+//save professional in Db
+Put: function (hpsid,newServiceProfessional) { 
+
+      var sqlString="UPDATE hpserviceprofessional SET "
+            +"hpsobliga= '"+newServiceProfessional.hpsobliga+"',"
+            +"hpstiplug= '"+newServiceProfessional.hpstiplug+"',"
+            +"hpsdeppr= '"+newServiceProfessional.hpsdeppr+"',"
+            +"hpsmunpr= '"+newServiceProfessional.hpsmunpr+"',"
+            +"hpspaispr= '"+newServiceProfessional.hpspaispr+"',"
+            +"hpsfecini= '"+newServiceProfessional.hpsfecini+"',"
+            +"hpsfecfin= '"+newServiceProfessional.hpsfecfin+"',"
+            +"hpsmodal= '"+newServiceProfessional.hpsmodal+"',"
+            +"hpsprog= '"+newServiceProfessional.hpsprog+"'"
+            +" WHERE hpsid="+hpsid;
+      return sqlString;
+      
+},
   //get register professional in Db
   Get: function (pid) {
         if(pid)
@@ -26,12 +43,6 @@ Post: function (newServiceProfessional) {
         else
             return ("SELECT * FROM hpserviceprofessional");
         },
-
-  //update professional in Db
-  Put: function (idProfessional,CurrentProfessional) {
-        console.log(idProfessional);
-        console.log(CurrentProfessional);
-  },
 
   //del professional in Db
   Del: function (idProfessional) {

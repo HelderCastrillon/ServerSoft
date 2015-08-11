@@ -22,6 +22,26 @@ Post: function (newProfessional) {
 	
 },
 
+//save professional in Db
+Put: function (hpid,newProfessional) { 
+   var sqlString="UPDATE hphealthprofessional SET "
+            +"hptipdoc= '"+newProfessional.hptipdoc+"',"
+            +"hpnumdoc= '"+newProfessional.hpnumdoc+"',"
+            +"hppriape= '"+newProfessional.hppriape+"',"
+            +"hpsegape= '"+newProfessional.hpsegape+"',"
+            +"hpprinom= '"+newProfessional.hpprinom+"',"
+            +"hpsegnom= '"+newProfessional.hpsegnom+"',"
+            +"hpsexo= '"+newProfessional.hpsexo+"',"
+            +"hpdepnac= '"+newProfessional.hpdepnac+"',"
+            +"hpmunnac= '"+newProfessional.hpmunnac+"',"
+            +"hppais= '"+newProfessional.hppais+"',"
+            +"hpfecnac= '"+newProfessional.hpfecnac+"',"
+            +"hpetnia= '"+newProfessional.hpetnia+"',"
+            +"hptoken= '"+newProfessional.hptoken+"'"
+            +" WHERE hpid="+hpid;
+   return sqlString;
+   
+},
 //get register professional in Db
 Get: function (pid,option) {
       switch(option){
@@ -43,13 +63,6 @@ GetId: function (numdoc){
 //get by token
 GetByToken: function (numdoc, ntoken){
    return ("select * from hphealthprofessional inner join hpstudyprofessional on hpstudyprofessional.hpid=hphealthprofessional.hpid where  hphealthprofessional.hpnumdoc='"+numdoc+"' and hptoken='"+ntoken+"' limit 1"); 
-},
-
-
-//update professional in Db
-Put: function (idProfessional,CurrentProfessional) {
-	console.log(idProfessional);
- 	console.log(CurrentProfessional);
 },
 
 //del professional in Db

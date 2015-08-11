@@ -58,6 +58,13 @@ ConnectionController: function(StrQuery,res){
 				res.write(JSON.stringify({"status":"SUCCESS","row":result.rowCount}) + "\n");
 				res.end();
 				break;
+			case "UPDATE":
+				// On end JSONify and write the results to console and to HTML output
+				console.log(result);
+				res.writeHead(200, {'Content-Type': 'text/plain'});
+				res.write(JSON.stringify({"status":"SUCCESS","row":result.rowCount}) + "\n");
+				res.end();
+				break;
 			}
 
 		});

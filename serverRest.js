@@ -95,9 +95,9 @@ app.post('/api/HealthProfessional', function(request, response) {
 });
 
 //Update professional
-app.put('/api/HealthProfessional', function(request, response) {
-	var PMquery=profManager.Put(request.body);	
-	//mainController.ConnectionController(PMquery,response);
+app.put('/api/HealthProfessional/:hpid', function(request, response) {
+	var PMquery=profManager.Put(request.params.hpid,request.body);	
+	mainController.ConnectionController(PMquery,response);
 });
 
 /////////////////////////////////////////////////////////
@@ -128,9 +128,9 @@ app.post('/api/HealthProfessionalDetail', function(request, response) {
 });
 
 //Update professional detail
-app.put('/api/HealthProfessionalDetail', function(request, response) {
-	var PMquery=profManagerDetail.Put(request.body);		
-	//mainController.ConnectionController(PMquery,response);
+app.put('/api/HealthProfessionalDetail/:hpdid', function(request, response) {
+	var PMquery=profManagerDetail.Put(request.params.hpdid,request.body);		
+	mainController.ConnectionController(PMquery,response);
 });
 
 /////////////////////////////////////////////////////////
@@ -163,9 +163,9 @@ app.post('/api/ProfessionalStudy', function(request, response) {
 });
 
 //Update professional Study
-app.put('/api/ProfessionalStudy', function(request, response) {
-	var PMquery=StudyManager.Put(request.body);		
-	//mainController.ConnectionController(PMquery,response);
+app.put('/api/ProfessionalStudy/:hpesid', function(request, response) {
+	var PMquery=StudyManager.Put(request.params.hpesid,request.body);		
+	mainController.ConnectionController(PMquery,response);
 });
 
 
@@ -198,9 +198,9 @@ app.post('/api/ProfessionalSSO', function(request, response) {
 });
 
 //Save professional Service
-app.put('/api/ProfessionalSSO', function(request, response) {
-	var PMquery=ServiceManager.Put(request.body);		
-	//mainController.ConnectionController(PMquery,response);
+app.put('/api/ProfessionalSSO/:hpsoid', function(request, response) {
+	var PMquery=ServiceManager.Put(request.params.hpsoid,request.body);		
+	mainController.ConnectionController(PMquery,response);
 });
 
 /////////////////////////////////////////////////////////

@@ -455,11 +455,19 @@
 			  <div class="col-sm-4">
 			    <div class="thumbnail">
 			      <img src="img/Ok.png" alt="Registro de profesional">
-			      <div class="caption">
+			      <div class="caption" ng-show="RegisterMode=='Register'?'true':false">
 			        <h4>Registro correcto</h4>
 			        <p>El Registro se completo exitosamente, gracias por usar este servicio y tenga en cuenta que debe llevar los documentos originales a la ofina de registro de diplomas ubicada en la Secretaría Departamental de Salud</p>
+			        <p>Su codigo de registro es</p>
 			        <div class="well"><h2 class="text-center">{{tokenForUser}}</h2></div>
 			        <ul class="pager"><li class="previous"><a href="/view#/index"><span aria-hidden="true">&larr;</span> Regresar</a></li> </ul>
+			      </div>
+			      <div class="caption" ng-show="RegisterMode=='Edit'?'true':false">
+			        <h4>Actualización de datos correcta</h4>
+			        <p>Actualización de datos se realizó exitosamente</p>
+			        <p>El codigo de registro del usuario es</p>
+			        <div class="well"><h2 class="text-center">{{tokenForUser}}</h2></div>
+			        <ul class="pager"><li class="previous"><a href="/view#/adminaccess"><span aria-hidden="true">&larr;</span> Regresar</a></li> </ul>
 			      </div>
 			    </div>
 			  </div>
@@ -471,6 +479,12 @@
 	 </div>
 	</div>
     </tab>
+   	<div class="text-right">
+	  	<a class ='btn btn-success' href="/view#/adminaccess">
+	  	<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+	  	Regresar a la Lista
+	  	</a>
+  	</div>
   </tabset>
 </div>
 <div>

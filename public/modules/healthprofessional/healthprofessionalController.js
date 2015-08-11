@@ -775,24 +775,24 @@ $scope.findProfessional=function(){
  	$scope.tokenForUser=$scope.DataPersonal.hptoken;
 
  	//data professional
-  	HealthProfessional.put($scope.DataPersonal)
+  	HealthProfessional.put({pid:$scope.DataPersonal.hpid},$scope.DataPersonal)
 			.$promise.then(function(responseHP){
 				if(responseHP.status=="SUCCESS"){
 			
 					//data professional detail
-				 	HealthProfessionalDetail.put($scope.DataPersonalAdd)
+				 	HealthProfessionalDetail.put({pid:$scope.DataPersonalAdd.hpdid},$scope.DataPersonalAdd)
 							.$promise.then(function(responseAdd){
 								if(responseAdd.status=="SUCCESS"){
 							
 												
 								//data professional study
-								HealthProfessionalStudy.put($scope.Study)
+								HealthProfessionalStudy.put({pid:$scope.Study.hpesid},$scope.Study)
 										.$promise.then(function(responseSt){
 											if(responseSt.status=="SUCCESS"){	
 										
 
 											//data professional service		
-											HealthProfessionalService.put($scope.obligService)
+											HealthProfessionalService.put({pid:$scope.obligService.hpsid},$scope.obligService)
 												.$promise.then(function(responseSSO){
 													if(responseSSO.status=="SUCCESS"){
 

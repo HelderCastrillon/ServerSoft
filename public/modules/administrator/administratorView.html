@@ -2,12 +2,12 @@
 <tr>
   <th>Documento</th>
   <th>Nombre</th>
-  <th>Ver detalles</th>
+  <th>Ver/editar o Registrar Acto</th>
 </tr>
 <tr ng-repeat="hp in ListProfessional">
   <td>{{hp.hpnumdoc}}</td>
   <td>{{hp.hppriape+' '+hp.hpprinom+' '+hp.hpsegape+' '+hp.hpsegnom}}</td>
-  <td><a class="btn btn-default" type="submit" href="/view#/healthprofessional/{{hp.hpid}}">Ver o modificar Datos</a></td>
+  <td><a class="btn btn-default" type="submit" href="/view#/healthprofessional/{{hp.hpid}}"><span class='glyphicon glyphicon-edit'></span></a><a class="btn btn-default" type="submit"><span class='glyphicon glyphicon-list-alt'></span></a></td>
 </tr>
 </table>
 
