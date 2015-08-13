@@ -168,6 +168,12 @@ app.put('/api/ProfessionalStudy/:hpesid', function(request, response) {
 	mainController.ConnectionController(PMquery,response);
 });
 
+//Update professional Study
+app.put('/api/ProfessionalActo/:hpesid', function(request, response) {
+	var PMquery=StudyManager.PutActo(request.params.hpesid,request.body);		
+	mainController.ConnectionController(PMquery,response);
+});
+
 
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////

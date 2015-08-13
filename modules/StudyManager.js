@@ -51,6 +51,18 @@ Put: function (hpesid,newStudyProfessional) {
 },
 
 
+//save professional in Db
+Put: function (hpesid,newStudyProfessional) { 
+      console.log(newStudyProfessional)
+      var sqlString="UPDATE hpstudyprofessional SET "
+            +"hpeactoadm= '"+newStudyProfessional.hpeactoadm+"',"
+            +"hpefecact= '"+newStudyProfessional.hpefecact+"'"
+            +" WHERE hpesid="+hpesid;
+      return sqlString;
+      
+},
+
+
 //get register professional in Db
 Get: function (pid) {
       if(pid)

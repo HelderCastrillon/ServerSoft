@@ -1,4 +1,4 @@
-appServersoft.controller('administratorController', ['$scope','$filter','$modal','HealthProfessional','HealthProfessionalStudy', function($scope,$filter,$modal,HealthProfessional,HealthProfessionalStudy){
+appServersoft.controller('administratorController', ['$scope','$filter','$modal','HealthProfessional','HealthProfessionalStudy','HealthProfessionalActo', function($scope,$filter,$modal,HealthProfessional,HealthProfessionalStudy,HealthProfessionalActo){
 HealthProfessional.get()
 				.$promise.then(function(response){
 					$scope.ListProfessional=response;
@@ -16,12 +16,12 @@ HealthProfessional.get()
   $scope.SaveData = function(){
 
   	//data professional study
-	HealthProfessionalStudy.put({pid:$scope.Study.hpesid},$scope.Study)
-			.$promise.then(function(responseSt){
-				if(responseSt.status=="SUCCESS"){
+	HealthProfessionalActo.put({pid:$scope.Study.hpesid},$scope.Study)
+			.$promise.then(function(responseActo){
+				if(responseActo.status=="SUCCESS"){
 						
 				}
-			}
+			});
 
   }
 
@@ -42,7 +42,7 @@ HealthProfessional.get()
     });
 
     modalInstance.result.then(function (DataSave) {
-    	console.log(DataSave);
+    	$scope.SaveData({hpid:idUserRegistered},DataSave);
     }, function () {
       
     });
@@ -55,7 +55,7 @@ HealthProfessional.get()
 appServersoft.controller('ModalInstanceRegisterActo', function ($scope, $modalInstance, hpid) {
   	$scope.hpid = hpid;
    $scope.ok = function () {
-   	$modalInstance.close({numActo:$scope.numActo,fecActo:$scope.fecActo});
+   	$modalInstance.close({hpeactoadm:$scope.numActo,hpefecact:$scope.fecActo});
   };
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
