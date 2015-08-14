@@ -52,12 +52,12 @@ Put: function (hpesid,newStudyProfessional) {
 
 
 //save professional in Db
-Put: function (hpesid,newStudyProfessional) { 
+PutActo: function (hpesid,newStudyProfessional) { 
       console.log(newStudyProfessional)
       var sqlString="UPDATE hpstudyprofessional SET "
             +"hpeactoadm= '"+newStudyProfessional.hpeactoadm+"',"
             +"hpefecact= '"+newStudyProfessional.hpefecact+"'"
-            +" WHERE hpesid="+hpesid;
+            +" WHERE hpid="+hpesid;
       return sqlString;
       
 },

@@ -64,8 +64,8 @@ ServersoftApi.factory("HealthProfessionalStudy",['$resource','commonvariable', f
 }]);
 
 ServersoftApi.factory("HealthProfessionalActo",['$resource','commonvariable', function ($resource,commonvariable) {
-	return $resource( commonvariable.url+"ProfessionalActo/:pid", 
-	{pid:'@pid'},
+	return $resource( commonvariable.url+"ProfessionalActo/:hpid", 
+	{hpid:'@hpid'},
   { put: { method: "PUT"}
   });
 }]);

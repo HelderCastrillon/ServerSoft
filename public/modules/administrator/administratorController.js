@@ -13,10 +13,10 @@ HealthProfessional.get()
 
   //save Data
 
-  $scope.SaveData = function(){
+  $scope.SaveData = function(hpid,DataSave){
 
   	//data professional study
-	HealthProfessionalActo.put({pid:$scope.Study.hpesid},$scope.Study)
+	HealthProfessionalActo.put(hpid,DataSave)
 			.$promise.then(function(responseActo){
 				if(responseActo.status=="SUCCESS"){
 						
