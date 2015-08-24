@@ -10,7 +10,7 @@ var ServersoftApi = angular.module("ServersoftApi", ['ngResource']);
 //Create all common variables of the apps 
 ServersoftApi.factory("commonvariable", function () {
 	var Vari={
-			url:"http://192.168.1.42:5433/api/",
+			url:"http://localhost:5433/api/",
 			urlemail:"http://190.146.87.62/upload/sendmail.php",
 			OptionSetSelected:[]
 			};
