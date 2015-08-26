@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
@@ -16,15 +16,15 @@
                     <input type="text" class="form-control" ng-model="valueToFind" placeholder="Escribe el nombre o documento de la persona">
                 </div>
                 <button type="submit" class="btn btn-primary" ng-click="findPerson(valueToFind)">Buscar</button>
-                <button type="submit" class="btn btn-success" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-refresh" aria-hidden="true" ng-click="loadList()"></span>
-                </button>
-            </form>
+             </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#/adminaccess" ng-click="loadList()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a></li>
+                <li><a href="#/adminaccess" ng-click='openmodalRegisterActo(hp.hpid,0)'>Generar planos</a></li>
+            </ul>
+
         </div>
-
-        
-
     </div>
+</nav>
 
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
@@ -41,7 +41,7 @@
   <td>{{hp.hppriape+' '+hp.hpsegape+' '+hp.hpprinom+' '+hp.hpsegnom}}</td>
     <td>{{hp.actAdm.acto}}</td>
     <td>{{hp.actAdm.fecha}}</td>
-    <td><a class="btn btn-default" type="submit" href="/view#/healthprofessional/{{hp.hpid}}"><span class='glyphicon glyphicon-edit'></span></a><a class="btn btn-default" type="submit" ng-click='openmodalRegisterActo(hp.hpid)'><span class='glyphicon glyphicon-list-alt'></span></a></td>
+    <td><a class="btn btn-default" type="submit" href="/view#/healthprofessional/{{hp.hpid}}"><span class='glyphicon glyphicon-edit'></span></a><a class="btn btn-default" ng-click='openmodalRegisterActo(hp.hpid,1)'><span class='glyphicon glyphicon-list-alt'></span></a></td>
 </tr>
 </table>
 
@@ -67,7 +67,27 @@
     </div>
 </script>
 
-
+<script type="text/ng-template" id="ModalGenerarPlano.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Generar Archivo plano</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="fecIni">Fecha inicial</label>
+                <input  id="fecIni" type="text" class="form-control" ng-model="fecIni" ng-change="fecIni=maskDate(fecIni,'-',[4,2,2],true)" placeholder="Escriba fecha en formato AAAMMMDD">
+            </div>
+            <div class="form-group">
+                <label for="fecFin">Fecha final</label>
+                <input id="fecFin" type="text" class="form-control" ng-model="fecFin" ng-change="fecFin=maskDate(fecFin,'-',[4,2,2],true)" placeholder="Escriba fecha en formato AAAMMMDD">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">Cancelar</button>
+        <button class="btn btn-primary" ng-click="Generar()">Generar</button>
+    </div>
+</script>
 
 
  
