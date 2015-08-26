@@ -52,7 +52,7 @@ Get: function (pid,option) {
 		return ("SELECT * FROM hphealthprofessional where hpnumdoc||hppriape||hpsegape||hpprinom||hpsegnom ilike '%"+pid+"%' order by hpid desc limit 1;");
             break
       default:
-            return ("SELECT * FROM hphealthprofessional");
+            return ("SELECT * FROM hphealthprofessional order by hpid desc limit 20");
 	}
 },
 

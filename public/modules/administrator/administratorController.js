@@ -1,6 +1,13 @@
-appServersoft.controller('administratorController', ['$scope','$filter','$modal','HealthProfessional','HealthProfessionalStudy','HealthProfessionalActo', function($scope,$filter,$modal,HealthProfessional,HealthProfessionalStudy,HealthProfessionalActo){
+appServersoft.controller('administratorController', ['$scope','$filter','$modal','HealthProfessional','HealthProfessionalStudy','HealthProfessionalActo','FindHealthProfessional', function($scope,$filter,$modal,HealthProfessional,HealthProfessionalStudy,HealthProfessionalActo, FindHealthProfessional){
         
-       $scope.loadList=function(){
+        $scope.findPerson = function (valueToFind) {
+            FindHealthProfessional.get({value:valueToFind})
+				.$promise.then(function (response) {
+                    $scope.ListProfessional = response;
+            })
+        }
+        
+        $scope.loadList = function (){
         HealthProfessional.get()
 				.$promise.then(function(response){
 					$scope.ListProfessional=response;
@@ -31,10 +38,14 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
 
   	//data professional study
 	HealthProfessionalActo.put(hpid,DataSave)
-			.$promise.then(function(responseActo){
-				if(responseActo.status=="SUCCESS"){
-						
-				}
+			.$promise.then(function(dataResp){
+                if (dataResp.status == "SUCCESS") {
+                    $scope.loadList();
+                    $scope.addAlert(dataResp.status);
+                }
+                else {
+                    $scope.addAlert('error');
+                } 
 			});
 
   }
@@ -56,14 +67,24 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
     });
 
     modalInstance.result.then(function (DataSave) {
-                $scope.SaveData({ hpid: idUserRegistered }, DataSave);
-                $scope.loadList();
+                $scope.SaveData({ hpid: idUserRegistered }, DataSave);               
     }, function () {
       
     });
   };
 
-
+    $scope.alerts = [];
+        
+    $scope.addAlert = function (type) {
+        if(type=="SUCCESS")
+            $scope.alerts.push({ type: type, msg: 'se ha guardado el acto administrativo para este usuario' });
+        else
+            $scope.alerts.push({ type: type, msg: 'se ha generado un error al guardar el acto adminitrativo' });
+    };
+        
+    $scope.closeAlert = function (index) {
+        $scope.alerts.splice(index, 1);
+    };
 
 }]);
 
