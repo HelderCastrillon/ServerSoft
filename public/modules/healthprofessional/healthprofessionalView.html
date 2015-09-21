@@ -257,11 +257,13 @@
 					 <div class="col-md-6">
 					   	<label   for="tipoprograma" class="{{ValidationField.hpetippr.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_TYPE' | translate }} </label>
 			    		<hs-optionlist namelist='tipoprograma' preload='{{Study.hpetippr}}'></hs-optionlist>
+                         
 					</div>
 					<div class="col-md-6" ng-show="Study.hpeorigtit==1?true:false">
 					   	<label  for="program" class="{{ValidationField.hpecodpr.active?'label label-danger':'control-label'}}">{{ 'PROF_EST_PROGRAM' | translate }} </label>
 			    		<d2-dropdownoptionset tittleoption='program' resource='program' parent="institution" preload='{{Study.hpecodpr}}'></d2-dropdownoptionset>
-					</div>
+                        <label>{{'PROF_SER_TYPE_DESC' | translate}}</label>
+                    </div>
 				</div>	
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
 					<div class="col-md-6 {{ValidationField.hpenumconv.active?'has-error':''}}" >
@@ -296,7 +298,7 @@
 		</div>
 	</div>  
     </tab>
-    <tab heading="{{tabsPersonal4.tittle}}" active="tabsPersonal4.active" disable="tabsPersonal4.disabled" select='validation(4)'>
+    <tab heading="{{tabsPersonal4.tittle}}" ng-show="prestaSSO" active="tabsPersonal4.active" disable="tabsPersonal4.disabled" select='validation(4)'>
     		
 		<div class="panel panel-default">
 		  <div class="panel-heading">
@@ -355,10 +357,10 @@
 					   	<label class="{{ValidationField.hpsmodal.active?'label label-danger':'control-label'}}"   for="modalidad">{{ 'PROF_SERV_MOD' | translate }} </label>
 			    		<hs-optionlist namelist='modalidad' preload='{{obligService.hpsmodal}}'></hs-optionlist>
 					</div>
-					<div class="col-md-6">
+					<!--<div class="col-md-6">
 					   	<label class="{{ValidationField.hpsprog.active?'label label-danger':'control-label'}}"  for="programa">{{ 'PROF_SER_TYPE' | translate }} </label>
 			    		<hs-optionlist namelist='programa' preload='{{obligService.hpsprog}}'></hs-optionlist>
-					</div>
+					</div>-->
 				</div>
 	    	<br>
 		  <nav>
@@ -417,18 +419,20 @@
               </tr>
           </table>
           <br>
- 		  <h3 class="text-center">{{tabsPersonal4.tittle}} </h3>
-		 	 <table class="table table-hover">
-              <tr>
-                <th>Atributo</th>
-                <th>Valor</th>
-              </tr>
-              <tr ng-repeat="so in obligServiceR">
-                <th>{{so.label}}</th>
-                <td>{{so.value}}</td>    
+           <div ng-show="prestaSSO">
+               <h3 class="text-center">{{tabsPersonal4.tittle}} </h3>
+               <table class="table table-hover">
+                   <tr>
+                       <th>Atributo</th>
+                       <th>Valor</th>
+                   </tr>
+                   <tr ng-repeat="so in obligServiceR">
+                       <th>{{so.label}}</th>
+                       <td>{{so.value}}</td>
 
-              </tr>
-          </table>
+                   </tr>
+               </table>
+           </div>
           <br>
 
 	    	<br>

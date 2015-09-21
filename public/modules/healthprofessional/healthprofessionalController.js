@@ -138,7 +138,8 @@ $scope.initData();
 	$scope.tabsPersonal3 = {tittle:$translate('PROF_TAB_STUDY'),active:false,disabled:true};
 	$scope.tabsPersonal4 = {tittle:$translate('PROF_TAB_SERVICE'),active:false,disabled:true};
 	$scope.tabsPersonal5 = {tittle:$translate('PROF_TAB_RESUME'),active:false,disabled:true};
-
+        
+    $scope.prestaSSO = false;
 ///////////////////////////////////////////////////////////////////
 
 $scope.agreeinformation=function(){
@@ -163,7 +164,15 @@ $scope.loadData=function(id){
 
 	HealthProfessionalStudy.get({pid:id})
 			.$promise.then(function(responseSt){
-				$scope.Study=responseSt[0];
+                $scope.Study = responseSt[0];
+
+                if (commonvariable.OptionSetSelected.program.name == "ODONTOLOGIA") {
+                       $scope.prestaSSO = true;
+                }
+                else {
+                    $scope.prestaSSO = false;
+                  }
+
 			});
 											
  	HealthProfessionalService.get({pid:id})
@@ -370,15 +379,37 @@ if($routeParams.id){
 			console.log($scope.DataPersonalAdd);
 			break;
   		case 3:
-  			$scope.tabsPersonal4.active = true;
-  			$scope.Study.hpedepin=(commonvariable.OptionSetSelected.departamentoin!=undefined)?commonvariable.OptionSetSelected.departamentoin.code:"";
+           	$scope.Study.hpedepin=(commonvariable.OptionSetSelected.departamentoin!=undefined)?commonvariable.OptionSetSelected.departamentoin.code:"";
 			$scope.Study.hpemunin=(commonvariable.OptionSetSelected.municipioin!=undefined)?commonvariable.OptionSetSelected.municipioin.code:"";
 			$scope.Study.hpepaisin=(commonvariable.OptionSetSelected.paisin!=undefined)?commonvariable.OptionSetSelected.paisin.numericcode:"";
 			$scope.Study.hpetipin=(commonvariable.OptionSetSelected.tipoinstitucion!=undefined)?commonvariable.OptionSetSelected.tipoinstitucion.key:"";
 			$scope.Study.hpecodin=(commonvariable.OptionSetSelected.institution!=undefined)?commonvariable.OptionSetSelected.institution.code:"";
 			$scope.Study.hpetippr=(commonvariable.OptionSetSelected.tipoprograma!=undefined)?commonvariable.OptionSetSelected.tipoprograma.key:"";
 			$scope.Study.hpecodpr=(commonvariable.OptionSetSelected.program!=undefined)?commonvariable.OptionSetSelected.program.code:"";
-  			console.log($scope.Study);
+                    console.log($scope.Study);
+                    if (commonvariable.OptionSetSelected.program.name=="ODONTOLOGIA") {
+                        $scope.tabsPersonal4.active = true;
+                        $scope.prestaSSO = true;
+                    }
+                    else {
+                        $scope.tabsPersonal5.active = true;
+                        $scope.prestaSSO = false;
+                        ///variables por defecto segun CIRCULAR 013  de 2015
+                        
+                        $scope.obligService.hpsobliga=1;
+                        $scope.obligService.hpstiplug=3;
+                        $scope.obligService=hpsdeppr="00";
+                        $scope.obligService.hpsmunpr="000";
+                        $scope.obligService.hpspaispr="000";
+                        $scope.obligService.hpsmodal ="0";
+                        $scope.obligService.hpsfecini = '1900-01-01';
+                        $scope.obligService.hpsfecfin = '1900-01-01';
+                        $scope.obligService.hpsmodal = '0';
+                        $scope.obligService.hpsprog = '0';
+
+                        $scope.resume();
+
+                    }
   			break;
   		case 4:
   			$scope.tabsPersonal5.active = true;
@@ -386,8 +417,9 @@ if($routeParams.id){
 			$scope.obligService.hpsmunpr=(commonvariable.OptionSetSelected.municipioss!=undefined)?commonvariable.OptionSetSelected.municipioss.code:"";
 			$scope.obligService.hpspaispr=(commonvariable.OptionSetSelected.paisss!=undefined)?commonvariable.OptionSetSelected.paisss.numericcode:"";
 			$scope.obligService.hpsmodal=(commonvariable.OptionSetSelected.modalidad!=undefined)?commonvariable.OptionSetSelected.modalidad.key:"";
-			$scope.obligService.hpsprog=(commonvariable.OptionSetSelected.programa!=undefined)?commonvariable.OptionSetSelected.programa.key:"";
-  			console.log($scope.obligService);
+			//$scope.obligService.hpsprog=(commonvariable.OptionSetSelected.programa!=undefined)?commonvariable.OptionSetSelected.programa.key:"";
+            $scope.obligService.hpsprog = 2;
+            console.log($scope.obligService);
 
   			$scope.resume();			
   		 	break;
@@ -567,7 +599,7 @@ $scope.validationtype=function(type,value, msg){
   			break;
    		case 2:
  			angular.forEach($scope.DataPersonal,function(value,key){
- 				if($scope.ValidationField[key].mandatory==true||($scope.ValidationField[key].mandatory==false && value!="")){
+ 				if($scope.ValidationField[key].mandatory==true||($scope.ValidationField[key].mandatory==false && (value!="" && value!=undefined))){
 	 				var revaltype=$scope.validationtype($scope.ValidationField[key].tipval,value,$scope.ValidationField[key].msg);
 	 				$scope.ValidationField[key].active=revaltype;
 	 			}		 
@@ -576,7 +608,7 @@ $scope.validationtype=function(type,value, msg){
    			break;
   		case 3:
   			angular.forEach($scope.DataPersonalAdd,function(value,key){
- 				if($scope.ValidationField[key].mandatory==true||($scope.ValidationField[key].mandatory==false && value!="")){
+ 				if($scope.ValidationField[key].mandatory==true||($scope.ValidationField[key].mandatory==false && (value!="" && value!=undefined))){
 	 				var revaltype=$scope.validationtype($scope.ValidationField[key].tipval,value,$scope.ValidationField[key].msg);
 	 				$scope.ValidationField[key].active=revaltype;
 	 			}		 
@@ -585,20 +617,21 @@ $scope.validationtype=function(type,value, msg){
   			break;
   		case 4:
 			angular.forEach($scope.Study,function(value,key){
- 				if($scope.ValidationField[key].mandatory==true||($scope.ValidationField[key].mandatory==false && value!="")){
+ 				if($scope.ValidationField[key].mandatory==true||($scope.ValidationField[key].mandatory==false && (value!="" && value!=undefined))){
 	 				var revaltype=$scope.validationtype($scope.ValidationField[key].tipval,value,$scope.ValidationField[key].msg);
 	 				$scope.ValidationField[key].active=revaltype;
 	 			}		 
  			});
  			$scope.tabReturn=3;
   		 	break;
-  		 case 5:
-			angular.forEach($scope.obligService,function(value,key){
- 				if($scope.ValidationField[key].mandatory==true||($scope.ValidationField[key].mandatory==false && value!="")){
-	 				var revaltype=$scope.validationtype($scope.ValidationField[key].tipval,value,$scope.ValidationField[key].msg);
-	 				$scope.ValidationField[key].active=revaltype;
-	 			}		 
- 			});
+                case 5:
+           if($scope.prestaSSO==true)
+			    angular.forEach($scope.obligService,function(value,key){
+ 				    if($scope.ValidationField[key].mandatory==true||($scope.ValidationField[key].mandatory==false && (value!="" && value!=undefined))){
+	 				    var revaltype=$scope.validationtype($scope.ValidationField[key].tipval,value,$scope.ValidationField[key].msg);
+	 				    $scope.ValidationField[key].active=revaltype;
+	 			    }		 
+ 			    });
  			$scope.tabReturn=4;
   		 	break;
   	}
@@ -653,19 +686,22 @@ $scope.findProfessional=function(){
 	.$promise.then(function(dataProfessional){
 			if(dataProfessional.length>0){
 				HealthProfessionalStudy.get({pid:dataProfessional[0].hpid})
-				.$promise.then(function(dataStudy){
-					if(dataStudy[0].hpeactoadm){
-						$scope.DataPersonal.hppriape=dataProfessional[0].hppriape;
-						$scope.DataPersonal.hpsegape=dataProfessional[0].hpsegape;
-						$scope.DataPersonal.hpprinom=dataProfessional[0].hpprinom;
-						$scope.DataPersonal.hpsegnom=dataProfessional[0].hpsegnom;
-						$scope.DataPersonal.hpfecnac=dataProfessional[0].hpfecnac;
-					}
-					else{
-						 	$scope.addAlert("Estimado "+dataProfessional[0].hppriape+" "+dataProfessional[0].hpsegape+" "+dataProfessional[0].hpprinom+" "+dataProfessional[0].hpsegnom+" Usted ya cuenta con un registro pediente, por favor dirigase a la pagina de inicio si desea verificar su registro, utilizando el codigo previamente enviado a su correo. Gracias.");
-  							$scope.openmodal();
-  							$scope.ifsubreg=true;
-						}
+				.$promise.then(function (dataStudy){
+                        try {
+                            if (dataStudy[0].hpeactoadm) {
+                                $scope.DataPersonal.hppriape = dataProfessional[0].hppriape;
+                                $scope.DataPersonal.hpsegape = dataProfessional[0].hpsegape;
+                                $scope.DataPersonal.hpprinom = dataProfessional[0].hpprinom;
+                                $scope.DataPersonal.hpsegnom = dataProfessional[0].hpsegnom;
+                                $scope.DataPersonal.hpfecnac = dataProfessional[0].hpfecnac;
+                            }
+                            else {
+                                $scope.addAlert("Estimado " + dataProfessional[0].hppriape + " " + dataProfessional[0].hpsegape + " " + dataProfessional[0].hpprinom + " " + dataProfessional[0].hpsegnom + " Usted ya cuenta con un registro pediente, por favor dirigase a la pagina de inicio si desea verificar su registro, utilizando el codigo previamente enviado a su correo. Gracias.");
+                                $scope.openmodal();
+                                $scope.ifsubreg = true;
+                            }
+                        } catch (error) { 
+                        };
 				});
 			}
 
@@ -739,12 +775,17 @@ $scope.findProfessional=function(){
 									.$promise.then(function(responseSt){
 										if(responseSt.status=="SUCCESS"){	
 											//data professional service		
-										 	HealthProfessionalService.post($scope.obligService)
-													.$promise.then(function(responseSSO){
-														if(responseSSO.status=="SUCCESS"){
-															$scope.tokenPresentation();
-														}
-													 });
+                                        if ($scope.prestaSSO == true) {
+                                            HealthProfessionalService.post($scope.obligService)
+													.$promise.then(function (responseSSO) {
+                                                if (responseSSO.status == "SUCCESS") {
+                                                    $scope.tokenPresentation();
+                                                }
+                                            });
+                                        }
+                                        else { 
+                                            $scope.tokenPresentation();
+                                        }
 										}	
 
 									 });
@@ -788,22 +829,29 @@ $scope.findProfessional=function(){
 								//data professional study
 								HealthProfessionalStudy.put({pid:$scope.Study.hpesid},$scope.Study)
 										.$promise.then(function(responseSt){
-											if(responseSt.status=="SUCCESS"){	
+                                if (responseSt.status == "SUCCESS") {
+                                    if ($scope.prestaSSO == true) {
+                                        
+                                        //data professional service		
+                                        HealthProfessionalService.put({ pid: $scope.obligService.hpsid }, $scope.obligService)
+												.$promise.then(function (responseSSO) {
+                                            if (responseSSO.status == "SUCCESS") {
+                                                
+                                                $scope.showtoken = true;
+                                                //init data 
+                                                $scope.initData();
+                                                commonvariable.OptionSetSelected = [];
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        $scope.showtoken = true;
+                                        //init data 
+                                        $scope.initData();
+                                        commonvariable.OptionSetSelected = [];
+                                    }
 										
-
-											//data professional service		
-											HealthProfessionalService.put({pid:$scope.obligService.hpsid},$scope.obligService)
-												.$promise.then(function(responseSSO){
-													if(responseSSO.status=="SUCCESS"){
-
-														$scope.showtoken=true;
-														//init data 
-													 	$scope.initData();
-													 	commonvariable.OptionSetSelected=[];
-													}
-												});									
-										
-											}	
+                                }
 										});					
 
 				 				}

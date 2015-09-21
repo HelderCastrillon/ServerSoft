@@ -45,10 +45,7 @@ module.exports = {
 		{"key":"AUX","value":"Auxiliar"},
 		{"key":"TCP","value":"Técnico profesional"},
 		{"key":"TEC","value":"Tecnología"},
-		{"key":"UNV","value":"Universitaria"},
-		{"key":"ESP","value":"Especialización"},
-		{"key":"TEC","value":"Maestría"},
-		{"key":"DOC","value":"Doctorado"}
+		{"key":"UNV","value":"Universitaria"}		
 		];
 
 		var serviciooblig=[

@@ -60,14 +60,14 @@ GetInstitutionByID: function (id) {
 //get program by institution
 GetProgram: function (name,institution) {
       if(name)
-            return ("SELECT institutioncode, code, area, nbc, trim(name) as name, level, levelac  FROM hpprograms where name  ilike '%"+name+"%' and institutioncode = '"+institution+"' limit 10");
+            return ("SELECT institutioncode, code, area, nbc, trim(name) as name, level, levelac  FROM hpprograms where name  ilike '%"+name+"%' and institutioncode = '"+institution+"' and status=1 limit 10");
       else
-            return "SELECT institutioncode, code, area, nbc, trim(name) as name, level, levelac  FROM hpprograms where institutioncode = "+institution+" limit 10";
+            return "SELECT institutioncode, code, area, nbc, trim(name) as name, level, levelac  FROM hpprograms where institutioncode = "+institution+" and status=1 limit 10";
       },
 
 //get program by institution
 GetProgramByID: function (id) {
-       return ("SELECT institutioncode, code, area, nbc, trim(name) as name, level, levelac  FROM hpprograms where code = '"+id+"'");
+       return ("SELECT institutioncode, code, area, nbc, trim(name) as name, level, levelac  FROM hpprograms where code = '"+id+"' and status=1");
       }
 
 };
