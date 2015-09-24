@@ -643,36 +643,38 @@ $scope.validationtype=function(type,value, msg){
 
 ///////////
 
- $scope.resume=function(){
- 	$scope.DataPersonalR=[];
- 	$scope.DataPersonalAddR=[];
- 	$scope.StudyR=[];
- 	$scope.obligServiceR=[];
- 	///data personal
- 	angular.forEach($scope.DataPersonal,function(value,key){
-			if($scope.ValidationField[key].tipval=='S')
- 				value=commonvariable.OptionSetSelected[$scope.ValidationField[key].list.source][$scope.ValidationField[key].list.field];
- 			$scope.DataPersonalR.push({label:$scope.ValidationField[key].label,value:value});	 			
-   			});
- 	///data personal add
- 	angular.forEach($scope.DataPersonalAdd,function(value,key){
- 			if($scope.ValidationField[key].tipval=='S')
- 				value=commonvariable.OptionSetSelected[$scope.ValidationField[key].list.source][$scope.ValidationField[key].list.field];
- 			$scope.DataPersonalAddR.push({label:$scope.ValidationField[key].label,value:value});	
+ $scope.resume= function () {
+            $scope.DataPersonalR = [];
+            $scope.DataPersonalAddR = [];
+            $scope.StudyR = [];
+            $scope.obligServiceR = [];
+            ///data personal
+            angular.forEach($scope.DataPersonal, function (value, key) {
+                if ($scope.ValidationField[key].tipval == 'S')
+                    value = commonvariable.OptionSetSelected[$scope.ValidationField[key].list.source][$scope.ValidationField[key].list.field];
+                $scope.DataPersonalR.push({ label: $scope.ValidationField[key].label, value: value });
+            });
+            ///data personal add
+            angular.forEach($scope.DataPersonalAdd, function (value, key) {
+                if ($scope.ValidationField[key].tipval == 'S')
+                    value = commonvariable.OptionSetSelected[$scope.ValidationField[key].list.source][$scope.ValidationField[key].list.field];
+                $scope.DataPersonalAddR.push({ label: $scope.ValidationField[key].label, value: value });
  						 
- 			});
- 	//study
- 	angular.forEach($scope.Study,function(value,key){
- 			if($scope.ValidationField[key].tipval=='S')
- 				value=commonvariable.OptionSetSelected[$scope.ValidationField[key].list.source][$scope.ValidationField[key].list.field];
- 			$scope.StudyR.push({label:$scope.ValidationField[key].label,value:value});				 
- 			});
- 	//Obligatory Service social
- 	angular.forEach($scope.obligService,function(value,key){
- 			if($scope.ValidationField[key].tipval=='S')
- 				value=commonvariable.OptionSetSelected[$scope.ValidationField[key].list.source][$scope.ValidationField[key].list.field];
- 			$scope.obligServiceR.push({label:$scope.ValidationField[key].label,value:value});				 
- 			});
+            });
+            //study
+            angular.forEach($scope.Study, function (value, key) {
+                if ($scope.ValidationField[key].tipval == 'S')
+                    value = commonvariable.OptionSetSelected[$scope.ValidationField[key].list.source][$scope.ValidationField[key].list.field];
+                $scope.StudyR.push({ label: $scope.ValidationField[key].label, value: value });
+            });
+            if ($scope.prestaSSO == true) {
+                //Obligatory Service social
+                angular.forEach($scope.obligService, function (value, key) {
+                    if ($scope.ValidationField[key].tipval == 'S')
+                        value = commonvariable.OptionSetSelected[$scope.ValidationField[key].list.source][$scope.ValidationField[key].list.field];
+                    $scope.obligServiceR.push({ label: $scope.ValidationField[key].label, value: value });
+                });
+            }
 
  };
 
@@ -867,12 +869,12 @@ $scope.findProfessional=function(){
  	///send token by email
  	$scope.professionalFullName=$scope.DataPersonal.hppriape+" "+$scope.DataPersonal.hpsegape+" "+$scope.DataPersonal.hpprinom+" "+$scope.DataPersonal.hpsegnom;
 	var messageForUser='<h3> Estimado : ' +$scope.professionalFullName+"</h3>";
-	messageForUser+="<br> <h4> El presente correo es informativo y se le envía para notificarle que el proceso de registro se ha realizado exitosamente";
-	messageForUser+="recuerde que usted debe entregar los documentos originales en la oficina de Registro de diplomas ubicada en la Secretaria de salud. </h4>";
-	messageForUser+="<br> Cuando el proceso se encuentre completo serán notificado, también podrá verificar su estado a traves del portal XXX con el codigo de registro  "; 
+	messageForUser+="<br> <h4> El presente correo es informativo y se le envía para notificarle que el proceso de registro se ha realizado exitosamente. ";
+	messageForUser+="Recuerde que usted debe entregar los documentos originales en la oficina de Registro de diplomas de la Secretaria de Salud Departamental del Cauca  Calle 5 # 15-57 Barrio Valencia (Popayán). </h4>";
+	messageForUser+="<br> Cuando el proceso se encuentre completo será notificado, también podrá verificar su estado a través del portal <a href='http://saludcauca.gov.co/diplomas-y-registro'> http://saludcauca.gov.co/diplomas-y-registro </a> con el codigo de registro  "; 
 	messageForUser+="<h3>Codigo de Registro</h3>"; 
 	messageForUser+="<h2>"+$scope.tokenForUser+"</h2>"; 
-	messageForUser+="<br> Si tiene alguna inquietud puede comunicarse con la oficina de registro de diplomas";
+	messageForUser+="<br> Si tiene alguna inquietud puede comunicarse con la oficina de registro de diplomas al teléfono: (2)8209607 ext 119 o al (2)8209613.";
 	messageForUser+="<br> gracias"; 
 
 	///
