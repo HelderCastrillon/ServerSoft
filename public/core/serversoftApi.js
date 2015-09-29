@@ -89,15 +89,19 @@ ServersoftApi.factory("enumList",['$resource','commonvariable', function ($resou
 }]);
 
 ServersoftApi.factory("CountryList",['$resource','commonvariable', function ($resource,commonvariable) {
-	return $resource(commonvariable.url+"common/:resource/:level/:name", 
+	return $resource(commonvariable.url+"common/:resource/:level/:name/:type/:levelac", 
 	{resource:'@resource',
 	name:'@name',
-	level:'@level'},
+	level:'@level',
+    type:'@type',
+    levelac:'@levelac'
+    },
   { get: { method: "GET",isArray: true}
   });
 }]);
 
-ServersoftApi.factory("Token",['$resource','commonvariable', function ($resource,commonvariable) {
+
+ServersoftApi.factory("Token", ['$resource', 'commonvariable', function ($resource, commonvariable) {
 	return $resource(commonvariable.url+"HealthProfessional/token/:numdoc/:ntoken", 
 	{numdoc:'@numdoc',
 	ntoken:'@ntoken'},

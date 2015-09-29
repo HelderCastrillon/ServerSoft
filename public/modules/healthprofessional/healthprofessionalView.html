@@ -51,7 +51,7 @@
 				</div>
 				<div class="col-md-6 form-group {{ValidationField.hpnumdoc.active?'has-error':''}}">
 				   	<label class="control-label"  for="numdoc">{{ 'PROF_DOC' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonal.hpnumdoc" ng-blur="findProfessional()" id="numdoc" required=""/>
+		    		<input type="text" class="form-control" ng-model="DataPersonal.hpnumdoc" ng-blur="findProfessional()" id="numdoc" required=""  mask='9999999999' clean="false" restrict="reject"/>
 				</div>
 			</div>
 			<div class="row">
@@ -81,8 +81,8 @@
 				</div>
 				<div class="col-md-6 {{ValidationField.hpfecnac.active?'has-error':''}}">
 				   	<label for="fecnac" class="">{{ 'PROF_FECNAC' | translate }} (AAAA-MM-DD) </label>
-		    		<input type="text" class="form-control" id="fecnac" ng-model="DataPersonal.hpfecnac" ng-change="DataPersonal.hpfecnac=maskDate(DataPersonal.hpfecnac,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD '  />
-		         </div>
+		    		<input type="text" class="form-control" ng-model="DataPersonal.hpfecnac"  placeholder='Escribe fecha con formato AAAA-MM-DD '  mask='9999-19-39' clean="false" restrict="reject" ng-value="1900-01-01" />
+				 </div>
 			</div>
     		<div class="row">
 				<div class="col-md-6">
@@ -175,13 +175,13 @@
 				</div>
 				<div class="col-md-6 {{ValidationField.hpdtelef.active?'has-error':''}}">
 				   	<label class="control-label"  for="Telefono">{{ 'PROF_TELEFONORED' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelef" id="Telefono" required="" placeholder="Escriba el numero de telefono Ejm: 8233332"/>
+		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelef" id="Telefono" mask='9999999999' clean="false" restrict="reject" ng-value="0" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6 {{ValidationField.hpdtelmov.active?'has-error':''}}">
 				   	<label class="control-label"  for="Movil">{{ 'PROF_MOVIL' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelmov" id="TelefonoCel" required="" placeholder="Escriba el numero de telefono Ejm: 3112233445"/>
+		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelmov" id="TelefonoCel" mask='9999999999' clean="false" restrict="reject" ng-value="0"/>
 				</div>
 				<div class="col-md-6 {{ValidationField.hpdcorreo.active?'has-error':''}}">
 				   	<label class="control-label"  for="Correo">{{ 'PROF_CORREO' | translate }} </label>
@@ -220,7 +220,7 @@
 					</div>
 					<div class="col-md-6 {{ValidationField.hpefecgrad.active?'has-error':''}}">
 					   	<label   for="fecgrad">{{ 'PROF_FEC_GRADO' | translate }} (AAAA-MM-DD) </label>
-			    		<input type="text" class="form-control" ng-model="Study.hpefecgrad"  id="fecgrad" ng-change="Study.hpefecgrad=maskDate(Study.hpefecgrad,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD ' />
+			    		<input type="text" class="form-control" ng-model="Study.hpefecgrad"  id="fecgrad" mask='9999-19-39' clean="false" restrict="reject" ng-value="1900-01-01" />
 			             
 					</div>		  			 
 				</div>
@@ -277,7 +277,7 @@
 				<div class="row" ng-show="Study.hpeorigtit==2?true:false">
 					<div class="col-md-6 {{ValidationField.hpefecconv.active?'has-error':''}}">
 					   	<label   for="fecnac">{{ 'PROF_FEC_CONV' | translate }} </label>
-			    		<input type="text" class="form-control"  ng-model="Study.hpefecconv" ng-change="Study.hpefecgrad=maskDate(Study.hpefecgrad,'-',[4,2,2],true)" />
+			    		<input type="text" class="form-control"  ng-model="Study.hpefecconv" mask='9999-19-39' clean="false" restrict="reject" ng-value="1900-01-01" />
 			    
 
 					</div>
@@ -342,12 +342,12 @@
 				<div class="row" ng-show="obligService.hpsobliga==1?true:false">
 					<div class="col-md-6 {{ValidationField.hpsfecini.active?'has-error':''}}">
 					   	<label class=""  for="fecini">{{ 'PROF_SER_FECINI' | translate }} (AAAA-MM-DD) </label>
-			    		 <input type="text" class="form-control" ng-model="obligService.hpsfecini" ng-change="obligService.hpsfecini=maskDate(obligService.hpsfecini,'-',[4,2,2],true)" placeholder='Escribe fecha con formato AAAA-MM-DD ' />			              
+			    		 <input type="text" class="form-control" ng-model="obligService.hpsfecini" mask='9999-19-39' clean="false" restrict="reject" ng-value="1900-01-01" />			              
 
 					</div>
 					<div class="col-md-6 {{ValidationField.hpsfecfin.active?'has-error':''}}" ng-show="obligService.hpsobliga==1?true:false">
 					   	<label  for="fecfin">{{ 'PROF_SER_FECFIN' | translate }} (AAAA-MM-DD)</label>
-			    		<input type="text" class="form-control" ng-model="obligService.hpsfecfin" ng-change="obligService.hpsfecfin=maskDate(obligService.hpsfecfin,'-',[4,2,2],true)" placeholder='Escribe fecha  con formato AAAA-MM-DD '  />          
+			    		<input type="text" class="form-control" ng-model="obligService.hpsfecfin" mask='9999-19-39' clean="false" restrict="reject" ng-value="1900-01-01" />          
 
 					</div>
 				</div>

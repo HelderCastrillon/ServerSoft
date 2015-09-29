@@ -289,11 +289,17 @@ app.get('/api/common/institutionbyid/:id', function(request, response) {
 });
 
 //get program by name and institution
-app.get('/api/common/program/:institution/:name', function(request, response) {
-	var PMquery=CommmonQuery.GetProgram(request.params.name,request.params.institution);
-	mainController.ConnectionController(PMquery,response);
+app.get('/api/common/program/:institution/:name', function (request, response) {
+    console.log(request.params);
+    var PMquery = CommmonQuery.GetProgram(request.params.name, request.params.institution);
+    mainController.ConnectionController(PMquery, response);
 });
 
+//get program by name and institution
+app.get('/api/common/program/:institution/:name/:type/:levelac', function (request, response) {
+    var PMquery = CommmonQuery.GetProgram(request.params.name, request.params.institution, request.params.type, request.params.levelac);
+    mainController.ConnectionController(PMquery, response);
+});
 //get program by  institution
 app.get('/api/common/program/:institution', function(request, response) {
 	var PMquery=CommmonQuery.GetProgram(undefined,request.params.institution);

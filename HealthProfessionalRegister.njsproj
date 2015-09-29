@@ -17,6 +17,8 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include="package.json" />
+    <Compile Include="public\include\jquery\jquery-2.1.1.min.js" />
+    <Compile Include="public\include\Mask\ngMask.min.js" />
     <Compile Include="ServerController.js" />
     <Compile Include="serverRest.js" />
     <Compile Include="modules\commonList.js" />
@@ -109,6 +111,7 @@
     <Folder Include="public\include\bootstrap-3.3.1-dist\js" />
     <Folder Include="public\include\fileSaver" />
     <Folder Include="public\include\jquery" />
+    <Folder Include="public\include\Mask\" />
     <Folder Include="public\languages" />
     <Folder Include="public\modules" />
     <Folder Include="public\modules\administrator" />

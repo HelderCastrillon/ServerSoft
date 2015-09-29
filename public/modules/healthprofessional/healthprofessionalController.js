@@ -66,12 +66,16 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 			hpsprog:""
 		}
 
+		
+		
+
+
+
 
 	};
 
 $scope.initData();
 ///////////////////////////////////////////////////////////////////
-
 
 /////////////////////////////////
 

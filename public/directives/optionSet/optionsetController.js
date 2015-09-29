@@ -17,13 +17,31 @@ appServersoft.controller("hsDropdownOptionSetController", ['$scope','CountryList
 				$scope.level=commonvariable.OptionSetSelected[$scope.parent].code;
 			else
 				$scope.level=undefined;
-			return CountryList.get({name:nameOs,resource:$scope.resource,level:$scope.level})
+            
+            if ($scope.resource != "program") { 
+                var parameter = { name: nameOs, resource: $scope.resource, level: $scope.level, };
+            }
+            else { 
+                var parameter = { name: nameOs, resource: $scope.resource, level: $scope.level,type: commonvariable.OptionSetSelected.tipoinstitucion.key, levelac: commonvariable.OptionSetSelected.tipoprograma.key };
+            }
+            return CountryList.get(parameter)
 			.$promise.then(function(response){
 				return  response;
 			 })};
 	$scope.onSelect = function ($item, $model, $label) {
 			commonvariable.OptionSetSelected[$scope.tittleoption]=$item;
 		   };
+		   
+	$scope.verifySelected=function(){
+		if(commonvariable.OptionSetSelected[$scope.tittleoption].code==""){
+			$scope.errorfound="has-error";	
+			$scope.errorFoundshow=true;
+	
+		}
+		else{
+			$scope.optionsetSelected=commonvariable.OptionSetSelected[$scope.tittleoption].name;
+		}
+	}	   
 
 
 	$scope.$watch(

@@ -1,6 +1,20 @@
 <div  ng-controller="hsDropdownOptionSetController">
-  <input type="text" ng-model="optionsetSelected" placeholder="{{'OPTIONSET_SEARCH' | translate }}" typeahead="os as os.name for os in findOptionbyName($viewValue)" typeahead-min-length="2"  typeahead-loading="loadingrefresh" class="form-control" typeahead-on-select="onSelect($item, $model, $label)">
+  
+    <div class="row">
+        <div class="col-md-10">
+
+            <div class="input-group-btn {{ouExist}}" >
+  <input type="text" ng-model="optionsetSelected" id="optionsetSelected" placeholder="{{'OPTIONSET_SEARCH' | translate }}" typeahead="os as os.name for os in findOptionbyName($viewValue)" typeahead-min-length="2" ng-blur="verifySelected()" ng-focus="errorFoundshow=false" typeahead-loading="loadingrefresh" class="form-control" typeahead-on-select="onSelect($item, $model, $label)">
     <i ng-show="loadingrefresh" class="glyphicon glyphicon-refresh"></i>
-</div>
-</div>
+           
+            </div>
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-default btn-warning" aria-label="Advertencia" ng-show="errorFoundshow" popover="Debe seleccionar una opción"  popover-trigger="mouseenter" popover-placement="right">
+                <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+            </button>
+        </div>
+		<div class="col-md-1"></div>
+    </div>
+	</div>
 

@@ -58,9 +58,9 @@ GetInstitutionByID: function (id) {
       },
 
 //get program by institution
-GetProgram: function (name,institution) {
+GetProgram: function (name,institution,type,levelac) {
       if(name)
-            return ("SELECT institutioncode, code, area, nbc, trim(name) as name, level, levelac  FROM hpprograms where name  ilike '%"+name+"%' and institutioncode = '"+institution+"' and status=1 limit 10");
+            return ("SELECT institutioncode, code, area, nbc, trim(name) as name, level, levelac  FROM hpprograms where name  ilike '%"+name+"%' and institutioncode = '"+institution+"' and level='"+type+"' and levelac='"+levelac+"' and status=1  limit 10");
       else
             return "SELECT institutioncode, code, area, nbc, trim(name) as name, level, levelac  FROM hpprograms where institutioncode = "+institution+" and status=1 limit 10";
       },
