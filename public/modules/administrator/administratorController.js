@@ -1,5 +1,9 @@
-appServersoft.controller('administratorController', ['$scope','$filter','$modal','HealthProfessional','HealthProfessionalStudy','HealthProfessionalActo','FindHealthProfessional', function($scope,$filter,$modal,HealthProfessional,HealthProfessionalStudy,HealthProfessionalActo, FindHealthProfessional){
-        
+appServersoft.controller('administratorController', ['$scope','$filter','$modal','HealthProfessional','HealthProfessionalStudy','HealthProfessionalActo','FindHealthProfessional', 'authentication', function($scope,$filter,$modal,HealthProfessional,HealthProfessionalStudy,HealthProfessionalActo, FindHealthProfessional,authentication){
+        ///verify session
+        authentication.checkStatus();
+        $scope.shutdown = function () { 
+            authentication.logout();    
+        }
         $scope.findPerson = function (valueToFind) {
             FindHealthProfessional.get({value:valueToFind})
 				.$promise.then(function (response) {

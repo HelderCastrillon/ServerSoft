@@ -1,8 +1,16 @@
-var appServersoft = angular.module("appServersoft", ['ngRoute','ServersoftApi','pascalprecht.translate','ui.bootstrap','ngMask','angular-md5',]);
+var appServersoft = angular.module("appServersoft", ['ngRoute','ServersoftApi','pascalprecht.translate','ui.bootstrap','ngMask','angular-md5', 'ngCookies']);
 
-appServersoft.config(function($routeProvider,$translateProvider) {
- 
-	  $routeProvider.when('/healthprofessional', {
+appServersoft.config(function($routeProvider,$translateProvider, $httpProvider) {
+    
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    
+
+    $routeProvider.when('/login', {
+        templateUrl: "/modules/login/loginView.html",
+        controller: "loginController"
+    });
+    $routeProvider.when('/healthprofessional', {
 		  	templateUrl: "/modules/healthprofessional/healthprofessionalView.html",
 		  	controller: "healthprofessionalController"
 		  });
@@ -26,8 +34,6 @@ appServersoft.config(function($routeProvider,$translateProvider) {
 	$routeProvider.otherwise({
 	        redirectTo: '/index'
 	  });
-
-
 
 
 	  $translateProvider.useStaticFilesLoader({
