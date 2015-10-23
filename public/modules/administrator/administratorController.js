@@ -175,9 +175,9 @@ appServersoft.controller('ModalInstanceRegisterActo', function ($scope, $modalIn
 });
 
 
-appServersoft.controller('ModalGenerarPlano', function ($scope, $modalInstance) {
+appServersoft.controller('ModalGenerarPlano', function ($scope, $modalInstance, filesaver) {
     $scope.Generar = function () {
-
+        filesaver.generate($scope.fecIni, $scope.fecFin);
     };
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
