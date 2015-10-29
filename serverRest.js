@@ -313,6 +313,33 @@ app.get('/api/common/programbyid/:id', function(request, response) {
 });
 
 
+/////////////////////////Resoure in format to resolution 3030
+
+//get all professional in format
+app.get('/api/HealthProfessional/format/:dateini/:dateend', function (request, response) {
+    var PMquery = profManager.GetinFormat(request.params.dateini, request.params.dateend);
+    mainController.ConnectionController(PMquery, response);
+});
+
+//get all professional detail in format
+app.get('/api/HealthProfessionalDetail/format/:dateini/:dateend', function (request, response) {
+    var PMquery = profManagerDetail.GetinFormat(request.params.dateini, request.params.dateend);
+    mainController.ConnectionController(PMquery, response);
+});
+
+//get all professional study in format
+app.get('/api/ProfessionalStudy/format/:dateini/:dateend', function (request, response) {
+    var PMquery = StudyManager.GetinFormat(request.params.dateini, request.params.dateend);
+    mainController.ConnectionController(PMquery, response);
+});
+
+//get all professional SSD in format
+app.get('/api/ProfessionalSSO/format/:dateini/:dateend', function (request, response) {
+    var PMquery = ServiceManager.GetinFormat(request.params.dateini, request.params.dateend);
+    mainController.ConnectionController(PMquery, response);
+});
+
+
 ///////////////////////////////////////////////////////////
 
 //creation of the Server

@@ -110,6 +110,17 @@ ServersoftApi.factory("Token", ['$resource', 'commonvariable', function ($resour
   });
 }]);
 
+ServersoftApi.factory("RETHUS", ['$resource', 'commonvariable', function ($resource, commonvariable) {
+        return $resource(commonvariable.url + ":resource/format/:dateini/:dateend", 
+	{
+            dateini: '@dateini',
+            dateend: '@dateend'
+        },
+  {
+            get: { method: "GET", isArray: true }
+        });
+    }]);
+
 
 
 

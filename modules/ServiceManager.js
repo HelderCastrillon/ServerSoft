@@ -42,8 +42,11 @@ Put: function (hpsid,newServiceProfessional) {
              return ("SELECT * FROM hpserviceprofessional where hpid="+pid);
         else
             return ("SELECT * FROM hpserviceprofessional");
-        },
+    },
 
+  GetinFormat: function (dateini, dateend) {
+        return ("SELECT 3 as type,* FROM hpserviceprofessional");
+    },
   //del professional in Db
   Del: function (idProfessional) {
     console.log(idProfessional);

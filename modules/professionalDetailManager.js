@@ -42,7 +42,11 @@ Get: function (pid) {
           return ("SELECT * FROM hpdetailprofessional");
       },
 
+//get register professional in Db
+GetinFormat: function (dateini, dateend) {
+                 return ("SELECT 2 as type, * FROM hpdetailprofessional");
 
+      },
 //del professional in Db
 Del: function (idProfessional) {
   console.log(idProfessional);

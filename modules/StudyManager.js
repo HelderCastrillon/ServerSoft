@@ -60,8 +60,11 @@ PutActo: function (hpesid,newStudyProfessional) {
             +" WHERE hpid="+hpesid;
       return sqlString;
       
-},
+    },
 
+  GetinFormat: function (dateini, dateend) {
+        return ("SELECT 4 as type,* FROM hpstudyprofessional");
+  },
 
 //get register professional in Db
 Get: function (pid) {

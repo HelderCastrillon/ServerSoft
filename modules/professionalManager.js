@@ -59,6 +59,10 @@ Get: function (pid,option) {
 //get lastID
 GetId: function (numdoc){
    return ("SELECT max(hpid) as hpid  FROM hphealthprofessional where hpnumdoc='"+numdoc+"'"); 
+    },
+//get lastID
+GetinFormat: function (dateini, dateend){
+   return ("SELECT 1 as type,*  FROM hphealthprofessional"); 
 },
 //get by token
 GetByToken: function (numdoc, ntoken){
