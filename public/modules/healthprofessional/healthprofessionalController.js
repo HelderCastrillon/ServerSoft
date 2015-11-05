@@ -91,7 +91,7 @@ $scope.initData();
 		hpsegape:{label:"Segundo apellido",msg:"Escriba su segundo apellido",tipval:"W",active:false,mandatory:false},
 		hpprinom:{label:"Primer nombre",msg:"Escriba su primer nombre",tipval:"W",active:false,mandatory:true},
 		hpsegnom:{label:"Segundo nombre",msg:"Escriba su segundo nombre",tipval:"W",active:false,mandatory:false},
-		hpsexo:{label:"Sexo",msg:"seleccione su sexo",tipval:"S",active:false,mandatory:true,list:{source:"sexo",field:"value"}},
+		hpsexo:{label:"Sexo",msg:"seleccione su Genero",tipval:"S",active:false,mandatory:true,list:{source:"sexo",field:"value"}},
 		hpdepnac:{label:"Departamento donde nació",msg:"Seleccione su departamento de nacimiento",tipval:"S",active:false,mandatory:true,list:{source:"departamento",field:"name"}},
 		hpmunnac:{label:"Municipio donde nació",msg:"Seleccione su municipio de nacimiento",tipval:"S",active:false,mandatory:true,list:{source:"municipio",field:"name"}},
 		hppais:{label:"Pais donde nació",msg:"Seleccione su pais de nacimiento si no es colombiano, de lo contrario seleccione que es colombiano",tipval:"S",active:false,mandatory:true,list:{source:"pais",field:"name"}},
@@ -382,7 +382,8 @@ if($routeParams.id){
 			$scope.DataPersonalAdd.hpdmunred=(commonvariable.OptionSetSelected.municipiored!=undefined)?commonvariable.OptionSetSelected.municipiored.code:"";
 			console.log($scope.DataPersonalAdd);
 			break;
-  		case 3:
+        case 3:
+            $scope.respvalidation=$scope.veriffecgrado($scope.prevfecgrado, $scope.Study.hpefecgrad);
            	$scope.Study.hpedepin=(commonvariable.OptionSetSelected.departamentoin!=undefined)?commonvariable.OptionSetSelected.departamentoin.code:"";
 			$scope.Study.hpemunin=(commonvariable.OptionSetSelected.municipioin!=undefined)?commonvariable.OptionSetSelected.municipioin.code:"";
 			$scope.Study.hpepaisin=(commonvariable.OptionSetSelected.paisin!=undefined)?commonvariable.OptionSetSelected.paisin.numericcode:"";
@@ -392,26 +393,33 @@ if($routeParams.id){
 			$scope.Study.hpecodpr=(commonvariable.OptionSetSelected.program!=undefined)?commonvariable.OptionSetSelected.program.code:"";
                     console.log($scope.Study);
                     if (commonvariable.OptionSetSelected.program.name=="ODONTOLOGIA") {
-                        $scope.tabsPersonal4.active = true;
-                        $scope.prestaSSO = true;
+                        if($scope.respvalidation==true) {
+                            $scope.tabsPersonal4.active = true;
+                            $scope.prestaSSO = true;
+                        }
+                        else
+                            $scope.tabsPersonal3.active = true;
+                        
                     }
                     else {
                         $scope.tabsPersonal5.active = true;
                         $scope.prestaSSO = false;
                         ///variables por defecto segun CIRCULAR 013  de 2015
-                        
-                        $scope.obligService.hpsobliga=1;
-                        $scope.obligService.hpstiplug=3;
-                        $scope.obligService=hpsdeppr="00";
-                        $scope.obligService.hpsmunpr="000";
-                        $scope.obligService.hpspaispr="000";
-                        $scope.obligService.hpsmodal ="0";
-                        $scope.obligService.hpsfecini = '1900-01-01';
-                        $scope.obligService.hpsfecfin = '1900-01-01';
-                        $scope.obligService.hpsmodal = '0';
-                        $scope.obligService.hpsprog = '0';
-
-                        $scope.resume();
+                        $scope.obligService = {
+                            hpsobliga: 1,
+                            hpstiplug: 3,
+                            hpsdeppr: "00",
+                            hpsmunpr: "000",
+                            hpspaispr: "000",
+                            hpsfecini: "1900-01-01",
+                            hpsfecfin: "1900-01-01",
+                            hpsmodal: "0",
+                            hpsprog: "0"
+                        };
+                        if ($scope.respvalidation == true)                      
+                            $scope.resume();
+                        else
+                            $scope.tabsPersonal3.active = true;
 
                     }
   			break;
@@ -680,12 +688,24 @@ $scope.validationtype=function(type,value, msg){
                 });
             }
 
- };
+        };
+        
+        ///verif date of graduation
+$scope.veriffecgrado = function (fprev,factual) { 
+            fprev = fprev.substring(0, 10);
+    if(fprev==factual){
+            $scope.addAlert("Estimado Usuario, usted ya cuenta con un registro académico en esta fecha de grado, por favor verifique que la información es correcta, Gracias.");
+            $scope.openmodal();
+                $scope.ifsubreg = true;
+                return false;
+            }
+            return true;
+ }
 
 ///find professional if there exist 94489321
 
 $scope.findProfessional=function(){
-	if($scope.RegisterMode=='Edit')
+	if($scope.RegisterMode=='Edit' || $scope.DataPersonal.hpnumdoc=="")
 		return 1;
 
 	FindHealthProfessional.get({value:$scope.DataPersonal.hpnumdoc})
@@ -693,8 +713,9 @@ $scope.findProfessional=function(){
 			if(dataProfessional.length>0){
 				HealthProfessionalStudy.get({pid:dataProfessional[0].hpid})
 				.$promise.then(function (dataStudy){
+                        $scope.prevfecgrado = dataStudy[0].hpefecgrad;
                         try {
-                            if (dataStudy[0].hpeactoadm) {
+                            if (dataStudy[dataStudy.length-1].hpeactoadm) {
                                 $scope.DataPersonal.hppriape = dataProfessional[0].hppriape;
                                 $scope.DataPersonal.hpsegape = dataProfessional[0].hpsegape;
                                 $scope.DataPersonal.hpprinom = dataProfessional[0].hpprinom;
@@ -714,6 +735,7 @@ $scope.findProfessional=function(){
 
 
 	});
+
 
 
 }

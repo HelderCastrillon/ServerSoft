@@ -220,7 +220,7 @@
 					</div>
 					<div class="col-md-6 {{ValidationField.hpefecgrad.active?'has-error':''}}">
 					   	<label   for="fecgrad">{{ 'PROF_FEC_GRADO' | translate }} (AAAA-MM-DD) </label>
-			    		<input type="text" class="form-control" ng-model="Study.hpefecgrad"  id="fecgrad" mask='9999-19-39' clean="false" restrict="reject" ng-value="1900-01-01" />
+			    		<input type="text" class="form-control" ng-model="Study.hpefecgrad"  ng-blur="veriffecgrado(prevfecgrado,Study.hpefecgrad)" id="fecgrad" mask='9999-19-39' clean="false" restrict="reject" ng-value="1900-01-01" />
 			             
 					</div>		  			 
 				</div>
