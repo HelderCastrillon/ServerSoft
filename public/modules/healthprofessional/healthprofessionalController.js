@@ -402,22 +402,24 @@ if($routeParams.id){
                         
                     }
                     else {
-                        $scope.tabsPersonal5.active = true;
-                        $scope.prestaSSO = false;
-                        ///variables por defecto segun CIRCULAR 013  de 2015
-                        $scope.obligService = {
-                            hpsobliga: 1,
-                            hpstiplug: 3,
-                            hpsdeppr: "00",
-                            hpsmunpr: "000",
-                            hpspaispr: "000",
-                            hpsfecini: "1900-01-01",
-                            hpsfecfin: "1900-01-01",
-                            hpsmodal: "0",
-                            hpsprog: "0"
-                        };
-                        if ($scope.respvalidation == true)                      
+                        if ($scope.respvalidation == true) {
+                            $scope.prestaSSO = false;
+                            ///variables por defecto segun CIRCULAR 013  de 2015
+                            $scope.obligService = {
+                                hpsobliga: 1,
+                                hpstiplug: 3,
+                                hpsdeppr: "00",
+                                hpsmunpr: "000",
+                                hpspaispr: "000",
+                                hpsfecini: "1900-01-01",
+                                hpsfecfin: "1900-01-01",
+                                hpsmodal: "0",
+                                hpsprog: "0"
+                            };
+                            $scope.tabsPersonal5.active = true;
                             $scope.resume();
+                        }                    
+                            
                         else
                             $scope.tabsPersonal3.active = true;
 
