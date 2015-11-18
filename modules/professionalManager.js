@@ -67,7 +67,20 @@ GetinFormat: function (dateini, dateend){
 //get by token
 GetByToken: function (numdoc, ntoken){
    return ("select * from hphealthprofessional inner join hpstudyprofessional on hpstudyprofessional.hpid=hphealthprofessional.hpid where  hphealthprofessional.hpnumdoc='"+numdoc+"' and hptoken='"+ntoken+"' limit 1"); 
-},
+    },
+    
+  //get by date
+GetByDateRegister: function (dateini,dateend) {
+     return ("select * from hphealthprofessional inner join hpstudyprofessional on hpstudyprofessional.hpid=hphealthprofessional.hpid where  hpfecha between'" + dateini + "' and '" + dateend + "'");
+    },
+    //get by date
+GetByDateActo: function (dateini, dateend) {
+        return ("select * from hphealthprofessional inner join hpstudyprofessional on hpstudyprofessional.hpid=hphealthprofessional.hpid where  hpefecact between'" + dateini + "' and '" + dateend + "'");
+    }, 
+    //get by date
+GetByDateDocument: function (dateini, dateend) {
+        return ("select * from hphealthprofessional inner join hpstudyprofessional on hpstudyprofessional.hpid=hphealthprofessional.hpid where  hpefechaentrega between'" + dateini + "' and '" + dateend + "'");
+    },   
 
 //del professional in Db
 Del: function (idProfessional) {

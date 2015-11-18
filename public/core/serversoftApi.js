@@ -12,7 +12,8 @@ ServersoftApi.factory("commonvariable", function () {
 	var Vari={
 			url:"http://localhost:5433/api/",
         urlemail: "http://190.146.87.62/upload/sendmail.php",
-            urlsession: "http://localhost:7777/api/sys/auth",
+        urlsession: "https://localhost:7777/api/sys/auth",
+        templateUrl:"/",
 			OptionSetSelected:[]
 			};
 
@@ -35,6 +36,19 @@ ServersoftApi.factory("FindHealthProfessional",['$resource','commonvariable', fu
   { get: { method: "GET",isArray: true}
   });
 }]);
+
+
+ServersoftApi.factory("FindHealthProfessionalbyDate", ['$resource', 'commonvariable', function ($resource, commonvariable) {
+        return $resource(commonvariable.url + "HealthProfessional/:resource/:dateini/:dateend", 
+	{
+            resource: '@resource',
+            dateini: '@dateini',
+            dateend:'@dateend'
+        },
+  {
+            get: { method: "GET", isArray: true }
+        });
+    }]);
 
 ServersoftApi.factory("HealthProfessionalId",['$resource','commonvariable', function ($resource,commonvariable) {
 	return $resource( commonvariable.url+"HealthProfessionalId/:numdoc", 
@@ -69,7 +83,15 @@ ServersoftApi.factory("HealthProfessionalActo",['$resource','commonvariable', fu
 	{hpid:'@hpid'},
   { put: { method: "PUT"}
   });
-}]);
+    }]);
+
+ServersoftApi.factory("HealthProfessionalDocument", ['$resource', 'commonvariable', function ($resource, commonvariable) {
+        return $resource(commonvariable.url + "ProfessionalDocument/:hpid", 
+	{ hpid: '@hpid' },
+  {
+            put: { method: "PUT" }
+        });
+    }]);
 
 ServersoftApi.factory("HealthProfessionalService",['$resource','commonvariable', function ($resource,commonvariable) {
 	return $resource( commonvariable.url+"ProfessionalSSO/:pid", 

@@ -61,8 +61,20 @@ PutActo: function (hpesid,newStudyProfessional) {
       return sqlString;
       
     },
-
-  GetinFormat: function (dateini, dateend) {
+    
+  //save professional in Db
+ PutDocument: function (hpesid, newStudyProfessional) {
+        console.log(newStudyProfessional)
+        var sqlString = "UPDATE hpstudyprofessional SET " 
+        + "hpobservacion= '" + newStudyProfessional.hpobservacion + "',"     
+        + "hpedocentregados= '" + newStudyProfessional.hpedocentregados + "'," 
+            + "hpefechaentrega= '" + newStudyProfessional.hpefechaentrega + "'" 
+            + " WHERE hpid=" + hpesid;
+        return sqlString;
+      
+    },
+    
+ GetinFormat: function (dateini, dateend) {
         return ("SELECT 4 as type,* FROM hpstudyprofessional");
   },
 

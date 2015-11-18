@@ -174,9 +174,19 @@
 		    		<input type="text" class="form-control" ng-change="DataPersonalAdd.hpddirecc=DataPersonalAdd.hpddirecc.toUpperCase();" ng-model="DataPersonalAdd.hpddirecc" id="Dirección" required=""/>
 				</div>
 				<div class="col-md-6 {{ValidationField.hpdtelef.active?'has-error':''}}">
-				   	<label class="control-label"  for="Telefono">{{ 'PROF_TELEFONORED' | translate }} </label>
-		    		<input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelef" id="Telefono" mask='9999999999' clean="false" restrict="reject" ng-value="0" />
-				</div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="control-label" for="Telefono">{{ 'PROF_TELEFONORED' | translate }} </label>
+                            <input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelef" id="Telefono" mask='9999999999' clean="false" restrict="reject" ng-value="0" />
+
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label" for="Telefono2">{{ 'PROF_TELEFONORED2' | translate }} </label>
+                            <input type="text" class="form-control" ng-model="DataPersonalAdd.hpdtelef2" id="Telefono2" mask='9999999999' clean="false" restrict="reject" ng-value="0" />
+
+                        </div>
+                    </div>
+    				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6 {{ValidationField.hpdtelmov.active?'has-error':''}}">
@@ -463,14 +473,14 @@
 			        <p>El Registro se completo exitosamente, gracias por usar este servicio y tenga en cuenta que debe llevar los documentos originales a la ofina de registro de diplomas ubicada en la Secretaría Departamental de Salud</p>
 			        <p>Su codigo de registro es</p>
 			        <div class="well"><h2 class="text-center">{{tokenForUser}}</h2></div>
-			        <ul class="pager"><li class="previous"><a href="/view#/index"><span aria-hidden="true">&larr;</span> Regresar</a></li> </ul>
+			        <ul class="pager"><li class="previous"><a href="/view#/index"><span aria-hidden="true">&larr;</span> Finalizar </a></li> </ul>
 			      </div>
 			      <div class="caption" ng-show="RegisterMode=='Edit'?'true':false">
 			        <h4>Actualización de datos correcta</h4>
 			        <p>Actualización de datos se realizó exitosamente</p>
 			        <p>El codigo de registro del usuario es</p>
 			        <div class="well"><h2 class="text-center">{{tokenForUser}}</h2></div>
-			        <ul class="pager"><li class="previous"><a href="/view#/adminaccess"><span aria-hidden="true">&larr;</span> Regresar</a></li> </ul>
+			        <ul class="pager"><li class="previous"><a href="/view#/adminaccess"><span aria-hidden="true">&larr;</span> Finalizar</a></li> </ul>
 			      </div>
 			    </div>
 			  </div>

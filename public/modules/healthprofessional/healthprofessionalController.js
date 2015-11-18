@@ -23,15 +23,16 @@ appServersoft.controller('healthprofessionalController', ['$scope','$filter','co
 			hptoken:"1"
 		};
 
-		$scope.DataPersonalAdd={
-			hpdestcon:"",
-			hpdpaisred:"",
-			hpddepred:"",
-			hpdmunred:"",
-			hpddirecc:"",
-			hpdtelef:"0",
-			hpdtelmov:"0",
-			hpdcorreo:""
+		$scope.DataPersonalAdd= {
+                hpdestcon: "",
+                hpdpaisred: "",
+                hpddepred: "",
+                hpdmunred: "",
+                hpddirecc: "",
+                hpdtelef: "",
+                hpdtelmov: "",
+                hpdcorreo: "",
+                hpdtelef2:""            
 		};
 
 		$scope.Study={
@@ -103,8 +104,9 @@ $scope.initData();
 		hpddepred:{label:"Departamento de Residencia",msg:"Seleccione su departamento de residencia",tipval:"S",active:false,mandatory:true,list:{source:"departamentored",field:"name"}},
 		hpdmunred:{label:"Municipio de residencia",msg:"Seleccione su municipio de residencia",tipval:"S",active:false,mandatory:true,list:{source:"municipiored",field:"name"}},
 		hpddirecc:{label:"Dirección de residencia",msg:"Escriba la dirección donde usted vive",tipval:"W",active:false,mandatory:true},
-		hpdtelef:{label:"Telefono Fijo",msg:"Escriba si telefono fijo de contacto",tipval:"N",active:false,mandatory:false},
-		hpdtelmov:{label:"Telefono celular",msg:"Escriba un telefono celular de contacto valido",tipval:"N",active:false,mandatory:false},
+        hpdtelef: { label: "Telefono Fijo", msg: "Escriba si telefono fijo de contacto", tipval: "N", active: false, mandatory: false },
+        hpdtelef2: { label: "Telefono de contacto", msg: "Escriba si telefono de contacto adicionar", tipval: "N", active: false, mandatory: false },
+        hpdtelmov:{label:"Telefono celular",msg:"Escriba un telefono celular de contacto valido",tipval:"N",active:false,mandatory:false},
 		hpdcorreo:{label:"Correo Electronico",msg:"escriba un correo electronico valido",tipval:"M",active:false,mandatory:true},
 		hpeorigtit:{label:"Origen del titulo",msg:"Seleccione su titulo de origen",tipval:"S",active:false,mandatory:true,list:{source:"paisin",field:"name"}},
 		hpedepin:{label:"Departamento donde estudió",msg:"Seleccione el departamento donde se encuentra el instituto donde estudió",tipval:"S",active:false,mandatory:true,list:{source:"departamentoin",field:"name"}},
@@ -380,7 +382,12 @@ if($routeParams.id){
    			$scope.DataPersonalAdd.hpdpaisred=(commonvariable.OptionSetSelected.paisred!=undefined)?commonvariable.OptionSetSelected.paisred.numericcode:"";
 			$scope.DataPersonalAdd.hpddepred=(commonvariable.OptionSetSelected.departamentored!=undefined)?commonvariable.OptionSetSelected.departamentored.code:"";
 			$scope.DataPersonalAdd.hpdmunred=(commonvariable.OptionSetSelected.municipiored!=undefined)?commonvariable.OptionSetSelected.municipiored.code:"";
-			console.log($scope.DataPersonalAdd);
+                    
+            if($scope.DataPersonalAdd.hpdtelef=="")$scope.DataPersonalAdd.hpdtelef=0;
+            if($scope.DataPersonalAdd.hpdtelmov=="")$scope.DataPersonalAdd.hpdtelmov=0;
+            if ($scope.DataPersonalAdd.hpdtelef2 == "") $scope.DataPersonalAdd.hpdtelef2 = 0;
+                    
+            console.log($scope.DataPersonalAdd);
 			break;
         case 3:
             $scope.respvalidation=$scope.veriffecgrado($scope.prevfecgrado, $scope.Study.hpefecgrad);
@@ -693,7 +700,9 @@ $scope.validationtype=function(type,value, msg){
         };
         
         ///verif date of graduation
-$scope.veriffecgrado = function (fprev,factual) { 
+        $scope.veriffecgrado = function (fprev, factual) {
+            if (fprev == undefined)
+                return true;
             fprev = fprev.substring(0, 10);
     if(fprev==factual){
             $scope.addAlert("Estimado Usuario, usted ya cuenta con un registro académico en esta fecha de grado, por favor verifique que la información es correcta, Gracias.");

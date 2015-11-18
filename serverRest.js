@@ -82,6 +82,24 @@ app.get('/api/HealthProfessionalId/:numdoc', function(request, response) {
 	mainController.ConnectionController(PMquery,response);
 });
 
+//find professional by create date
+app.get('/api/HealthProfessional/findbycreatedate/:dateini/:dateend', function (request, response) {
+    console.log(request.params.dateini);
+    var PMquery = profManager.GetByDateRegister(request.params.dateini, request.params.dateend);
+    mainController.ConnectionController(PMquery, response);
+});
+
+//find professional by  acto date
+app.get('/api/HealthProfessional/findbyactodate/:dateini/:dateend', function (request, response) {
+    var PMquery = profManager.GetByDateActo(request.params.dateini, request.params.dateend);
+    mainController.ConnectionController(PMquery, response);
+});
+//find professional by document date
+app.get('/api/HealthProfessional/findbydocumentdate/:dateini/:dateend', function (request, response) {
+    var PMquery = profManager.GetByDateDocument(request.params.dateini, request.params.dateend);
+    mainController.ConnectionController(PMquery, response);
+});
+
 //get id professional saved
 app.get('/api/HealthProfessional/token/:numdoc/:ntoken', function(request, response) {
 	var PMquery=profManager.GetByToken(request.params.numdoc,request.params.ntoken);
@@ -114,6 +132,7 @@ app.get('/api/HealthProfessionalDetail/find/:pid', function(request, response) {
 	var PMquery=profManagerDetail.Get(request.params.pid,'name');
 	mainController.ConnectionController(PMquery,response);
 });
+
 
 //get all professional
 app.get('/api/HealthProfessionalDetail', function(request, response) {
@@ -172,6 +191,12 @@ app.put('/api/ProfessionalStudy/:hpesid', function(request, response) {
 app.put('/api/ProfessionalActo/:hpesid', function(request, response) {
 	var PMquery=StudyManager.PutActo(request.params.hpesid,request.body);		
 	mainController.ConnectionController(PMquery,response);
+});
+
+//Update professional Study
+app.put('/api/ProfessionalDocument/:hpesid', function (request, response) {
+    var PMquery = StudyManager.PutDocument(request.params.hpesid, request.body);
+    mainController.ConnectionController(PMquery, response);
 });
 
 

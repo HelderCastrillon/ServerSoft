@@ -7,88 +7,174 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <div class="navbar-brand">Buscar persona registrada</div>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" ng-model="valueToFind" placeholder="Escribe el nombre o documento de la persona">
-                </div>
-                <button type="submit" class="btn btn-primary" ng-click="findPerson(valueToFind)">Buscar</button>
-             </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/adminaccess" ng-click='openmodalRegisterActo(hp.hpid,0)'>Generar planos</a></li>
-                <li class="active"><a href="#/adminaccess" ng-click="loadList()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a></li>
-                <li class="active"><a href="#/adminaccess" ng-click="shutdown()"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>
-            </ul>
 
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-12"><br /></div>
+            </div>
+        <div class="row">
+            <div class="col-md-2">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#/adminaccess" ng-click="loadList()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a></li>
+                    <li class="active"><a href="#/adminaccess" ng-click="shutdown()"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></li>
+                </ul>
+            </div>
+            <div class="col-md-10">
+                <accordion close-others="oneAtATime">
+                    <accordion-group is-open="status.open">
+                        <accordion-heading>
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            Opciones de busqueda <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                        </accordion-heading>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <label class="label-control">Buscar por:</label>
+                                <div class="btn-group" role="group" aria-label="...">
+                                    <button type="button" class="btn btn-{{opSearch==1?'primary':'default'}}" ng-click="opSearch=1">nombre o documento</button>
+                                    <button type="button" class="btn btn-{{opSearch==2?'primary':'default'}}" ng-click="opSearch=2">fecha de registro</button>
+                                    <button type="button" class="btn btn-{{opSearch==3?'primary':'default'}}" ng-click="opSearch=3">fecha de acto</button>
+                                    <button type="button" class="btn btn-{{opSearch==4?'primary':'default'}}" ng-click="opSearch=4">fecha de entrega de documentos</button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row" ng-show="opSearch==1">
+                            <form class="navbar-form navbar-left" role="search">
+                                <div class="form-group">
+                                    <label class="label-control">Escribe el nombre o el documento de la persona:</label>
+                                    <input type="text" class="form-control" ng-model="valueToFind" placeholder="Escribe el nombre o documento de la persona">
+                                </div>
+                                <button type="submit" class="btn btn-primary" ng-click="findPerson(valueToFind)">Buscar</button>
+                            </form>
+                        </div>
+                        <div class="row" ng-show="opSearch!=1">
+                            <form class="navbar-form navbar-left" role="search">
+                                <div class="form-group">
+                                    <label class="label-control">Fecha inicio:</label>
+                                    <input type="date" class="form-control" ng-model="dateini">
+                                    <label class="label-control">Fecha final:</label>
+                                    <input type="date" class="form-control" ng-model="dateend">
+                                </div>
+                                <button type="submit" class="btn btn-primary" ng-click="findByDate(dateini,dateend,opSearch)">Buscar</button>
+                            </form>
+                        </div>
+                      
+                        <div class="row">
+                            <div class="col-md-12">
+                                <br />
+                            </div>
+                         </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="label-control">Filtros:</label>
+                                    <div class="form-group">
+                                        <input type="checkbox" ng-click=""> Con acto administrativo
+                                        <input type="checkbox" ng-click=""> Sin acto administrativo
+                                        <input type="checkbox" ng-click=""> Documentos entregados
+                                        <input type="checkbox" ng-click=""> Documentos no entregados
+
+                                    </div>
+                                 </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                </div>
+                              <div class="col-md-6">
+                                  <div class="btn-group" role="group" aria-label="...">
+                                      <button class="btn btn-default" type="button">
+                                          Total de registros <span class="badge">{{ListProfessional.length}}</span>
+                                      </button>
+                                      <button type="button" class="btn btn-success" aria-label="Left Align" ng-click='openmodalRegisterActo(hp.hpid,0)'>
+                                          <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>Guardar en archivo plano
+                                      </button>
+                                  </div>
+                            </div>
+                        </div>
+</accordion-group>
+                </accordion>
+            </div>
+        </div>
+       </div>
 </nav>
 
-<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
-<table class="table table-hover">
-<tr>
-  <th>Documento</th>
-  <th>Nombre</th>
-  <th>Acto</th>
-  <th>Fecha Acto</th>
-  <th>Ver/editar o Registrar Acto</th>
-</tr>
-<tr ng-repeat="hp in ListProfessional" class="{{hp.actAdm.acto==''?'warning':''}}">
-  <td>{{hp.hpnumdoc}}</td>
-  <td>{{hp.hppriape+' '+hp.hpsegape+' '+hp.hpprinom+' '+hp.hpsegnom}}</td>
-    <td>{{hp.actAdm.acto}}</td>
-    <td>{{hp.actAdm.fecha}}</td>
-    <td><a class="btn btn-default" type="submit" href="/view#/healthprofessional/{{hp.hpid}}"><span class='glyphicon glyphicon-edit'></span></a><a class="btn btn-default" ng-click='openmodalRegisterActo(hp.hpid,1)'><span class='glyphicon glyphicon-list-alt'></span></a></td>
-</tr>
-</table>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
-<script type="text/ng-template" id="ModalRegisterActo.html">
-    <div class="modal-header">
-        <h3 class="modal-title">Registro de acto Administrativo</h3>
-    </div>
-    <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Numero del acto administrativo</label>
-            <input type="text" class="form-control" ng-model="numActo" placeholder="ingrese solo numeros">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Fecha del acto administrativo</label>
-            <input type="text" class="form-control" ng-model="fecActo" ng-change="fecActo=maskDate(fecActo,'-',[4,2,2],true)" placeholder="Escriba fecha en formato AAAMMMDD">
-          </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-default" ng-click="cancel()">Cancelar</button>
-        <button class="btn btn-primary" ng-click="ok()" >Guardar</button>
-    </div>
+    <table class="table table-hover">
+        <tr>
+            <th>Documento</th>
+            <th>Nombre</th>
+            <th>Acto</th>
+            <th>Fecha Acto</th>
+            <th>Opciones</th>           
+        </tr>
+        <tr ng-repeat="hp in ListProfessional" class="{{hp.actAdm.acto==''?'warning':''}}">
+            <td>{{hp.hpnumdoc}}</td>
+            <td>{{hp.hppriape+' '+hp.hpsegape+' '+hp.hpprinom+' '+hp.hpsegnom}}</td>
+            <td>{{hp.actAdm.acto}}</td>
+            <td>{{hp.actAdm.fecha}}</td>
+            <td>
+            <div class="btn-group" role="group" aria-label="...">
+                <a class="btn btn-default" title="ver o editar registro" type="submit" href="/view#/healthprofessional/{{hp.hpid}}"><span class='glyphicon glyphicon-pencil'></span></a>
+                <a class="btn btn-default" title="Guardar registro administrativo" ng-click='openmodal(hp.hpid,1)'><span class='glyphicon glyphicon-tags'></span></a>
+                <a class="btn btn-default" title="entrega de documentos" ng-click='openmodal(hp.hpid,2)'><span class='glyphicon glyphicon-book'></span></a>
+                <a class="btn btn-default"  title="Generar certificado" ng-click='openmodal(hp.hpid,3)'><span class='glyphicon glyphicon-file'></span></a>
+            </div>
+</td>     
+        </tr>
+    </table>
+
+    <script type="text/ng-template" id="ModalRegisterActo.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Registro de acto Administrativo</h3>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Numero del acto administrativo</label>
+                    <input type="text" class="form-control" ng-model="numActo" placeholder="ingrese solo numeros">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Fecha del acto administrativo</label>
+                    <input type="text" class="form-control" ng-model="fecActo" ng-change="fecActo=maskDate(fecActo,'-',[4,2,2],true)" placeholder="Escriba fecha en formato AAAMMMDD">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">Cancelar</button>
+            <button class="btn btn-primary" ng-click="ok()">Guardar</button>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="ModalRecepcionDocumentos.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Recepción de documentos</h3>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                    <label for="hpefechaentrega">Fecha de recepción</label>
+                    <input id="hpefechaentrega" type="date" class="form-control" ng-model="hpefechaentrega">
+                </div>
+                <div class="form-group">
+                    <label for="hpedocentregados">Documentos entregados completamente</label>
+                    <input id="hpedocentregados" type="radio" name="hpedocentregados" value="true"  ng-click="hpedocentregados=true">Si
+                    <input id="hpedocentregados" type="radio" name="hpedocentregados"  value="false" ng-click="hpedocentregados=false">No
+                </div>
+                <div class="form-group">
+                    <label for="hpobservacion">Descripción</label>
+                    <textarea id="hpobservacion" type="text" class="form-control" ng-model="hpobservacion" placeholder="Escriba que documento y observaciones sobre la entrega del documento"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">Cancelar</button>
+            <button class="btn btn-primary" ng-click="ok()">Guardar</button>
+        </div>
+    </script>
+<script type="text/ng-template" id="ModalViewpdf.html">
+    <div class="text-right"><button class="btn btn-danger" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span></button></div>
+    <hs-printpdf templatename="RETHUS-Auxiliares.html" dataperson="{{personSelected}}"></hs-printpdf>
+    
 </script>
 
-<script type="text/ng-template" id="ModalGenerarPlano.html">
-    <div class="modal-header">
-        <h3 class="modal-title">Generar Archivo plano</h3>
-    </div>
-    <div class="modal-body">
-        <form>
-            <div class="form-group">
-                <label for="fecIni">Fecha inicial</label>
-                <input  id="fecIni" type="text" class="form-control" ng-model="fecIni" ng-change="fecIni=maskDate(fecIni,'-',[4,2,2],true)" placeholder="Escriba fecha en formato AAAMMMDD">
-            </div>
-            <div class="form-group">
-                <label for="fecFin">Fecha final</label>
-                <input id="fecFin" type="text" class="form-control" ng-model="fecFin" ng-change="fecFin=maskDate(fecFin,'-',[4,2,2],true)" placeholder="Escriba fecha en formato AAAMMMDD">
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-default" ng-click="cancel()">Cancelar</button>
-        <button class="btn btn-primary" ng-click="Generar()">Generar</button>
-    </div>
-</script>
-
-
- 
