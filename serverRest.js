@@ -60,6 +60,12 @@ app.get('/api/commonList/:nlist', function(request, response) {
 ////	Module Health professional 		///
 
 //get professioanl by id
+app.get('/api/HealthProfessionalCertificate/:pid', function (request, response) {
+    var PMquery = profManager.GetCertificate(request.params.pid, 'id');
+    mainController.ConnectionController(PMquery, response);
+});
+
+//get professioanl by id
 app.get('/api/HealthProfessional/:pid', function(request, response) {
 	var PMquery=profManager.Get(request.params.pid,'id');
 	mainController.ConnectionController(PMquery,response);

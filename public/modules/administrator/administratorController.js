@@ -1,17 +1,86 @@
-appServersoft.controller('administratorController', ['$scope','$filter','$modal','filesaver','HealthProfessional','HealthProfessionalStudy','HealthProfessionalActo','FindHealthProfessional', 'authentication','FindHealthProfessionalbyDate','HealthProfessionalDocument', function($scope,$filter,$modal,filesaver,HealthProfessional,HealthProfessionalStudy,HealthProfessionalActo, FindHealthProfessional,authentication, FindHealthProfessionalbyDate, HealthProfessionalDocument){
+appServersoft.controller('administratorController', ['$scope','$filter','$modal','filesaver','HealthProfessional','HealthProfessionalStudy','HealthProfessionalActo','FindHealthProfessional', 'authentication','FindHealthProfessionalbyDate','HealthProfessionalDocument','HealthProfessionalCertificate', function($scope,$filter,$modal,filesaver,HealthProfessional,HealthProfessionalStudy,HealthProfessionalActo, FindHealthProfessional,authentication, FindHealthProfessionalbyDate, HealthProfessionalDocument, HealthProfessionalCertificate){
+
         ///verify session
         authentication.checkStatus();
         $scope.shutdown = function () { 
             authentication.logout();    
         }
         $scope.findPerson = function (valueToFind) {
+            $scope.filterList($scope.ListProfessional, 'alld');
+            $scope.allRegistrerFilter = true;
             FindHealthProfessional.get({value:valueToFind})
 				.$promise.then(function (response) {
-                    $scope.ListProfessional = response;
+                $scope.ListProfessional = response;
+                angular.forEach($scope.ListProfessional, function (pvalue, pkey) {
+                    $scope.ListProfessional[pkey]['visible'] = true;
+                }); 
             })
         }
         
+        $scope.filterList = function (currentList,filterType) {
+            //(hp.hpeactoadm && viewwa)||(hp.hpefechaentrega && viewwd)||((hp.hpeactoadm?false:true) && viewwoa)||((hp.hpefechaentrega?false:true) && viewwod)
+            //$scope.ListProfessional = [];
+            angular.forEach(currentList, function (value, key) {
+                switch (filterType) {
+                    case 'alla':
+                        if (value.hpeactoadm)
+                            currentList[key].visible = true;
+                        else
+                            currentList[key].visible = true;
+                        break;
+                    case 'wa':
+                        if (value.hpeactoadm)
+                            currentList[key].visible = true;
+                        else
+                            currentList[key].visible = false;
+                        break;
+                    case 'woa':
+                        if (value.hpeactoadm)
+                            currentList[key].visible = false;
+                        else
+                            currentList[key].visible = true;
+                        break;
+                    case 'alld':
+                        if (value.hpefechaentrega)
+                            currentList[key].visible = true;
+                        else
+                            currentList[key].visible = true;
+                        break;
+                    case 'wd':
+                        if (value.hpefechaentrega)
+                            currentList[key].visible = true;
+                        else
+                            currentList[key].visible = false;
+                        break;
+                    case 'wod':
+                        if (value.hpefechaentrega)
+                            currentList[key].visible = false;
+                        else
+                            currentList[key].visible = true;
+                        break;    
+
+                }
+                $scope.ListProfessional = currentList;
+            });
+        }      
+        $scope.documentRegister = function (docstatus) {
+            switch (docstatus) {
+                case true:
+                    return 'success';
+                    break;
+                case false:
+                    return 'warning';
+                    break;
+                default:
+                    return'default'
+            }
+        }
         $scope.findByDate = function (ini, end, opSearch) {
+            
+            //show all
+            $scope.filterList($scope.ListProfessional, 'alld');
+            $scope.allRegistrerFilter = true;
+
             var inimonth = ini.getMonth() + 1;
             var endmonth = end.getMonth() + 1;
             var dateini = ini.getFullYear() + '-' + inimonth + '-' + ini.getDate();
@@ -21,17 +90,27 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
                     FindHealthProfessionalbyDate.get({ resource: 'findbycreatedate', dateini: dateini, dateend: dateend })
                     .$promise.then(function (response) {
                         $scope.ListProfessional = response;
+                        angular.forEach($scope.ListProfessional, function (pvalue, pkey) {
+                            $scope.ListProfessional[pkey]['visible'] = true;
+                        }); 
                     })
                     break;                   
                 case 3:
                     FindHealthProfessionalbyDate.get({ resource: 'findbyactodate', dateini: dateini, dateend: dateend })
                     .$promise.then(function (response) {
                         $scope.ListProfessional = response;
+                        angular.forEach($scope.ListProfessional, function (pvalue, pkey) {
+                            $scope.ListProfessional[pkey]['visible'] = true;
+                        }); 
                     })
                     break;
                     FindHealthProfessionalbyDate.get({ resource: 'findbydocumentdate', dateini: dateini, dateend: dateend })
                     .$promise.then(function (response) {
                         $scope.ListProfessional = response;
+                        angular.forEach($scope.ListProfessional, function (pvalue, pkey) {
+                            $scope.ListProfessional[pkey]['visible'] = true; 
+                        });
+                        
                     })
                 case 4:
                     break;
@@ -43,16 +122,26 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
         };
         $scope.opSearch = 1;
         $scope.loadList = function (){
+            
+        //show all
+        $scope.filterList($scope.ListProfessional, 'alld');
+        $scope.allRegistrerFilter = true;
+
         HealthProfessional.get()
 				.$promise.then(function(response){
 					$scope.ListProfessional=response;
-				
                     HealthProfessionalStudy.get()
 				            .$promise.then(function (responsestudy) {
                         angular.forEach(responsestudy, function (svalue, skey) { 
                             angular.forEach($scope.ListProfessional, function (pvalue, pkey) {
-                                if (svalue.hpid == pvalue.hpid) { 
-                                    $scope.ListProfessional[pkey]['actAdm'] = { acto: svalue.hpeactoadm, fecha: svalue.hpefecact };
+                            if (svalue.hpid == pvalue.hpid) {
+                                $scope.ListProfessional[pkey]['hpefecha'] = svalue.hpefecha;
+                                $scope.ListProfessional[pkey]['hpeactoadm'] = svalue.hpeactoadm;
+                                $scope.ListProfessional[pkey]['hpefecact'] = svalue.hpefecact;
+                                $scope.ListProfessional[pkey]['hpefechaentrega'] = svalue.hpefechaentrega;
+                                $scope.ListProfessional[pkey]['hpobservacion'] = svalue.hpobservacion;
+                                $scope.ListProfessional[pkey]['hpedocentregados'] = svalue.hpedocentregados;
+                                $scope.ListProfessional[pkey]['visible'] = true;                               
                                 }
                             });                
                         });
@@ -103,13 +192,30 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
 
         }
         
+        
+        ///obtener Datos del certificado
+        
+        $scope.GetDataforCertificate = function (id) {
+            HealthProfessionalCertificate.get({hpid:id})
+				.$promise.then(function (response) {
+                if (response.length >= 1) { 
+                    $scope.openmodal(id, 3, response);
+                }
+            })
+        }
+
         /// Generar planos
         
-        $scope.Generar = function () {
-            filesaver.generate($scope.fecIni, $scope.fecFin);
+        $scope.GenerateFileReport = function (ini, end) {
+            var inimonth = ini.getMonth() + 1;
+            var endmonth = end.getMonth() + 1;
+            var dateini = ini.getFullYear() + '-' + inimonth + '-' + ini.getDate();
+            var dateend = end.getFullYear() + '-' + endmonth + '-' + end.getDate();
+
+            filesaver.generate(dateini, dateend);
         };
         
-  $scope.openmodal = function (idUserRegistered, typemodal) {
+  $scope.openmodal = function (idUserRegistered, typemodal,data) {
             
             switch (typemodal) {
             
@@ -123,8 +229,11 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
                         resolve: {
                             hpid: function () {
                                 return idUserRegistered;
+                            },
+                        
+                            dataValue: function () {
+                                return data;
                             }
-
                         }
                     });
                     
@@ -144,6 +253,10 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
                         resolve: {
                             hpid: function () {
                                 return idUserRegistered;
+                            },
+                        
+                            dataValue: function () {
+                                return data;
                             }
                         }
                     });
@@ -155,7 +268,7 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
                     });
                     break;
                 case 3:
-                    var modalInstance = $modal.open({
+                     var modalInstance = $modal.open({
                         animation: $scope.animationsEnabled,
                         templateUrl: 'ModalViewpdf.html',
                         controller: 'ModalViewpdf',
@@ -164,6 +277,9 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
                         resolve: {
                             hpid: function () {
                                 return idUserRegistered;
+                            },
+                            dataValue: function () {
+                                return data;
                             }
                         }
                     });
@@ -193,10 +309,9 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
 
 }]);
 
-appServersoft.controller('ModalInstanceRegisterActo', function ($scope, $modalInstance, hpid) {
-    $scope.numActo = "";
-    $scope.fecActo = "";
-
+appServersoft.controller('ModalInstanceRegisterActo', function ($scope, $modalInstance, hpid, dataValue) {
+    $scope.numActo = dataValue.num;
+    $scope.fecActo = dataValue.date;
     $scope.hpid = hpid;
    $scope.ok = function () {
    	$modalInstance.close({hpeactoadm:$scope.numActo,hpefecact:$scope.fecActo});
@@ -260,9 +375,10 @@ appServersoft.controller('ModalInstanceRegisterActo', function ($scope, $modalIn
 });
 
 
-appServersoft.controller('ModalRecepcionDocumentos', function ($scope, $modalInstance) {
-    $scope.hpedocentregados = "";
-    $scope.hpefechaentrega = "";
+appServersoft.controller('ModalRecepcionDocumentos', function ($scope, $modalInstance, dataValue) {
+    $scope.hpedocentregados = dataValue.docentrega;
+    $scope.hpefechaentrega = new Date(dataValue.docfecha);
+    $scope.hpobservacion = dataValue.docobservacion;
 
     $scope.ok = function () {
          var month = $scope.hpefechaentrega.getMonth() + 1;
@@ -276,8 +392,8 @@ appServersoft.controller('ModalRecepcionDocumentos', function ($scope, $modalIns
 
 });
 
-appServersoft.controller('ModalViewpdf', function ($scope, $modalInstance) {
-    $scope.personSelected = { name: "Helder Castrillon", document: "10290528" };
+appServersoft.controller('ModalViewpdf', function ($scope, $modalInstance, dataValue) {
+    $scope.personSelected = dataValue[0];
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };

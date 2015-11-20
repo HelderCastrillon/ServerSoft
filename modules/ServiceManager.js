@@ -45,7 +45,7 @@ Put: function (hpsid,newServiceProfessional) {
     },
 
   GetinFormat: function (dateini, dateend) {
-        return ("SELECT 3 as type,* FROM hpserviceprofessional");
+        return ("select '4' as type,'#reg' as reg, hptipdoc,hpnumdoc,hpsobliga,hpstiplug,hpsdeppr,  hpsmunpr,hpspaispr,to_char(hpsfecini,'YYYY-MM-DD') as hpsfecini,to_char(hpsfecfin,'YYYY-MM-DD') as hpsfecfin,hpsmodal,hpsprog from hphealthprofessional inner join hpserviceprofessional on hpserviceprofessional.hpid=hphealthprofessional.hpid inner join hpstudyprofessional  on hpstudyprofessional.hpid=hphealthprofessional.hpid where hpefecact between '" + dateini + "' and '" + dateend + "'"); 
     },
   //del professional in Db
   Del: function (idProfessional) {

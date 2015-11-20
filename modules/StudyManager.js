@@ -75,7 +75,7 @@ PutActo: function (hpesid,newStudyProfessional) {
     },
     
  GetinFormat: function (dateini, dateend) {
-        return ("SELECT 4 as type,* FROM hpstudyprofessional");
+        return ("select '3' as type,'#reg' as reg, hptipdoc,hpnumdoc, hpeorigtit,hpedepin,hpemunin,hpepaisin,hpetipin,hpecodin, hpetippr,hpecodpr, to_char(hpefecgrad,'YYYY-MM-DD') as hpefecgrad,hpenumconv,to_char(hpefecconv,'YYYY-MM-DD') as hpefecconv,hpetitequi,hpegruptit,hpeactoadm, to_char(hpefecact,'YYYY-MM-DD') as hpefecact from hphealthprofessional inner join hpstudyprofessional  on hpstudyprofessional.hpid=hphealthprofessional.hpid where hpefecact between '" + dateini + "' and '" + dateend + "'"); 
   },
 
 //get register professional in Db

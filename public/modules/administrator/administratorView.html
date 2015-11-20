@@ -68,10 +68,22 @@
                                 <div class="col-md-12">
                                     <label class="label-control">Filtros:</label>
                                     <div class="form-group">
-                                        <input type="checkbox" ng-click=""> Con acto administrativo
-                                        <input type="checkbox" ng-click=""> Sin acto administrativo
-                                        <input type="checkbox" ng-click=""> Documentos entregados
-                                        <input type="checkbox" ng-click=""> Documentos no entregados
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="label-control">Acto administrativo</label><br />
+                                                <input type="radio" name="filtro" ng-click="filterList(ListProfessional,'wa')"> Con acto
+                                                <input type="radio" name="filtro" ng-click="filterList(ListProfessional,'woa')"> Sin acto
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label class="label-control">Entrega de documentos</label><br />
+                                                <input type="radio" name="filtro" ng-click="filterList(ListProfessional,'wd')"> Entregados
+                                                <input type="radio" name="filtro" ng-click="filterList(ListProfessional,'wod')"> No entregados
+                                                <input type="radio" name="filtro" ng-click="filterList(ListProfessional,'alld')" ng-checked="allRegistrerFilter"> Todos
+                                            </div>
+                                        </div>
+                                        
+                                        
+
 
                                     </div>
                                  </div>
@@ -84,7 +96,7 @@
                                       <button class="btn btn-default" type="button">
                                           Total de registros <span class="badge">{{ListProfessional.length}}</span>
                                       </button>
-                                      <button type="button" class="btn btn-success" aria-label="Left Align" ng-click='openmodalRegisterActo(hp.hpid,0)'>
+                                      <button ng-disabled="opSearch!=3?true:false" type="button" class="btn btn-success" aria-label="Left Align" ng-click='GenerateFileReport(dateini,dateend)'>
                                           <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>Guardar en archivo plano
                                       </button>
                                   </div>
@@ -100,27 +112,25 @@
 
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
-    <table class="table table-hover">
+    <table class="table table-hover" >
         <tr>
             <th>Documento</th>
             <th>Nombre</th>
-            <th>Acto</th>
-            <th>Fecha Acto</th>
+            <th>Fecha Registro</th>
             <th>Opciones</th>           
         </tr>
-        <tr ng-repeat="hp in ListProfessional" class="{{hp.actAdm.acto==''?'warning':''}}">
+        <tr ng-repeat="hp in ListProfessional" class="{{hp.hpeactoadm==''?'warning':''}}" ng-show="hp.visible">
             <td>{{hp.hpnumdoc}}</td>
             <td>{{hp.hppriape+' '+hp.hpsegape+' '+hp.hpprinom+' '+hp.hpsegnom}}</td>
-            <td>{{hp.actAdm.acto}}</td>
-            <td>{{hp.actAdm.fecha}}</td>
+            <td>{{hp.hpefecha}}</td>
             <td>
-            <div class="btn-group" role="group" aria-label="...">
-                <a class="btn btn-default" title="ver o editar registro" type="submit" href="/view#/healthprofessional/{{hp.hpid}}"><span class='glyphicon glyphicon-pencil'></span></a>
-                <a class="btn btn-default" title="Guardar registro administrativo" ng-click='openmodal(hp.hpid,1)'><span class='glyphicon glyphicon-tags'></span></a>
-                <a class="btn btn-default" title="entrega de documentos" ng-click='openmodal(hp.hpid,2)'><span class='glyphicon glyphicon-book'></span></a>
-                <a class="btn btn-default"  title="Generar certificado" ng-click='openmodal(hp.hpid,3)'><span class='glyphicon glyphicon-file'></span></a>
-            </div>
-</td>     
+                <div class="btn-group" role="group" aria-label="...">
+                    <a class="btn btn-default" title="ver o editar registro" type="submit" href="/view#/healthprofessional/{{hp.hpid}}"><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a class="btn btn-{{hp.hpeactoadm?'success':'default'}}" title="Guardar registro administrativo" ng-click='openmodal(hp.hpid,1,{date:hp.hpefecact,num:hp.hpeactoadm})'><span class='glyphicon glyphicon-tags'></span></a>
+                    <a class="btn btn-{{documentRegister(hp.hpedocentregados)}}" title="entrega de documentos" ng-click='openmodal(hp.hpid,2,{docfecha:hp.hpefechaentrega,docobservacion:hp.hpobservacion,docentrega:hp.hpedocentregados})'><span class='glyphicon glyphicon-book'></span></a>
+                    <a class="btn btn-default"  title="Generar certificado" ng-click='GetDataforCertificate(hp.hpid)'><span class='glyphicon glyphicon-file'></span></a>
+                </div>
+            </td>     
         </tr>
     </table>
 
@@ -158,8 +168,8 @@
                 </div>
                 <div class="form-group">
                     <label for="hpedocentregados">Documentos entregados completamente</label>
-                    <input id="hpedocentregados" type="radio" name="hpedocentregados" value="true"  ng-click="hpedocentregados=true">Si
-                    <input id="hpedocentregados" type="radio" name="hpedocentregados"  value="false" ng-click="hpedocentregados=false">No
+                    <input id="hpedocentregados" type="radio" name="hpedocentregados" ng-checked="hpedocentregados==true" value="true"  ng-click="hpedocentregados=true">Si
+                    <input id="hpedocentregados" type="radio" name="hpedocentregados" ng-checked="hpedocentregados==false"  value="false" ng-click="hpedocentregados=false">No
                 </div>
                 <div class="form-group">
                     <label for="hpobservacion">Descripción</label>

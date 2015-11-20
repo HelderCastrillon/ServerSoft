@@ -49,11 +49,31 @@ Get: function (pid,option) {
 	     return ("SELECT * FROM hphealthprofessional where hpid="+pid);
            break;
 	case 'name':
-		return ("SELECT * FROM hphealthprofessional where hpnumdoc||hppriape||hpsegape||hpprinom||hpsegnom ilike '%"+pid+"%' order by hpid desc limit 1;");
+		return ("SELECT * FROM hphealthprofessional inner join hpstudyprofessional on hpstudyprofessional.hpid=hphealthprofessional.hpid where hpnumdoc||hppriape||hpsegape||hpprinom||hpsegnom ilike '%"+pid+"%' order by hphealthprofessional.hpid desc limit 1;");
             break
       default:
             return ("SELECT * FROM hphealthprofessional order by hpid desc limit 20");
 	}
+    },
+    
+GetCertificate: function (hpid) { 
+    var sqlString="select hpprinom ||' '|| hpsegnom ||' '|| hppriape ||' '|| hpsegape as fullName,"
+    +"hpnumdoc, munnac.name as nommun, hpprograms.practice, hpprograms.title, institution.name, institution.municipio as munest, depest.name as nomdepest,"
+    +" to_char(hpserviceprofessional.hpsfecini,'DD') dayini,"
+    +" to_char(hpserviceprofessional.hpsfecini,'MONTH') monthini,"
+    +" to_char(hpserviceprofessional.hpsfecini,'YYYY') yearini,"
+    +" to_char(hpserviceprofessional.hpsfecfin,'DD') dayend,"
+    +" to_char(hpserviceprofessional.hpsfecfin,'MONTH') monthend,"
+    +" to_char(hpserviceprofessional.hpsfecfin,'YYYY') yearend"
+    +" from hphealthprofessional"
+    +" inner join hpstudyprofessional on hpstudyprofessional.hpid=hphealthprofessional.hpid"
+    +" inner join hpprograms on cast(hpprograms.code as char(10))=hpstudyprofessional.hpecodpr"
+    +" inner join(select code, name from municipality) as munnac on cast(munnac.code as char(10)) =hpmunnac"
+    +" inner join (select code, name, municipio from hpinstitutions) as institution on cast(institution.code as char(10))=hpstudyprofessional.hpecodin"
+    + " inner join (select code, name from department ) as depest on cast(depest.code as char(10)) =hpstudyprofessional.hpedepin"
+    + " left join hpserviceprofessional on hpserviceprofessional.hpid=hphealthprofessional.hpid"    
+    + " WHERE hphealthprofessional.hpid=" + hpid;   
+            return sqlString;
 },
 
 //get lastID
@@ -62,7 +82,7 @@ GetId: function (numdoc){
     },
 //get lastID
 GetinFormat: function (dateini, dateend){
-   return ("SELECT 1 as type,*  FROM hphealthprofessional"); 
+   return ("select '2' as type,'#reg' as reg, hptipdoc,hpnumdoc,hppriape,hpsegape,hpprinom,hpsegnom,hpsexo,hpdepnac,hpmunnac,hppais,to_char(hpfecnac,'YYYY-MM-DD') as hpfecnac,hpdestcon,hpdpaisred, hpddepred,hpdmunred,hpddirecc,hpdtelef,hpdtelmov,hpdcorreo,hpetnia from hphealthprofessional inner join hpdetailprofessional on hpdetailprofessional.hpid=hphealthprofessional.hpid inner join hpstudyprofessional  on hpstudyprofessional.hpid=hphealthprofessional.hpid where hpefecact between '"+ dateini+"' and '"+dateend+"'"); 
 },
 //get by token
 GetByToken: function (numdoc, ntoken){
