@@ -5,6 +5,12 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
         $scope.shutdown = function () { 
             authentication.logout();    
         }
+        $scope.clearSeach = function () {
+            $scope.valueToFind = "";
+            $scope.dateini = "";
+            $scope.dateend = "";
+        }
+
         $scope.findPerson = function (valueToFind) {
             $scope.filterList($scope.ListProfessional, 'alld');
             $scope.allRegistrerFilter = true;
@@ -123,6 +129,7 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
         $scope.opSearch = 1;
         $scope.loadList = function (){
             
+          $scope.clearSeach();
         //show all
         $scope.filterList($scope.ListProfessional, 'alld');
         $scope.allRegistrerFilter = true;
@@ -273,7 +280,7 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
                         templateUrl: 'ModalViewpdf.html',
                         controller: 'ModalViewpdf',
                         backdrop: false,
-                        size: 'lg',
+                        size: '',
                         resolve: {
                             hpid: function () {
                                 return idUserRegistered;
@@ -392,9 +399,77 @@ appServersoft.controller('ModalRecepcionDocumentos', function ($scope, $modalIns
 
 });
 
-appServersoft.controller('ModalViewpdf', function ($scope, $modalInstance, dataValue) {
-    $scope.personSelected = dataValue[0];
+appServersoft.controller('ModalViewpdf', function ($scope, $modalInstance, dataValue,RETHUSAuxiliares, RETHUSProfesional, RETHUSProfesionalSSO) {
+    $scope.hpeprof = false;
+    $scope.dataperson = dataValue[0];
+    $scope.alerts = [];
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
+    $scope.closeAlert = function (index) {
+        $scope.alerts.splice(index, 1);
+    };
+    $scope.addAlert = function (type, description) {
+        if (type == "SUCCESS")
+            $scope.alerts.push({ type: "success", msg: description });
+        else
+            $scope.alerts.push({ type: "error", msg: description });
+    };
+
+    $scope.SaveinPDF = function () {
+        $scope.months = {
+            "JANUARY": "ENERO",
+            "FEBRUARY": "FEBRERO",
+            "MARCH": "MARZO",
+            "APRIL": "ABRIL",
+            "MAY": "MAYO",
+            "JUNE": "JUNIO",
+            "AUGUST": "AGOSTO",
+            "SEPTEMBER": "SEPTIEMBRE",
+            "OCTOBER": "OCTUBRE",
+            "NOVEMBER": "NOVIEMBRE",
+            "DECEMBER":"DICIEMBRE"
+        }
+        $scope.dataperson["hpefecgradoletras"] = $scope.dataperson.daygrad + " de " + $scope.months[$scope.dataperson.monthgrad.trim()] + " de " + $scope.dataperson.yeargrad;
+        if ($scope.dataperson.monthini) { 
+            $scope.dataperson["hpefecssoini"] = $scope.dataperson.dayini + " de " + $scope.months[$scope.dataperson.monthini.trim()] + " de " + $scope.dataperson.yearini;
+            $scope.dataperson["hpefecssofin"] = $scope.dataperson.dayend + " de " + $scope.months[$scope.dataperson.monthend.trim()]+ " de " + $scope.dataperson.yearend;
+         }
+        if ($scope.dataperson) {
+            $scope.dataperson["hpenumreguni"] = $scope.hpenumreguni;
+            $scope.dataperson["hpelugarsso"] = $scope.hpelugarsso;
+            $scope.dataperson["hpenumacta"] = $scope.hpenumacta;
+            $scope.dataperson["hpenumlibrodip"] = $scope.hpenumlibrodip;
+            $scope.dataperson["hpefoliodip"] = $scope.hpefoliodip;
+            $scope.dataperson["hpelibroreg"] = $scope.hpelibroreg;
+            $scope.dataperson["hpenumlibroreg"] = $scope.hpenumlibroreg;
+            $scope.dataperson["hpenumfolioreg"] = $scope.hpenumfolioreg;
+            $scope.dataperson["hpenumreg"] = $scope.hpenumreg;
+            if ($scope.hpenumacta == undefined || $scope.hpenumlibrodip == undefined || $scope.hpefoliodip == undefined || $scope.hpenumlibroreg == undefined || $scope.hpenumlibroreg == undefined || $scope.hpenumfolioreg == undefined || $scope.hpenumreg == undefined) { 
+                $scope.addAlert('error', 'Todos los campos son obligatorios');
+            }
+            else {
+                if ($cope.hpeprof) {
+                    if ($scope.dataperson.monthini) {
+                        var docDefinition = RETHUSProfesionalSSO.get($scope.dataperson);
+                    } else { 
+                        var docDefinition = RETHUSProfesional.get($scope.dataperson);
+                    }
+                }
+                else {
+                    if ($scope.dataperson.monthini) {
+                        var docDefinition = RETHUSProfesionalSSO.get($scope.dataperson);
+                    } else { 
+                        var docDefinition = RETHUSAuxiliares.get($scope.dataperson);
+                    }
+                }
+                pdfMake.createPdf(docDefinition).print();
+                $modalInstance.dismiss('cancel');
+            }
+            
+        }
+        else
+            $scope.SaveinPDF();
+    }
+
 });

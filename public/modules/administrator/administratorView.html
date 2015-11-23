@@ -183,8 +183,65 @@
         </div>
     </script>
 <script type="text/ng-template" id="ModalViewpdf.html">
-    <div class="text-right"><button class="btn btn-danger" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span></button></div>
-    <hs-printpdf templatename="RETHUS-Auxiliares.html" dataperson="{{personSelected}}"></hs-printpdf>
     
+    <div class="modal-header">
+        <div class="text-center"><h3>Impresi&oacute;n de formato</h3> </div>
+    </div>
+    <div class="modal-body">
+        
+       
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <alert ng-repeat="alert in alerts" type='error' close="closeAlert($index)">{{alert.msg}}</alert>
+                <div class="form-group">
+                    <label>es profesional</label>
+                    <input type="checkbox" ng-checked="hpeprof" ng-model="hpeprof" placeholder=" ejemplo: 2567">
+                </div>
+                <div class="form-group">
+                    <label>N&uacute;mero de acta de grado</label>
+                    <input type="text" class="form-control" ng-model="hpenumacta" placeholder=" ejemplo: 2567">
+                </div>
+                <div class="form-group">
+                    <label>N&uacute;mero de libro del diploma</label>
+                    <input type="text" class="form-control" ng-model="hpenumlibrodip" placeholder="ejemplo: 12">
+                </div>
+                <div class="form-group">
+                    <label>N&uacute;mero de folio en el libro de diplomas universitario</label>
+                    <input type="text" class="form-control" ng-model="hpefoliodip" placeholder=" ejemplo: 10 si no existe poner SN">
+                </div>
+                <div class="form-group" ng-show="hpeprof">
+                    <label>n&uacute;mero de registro en el libro  de diplomas universitario</label>
+                    <input type="text" class="form-control" ng-model="hpenumreguni" placeholder=" ejemplo: 09 si no existe poner SN">
+                </div>
+                <div class="form-group">
+                    <label>Nombre del libro de registro</label>
+                    <input type="text" class="form-control" ng-model="hpelibroreg" placeholder="ejemplo: ODONTOLOGOS">
+                </div>
+                <div class="form-group">
+                    <label>n&uacute;mero de libro de registro</label>
+                    <input type="text" class="form-control" ng-model="hpenumlibroreg" placeholder=" ejemplo: 07">
+                </div>
+                <div class="form-group">
+                    <label>n&uacute;mero de folio en libro de registro</label>
+                    <input type="text" class="form-control" ng-model="hpenumfolioreg" placeholder=" ejemplo: 23">
+                </div>
+                <div class="form-group">
+                    <label>n&uacute;mero de registro en el libro</label>
+                    <input type="text" class="form-control" ng-model="hpenumreg" placeholder=" ejemplo: 12345">
+                </div>
+                <div class="form-group" ng-show="dataperson.monthini">
+                    <label> Lugar de servicio social obligatorio</label>
+                    <input type="text" class="form-control" ng-model="hpelugarsso" placeholder=" ejemplo: LA EMPRESA SOCIAL DEL ESTADO GUAPI CAUCA">
+                </div>                
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">Cancelar</button>
+        <button ng-click="SaveinPDF()" class="btn btn-success">Guardar Pdf</button>
+
+    </div>
 </script>
 
