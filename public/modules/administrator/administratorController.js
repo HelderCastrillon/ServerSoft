@@ -449,7 +449,7 @@ appServersoft.controller('ModalViewpdf', function ($scope, $modalInstance, dataV
                 $scope.addAlert('error', 'Todos los campos son obligatorios');
             }
             else {
-                if ($cope.hpeprof) {
+                if ($scope.hpeprof) {
                     if ($scope.dataperson.monthini) {
                         var docDefinition = RETHUSProfesionalSSO.get($scope.dataperson);
                     } else { 
