@@ -3,7 +3,7 @@ module.exports = {
 //save professional in Db
 Post: function (newProfessionalDetail) { 
 
-      var sqlString="INSERT INTO hpdetailprofessional( hpid, hpdestcon, hpdpaisred, hpddepred, hpdmunred, hpddirecc, hpdtelef, hpdtelmov, hpdcorreo,hpdtelef2www.faw) VALUES ("
+      var sqlString="INSERT INTO hpdetailprofessional( hpid, hpdestcon, hpdpaisred, hpddepred, hpdmunred, hpddirecc, hpdtelef, hpdtelmov, hpdcorreo,hpdtelef2) VALUES ("
             +"'"+newProfessionalDetail.hpid+"',"
             +"'"+newProfessionalDetail.hpdestcon+"',"
             +"'"+newProfessionalDetail.hpdpaisred+"',"

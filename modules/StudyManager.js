@@ -74,6 +74,24 @@ PutActo: function (hpesid,newStudyProfessional) {
       
     },
     
+    //save professional in Db
+    PutCertificate: function (hpesid, newStudyProfessional) {
+        console.log(newStudyProfessional)
+        var sqlString = "UPDATE hpstudyprofessional SET " 
+            + "hpelugarsso= '" + newStudyProfessional.hpelugarsso + "'," 
+            + "hpenumacta= '" + newStudyProfessional.hpenumacta + "'," 
+            + "hpenumreguni= '" + newStudyProfessional.hpenumreguni + "'," 
+            + "hpenumlibrodip= '" + newStudyProfessional.hpenumlibrodip + "'," 
+            + "hpefoliodip= '" + newStudyProfessional.hpefoliodip + "'," 
+            + "hpelibroreg= '" + newStudyProfessional.hpelibroreg + "'," 
+            + "hpenumlibroreg= '" + newStudyProfessional.hpenumlibroreg + "'," 
+            + "hpenumfolioreg= '" + newStudyProfessional.hpenumfolioreg + "'," 
+            + "hpenumreg= '" + newStudyProfessional.hpenumreg + "'" 
+            + " WHERE hpid=" + hpesid;
+        return sqlString;
+      
+    },
+    
  GetinFormat: function (dateini, dateend) {
         return ("select '3' as type,'#reg' as reg, hptipdoc,hpnumdoc, hpeorigtit,hpedepin,hpemunin,hpepaisin,hpetipin,hpecodin, hpetippr,hpecodpr, to_char(hpefecgrad,'YYYY-MM-DD') as hpefecgrad,hpenumconv,to_char(hpefecconv,'YYYY-MM-DD') as hpefecconv,hpetitequi,hpegruptit,hpeactoadm, to_char(hpefecact,'YYYY-MM-DD') as hpefecact from hphealthprofessional inner join hpstudyprofessional  on hpstudyprofessional.hpid=hphealthprofessional.hpid where hpefecact between '" + dateini + "' and '" + dateend + "'"); 
   },

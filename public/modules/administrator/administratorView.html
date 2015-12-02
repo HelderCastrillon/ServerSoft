@@ -128,7 +128,7 @@
                     <a class="btn btn-default" title="ver o editar registro" type="submit" href="/view#/healthprofessional/{{hp.hpid}}"><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class="btn btn-{{hp.hpeactoadm?'success':'default'}}" title="Guardar registro administrativo" ng-click='openmodal(hp.hpid,1,{date:hp.hpefecact,num:hp.hpeactoadm})'><span class='glyphicon glyphicon-tags'></span></a>
                     <a class="btn btn-{{documentRegister(hp.hpedocentregados)}}" title="entrega de documentos" ng-click='openmodal(hp.hpid,2,{docfecha:hp.hpefechaentrega,docobservacion:hp.hpobservacion,docentrega:hp.hpedocentregados})'><span class='glyphicon glyphicon-book'></span></a>
-                    <a class="btn btn-default"  title="Generar certificado" ng-click='GetDataforCertificate(hp.hpid)'><span class='glyphicon glyphicon-file'></span></a>
+                    <a class="btn btn-{{hp.hpenumacta?'success':'default'}}" ng-disabled="!hp.hpeactoadm || !hp.hpedocentregados"  title="Generar certificado" ng-click='GetDataforCertificate(hp.hpid)'><span class='glyphicon glyphicon-file'></span></a>
                 </div>
             </td>     
         </tr>
@@ -158,12 +158,12 @@
 
     <script type="text/ng-template" id="ModalRecepcionDocumentos.html">
         <div class="modal-header">
-            <h3 class="modal-title">Recepción de documentos</h3>
+            <h3 class="modal-title">Recepci&oacute;n de documentos</h3>
         </div>
         <div class="modal-body">
             <form>
                 <div class="form-group">
-                    <label for="hpefechaentrega">Fecha de recepción</label>
+                    <label for="hpefechaentrega">Fecha de recepci&oacute;n</label>
                     <input id="hpefechaentrega" type="date" class="form-control" ng-model="hpefechaentrega">
                 </div>
                 <div class="form-group">
@@ -172,7 +172,7 @@
                     <input id="hpedocentregados" type="radio" name="hpedocentregados" ng-checked="hpedocentregados==false"  value="false" ng-click="hpedocentregados=false">No
                 </div>
                 <div class="form-group">
-                    <label for="hpobservacion">Descripción</label>
+                    <label for="hpobservacion">Descripci&oacute;n</label>
                     <textarea id="hpobservacion" type="text" class="form-control" ng-model="hpobservacion" placeholder="Escriba que documento y observaciones sobre la entrega del documento"></textarea>
                 </div>
             </form>

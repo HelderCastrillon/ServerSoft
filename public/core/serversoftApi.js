@@ -24,7 +24,8 @@ ServersoftApi.factory("HealthProfessionalCertificate", ['$resource', 'commonvari
         return $resource(commonvariable.url + "HealthProfessionalCertificate/:hpid", 
 	{ hpid: '@hpid' },
   	{
-            get: { method: "GET", isArray: true }           
+            get: { method: "GET", isArray: true },
+            put: { method: "PUT" }       
         });
     }]);
 
@@ -101,7 +102,7 @@ ServersoftApi.factory("HealthProfessionalDocument", ['$resource', 'commonvariabl
         });
     }]);
 
-ServersoftApi.factory("HealthProfessionalService",['$resource','commonvariable', function ($resource,commonvariable) {
+ServersoftApi.factory("HealthProfessionalService", ['$resource', 'commonvariable', function ($resource, commonvariable) {
 	return $resource( commonvariable.url+"ProfessionalSSO/:pid", 
 	{pid:'@pid'},
   { get: { method: "GET",isArray: true},

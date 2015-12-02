@@ -10,7 +10,7 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
             $scope.dateini = "";
             $scope.dateend = "";
         }
-
+        $scope.clearSeach();
         $scope.findPerson = function (valueToFind) {
             $scope.filterList($scope.ListProfessional, 'alld');
             $scope.allRegistrerFilter = true;
@@ -127,6 +127,8 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
             isFirstDisabled: false
         };
         $scope.opSearch = 1;
+        
+
         $scope.loadList = function (){
             
           $scope.clearSeach();
@@ -148,7 +150,10 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
                                 $scope.ListProfessional[pkey]['hpefechaentrega'] = svalue.hpefechaentrega;
                                 $scope.ListProfessional[pkey]['hpobservacion'] = svalue.hpobservacion;
                                 $scope.ListProfessional[pkey]['hpedocentregados'] = svalue.hpedocentregados;
-                                $scope.ListProfessional[pkey]['visible'] = true;                               
+                                $scope.ListProfessional[pkey]['hpenumacta'] = svalue.hpenumacta;
+                                $scope.ListProfessional[pkey]['visible'] = true;
+                                
+                                                              
                                 }
                             });                
                         });
@@ -194,6 +199,22 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
                 }
                 else {
                     $scope.addAlert('error', 'se ha generado un error al registrar la información de la entrega de documentos');
+                }
+            });
+
+        }
+        
+        $scope.SaveCertificate = function (hpid, DataSave) {
+            
+            //data professional study
+            HealthProfessionalCertificate.put(hpid, DataSave)
+			.$promise.then(function (dataResp) {
+                if (dataResp.status == "SUCCESS") {
+                    $scope.loadList();
+                    $scope.addAlert(dataResp.status, 'se ha guardado los datos del certificado generado');
+                }
+                else {
+                    $scope.addAlert('error', 'se ha generado un error al guardar los datos del certificado');
                 }
             });
 
@@ -292,7 +313,7 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
                     });
                     
                     modalInstance.result.then(function (DataSave) {
-                        $scope.SaveDocument({ hpid: idUserRegistered }, DataSave);
+                        $scope.SaveCertificate({ hpid: idUserRegistered }, DataSave);
                     }, function () {
       
                     });
@@ -317,8 +338,14 @@ appServersoft.controller('administratorController', ['$scope','$filter','$modal'
 }]);
 
 appServersoft.controller('ModalInstanceRegisterActo', function ($scope, $modalInstance, hpid, dataValue) {
-    $scope.numActo = dataValue.num;
-    $scope.fecActo = dataValue.date;
+    if (dataValue.num) {
+        $scope.numActo = dataValue.num;
+        $scope.fecActo = dataValue.date;
+    }
+    else {
+        $scope.numActo = "";
+        $scope.fecActo = "";
+    }
     $scope.hpid = hpid;
    $scope.ok = function () {
    	$modalInstance.close({hpeactoadm:$scope.numActo,hpefecact:$scope.fecActo});
@@ -383,9 +410,17 @@ appServersoft.controller('ModalInstanceRegisterActo', function ($scope, $modalIn
 
 
 appServersoft.controller('ModalRecepcionDocumentos', function ($scope, $modalInstance, dataValue) {
-    $scope.hpedocentregados = dataValue.docentrega;
-    $scope.hpefechaentrega = new Date(dataValue.docfecha);
-    $scope.hpobservacion = dataValue.docobservacion;
+    if (dataValue.docfecha) {
+        $scope.hpedocentregados = dataValue.docentrega;
+        $scope.hpefechaentrega = new Date(dataValue.docfecha);
+        $scope.hpobservacion = dataValue.docobservacion;
+    }
+    else {
+        $scope.hpedocentregados = false;
+        $scope.hpefechaentrega = "";
+        $scope.hpobservacion = "";
+    }
+    
 
     $scope.ok = function () {
          var month = $scope.hpefechaentrega.getMonth() + 1;
@@ -400,9 +435,40 @@ appServersoft.controller('ModalRecepcionDocumentos', function ($scope, $modalIns
 });
 
 appServersoft.controller('ModalViewpdf', function ($scope, $modalInstance, dataValue,RETHUSAuxiliares, RETHUSProfesional, RETHUSProfesionalSSO) {
+    
     $scope.hpeprof = false;
     $scope.dataperson = dataValue[0];
     $scope.alerts = [];
+    
+    
+    ////set or clear control
+      
+    if ($scope.dataperson) {
+        $scope.hpenumreguni = $scope.dataperson["hpenumreguni"];
+        $scope.hpelugarsso = $scope.dataperson["hpelugarsso"];
+        $scope.hpenumacta = $scope.dataperson["hpenumacta"];
+        $scope.hpenumlibrodip = $scope.dataperson["hpenumlibrodip"];
+        $scope.hpefoliodip = $scope.dataperson["hpefoliodip"];
+        $scope.hpelibroreg = $scope.dataperson["hpelibroreg"];
+        $scope.hpenumlibroreg = $scope.dataperson["hpenumlibroreg"];
+        $scope.hpenumfolioreg = $scope.dataperson["hpenumfolioreg"];
+        $scope.hpenumreg = $scope.dataperson["hpenumreg"];
+    }
+    else { 
+        $scope.hpenumreguni="";
+        $scope.hpelugarsso = "";
+        $scope.hpenumacta = "";
+        $scope.hpenumlibrodip = "";
+        $scope.hpefoliodip = "";
+        $scope.hpelibroreg = "";
+        $scope.hpenumlibroreg = "";
+        $scope.hpenumfolioreg = "";
+        $scope.hpenumreg = "";
+    }
+    
+    //
+    
+   
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
@@ -464,9 +530,10 @@ appServersoft.controller('ModalViewpdf', function ($scope, $modalInstance, dataV
                     }
                 }
                 pdfMake.createPdf(docDefinition).print();
-                $modalInstance.dismiss('cancel');
+                $scope.hpelugarsso= $scope.hpelugarsso?"":$scope.hpelugarsso;
+               $modalInstance.close({ hpenumreguni: $scope.hpenumreguni, hpelugarsso: $scope.hpelugarsso, hpenumacta: $scope.hpenumacta, hpenumlibrodip : $scope.hpenumlibrodip , hpefoliodip: $scope.hpefoliodip, hpelibroreg: $scope.hpelibroreg, hpenumlibroreg: $scope.hpenumlibroreg, hpenumfolioreg: $scope.hpenumfolioreg, hpenumreg: $scope.hpenumreg });
             }
-            
+   
         }
         else
             $scope.SaveinPDF();

@@ -205,6 +205,11 @@ app.put('/api/ProfessionalDocument/:hpesid', function (request, response) {
     mainController.ConnectionController(PMquery, response);
 });
 
+//Update professional Study the get is in professional seccion of first
+app.put('/api/HealthProfessionalCertificate/:hpesid', function (request, response) {
+    var PMquery = StudyManager.PutCertificate(request.params.hpesid, request.body);
+    mainController.ConnectionController(PMquery, response);
+});
 
 /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
